@@ -1073,5 +1073,21 @@ class CompareTest(unittest.TestCase):
         self.assertIn("output tok/s", report.format_comparison(result, "base", "cand"))
 
 
+class AuthTest(unittest.TestCase):
+    def test_api_key_env_adds_bearer_header(self):
+        old = os.environ.get(client.API_KEY_ENV)
+        try:
+            os.environ[client.API_KEY_ENV] = "secret"
+            self.assertEqual(
+                client.request_headers(content_type=True),
+                {"Content-Type": "application/json", "Authorization": "Bearer secret"},
+            )
+        finally:
+            if old is None:
+                os.environ.pop(client.API_KEY_ENV, None)
+            else:
+                os.environ[client.API_KEY_ENV] = old
+
+
 if __name__ == "__main__":
     unittest.main()

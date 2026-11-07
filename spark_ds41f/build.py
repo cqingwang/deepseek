@@ -1165,6 +1165,32 @@ def smoke_image(cluster: dict, tag: str, script: str = SMOKE_SCRIPT, max_cpus: i
     )
 
 
+def image_deployment_identity(directory: Path) -> tuple[str, str | None]:
+    """The image's deployment label without requiring a Git checkout.
+
+    The site deploys a one-way rsync mirror, so ``/opt/spark/deepseek`` has no
+    ``.git``. In that mode the content-addressed build-input receipt is the
+    honest identity. A real Git checkout keeps the upstream clean-commit gate.
+    """
+    probe = subprocess.run(
+        ["git", "rev-parse", "--is-inside-work-tree"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if probe.returncode == 0 and probe.stdout.strip() == "true":
+        if repository_dirty():
+            return "", "the image records the deployment commit; commit changes first"
+        return repository_revision(), None
+    receipt = directory / "inputs.json"
+    if not receipt.is_file():
+        return "", "build inputs are missing inputs.json"
+    digest = hashlib.sha256(receipt.read_bytes()).hexdigest()
+    return f"rsync-{digest[:32]}", None
+
+
 def command_build_image(args: argparse.Namespace) -> int:
     max_jobs = getattr(args, "max_compile_jobs", None)
     if max_jobs is not None and (type(max_jobs) is not int or max_jobs < 1):
@@ -1179,13 +1205,13 @@ def command_build_image(args: argparse.Namespace) -> int:
         for problem in problems:
             print(f"WARN: {problem}")
         return 1
-    if repository_dirty():
-        print("WARN: the image records the deployment commit; commit changes first")
+    deployment_commit, identity_problem = image_deployment_identity(directory)
+    if identity_problem:
+        print(f"WARN: {identity_problem}")
         return 1
     tag = args.tag or cluster["container"]["image"]
     context = directory / "context"
     base = upstreams["sources"]["vllm_base_image"]
-    deployment_commit = repository_revision()
 
     def command(jobs: int | str) -> list[str]:
         rendered = [

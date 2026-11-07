@@ -2,6 +2,9 @@
 .env
 .env.*
 !.env.example
+# 站点管理面（spark/config.yaml）的受管环境模板：未跟踪 overlay，必须对 git
+# 源码清单可见以进入 sync_to.sh 镜像；生成物 .env.deepseek 仍被 `.env.*` 忽略。
+!.env.deepseek.example
 *.local.json
 config/nodes.json
 config/site.json

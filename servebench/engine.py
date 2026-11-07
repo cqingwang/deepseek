@@ -17,7 +17,7 @@ import json
 import math
 import urllib.request
 
-from . import prom, stats
+from . import client, prom, stats
 
 SCHEMA = "servebench-engine/1"
 
@@ -55,13 +55,15 @@ def label(shape: dict) -> str:
 
 
 def max_model_len(base_url: str) -> int | None:
-    with urllib.request.urlopen(base_url.rstrip("/") + "/v1/models", timeout=60) as response:
+    request = urllib.request.Request(base_url.rstrip("/") + "/v1/models",
+                                     headers=client.request_headers())
+    with urllib.request.urlopen(request, timeout=60) as response:
         return json.load(response)["data"][0].get("max_model_len")
 
 
 def _post(url: str, body: dict | None, timeout: float) -> dict | None:
     request = urllib.request.Request(url, data=json.dumps(body or {}).encode(),
-                                     headers={"Content-Type": "application/json"}, method="POST")
+                                     headers=client.request_headers(content_type=True), method="POST")
     with urllib.request.urlopen(request, timeout=timeout) as response:
         text = response.read().decode()
     return json.loads(text) if text.strip() else None

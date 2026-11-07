@@ -12,7 +12,7 @@ import sys
 import time
 import urllib.request
 
-from . import SCHEMA, __version__, behaviour, engine, load, model_evidence, prefill, prompts, report, stall, suite
+from . import SCHEMA, __version__, behaviour, client, engine, load, model_evidence, prefill, prompts, report, stall, suite
 
 _SCALAR_ARRAY_RE = re.compile(
     r"\[\n\s+((?:(?:-?\d+(?:\.\d+)?(?:e[+-]?\d+)?|true|false|null|\"[^\"\\\n]*\"),?\n\s+)+)\]"
@@ -20,7 +20,9 @@ _SCALAR_ARRAY_RE = re.compile(
 
 
 def model_id(base_url: str) -> str:
-    with urllib.request.urlopen(base_url.rstrip("/") + "/v1/models", timeout=60) as response:
+    request = urllib.request.Request(base_url.rstrip("/") + "/v1/models",
+                                     headers=client.request_headers())
+    with urllib.request.urlopen(request, timeout=60) as response:
         return json.load(response)["data"][0]["id"]
 
 

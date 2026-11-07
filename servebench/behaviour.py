@@ -24,7 +24,7 @@ import time
 import urllib.request
 import uuid
 
-from . import prom, stats
+from . import client, prom, stats
 
 SCHEMA = "servebench-model/1"
 ACCEPTED_PER_POSITION = "vllm:spec_decode_num_accepted_tokens_per_pos"
@@ -33,7 +33,7 @@ DRAFTED_PER_POSITION = "vllm:spec_decode_num_draft_tokens_per_pos"
 
 def _post(url: str, body: dict, timeout: float) -> dict:
     request = urllib.request.Request(url, data=json.dumps(body).encode(),
-                                     headers={"Content-Type": "application/json"}, method="POST")
+                                     headers=client.request_headers(content_type=True), method="POST")
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return json.load(response)
 

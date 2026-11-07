@@ -11,6 +11,8 @@ the counters by draft position.
 import re
 import urllib.request
 
+from . import client
+
 VLLM = {
     "steps": "vllm:iteration_tokens_total_count",
     "step_tokens": "vllm:iteration_tokens_total_sum",
@@ -73,7 +75,9 @@ def by_label(text: str, name: str, label: str) -> dict[str, float]:
 def fetch(base_url: str, timeout: float = 10.0) -> str | None:
     """``base_url``/metrics as text, or None if unreachable."""
     try:
-        with urllib.request.urlopen(base_url.rstrip("/") + "/metrics", timeout=timeout) as response:
+        request = urllib.request.Request(base_url.rstrip("/") + "/metrics",
+                                         headers=client.request_headers())
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             return response.read().decode("utf-8", errors="replace")
     except Exception:  # noqa: BLE001 - a missing endpoint only drops the server columns
         return None

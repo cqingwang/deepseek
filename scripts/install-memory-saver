@@ -15,6 +15,11 @@ print(p["candidate"])
 PY
 )
 
+sudo apt-get \
+  -o Acquire::http::Proxy=false \
+  -o Acquire::https::Proxy=false \
+  install -y --no-install-recommends dkms build-essential "linux-headers-$(uname -r)"
+
 test -z "$(docker ps -q --filter name=^spark-ds41f$ --filter name=^dsv41-karmic-kraken$)"
 source_dir="$HOME/projects/dgx-spark-memory-saver"
 if [ ! -e "$source_dir" ]; then
@@ -22,13 +27,16 @@ if [ ! -e "$source_dir" ]; then
 fi
 test "$(git -C "$source_dir" remote get-url origin)" = "${pin[0]}"
 test -z "$(git -C "$source_dir" status --porcelain)"
-git -C "$source_dir" fetch origin
+if ! git -C "$source_dir" cat-file -e "${pin[1]}^{commit}" 2>/dev/null; then
+  git -C "$source_dir" fetch origin
+fi
 git -C "$source_dir" checkout --detach "${pin[1]}"
 cd "$source_dir"
 ./scripts/check
 
 sudo mokutil --test-key /root/.local/share/dgx-spark-fan-control/keys/MOK.der || true
-sudo python3 - <<'PY'
+if mokutil --sb-state 2>/dev/null | grep -q 'SecureBoot enabled'; then
+  sudo python3 - <<'PY'
 import sys
 sys.path.insert(0, "scripts")
 from signing import check_pair, require_enrolled
@@ -37,6 +45,9 @@ p = Path("/root/.local/share/dgx-spark-fan-control/keys")
 check_pair(p / "MOK.priv", p / "MOK.der")
 require_enrolled(p / "MOK.der")
 PY
+else
+  echo "Secure Boot disabled; skipping MOK enrollment checks"
+fi
 
 version=${pin[2]}
 kernel=${pin[3]}
@@ -55,17 +66,18 @@ sudo install -m 0644 patches/0001-pack-user-leaf-tables.patch \
 sudo install -m 0644 packaging/enable-packing.patch "$destination/packaging/"
 sudo dkms add -m dgx-spark-memory-saver -v "$version"
 sudo dkms build -m dgx-spark-memory-saver -v "$version" -k "$kernel"
-if [ "$(uname -r)" = "$kernel" ] && [ -d /sys/module/nvidia_uvm ]; then
-  if sudo fuser /dev/nvidia-uvm; then
-    echo "Stop GPU clients first" >&2
-    exit 1
-  fi
-  sudo modprobe -r nvidia_uvm
-fi
 sudo dkms install -m dgx-spark-memory-saver -v "$version" -k "$kernel"
 sudo depmod "$kernel"
 sudo update-initramfs -u -k "$kernel"
 if [ "$(uname -r)" = "$kernel" ]; then
+  if sudo fuser /dev/nvidia-uvm; then
+    echo "Stop GPU clients first" >&2
+    exit 1
+  fi
+  if [ -d /sys/module/nvidia_uvm ]; then
+    sudo modprobe -r nvidia_uvm
+  fi
+  sudo udevadm settle
   sudo modprobe nvidia_uvm
 fi
 ./scripts/status --json

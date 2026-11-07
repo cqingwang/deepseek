@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
-# Install dgx-spark-fan-control v0.1.4 and build its DKMS module for installed kernels.
+# Prepare/enroll the signing key and install the pinned fan-control DKMS module.
+#
+# The upstream v0.1.4 checkout has no install.sh. This wrapper follows
+# docs/installation.md: prepare-key requests MOK enrollment; after the operator
+# completes enrollment at the firmware console, install builds the module for
+# kernels that already have headers and installs the userspace unit.
 set -euo pipefail
 
 version=v0.1.4
 repo="https://github.com/christopherowen/dgx-spark-fan-control.git"
 source_dir="$HOME/projects/dgx-spark-fan-control"
+key_dir="${DGX_MOK_DIR:-/root/.local/share/dgx-spark-fan-control/keys}"
+action="${1:-install}"
+
+die() { echo "ERROR: $*" >&2; exit 1; }
+
+case "$action" in
+  prepare-key|install) ;;
+  *) die "用法: $0 [prepare-key|install]" ;;
+esac
 
 if [ ! -e "$source_dir" ]; then
   git clone --branch "$version" "$repo" "$source_dir"
@@ -14,10 +28,80 @@ else
 fi
 
 cd "$source_dir"
-sudo ./install.sh
-for mod_dir in /lib/modules/*; do
-  k=$(basename "$mod_dir")
-  if [ -d "$mod_dir/build" ]; then
-    sudo dkms autoinstall -k "$k"
+./scripts/check
+
+secure_boot_enabled() {
+  mokutil --sb-state 2>/dev/null | grep -q 'SecureBoot enabled'
+}
+
+if [ "$action" = prepare-key ]; then
+  if ! secure_boot_enabled; then
+    echo "Secure Boot disabled; no MOK enrollment is required"
+    exit 0
   fi
+  if [ ! -f "$key_dir/MOK.priv" ] || [ ! -f "$key_dir/MOK.der" ]; then
+    user_key_dir="$HOME/.local/share/dgx-spark-fan-control/keys"
+    if [ ! -f "$user_key_dir/MOK.priv" ] || [ ! -f "$user_key_dir/MOK.der" ]; then
+      ./scripts/generate-signing-key
+    fi
+    sudo install -d -m 0700 "$key_dir"
+    sudo install -m 0600 "$user_key_dir/MOK.priv" "$key_dir/MOK.priv"
+    sudo install -m 0644 "$user_key_dir/MOK.der" "$key_dir/MOK.der"
+  fi
+  if sudo mokutil --test-key "$key_dir/MOK.der" 2>&1 | grep -Fxq -- "$key_dir/MOK.der is already enrolled"; then
+    echo "signing key already enrolled: $key_dir/MOK.der"
+    exit 0
+  fi
+  echo "Requesting MOK enrollment; this command needs the temporary enrollment password."
+  if [ -n "${MOK_PASSWORD:-}" ]; then
+    hash_file="$(mktemp)"
+    chmod 0600 "$hash_file"
+    mokutil --generate-hash="$MOK_PASSWORD" > "$hash_file"
+    if ! sudo mokutil --import "$key_dir/MOK.der" --hash-file "$hash_file"; then
+      rm -f "$hash_file"
+      exit 1
+    fi
+    rm -f "$hash_file"
+  else
+    sudo mokutil --import "$key_dir/MOK.der"
+  fi
+  echo "MOK request staged. Reboot with a console, enroll the key, then rerun: $0 install"
+  exit 0
+fi
+
+if secure_boot_enabled; then
+  sudo test -f "$key_dir/MOK.priv" || die "missing $key_dir/MOK.priv; run $0 prepare-key"
+  sudo test -f "$key_dir/MOK.der" || die "missing $key_dir/MOK.der; run $0 prepare-key"
+  enrollment="$(sudo mokutil --test-key "$key_dir/MOK.der" 2>&1 || true)"
+  printf '%s\n' "$enrollment"
+  printf '%s\n' "$enrollment" | grep -Fxq -- "$key_dir/MOK.der is already enrolled" \
+    || die "signing key is not enrolled; complete MOK enrollment first"
+else
+  echo "Secure Boot disabled; building an unsigned fan-control module"
+fi
+
+sudo apt-get \
+  -o Acquire::http::Proxy=false \
+  -o Acquire::https::Proxy=false \
+  install -y --no-install-recommends dkms build-essential linux-headers-"$(uname -r)"
+
+source_root="/usr/src/dgx-spark-fan-control-$version"
+sudo install -d "$source_root/kernel"
+sudo install -m 0644 dkms.conf "$source_root/dkms.conf"
+sudo install -m 0644 kernel/Makefile kernel/dgx_ec_fan_control.c "$source_root/kernel/"
+sudo dkms add -m dgx-spark-fan-control -v "$version"
+
+for mod_dir in /lib/modules/*; do
+  [ -d "$mod_dir/build" ] || continue
+  kernel="$(basename "$mod_dir")"
+  sudo dkms build -m dgx-spark-fan-control -v "$version" -k "$kernel"
+  sudo dkms install -m dgx-spark-fan-control -v "$version" -k "$kernel"
 done
+
+sudo install -D -m 0755 userspace/dgx_fan_control.py /usr/local/sbin/dgx-fan-control
+sudo install -D -m 0644 systemd/dgx_ec_fan_control.conf /etc/modules-load.d/dgx_ec_fan_control.conf
+sudo install -D -m 0644 systemd/dgx-fan-control.service /etc/systemd/system/dgx-fan-control.service
+sudo systemctl daemon-reload
+sudo modprobe dgx_ec_fan_control
+/usr/local/sbin/dgx-fan-control status
+echo "fan-control installed for kernels with headers; service is installed but not enabled"

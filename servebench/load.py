@@ -86,7 +86,7 @@ def token_count(base_url: str, model: str, text: str) -> int | None:
     """Tokens in ``text`` by the server's tokenizer (vLLM /tokenize), or None."""
     request = urllib.request.Request(base_url.rstrip("/") + "/tokenize",
                                      data=json.dumps({"model": model, "prompt": text}).encode(),
-                                     headers={"Content-Type": "application/json"}, method="POST")
+                                     headers=client.request_headers(content_type=True), method="POST")
     try:
         with urllib.request.urlopen(request, timeout=300) as response:
             return json.load(response).get("count")

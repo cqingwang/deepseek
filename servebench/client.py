@@ -14,6 +14,7 @@ import urllib.request
 
 TIMEOUT_S = 900.0
 STREAM_POLICY_ENV = "SPARK_DS41F_BENCH_STREAM_POLICY"
+API_KEY_ENV = "SPARK_DS41F_API_KEY"
 RECORDED_STREAM_POLICY = "recorded-1030"
 
 
@@ -22,6 +23,16 @@ def stream_policy() -> str:
     if policy not in ("current", RECORDED_STREAM_POLICY):
         raise ValueError(f"unsupported stream collector policy: {policy}")
     return policy
+
+
+def request_headers(*, content_type: bool = False) -> dict[str, str]:
+    headers: dict[str, str] = {}
+    if content_type:
+        headers["Content-Type"] = "application/json"
+    api_key = os.environ.get(API_KEY_ENV)
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    return headers
 
 
 def stream_chat(base_url: str, payload: dict, *, continuous_usage: bool = False,
@@ -41,7 +52,7 @@ def stream_chat(base_url: str, payload: dict, *, continuous_usage: bool = False,
     body = dict(payload, stream=True, stream_options=options)
     request = urllib.request.Request(
         base_url.rstrip("/") + "/v1/chat/completions", data=json.dumps(body).encode(),
-        headers={"Content-Type": "application/json"}, method="POST")
+        headers=request_headers(content_type=True), method="POST")
     record = {"sent": clock(), "first": None, "end": None, "events": [],
               "prompt_tokens": None, "completion_tokens": None, "finish_reason": None,
               "token_times": "exact", "error": None}

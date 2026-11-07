@@ -20,7 +20,7 @@ candidate=${specs[0]}
 packages=("${specs[@]:1}")
 
 apt-get update
-apt-get install -y "${packages[@]}"
+apt-get install -y --no-install-recommends nvidia-spark-grub-kho "${packages[@]}"
 
 if dkms status -m dgx-spark-fan-control 2>/dev/null | grep -q dgx-spark-fan-control; then
   dkms autoinstall -k "$candidate"

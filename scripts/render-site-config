@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""Render spark-ds41f's git-ignored site files from the parent Spark config.
+
+The parent ``spark/config.yaml`` remains the sole site inventory. This helper
+only translates its derived ring topology into the two files expected by the
+upstream ``bin/spark`` build/cluster commands.
+"""
+
+from __future__ import annotations
+
+import argparse
+import ipaddress
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+
+def run_json(program: Path, config: Path, *arguments: str) -> Any:
+    result = subprocess.run(
+        [sys.executable, str(program), *arguments, "--config", str(config)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or result.stdout.strip() or "no output"
+        raise SystemExit(f"{' '.join(arguments)} failed: {detail}")
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as error:
+        raise SystemExit(f"{' '.join(arguments)} returned invalid JSON: {error}") from error
+
+
+def run_rows(program: Path, config: Path, *arguments: str) -> list[list[str]]:
+    result = subprocess.run(
+        [sys.executable, str(program), *arguments, "--config", str(config)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or result.stdout.strip() or "no output"
+        raise SystemExit(f"{' '.join(arguments)} failed: {detail}")
+    return [line.split("\t") for line in result.stdout.splitlines() if line]
+
+
+def peer_hca_maps(program: Path, config: Path) -> dict[str, dict[str, list[str]]]:
+    maps: dict[str, dict[str, list[str]]] = {}
+    for row in run_rows(program, config, "ring-peer-hca", "--target", "deepseek"):
+        if len(row) != 2:
+            raise SystemExit(f"ring-peer-hca returned malformed row: {row!r}")
+        peers: dict[str, list[str]] = {}
+        for item in row[1].split(";"):
+            rank, separator, raw_hcas = item.partition("=")
+            hcas = [hca for hca in raw_hcas.split(",") if hca]
+            if not separator or not rank.isdigit() or not hcas:
+                raise SystemExit(f"ring-peer-hca returned malformed peer entry: {item!r}")
+            peers[rank] = hcas
+        maps[row[0]] = peers
+    return maps
+
+
+def render(config: Path, program: Path, output_dir: Path) -> tuple[Path, Path]:
+    payload = run_json(program, config, "ring-topology", "--json")
+    topology = payload.get("nodes")
+    if not isinstance(topology, dict) or not topology:
+        raise SystemExit("ring-topology returned no nodes")
+    peers = peer_hca_maps(program, config)
+
+    nodes: list[dict[str, Any]] = []
+    for name, record in sorted(topology.items(), key=lambda item: int(item[1]["rank"])):
+        if name not in peers:
+            raise SystemExit(f"ring-peer-hca omitted node {name}")
+        subnets: dict[str, str] = {}
+        for plane in ("fabric", "fabric2"):
+            for index in (0, 1):
+                hca = str(record[f"{plane}_hca{index}"])
+                try:
+                    interface = ipaddress.ip_interface(record[f"{plane}_ip{index}"])
+                except (KeyError, ValueError) as error:
+                    raise SystemExit(f"{name}: invalid {plane} address: {record.get(f'{plane}_ip{index}')}") from error
+                subnets[hca] = str(interface.network)
+        management_ip = str(record["management_ip"])
+        nodes.append(
+            {
+                "name": name,
+                "rank": int(record["rank"]),
+                "management_ip": management_ip,
+                "control_ip": management_ip,
+                "head": bool(record["role"] == "head"),
+                "roce_peer_hcas": peers[name],
+                "roce_subnets": subnets,
+            }
+        )
+
+    heads = [node for node in nodes if node["head"]]
+    if len(heads) != 1:
+        raise SystemExit(f"ring topology must have exactly one head, found {len(heads)}")
+    first_ssh = str(next(iter(topology.values()))["ssh"])
+    ssh_user, separator, _ = first_ssh.partition("@")
+    if not separator or not ssh_user:
+        raise SystemExit(f"invalid management SSH target: {first_ssh!r}")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    site_path = output_dir / "site.json"
+    nodes_path = output_dir / "nodes-ring4.local.json"
+    site_path.write_text(json.dumps({"shape": "tp4-ring"}, indent=2) + "\n", encoding="utf-8")
+    nodes_path.write_text(
+        json.dumps({"schema_version": 1, "ssh_user": ssh_user, "nodes": nodes}, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return site_path, nodes_path
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--program", required=True, type=Path, help="parent spark/program.py")
+    parser.add_argument("--config", required=True, type=Path, help="parent spark/config.yaml")
+    parser.add_argument("--output-dir", required=True, type=Path, help="target config directory")
+    args = parser.parse_args()
+    site, nodes = render(args.config.resolve(), args.program.resolve(), args.output_dir.resolve())
+    print(f"rendered {site}")
+    print(f"rendered {nodes}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
