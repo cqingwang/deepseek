@@ -106,8 +106,8 @@
 
 已落盘：
 
-- [`spark/ds41f-host-prep.md`](../ds41f-host-prep.md)：逐阶段 runbook、回退和证据门禁；
-- [`spark/ds41f-host-prep.sh`](../ds41f-host-prep.sh)：默认只读 `check`，变更命令必须带 `--node`、`--yes`，`trial-boot` 另需 `--allow-reboot`；
+- [`spark/docs/ds41f-host-prep.md`](../docs/ds41f-host-prep.md)：逐阶段 runbook、回退和证据门禁；
+- [`spark/docs/ds41f-host-prep.sh`](../docs/ds41f-host-prep.sh)：默认只读 `check`，变更命令必须带 `--node`、`--yes`，`trial-boot` 另需 `--allow-reboot`；
 - 版本 pin 从 `config/kernel-trial.json` 读取；脚本不自动修改 OS、不自动 reboot。
 
 2026-11-07 四机只读基线：
@@ -127,7 +127,7 @@
 
 四机已完成 64K 重启；内核、driver、`kho=off`、modeset、host-recovery、
 64K swap/THP/min_free、memory saver 和 GRUB pin 均已通过。当前 boot 的四机
-`ds41f-host-prep.sh check` 全 PASS；fan-control 从硬门禁改为 optional/warn。
+`spark/docs/ds41f-host-prep.sh check` 全 PASS；fan-control 从硬门禁改为 optional/warn。
 
 本轮已开始主机准备：
 
@@ -311,7 +311,7 @@ bash spark/deploy.sh start --target=deepseek \
 - `spark/program.py`：deepseek 宿主/容器环境分支与 common.ring 派生。
 - `spark/deploy.sh`：deepseek 薄受管分支。
 - `spark/sync_to.sh`：登记 `deepseek` submodule，排除 `.env.deepseek`。
-- `spark/ds41f-host-prep.md`、`spark/ds41f-host-prep.sh`：主机准备 runbook、只读检查和分阶段变更入口。
+- `spark/docs/ds41f-host-prep.md`、`spark/docs/ds41f-host-prep.sh`：主机准备 runbook、只读检查和分阶段变更入口。
 - `spark/deepseek/.env.deepseek.example`：81 键固定配方快照。
 - `spark/deepseek/start-tp4.sh`：受管容器白名单、逐 rank 动态项、GLP mount。
 - `spark/deepseek/stop.sh`：精确停止与残留检查。
