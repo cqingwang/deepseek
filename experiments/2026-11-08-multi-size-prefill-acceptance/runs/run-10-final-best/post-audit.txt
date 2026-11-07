@@ -1,0 +1,36 @@
+utc=2026-11-07T20:41:16Z
+===== api =====
+{"object":"list","data":[{"id":"deepseek-v4.1-flash","object":"model","created":1794084076,"owned_by":"vllm","root":"/models/DeepSeek-V4.1-Flash-1017","parent":null,"max_model_len":1048576,"permission":[{"id":"modelperm-ab02acde1f402ab4","object":"model_permission","created":1794084076,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]},{"id":"deepseek-v4.1-flash-weightless","object":"model","created":1794084076,"owned_by":"vllm","root":"/models/DeepSeek-V4.1-Flash-1017","parent":null,"max_model_len":1048576,"permission":[{"id":"modelperm-a6620a02667210a1","object":"model_permission","created":1794084076,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+===== ranks =====
+spark-a
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=9 GiB
+47, 2177 MHz, 9.52 W
+spark-b
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=10 GiB
+48, 2190 MHz, 7.90 W
+spark-c
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=11 GiB
+48, 2190 MHz, 10.05 W
+spark-d
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=11 GiB
+49, 2184 MHz, 9.74 W
+===== selected env =====
+CUDA_DEVICE_MAX_CONNECTIONS=64
+NCCL_BUFFSIZE=4194304
+NCCL_IB_QPS_PER_CONNECTION=2
+NCCL_MAX_NCHANNELS=8
+NCCL_MIN_NCHANNELS=8
+SPARKNET_ROCE_ALLGATHER_MAX_BYTES=8388608
+===== kernel scan =====

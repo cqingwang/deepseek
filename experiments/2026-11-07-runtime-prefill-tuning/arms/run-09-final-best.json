@@ -1,0 +1,57 @@
+{
+  "run": "run-09-final-best",
+  "status": "retained final runtime configuration",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "source": {
+    "start_tp4_sha256": "6ccfaa4f0fa70575aaa524181c09db859bcc42b2e552ca710796e74f4e5a0cc5",
+    "env_template_sha256": "2ff89fe1ad83a2f849b703a4a63fb7950ba1fde4ff31ffd5a96341f88e05234b",
+    "measured_env_template_sha256": "b73c9be363b875592aa5e17286ee7d3d2510439caa2749580a0e14db5beb3297",
+    "env_template_note": "The measured start used b73c9be3; the final file differs only by a comment documenting the retained override.",
+    "serve_args": {
+      "--max-num-batched-tokens": "49152",
+      "--long-prefill-token-threshold": "49056"
+    },
+    "environment": {
+      "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+      "NCCL_BUFFSIZE": "4194304"
+    }
+  },
+  "decode_output_tps": {
+    "c1": 71.33333333333333,
+    "c2": 104.89999999999999,
+    "c3": 126.45,
+    "c4": 142.63333333333333
+  },
+  "prefill_tps": {
+    "32768_initial": 6858.999169578917,
+    "32768_repeat": 6920.203662244057,
+    "131072": 6880.318590101179,
+    "1040000": 5076.445496016712
+  },
+  "comparison_to_run_00": {
+    "prefill_32k_repeat_pct": 3.950613,
+    "prefill_131k_pct": 2.413408,
+    "prefill_1m_pct": 2.363306,
+    "c1_pct": -0.046707,
+    "c4_pct": -0.891720
+  },
+  "quality": {
+    "outputs_sha256": "6cf26aedc93c0c01bf81ed4dac8a67e77043222719930977e034aba70a9ff99a",
+    "perplexity": 1.1178292269357697,
+    "rank1_fraction": 1.0,
+    "failed": 0
+  },
+  "post_audit": {
+    "containers": "4 running",
+    "oom_killed": false,
+    "restart_count": 0,
+    "image_ids_match": true,
+    "memguards": "4 active",
+    "failed_units": 0,
+    "served_models": [
+      "deepseek-v4.1-flash",
+      "deepseek-v4.1-flash-weightless"
+    ]
+  }
+}

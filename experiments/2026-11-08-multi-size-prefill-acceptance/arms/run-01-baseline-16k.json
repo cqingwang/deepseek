@@ -1,0 +1,27 @@
+{
+  "run": "run-01-baseline-16k",
+  "status": "initial production baseline",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "runtime": {
+    "--max-num-batched-tokens": "16384",
+    "--long-prefill-token-threshold": "16288",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "2097152",
+    "NCCL_BUFFSIZE": "4194304"
+  },
+  "prefill_tps": {
+    "8192": 5792.5429867205785,
+    "16384": 6492.551900761931,
+    "32768": 6685.21632792389,
+    "65536": 6760.441005540517,
+    "131072": 6656.440601915649,
+    "262144": 6411.532551751188
+  },
+  "prefill_sum_tps": 38798.72537461376,
+  "prefill_mean_tps": 6466.454229102293,
+  "decode_output_tps": {
+    "c1": 69.2,
+    "c4": 139.9333333333333
+  },
+  "failed": 0
+}

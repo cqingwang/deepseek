@@ -1,0 +1,60 @@
+{
+  "frozen_at_utc": "2026-11-07T23:15:58Z",
+  "scope": "best six-size prefill runtime deployment before image/binary experiments",
+  "baseline_run": "run-01-baseline-16k",
+  "best_measured_run": "run-09-65520-ch8-cudaconn64-qps2",
+  "final_running_run": "run-10-final-best",
+  "primary_metric": "arithmetic mean of cold prefill tok/s at 8192,16384,32768,65536,131072,262144",
+  "baseline_mean_tps": 6466.454229102293,
+  "best_mean_tps": 6788.804777003316,
+  "best_delta_tps": 322.3505479010237,
+  "best_delta_pct": 4.9849660490951075,
+  "target_mean_tps": 8466.454229102294,
+  "target_reached": false,
+  "image": {
+    "tag": "spark-ds41f:1030",
+    "id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+    "expected_labels": {
+      "local.spark-ds41f.vllm.tree": "ea1281f880e7535e3d87725be0156a8e38fc2fb2",
+      "local.spark-ds41f.b12x.tree": "1a647a311ca55d45070ab83d60668d9c8fb8886c",
+      "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+      "local.spark-ds41f.tilelang.tree": "222b895d04ee6cd75179155d06e0c0d450636f51",
+      "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "local.spark-ds41f.sparknet.tree": "f997a594f03a696897e6ad8e50bb027ed877ebe9"
+    }
+  },
+  "runtime": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "NCCL_BUFFSIZE": "4194304",
+    "NCCL_IB_QPS_PER_CONNECTION": "2",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "64"
+  },
+  "quality": {
+    "outputs_sha256": "6cf26aedc93c0c01bf81ed4dac8a67e77043222719930977e034aba70a9ff99a",
+    "perplexity": 1.1178292269357697,
+    "rank1_fraction": 1.0,
+    "failed": 0
+  },
+  "decode_output_tps": {
+    "c1": 68.76666666666667,
+    "c4": 139.06666666666666
+  },
+  "prefill_1m_tps": 5183.9492211005145,
+  "files_sha256": {
+    "start-tp4.sh": "32b2a4c4608df07b4c48e550ab01513a25767e09edd26f68bf8bd4d26a114f5e",
+    ".env.deepseek.example": "d262f99e9ca2b77dc205034bcfeb08e34655024cbbdd12adf092768c9aab34c8",
+    "runtime-source.patch": "3d03b332148eb33a061c95656282b1b1b22da6b7ecee0dfe1f179db090b4cefe",
+    "tmp-evidence/deepseek-r0-args.json": "b82dbb3f298cec1e6cc5c0d4cb3aaabe281a44f1149984dbdf6012280bd613e0",
+    "tmp-evidence/deepseek-r0-env.txt": "06b240fe409447d19316e4ad49dbe4af0712dc25ab452a5decb2e5fd4480d225",
+    "tmp-evidence/chat-variants-baseline.json": "e99dc105c10c970fc6303ca774d4809c7a28f7ef38c5cc6c4fec1cede51fa98e"
+  },
+  "authoritative_live_paths": [
+    "spark/deepseek/start-tp4.sh",
+    "spark/deepseek/.env.deepseek.example",
+    "spark/config.yaml"
+  ]
+}

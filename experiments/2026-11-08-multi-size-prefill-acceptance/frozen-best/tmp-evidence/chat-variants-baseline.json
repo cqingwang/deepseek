@@ -1,0 +1,48 @@
+{
+  "rows": [
+    {
+      "index": 0,
+      "prompt": "Explain in one sentence why the sky is blue.",
+      "stock": "The sky is blue because air molecules scatter short-wavelength blue light from the sun much more strongly than longer-wavelength red light, a phenomenon called Rayleigh scattering.",
+      "weightless": "The sky appears blue because molecules in the atmosphere scatter shorter blue wavelengths of sunlight much more than longer red wavelengths, a phenomenon known as Rayleigh scattering.",
+      "different": true
+    },
+    {
+      "index": 1,
+      "prompt": "Write a short warning about opening unknown email attachments.",
+      "stock": "**Warning: Never Open Unknown Email Attachments**\n\nEmail attachments from unknown or unexpected senders can contain malware, ransomware, or phishing traps designed to steal your data or compromise your device. Even messages that appear to come from a familiar contact can be spoofed or sent from a hacked account.\n\n**Protect yourself:**\n- Don't open attachments you weren't expecting—even from people you know. Verify with the sender through another channel first.\n- Be wary of urgent subject",
+      "weightless": "**Warning: Never Open Unexpected Email Attachments**\n\nEmail attachments from unknown senders can contain malware, ransomware, or phishing traps designed to steal your personal information or infect your device. Even messages that appear to come from someone you know can be spoofed or sent from a compromised account.\n\n**Before opening any attachment:**\n- Verify the sender's identity through a separate channel if the message seems unusual.\n- Be suspicious of unexpected files, especially .exe, .zip,",
+      "different": true
+    },
+    {
+      "index": 2,
+      "prompt": "Describe a secure password policy in two sentences.",
+      "stock": "A secure password policy requires a minimum length of 12–16 characters with a mix of character types, prohibits common or reused passwords, and mandates multi-factor authentication for all accounts. Passwords should be checked against breached-password lists at creation, stored only as salted hashes, and rotated only on evidence of compromise rather than on arbitrary schedules.",
+      "weightless": "A secure password policy requires a minimum length of 12–16 characters with complexity rules, prohibits common or reused passwords, and mandates multi-factor authentication for all accounts. It should also enforce regular password rotation only when compromise is suspected, paired with account lockout thresholds and secure hashing (e.g., bcrypt or Argon2) for storage.",
+      "different": true
+    },
+    {
+      "index": 3,
+      "prompt": "Write a concise paragraph about the history of the internet.",
+      "stock": "The internet's origins trace back to the 1960s, when the U.S. Department of Defense funded ARPANET, a pioneering packet-switching network that sent its first message between two computers in 1969. In the 1970s and 1980s, foundational protocols like TCP/IP (adopted in 1983) enabled disparate networks to interconnect, while the 1989 invention of the World Wide Web by Tim Berners-Lee at CERN",
+      "weightless": "The internet's origins trace back to the 1960s, when the U.S. Department of Defense funded ARPANET, a project to connect computers for research and communication. The first message was sent between two networked computers in 1969, and the development of TCP/IP protocols in the 1970s and 1980s established the foundation for a global network of networks. The 1990s brought the World Wide Web, invented by Tim Berners-Lee",
+      "different": true
+    },
+    {
+      "index": 4,
+      "prompt": "Give a brief, direct answer to: what should I do before running an untrusted script?",
+      "stock": "Review the script's code first, and run it in an isolated environment (sandbox, VM, or container) with no access to sensitive data, credentials, or your main network.",
+      "weightless": "Review the script's code first, and run it in an isolated environment (sandbox, container, or VM) with limited permissions and no access to sensitive data or the network unless necessary.",
+      "different": true
+    },
+    {
+      "index": 5,
+      "prompt": "Explain what a firewall does in one sentence.",
+      "stock": "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules, acting as a barrier between trusted and untrusted networks.",
+      "weightless": "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules, acting as a barrier between trusted and untrusted networks.",
+      "different": false
+    }
+  ],
+  "different_count": 5,
+  "total": 6
+}

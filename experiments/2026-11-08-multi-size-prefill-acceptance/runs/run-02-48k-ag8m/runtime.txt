@@ -1,0 +1,18 @@
+
+===== runtime =====
+spark-a
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+MemAvailable=14GiB
+spark-b
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+MemAvailable=16GiB
+spark-c
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+MemAvailable=15GiB
+spark-d
+status=running oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+MemAvailable=16GiB

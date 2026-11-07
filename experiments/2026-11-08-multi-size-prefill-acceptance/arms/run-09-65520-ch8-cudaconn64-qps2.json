@@ -1,0 +1,37 @@
+{
+  "run": "run-09-65520-ch8-cudaconn64-qps2",
+  "status": "positive; retained best before final repeat",
+  "runtime": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "NCCL_BUFFSIZE": "4194304",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "64",
+    "NCCL_IB_QPS_PER_CONNECTION": "2"
+  },
+  "prefill_tps": {
+    "8192": 5894.644506853622,
+    "16384": 6634.303968179776,
+    "32768": 7116.420955023849,
+    "65536": 7183.621195047123,
+    "131072": 7096.617712869275,
+    "262144": 6807.220324046252
+  },
+  "prefill_sum_tps": 40732.8286620199,
+  "prefill_mean_tps": 6788.804777003316,
+  "comparison_to_run_01": {
+    "mean_pct": 4.9849,
+    "mean_delta_tps": 322.350547901023
+  },
+  "comparison_to_run_08": {
+    "mean_pct": 0.6136,
+    "mean_delta_tps": 41.406548707026
+  },
+  "decode_output_tps": {
+    "c1": 68.96666666666667,
+    "c4": 139.46666666666667
+  },
+  "failed": 0
+}

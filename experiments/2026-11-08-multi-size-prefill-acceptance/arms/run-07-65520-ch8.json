@@ -1,0 +1,36 @@
+{
+  "run": "run-07-65520-ch8",
+  "status": "positive; retained best so far",
+  "runtime": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "NCCL_BUFFSIZE": "4194304",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "32"
+  },
+  "prefill_tps": {
+    "8192": 5862.110944771386,
+    "16384": 6598.378200524194,
+    "32768": 7004.584701697966,
+    "65536": 7139.736251379654,
+    "131072": 7048.607644122077,
+    "262144": 6761.042241309558
+  },
+  "prefill_sum_tps": 40414.45998380484,
+  "prefill_mean_tps": 6735.74333063414,
+  "comparison_to_run_01": {
+    "mean_pct": 4.1644,
+    "mean_delta_tps": 269.289101531847
+  },
+  "comparison_to_run_03": {
+    "mean_pct": 0.2299,
+    "mean_delta_tps": 15.45474880091
+  },
+  "decode_output_tps": {
+    "c1": 69.0,
+    "c4": 138.63333333333333
+  },
+  "failed": 0
+}

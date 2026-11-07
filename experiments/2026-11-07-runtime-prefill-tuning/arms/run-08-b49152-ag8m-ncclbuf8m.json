@@ -1,0 +1,33 @@
+{
+  "run": "run-08-b49152-ag8m-ncclbuf8m",
+  "status": "regression against the 48K + 8 MiB all-gather best; rejected",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "source": {
+    "start_tp4_sha256": "6ccfaa4f0fa70575aaa524181c09db859bcc42b2e552ca710796e74f4e5a0cc5",
+    "env_template_sha256": "0ff4d28ae8f660d16fa2f5a74b57df1243182483765075c67f603ea9bc2c1cd0",
+    "changed_runtime_arguments": {
+      "--max-num-batched-tokens": "49152",
+      "--long-prefill-token-threshold": "49056"
+    },
+    "changed_environment": {
+      "NCCL_BUFFSIZE": "8388608",
+      "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608"
+    }
+  },
+  "result": {
+    "prefill_tps": {
+      "32768": 6861.699768007143,
+      "131072": 6803.244167806355
+    },
+    "decode_output_tps": {
+      "c1": 71.28333333333333,
+      "c4": 142.75
+    },
+    "failed": 0
+  },
+  "comparison_to_run_06": {
+    "prefill_32k_pct": -1.132372,
+    "prefill_131k_pct": -1.749448
+  }
+}

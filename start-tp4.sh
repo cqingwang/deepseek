@@ -9,7 +9,8 @@
 # cluster.json `container.docker_run_args`，DS41F_SERVE_ARGS =
 # `serve_args` 经 scripts/recipe.py:resolve(..., "tp4-ring") 渲染后的定值
 # （rows=96：max_num_seqs 16 x (1+drafts 5)；capture ladder 1..96；
-# long_prefill 16288=16384-96；engram table_memory=disk）。
+# 2026-11-08 multi-size final: long_prefill 65424=65520-96；
+# engram table_memory=disk）。
 # 来源：config/cluster.json @ 2026-10-30-spark-ds41f-1030（镜像 spark-ds41f:1030）。
 # 站点渲染点只有四处：serve 模型路径、--host、--port、--api-key；逐 rank
 # 注入 VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
@@ -41,6 +42,7 @@ set -a
 # shellcheck disable=SC1090
 source "$ENV_FILE"
 set +a
+CONFIG_FILE="${DS41F_CONFIG_FILE:-$ROOT/config/cluster.json}"
 
 container_name_for_rank() { printf '%s-r%s' "$TARGET_CONTAINER_PREFIX" "$1"; }
 
@@ -64,14 +66,23 @@ fi
   || die "runtime assets 必须精确为 /opt/runtime_assets/deepseek"
 [ "$NNODES" = "4" ] && [ "$TP_SIZE" = "4" ] \
   || die "deepseek 必须按 common.ring 使用 nnodes=4 的 TP4 环"
-case "$IMAGE" in
-  spark-ds41f:1030) ;;
-  *) die "镜像 tag 非本站已验收组合: $IMAGE" ;;
-esac
-case "$IMAGE_ID" in
-  sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41) ;;
-  *) die "镜像 image ID 非本站已验收组合: $IMAGE_ID" ;;
-esac
+if [ "${DS41F_ALLOW_UNVERIFIED_IMAGE:-0}" = "1" ]; then
+  case "$IMAGE" in
+    spark-ds41f:*) ;;
+    *) die "实验镜像 tag 不以 spark-ds41f: 开头: $IMAGE" ;;
+  esac
+  [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]] \
+    || die "实验镜像 image ID 非法: $IMAGE_ID"
+else
+  case "$IMAGE" in
+    spark-ds41f:1030) ;;
+    *) die "镜像 tag 非本站已验收组合: $IMAGE" ;;
+  esac
+  case "$IMAGE_ID" in
+    sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41) ;;
+    *) die "镜像 image ID 非本站已验收组合: $IMAGE_ID" ;;
+  esac
+fi
 
 read -r -a WORKER_TARGETS <<< "$WORKER_SSH_TARGETS"
 read -r -a WORKER_RANK_VALUES <<< "$WORKER_RANKS"
@@ -134,7 +145,7 @@ DS41F_SERVE_ARGS=(
   --gpu-memory-utilization
   0.82
   --max-num-batched-tokens
-  16384
+  65520
   --kv-cache-memory-bytes
   11274289152
   --max-cudagraph-capture-size
@@ -160,7 +171,7 @@ DS41F_SERVE_ARGS=(
   --prefix-cache-retention-interval
   8192
   --long-prefill-token-threshold
-  16288
+  65424
   --async-scheduling
   --reasoning-parser
   deepseek_v41
@@ -494,7 +505,7 @@ preflight() {
     die "head :$PORT 已被占用，拒绝启动 deepseek"
   fi
   info "镜像身份校验: $IMAGE ($IMAGE_ID)"
-  label_rows="$(python3 - "$ROOT/config/cluster.json" <<'PY'
+  label_rows="$(python3 - "$CONFIG_FILE" <<'PY'
 import json
 import sys
 

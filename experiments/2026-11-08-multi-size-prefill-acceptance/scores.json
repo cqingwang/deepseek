@@ -1,0 +1,24 @@
+{
+  "primary_metric": "arithmetic mean of cold prefill tok/s at 8192,16384,32768,65536,131072,262144",
+  "baseline_mean_tps": 6466.454229102293,
+  "target_mean_tps_if_plus_2000": 8466.454229102293,
+  "deployments": [
+    {"run": 1, "mean_tps": 6466.454229102293, "note": "16K baseline"},
+    {"run": 2, "mean_tps": 6660.305862463604, "note": "48K + all-gather 8 MiB"},
+    {"run": 3, "mean_tps": 6720.28858183323, "note": "65,520 + all-gather 8 MiB"},
+    {"run": 4, "mean_tps": 6712.798067883293, "note": "65,535"},
+    {"run": 5, "mean_tps": 6706.497501424078, "note": "65,520 + router-x3"},
+    {"run": 6, "mean_tps": 6649.4598899468065, "note": "65,520 + all-gather 16 MiB"},
+    {"run": 7, "mean_tps": 6735.74333063414, "note": "65,520 + NCCL 8 channels"},
+    {"run": 8, "mean_tps": 6747.39822829629, "note": "run 07 + CUDA connections 64"},
+    {"run": 9, "mean_tps": 6788.804777003316, "note": "run 08 + NCCL QPS 2; highest"},
+    {"run": 10, "mean_tps": 6776.6581371463435, "note": "same as run 09; final clean boot"}
+  ],
+  "winner": {
+    "run": 9,
+    "mean_tps": 6788.804777003316,
+    "delta_vs_baseline_tps": 322.3505479010237,
+    "delta_vs_baseline_pct": 4.9849660490951075,
+    "final_running_deployment": 10
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "run": "run-05-65520-ag8m-routerx3",
+  "status": "not retained; below run 03's six-size mean",
+  "runtime": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424",
+    "--enable-bf16x3-router-gemm": true,
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_BUFFSIZE": "4194304"
+  },
+  "prefill_tps": {
+    "8192": 5879.332873707552,
+    "16384": 6662.199874643752,
+    "32768": 6983.027485725837,
+    "65536": 7063.524104119479,
+    "131072": 6964.103608190644,
+    "262144": 6686.797062157211
+  },
+  "prefill_sum_tps": 40238.98500854447,
+  "prefill_mean_tps": 6706.497501424078,
+  "comparison_to_run_03": {
+    "mean_pct": -0.2054,
+    "mean_delta_tps": -13.791080409152
+  },
+  "decode_output_tps": {
+    "c1": 69.16666666666667,
+    "c4": 139.3
+  },
+  "failed": 0
+}

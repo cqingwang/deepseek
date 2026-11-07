@@ -1,0 +1,29 @@
+{
+  "run": "run-02-48k-ag8m",
+  "status": "positive versus baseline; retained best so far",
+  "runtime": {
+    "--max-num-batched-tokens": "49152",
+    "--long-prefill-token-threshold": "49056",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_BUFFSIZE": "4194304"
+  },
+  "prefill_tps": {
+    "8192": 5877.022405152322,
+    "16384": 6619.170521070105,
+    "32768": 6972.682450945136,
+    "65536": 6966.979699013335,
+    "131072": 6901.270561452115,
+    "262144": 6624.709537148613
+  },
+  "prefill_sum_tps": 39961.83517478163,
+  "prefill_mean_tps": 6660.305862463604,
+  "comparison_to_run_01": {
+    "mean_pct": 2.998,
+    "mean_delta_tps": 193.851633361311
+  },
+  "decode_output_tps": {
+    "c1": 69.0,
+    "c4": 139.06666666666666
+  },
+  "failed": 0
+}

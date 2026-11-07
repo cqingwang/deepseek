@@ -1,0 +1,36 @@
+utc=2026-11-07T16:17:20Z
+===== api =====
+{"object":"list","data":[{"id":"deepseek-v4.1-flash","object":"model","created":1794068240,"owned_by":"vllm","root":"/models/DeepSeek-V4.1-Flash-1017","parent":null,"max_model_len":1048576,"permission":[{"id":"modelperm-bb373f04dc43905b","object":"model_permission","created":1794068240,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]},{"id":"deepseek-v4.1-flash-weightless","object":"model","created":1794068240,"owned_by":"vllm","root":"/models/DeepSeek-V4.1-Flash-1017","parent":null,"max_model_len":1048576,"permission":[{"id":"modelperm-a131e8a12f656294","object":"model_permission","created":1794068240,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+===== ranks =====
+spark-a
+deepseek-r0	Up 12 minutes	spark-ds41f:1030
+oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=14 GiB
+48, 2177 MHz, 9.63 W
+spark-b
+deepseek-r1	Up 12 minutes	spark-ds41f:1030
+oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=16 GiB
+47, 2190 MHz, 7.88 W
+spark-c
+deepseek-r2	Up 12 minutes	spark-ds41f:1030
+oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=16 GiB
+47, 2190 MHz, 9.92 W
+spark-d
+deepseek-r3	Up 12 minutes	spark-ds41f:1030
+oom=false restarts=0 image=sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41
+active
+failed-units=0
+MemAvailable=16 GiB
+48, 2184 MHz, 9.65 W
+===== selected env =====
+NCCL_BUFFSIZE=4194304
+SPARKNET_ROCE_ALLGATHER_MAX_BYTES=8388608
+===== kernel scan =====

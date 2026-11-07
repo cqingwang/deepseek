@@ -1,0 +1,35 @@
+{
+  "run": "run-07-b49152-ag8m-routerx3",
+  "status": "not retained: gain is below the deployment decision floor; matched-setting outputs were identical",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "source": {
+    "start_tp4_sha256": "a7940ac12321c6d86bd5541ae4a7ce6d1508f7813a1e97419fd690851f2b0c6c",
+    "env_template_sha256": "b73c9be363b875592aa5e17286ee7d3d2510439caa2749580a0e14db5beb3297",
+    "changed_runtime_arguments": {
+      "--max-num-batched-tokens": "49152",
+      "--long-prefill-token-threshold": "49056",
+      "--enable-bf16x3-router-gemm": true
+    },
+    "changed_environment": {
+      "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608"
+    }
+  },
+  "result": {
+    "prefill_tps": {
+      "32768": 6971.883059439236,
+      "131072": 6939.587718875341
+    },
+    "decode_output_tps": {
+      "c1": 71.36666666666666,
+      "c4": 142.61666666666667
+    },
+    "failed": 0,
+    "matched_setting_outputs_identical": "6/6"
+  },
+  "comparison_to_run_06": {
+    "prefill_32k_pct": 0.455605,
+    "prefill_131k_pct": 0.219471
+  },
+  "decision": "The +0.46% / +0.22% movement is not resolved beyond the arm's interval. A direct comparison of the same six requests under run 07 and run 09 was 6/6 identical, so the earlier 4/6 result against the archived request set was a client-setting mismatch, not a router-x3 regression."
+}

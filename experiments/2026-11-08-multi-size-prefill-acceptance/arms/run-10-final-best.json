@@ -1,0 +1,46 @@
+{
+  "run": "run-10-final-best",
+  "status": "final deployment; same runtime as run 09, which has the highest six-size mean",
+  "runtime": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "NCCL_BUFFSIZE": "4194304",
+    "NCCL_IB_QPS_PER_CONNECTION": "2",
+    "CUDA_DEVICE_MAX_CONNECTIONS": "64"
+  },
+  "best_measured_run": "run-09-65520-ch8-cudaconn64-qps2",
+  "source": {
+    "start_tp4_sha256": "32b2a4c4608df07b4c48e550ab01513a25767e09edd26f68bf8bd4d26a114f5e",
+    "env_template_sha256": "d262f99e9ca2b77dc205034bcfeb08e34655024cbbdd12adf092768c9aab34c8",
+    "measured_start_tp4_sha256": "f2dd923a494f23898520c86d592e5b31188aee1a980028b7af5c1accb07f4199",
+    "measured_env_template_sha256": "cc15019a7a064799a35c72075f25cc01cdecde7408c6597dc189ec472f7923b0"
+  },
+  "prefill_tps": {
+    "8192": 5776.325845102721,
+    "16384": 6688.356038775808,
+    "32768": 7081.743548133138,
+    "65536": 7208.122318114447,
+    "131072": 7095.713088282244,
+    "262144": 6809.6879844697005
+  },
+  "prefill_sum_tps": 40659.94882287806,
+  "prefill_mean_tps": 6776.6581371463435,
+  "comparison_to_run_01": {
+    "mean_pct": 4.7971,
+    "mean_delta_tps": 310.2039080440509
+  },
+  "decode_output_tps": {
+    "c1": 68.76666666666667,
+    "c4": 139.06666666666666
+  },
+  "quality": {
+    "outputs_sha256": "6cf26aedc93c0c01bf81ed4dac8a67e77043222719930977e034aba70a9ff99a",
+    "perplexity": 1.1178292269357697,
+    "rank1_fraction": 1.0,
+    "failed": 0
+  },
+  "prefill_1m_tps": 5183.9492211005145
+}

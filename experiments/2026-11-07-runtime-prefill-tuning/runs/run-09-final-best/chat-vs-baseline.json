@@ -1,0 +1,42 @@
+{
+  "rows": [
+    {
+      "prompt": "Explain in one sentence why the sky is blue.",
+      "baseline": "The sky is blue because air molecules scatter short-wavelength blue light from the sun much more strongly than longer-wavelength red light, a phenomenon called Rayleigh scattering.",
+      "final": "The sky is blue because air molecules scatter short-wavelength blue light from the sun much more strongly than longer-wavelength red light, a phenomenon called Rayleigh scattering.",
+      "identical": true
+    },
+    {
+      "prompt": "Write a short warning about opening unknown email attachments.",
+      "baseline": "**Warning: Never Open Unknown Email Attachments**\n\nEmail attachments from unknown or unexpected senders can contain malware, ransomware, or phishing traps designed to steal your data or compromise your device. Even messages that appear to come from a familiar contact can be spoofed or sent from a hacked account.\n\n**Protect yourself:**\n- Don't open attachments you weren't expecting\u2014even from people you know. Verify with the sender through another channel first.\n- Be wary of urgent subject",
+      "final": "**Warning: Never Open Unknown Email Attachments**\n\nEmail attachments from unknown or unexpected senders can contain malware, ransomware, or phishing traps designed to steal your data or compromise your device. Even messages that appear to come from a familiar contact can be spoofed or sent from a hacked account.\n\n**Protect yourself:**\n- Don't open attachments you weren't expecting\u2014even from people you know. Verify with the sender through another channel first.\n- Be wary of urgent subject lines, mismatched sender addresses, or file types like .exe, .zip, or .js.\n- When in doubt, delete the email or report",
+      "identical": false
+    },
+    {
+      "prompt": "Describe a secure password policy in two sentences.",
+      "baseline": "A secure password policy requires a minimum length of 12\u201316 characters with a mix of character types, prohibits common or reused passwords, and mandates multi-factor authentication for all accounts. Passwords should be checked against breached-password lists at creation, stored only as salted hashes, and rotated only on evidence of compromise rather than on arbitrary schedules.",
+      "final": "A secure password policy requires a minimum length of 12\u201316 characters with a mix of character types, prohibits common or reused passwords, and mandates multi-factor authentication for all accounts. Passwords should be checked against breached-password lists at creation, stored only as salted hashes, and rotated only on evidence of compromise rather than on arbitrary schedules.",
+      "identical": true
+    },
+    {
+      "prompt": "Write a concise paragraph about the history of the internet.",
+      "baseline": "The internet's origins trace back to the 1960s, when the U.S. Department of Defense funded ARPANET, a pioneering packet-switching network that sent its first message between two computers in 1969. In the 1970s and 1980s, foundational protocols like TCP/IP (adopted in 1983) enabled disparate networks to interconnect, while the 1989 invention of the World Wide Web by Tim Berners-Lee at CERN",
+      "final": "The internet's origins trace back to the 1960s, when the U.S. Department of Defense funded ARPANET, a pioneering packet-switching network that sent its first message between two computers in 1969. In the 1970s and 1980s, foundational protocols like TCP/IP (adopted in 1983) enabled disparate networks to interconnect, while the 1989 invention of the World Wide Web by Tim Berners-Lee at CERN transformed the internet into an accessible, hyperlinked information system. The 1990s brought commercialization and mass adoption through web browsers and dial-up services, followed by",
+      "identical": false
+    },
+    {
+      "prompt": "Give a brief, direct answer to: what should I do before running an untrusted script?",
+      "baseline": "Review the script's code first, and run it in an isolated environment (sandbox, VM, or container) with no access to sensitive data, credentials, or your main network.",
+      "final": "Review the script's code first, and run it in an isolated environment (sandbox, VM, or container) with no access to sensitive data, credentials, or your main network.",
+      "identical": true
+    },
+    {
+      "prompt": "Explain what a firewall does in one sentence.",
+      "baseline": "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules, acting as a barrier between trusted and untrusted networks.",
+      "final": "A firewall monitors and controls incoming and outgoing network traffic based on predetermined security rules, acting as a barrier between trusted and untrusted networks.",
+      "identical": true
+    }
+  ],
+  "identical_count": 4,
+  "total": 6
+}

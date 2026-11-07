@@ -1,0 +1,107 @@
+{
+ "schema": "servebench-prefill/1",
+ "tool": {
+  "name": "servebench",
+  "version": "0.1.0"
+ },
+ "started_utc": "2026-11-07T15:19:53+00:00",
+ "label": "run-02-prefill",
+ "server": {
+  "url": "http://127.0.0.1:8888",
+  "model": "deepseek-v4.1-flash",
+  "max_model_len": 1048576
+ },
+ "workload": {
+  "sizes": [32768, 131072],
+  "repeats": 3,
+  "skipped": [],
+  "extra_body": {
+   "chat_template_kwargs": {
+    "thinking": false
+   }
+  },
+  "question": "Summarize the document above in one sentence."
+ },
+ "prefill": [
+  {
+   "size": 32768,
+   "prompt_tokens": 32735,
+   "tps": {
+    "n": 3,
+    "mean": 6926.406018877242,
+    "sd": 35.330588132467255,
+    "min": 6885.686064992718,
+    "max": 6948.925735275487,
+    "ci95": 87.77313002001014,
+    "ci95_pct": 1.2672247307015077
+   },
+   "samples": [6948.93, 6944.61, 6885.69],
+   "failed": 0
+  },
+  {
+   "size": 131072,
+   "prompt_tokens": 131874,
+   "tps": {
+    "n": 3,
+    "mean": 6907.601981172484,
+    "sd": 7.814806706078309,
+    "min": 6899.2800061255475,
+    "max": 6914.784516700203,
+    "ci95": 19.41462289056884,
+    "ci95_pct": 0.2810616903447213
+   },
+   "samples": [6899.28, 6914.78, 6908.74],
+   "failed": 0
+  }
+ ],
+ "samples": [
+  {
+   "size": 32768,
+   "repeat": 0,
+   "prompt_tokens": 32735,
+   "ttft_s": 4.710800093002035,
+   "tps": 6948.925735275487,
+   "error": null
+  },
+  {
+   "size": 131072,
+   "repeat": 0,
+   "prompt_tokens": 131874,
+   "ttft_s": 19.114168417996552,
+   "tps": 6899.2800061255475,
+   "error": null
+  },
+  {
+   "size": 32768,
+   "repeat": 1,
+   "prompt_tokens": 33348,
+   "ttft_s": 4.802000108997163,
+   "tps": 6944.60625636352,
+   "error": null
+  },
+  {
+   "size": 131072,
+   "repeat": 1,
+   "prompt_tokens": 130813,
+   "ttft_s": 18.91787078600464,
+   "tps": 6914.784516700203,
+   "error": null
+  },
+  {
+   "size": 32768,
+   "repeat": 2,
+   "prompt_tokens": 33679,
+   "ttft_s": 4.891161124993232,
+   "tps": 6885.686064992718,
+   "error": null
+  },
+  {
+   "size": 131072,
+   "repeat": 2,
+   "prompt_tokens": 134811,
+   "ttft_s": 19.51310546899913,
+   "tps": 6908.741420691699,
+   "error": null
+  }
+ ]
+}

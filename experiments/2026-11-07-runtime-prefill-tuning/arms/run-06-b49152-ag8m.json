@@ -1,0 +1,36 @@
+{
+  "run": "run-06-b49152-ag8m",
+  "status": "small positive; retained with the 48K chunk",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "source": {
+    "start_tp4_sha256": "6ccfaa4f0fa70575aaa524181c09db859bcc42b2e552ca710796e74f4e5a0cc5",
+    "env_template_sha256": "b73c9be363b875592aa5e17286ee7d3d2510439caa2749580a0e14db5beb3297",
+    "changed_runtime_arguments": {
+      "--max-num-batched-tokens": "49152",
+      "--long-prefill-token-threshold": "49056"
+    },
+    "changed_environment": {
+      "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608"
+    }
+  },
+  "result": {
+    "prefill_tps": {
+      "32768": 6940.282138801449,
+      "131072": 6924.388530633302
+    },
+    "decode_output_tps": {
+      "c1": 71.61666666666666,
+      "c4": 143.23333333333332
+    },
+    "failed": 0
+  },
+  "comparison_to_run_00": {
+    "prefill_32k_pct": 4.252061,
+    "prefill_131k_pct": 3.069560
+  },
+  "comparison_to_run_02": {
+    "prefill_32k_pct": 0.200303,
+    "prefill_131k_pct": 0.243027
+  }
+}

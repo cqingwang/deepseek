@@ -1,0 +1,102 @@
+{
+  "spark-c": {
+    "samples": 14,
+    "loaded_samples": 9,
+    "loaded_current_mhz": [
+      2190.0,
+      2190.0,
+      2190.0
+    ],
+    "applications_mhz": [
+      2418.0
+    ],
+    "max_mhz": [
+      3003.0
+    ],
+    "loaded_power_w": [
+      24.62,
+      38.49,
+      39.85
+    ],
+    "loaded_temp_c": [
+      39.0,
+      42.0,
+      45.0
+    ]
+  },
+  "spark-b": {
+    "samples": 14,
+    "loaded_samples": 9,
+    "loaded_current_mhz": [
+      2184.0,
+      2184.0,
+      2190.0
+    ],
+    "applications_mhz": [
+      2418.0
+    ],
+    "max_mhz": [
+      3003.0
+    ],
+    "loaded_power_w": [
+      23.51,
+      36.72,
+      37.38
+    ],
+    "loaded_temp_c": [
+      40.0,
+      43.0,
+      46.0
+    ]
+  },
+  "spark-a": {
+    "samples": 14,
+    "loaded_samples": 8,
+    "loaded_current_mhz": [
+      2177.0,
+      2177.0,
+      2177.0
+    ],
+    "applications_mhz": [
+      2418.0
+    ],
+    "max_mhz": [
+      3003.0
+    ],
+    "loaded_power_w": [
+      26.53,
+      36.69,
+      37.97
+    ],
+    "loaded_temp_c": [
+      40.0,
+      42.0,
+      45.0
+    ]
+  },
+  "spark-d": {
+    "samples": 14,
+    "loaded_samples": 9,
+    "loaded_current_mhz": [
+      2177.0,
+      2177.0,
+      2184.0
+    ],
+    "applications_mhz": [
+      2418.0
+    ],
+    "max_mhz": [
+      3003.0
+    ],
+    "loaded_power_w": [
+      24.81,
+      39.64,
+      41.49
+    ],
+    "loaded_temp_c": [
+      39.0,
+      42.0,
+      47.0
+    ]
+  }
+}

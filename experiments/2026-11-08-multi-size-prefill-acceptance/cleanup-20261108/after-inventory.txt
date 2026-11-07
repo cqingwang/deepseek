@@ -1,0 +1,40 @@
+=== spark-a ===
+containers:
+deepseek-r0	spark-ds41f:1030	Up 3 hours
+sparkDash	dash-sparkdash	Up 23 hours
+images:
+spark-ds41f:1030	84a8b73d0993	23.9GB
+dash-sparkdash:latest	d13d2517c29e	290MB
+vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e	cf41fa0cc731	22.1GB
+public.ecr.aws/docker/library/node:22-bookworm-slim	97aaa653fb55	247MB
+dangling:
+stopped_created=0
+volumes=0
+df=/dev/nvme0n1p2  3.7T  845G  2.7T  24% /
+=== spark-b ===
+containers:
+deepseek-r1	spark-ds41f:1030	Up 3 hours
+images:
+spark-ds41f:1030	84a8b73d0993	23.9GB
+dangling:
+stopped_created=0
+volumes=0
+df=/dev/nvme0n1p2  3.7T  818G  2.7T  23% /
+=== spark-c ===
+containers:
+deepseek-r2	spark-ds41f:1030	Up 3 hours
+images:
+spark-ds41f:1030	84a8b73d0993	23.9GB
+dangling:
+stopped_created=0
+volumes=0
+df=/dev/nvme0n1p2  3.7T  811G  2.7T  23% /
+=== spark-d ===
+containers:
+deepseek-r3	spark-ds41f:1030	Up 3 hours
+images:
+spark-ds41f:1030	84a8b73d0993	23.9GB
+dangling:
+stopped_created=0
+volumes=0
+df=/dev/nvme0n1p2  3.7T  811G  2.7T  23% /

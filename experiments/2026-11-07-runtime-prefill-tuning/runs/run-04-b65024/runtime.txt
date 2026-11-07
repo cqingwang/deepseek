@@ -1,0 +1,14 @@
+
+===== runtime =====
+spark-a
+deepseek-r0	Up 2 minutes
+MemAvailable=10GiB
+spark-b
+deepseek-r1	Up 2 minutes
+MemAvailable=12GiB
+spark-c
+deepseek-r2	Up 2 minutes
+MemAvailable=12GiB
+spark-d
+deepseek-r3	Up 2 minutes
+MemAvailable=12GiB

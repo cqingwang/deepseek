@@ -1,0 +1,30 @@
+{
+  "run": "run-01-b32768",
+  "status": "beneficial; retained best so far",
+  "image": "spark-ds41f:1030",
+  "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+  "source": {
+    "start_tp4_sha256": "912c202fbb731bf5caddc489297e6faa2accde083a19279443ed1d40d5838fd5",
+    "changed_runtime_arguments": {
+      "--max-num-batched-tokens": "32768",
+      "--long-prefill-token-threshold": "32672"
+    }
+  },
+  "result": {
+    "prefill_tps": {
+      "32768": 6869.409005840703,
+      "131072": 6923.803682187502
+    },
+    "decode_output_tps": {
+      "c1": 71.1,
+      "c4": 143.93333333333334
+    },
+    "failed": 0
+  },
+  "comparison_to_run_00": {
+    "prefill_32k_pct": 3.186874,
+    "prefill_131k_pct": 3.060206,
+    "c1_pct": -0.3736,
+    "c4_pct": 0.0093
+  }
+}

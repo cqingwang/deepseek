@@ -1,0 +1,2 @@
+f2dd923a494f23898520c86d592e5b31188aee1a980028b7af5c1accb07f4199  deepseek/start-tp4.sh
+d64123ee761918ea517d2e4b611fe9c6d05496d039e1ecd29cd9f3c720887ba2  deepseek/.env.deepseek.example
