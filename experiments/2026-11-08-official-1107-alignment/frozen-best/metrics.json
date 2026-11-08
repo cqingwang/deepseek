@@ -2,10 +2,11 @@
   "schema": "spark-ds41f-official-1107-alignment/v1",
   "selection": "arithmetic mean of cold source-text prefill tok/s at 8192,16384,32768,65536,131072,262144",
   "image": {
-    "image": "spark-ds41f:1107-tree-exact",
+    "image": "spark-ds41f:x1108",
     "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
     "rootfs_layer_count": 57,
-    "four_rank_identity_match": true
+    "four_rank_identity_match": true,
+    "tag_identity_note": "site-specific x1108 tag; official release name remains spark-ds41f:1107 with image ID 3f32..., local rebuild is 7525..."
   },
   "baseline": {
     "deployment": "run-01-official-baseline",
@@ -52,7 +53,8 @@
       "c1": 78.36666666666666,
       "c8": 188.13333333333333,
       "c16": 234.73333333333335
-    }
+    },
+    "final_running_deployment": "run-09-x1108-renamed"
   },
   "official_decode_reference": {
     "deployment": "run-06-best-runtime-clean",
@@ -122,5 +124,51 @@
     ],
     "throttle_flags": "0x0000000000000000",
     "verdict": "no thermal or clock-throttle evidence for decode gap"
+  },
+  "tag_rename": {
+    "deployment": "run-08-tag-renamed",
+    "image": "spark-ds41f:1107",
+    "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
+    "prefill_32k_smoke_tps": 8035.889948049547,
+    "image03_deleted": true,
+    "old_alias_deleted": true
+  },
+  "final_tag_rename": {
+    "deployment": "run-09-x1108-renamed",
+    "image": "spark-ds41f:x1108",
+    "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
+    "prefill_32k_smoke_tps": 8139.50333449132,
+    "official_release_tag": "spark-ds41f:1107",
+    "official_release_image_id": "sha256:3f32a962ce04b7c8d85337cd427a8946b8b6bcaadd97cc8d8a8cd14e8d68a6ce",
+    "intermediate_aliases_deleted": [
+      "spark-ds41f:1107-tree-exact",
+      "spark-ds41f:1107"
+    ],
+    "image03_deleted": true
+  },
+  "deleted_local_serving_images": [
+    {
+      "image": "spark-ds41f:binary-prefill-20261108-03",
+      "image_id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
+      "reason": "no container references"
+    },
+    {
+      "image": "spark-ds41f:1030",
+      "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+      "reason": "local serving image built from vLLM base; no container references; rollback explicitly not required"
+    }
+  ],
+  "base_image": {
+    "image": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "image_id": "sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56",
+    "retained_on": "spark-a build host"
+  },
+  "final_cleanup": {
+    "serving_image": "spark-ds41f:x1108",
+    "serving_image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
+    "local_serving_rollbacks_deleted": true,
+    "workers_only_retain_serving_image": true,
+    "build_cache_bytes": 0,
+    "dangling_images": 0
   }
 }

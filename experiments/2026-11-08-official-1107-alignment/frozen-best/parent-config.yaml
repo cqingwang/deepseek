@@ -197,11 +197,12 @@ engines:
     # 文件，已在其 .gitignore 增加一行 `!.env.deepseek.example` 豁免（唯一的
     # 上游文件本地修改），保证 git 源码清单可见、sync 镜像完整。
     env_template: .env.deepseek.example
-    # 官方 1107 runtime tree 的 spark-a 重建镜像。六个 source tree 与官方
-    # 3f32 基线一致；vLLM patch-head 因公开 series 无法复现作者原提交而记录为
-    # 实际回放得到的 2756478b，不能把本 image ID 冒充官方 3f32。
-    # 生产回滚仍是 spark-ds41f:1030，上一轮 image03 也保留。
-    image: spark-ds41f:1107-tree-exact
+    # 官方 1107 runtime tree 的 spark-a 重建镜像。使用站点唯一 tag x1108，
+    # 避免与官方 release 的 spark-ds41f:1107 同名混淆。六个 source tree
+    # 与官方 3f32 基线一致，但本 image ID 是重建的 7525...；vLLM patch-head
+    # 因公开 series 无法复现作者原提交而记录为实际回放得到的 2756478b。
+    # 用户明确不需要回退到旧 1030/image03；本配置只登记当前验证镜像。
+    image: spark-ds41f:x1108
     image_id: sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4
     allow_unverified_image: true
     ds41f_config_file: config/official-1107.cluster.json

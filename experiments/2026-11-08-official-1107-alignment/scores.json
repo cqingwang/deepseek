@@ -21,10 +21,28 @@
     }
   },
   "local_image": {
-    "image": "spark-ds41f:1107-tree-exact",
+    "image": "spark-ds41f:x1108",
     "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
     "rootfs_layer_count": 57,
-    "four_rank_identity_match": true
+    "four_rank_identity_match": true,
+    "tag_identity_note": "site-specific tag x1108 avoids collision with the official release tag spark-ds41f:1107; local rebuilt image ID remains 7525..."
+  },
+  "deleted_local_serving_images": [
+    {
+      "image": "spark-ds41f:binary-prefill-20261108-03",
+      "image_id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
+      "reason": "no container references; superseded and intentionally removed"
+    },
+    {
+      "image": "spark-ds41f:1030",
+      "image_id": "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41",
+      "reason": "local serving image built from vllm base, not a base image; no container references and user does not require rollback"
+    }
+  ],
+  "base_image": {
+    "image": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "image_id": "sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56",
+    "retained_on": "spark-a build host"
   },
   "primary_metric": "arithmetic mean of cold source-text prefill tok/s at 8192,16384,32768,65536,131072,262144",
   "max_deployments": 10,
@@ -146,6 +164,22 @@
         "c16": 234.73333333333335
       },
       "verdict": "final clean profile and highest six-size mean; retained"
+    },
+    {
+      "run": 8,
+      "id": "run-08-tag-renamed",
+      "profile": "profiles/run-02-proven-runtime.json",
+      "parameters": "same effective runtime parameters as run-07; image tag renamed from spark-ds41f:1107-tree-exact to spark-ds41f:1107",
+      "prefill_32k_smoke_tps": 8035.889948049547,
+      "verdict": "tag-only deployment; same image ID 7525..., API healthy, 32K smoke prefill remains above baseline"
+    },
+    {
+      "run": 9,
+      "id": "run-09-x1108-renamed",
+      "profile": "profiles/run-02-proven-runtime.json",
+      "parameters": "same effective runtime parameters as run-07; image tag changed to site-specific spark-ds41f:x1108",
+      "prefill_32k_smoke_tps": 8139.50333449132,
+      "verdict": "final tag-only deployment; same image ID 7525..., API and chat smoke passed"
     }
   ],
   "winner": {
@@ -153,7 +187,7 @@
     "prefill_six_mean_tps": 7875.854512260311,
     "delta_vs_baseline_tps": 451.58641358602017,
     "delta_vs_baseline_pct": 6.082571474845544,
-    "final_running_deployment": "run-07-final-clean-profile",
+    "final_running_deployment": "run-09-x1108-renamed",
     "final_profile": "profiles/run-02-proven-runtime.json"
   },
   "decode_gate": {

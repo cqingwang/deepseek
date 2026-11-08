@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "promoted_baseline": "2026-11-07-spark-ds41f-1107-tree-exact",
+  "promoted_baseline": "2026-11-07-spark-ds41f-1107",
   "model": "v41-flash-1017",
   "models": {
     "v41-flash": {
@@ -28,7 +28,7 @@
   },
   "container": {
     "name": "spark-ds41f",
-    "image": "spark-ds41f:1107-tree-exact",
+    "image": "spark-ds41f:x1108",
     "expected_labels": {
       "local.spark-ds41f.vllm.tree": "ed1bdb7a7684da33d403a055521ac0c4dd7ca670",
       "local.spark-ds41f.b12x.tree": "1a647a311ca55d45070ab83d60668d9c8fb8886c",
@@ -393,21 +393,6 @@
         "max_num_batched_tokens": 4096,
         "kv_cache_memory_bytes": 2362232012
       }
-    }
-  },
-  "experiment": {
-    "name": "binary-prefill-20261108",
-    "base_image": "spark-ds41f:1030",
-    "candidate_image": "spark-ds41f:binary-prefill-20261108-03",
-    "candidate_image_id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
-    "slice_defaults": {
-      "moe": 4096,
-      "wo": 2048
-    },
-    "slice_candidate": {
-      "SPARK_DS41F_MOE_SLICE_TOKENS": "4096",
-      "SPARK_DS41F_WO_SLICE_TOKENS": "2048",
-      "SPARK_DS41F_PREFILL_BLOCK_M": "128"
     }
   }
 }

@@ -1,0 +1,48 @@
+{
+ "schema": "servebench-prefill/1",
+ "tool": {
+  "name": "servebench",
+  "version": "0.1.0"
+ },
+ "started_utc": "2026-11-08T08:33:05+00:00",
+ "label": "run-08-tag-renamed-prefill-32k",
+ "server": {
+  "url": "http://127.0.0.1:8888",
+  "model": "deepseek-v4.1-flash",
+  "max_model_len": 1048576
+ },
+ "workload": {
+  "sizes": [32768],
+  "repeats": 1,
+  "skipped": [],
+  "extra_body": {},
+  "question": "Summarize the document above in one sentence."
+ },
+ "prefill": [
+  {
+   "size": 32768,
+   "prompt_tokens": 32761,
+   "tps": {
+    "n": 1,
+    "mean": 8035.889948049547,
+    "sd": 0.0,
+    "min": 8035.889948049547,
+    "max": 8035.889948049547,
+    "ci95": null,
+    "ci95_pct": null
+   },
+   "samples": [8035.89],
+   "failed": 0
+  }
+ ],
+ "samples": [
+  {
+   "size": 32768,
+   "repeat": 0,
+   "prompt_tokens": 32761,
+   "ttft_s": 4.076835324001877,
+   "tps": 8035.889948049547,
+   "error": null
+  }
+ ]
+}

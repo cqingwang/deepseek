@@ -1,5 +1,5 @@
 {
-  "image": "spark-ds41f:1107-tree-exact",
+  "image": "spark-ds41f:x1108",
   "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
   "rootfs_layers": [
     "sha256:ab34259f9ca5d315bec1b17d9f1ca272e84dedd964a8988695daf0ec3e0bbc2e",
@@ -536,5 +536,6 @@
     "release_commit": "59f523c543cb61e5a2d0df616cb4efa459677b35",
     "release_image": "spark-ds41f:1107",
     "release_image_id": "sha256:3f32a962ce04b7c8d85337cd427a8946b8b6bcaadd97cc8d8a8cd14e8d68a6ce"
-  }
+  },
+  "tag_identity_note": "site-specific x1108 tag; official release name remains spark-ds41f:1107 with image ID 3f32..., local rebuild is 7525..."
 }

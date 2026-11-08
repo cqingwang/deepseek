@@ -21,11 +21,15 @@
 | 正式 release commit | `59f523c543cb61e5a2d0df616cb4efa459677b35` |
 | 正式 image | `spark-ds41f:1107` |
 | 正式 image ID | `sha256:3f32a962ce04b7c8d85337cd427a8946b8b6bcaadd97cc8d8a8cd14e8d68a6ce` |
+| 本站部署 tag | `spark-ds41f:x1108` |
+| 本站重建 image ID | `sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4` |
 | source labels | vLLM `ed1bdb7a` / TileLang `e2b00182` / sparknet `8cc28a5c` / NCCL `6af10aa7` / TileKernels `cb2fa41c` / B12X `1a647a31` |
 
 `offical/main` 的后续 commit `cc20ed18` 未改变上述 runtime tree，但不能把在
 `cc20ed18` 重建出的新 image ID 写成官方 `3f32...`。因此正式对照先在 detached
-`59f523c` 构建；main 后续内容仅作源码和文档参考。
+`59f523c` 构建；main 后续内容仅作源码和文档参考。本站重建镜像使用独立
+tag `spark-ds41f:x1108`，避免与官方 `spark-ds41f:1107` 同名混淆；身份
+验收必须同时核对上面的本站 `7525...` image ID。
 
 ## 站点差异
 
@@ -72,6 +76,8 @@
 | 05 | 03 改 batch `65,535/65,439` | — | 启动失败，grid y=65,546 超 CUDA 上限 |
 | 06 | 03 同配置 clean boot + 官方长测 | 7,807.38 | clean confirmation |
 | 07 | 06 显式删除 3 个无消费者的旧 binary-prefill env | **7,875.85** | **最终 clean profile，`+6.08%`** |
+| 08 | 仅把运行 tag 改为 `spark-ds41f:1107` | — | 同 image ID `7525...`，32K smoke `8035.89` |
+| 09 | 运行 tag 改为 `spark-ds41f:x1108` | — | 同 image ID；32K smoke `8139.50` |
 
 六档最高方案的实际参数：
 
@@ -106,9 +112,15 @@
 
 - prefill 运行参数路径已确认正收益：最佳六档均值 `7875.85 tok/s`，
   相对本地官方 1107 基线提升 `+451.59 tok/s（+6.08%）`；最终运行态
-  与该 profile 完全一致。
+  与该 profile 完全一致，容器实际镜像名为 `spark-ds41f:x1108`。
 - decode 未达标，不能把本轮写成 decode 对齐完成。运行时参数只能保持
   本地基线附近，下一阶段按用户新方向检查镜像内 binary/build provenance。
 - 可复现冻结资产在 `frozen-best/`，包含 profile、父级配置、launcher、
   env template、官方 cluster profile、镜像身份、指标和逐文件 SHA-256。
+- 旧 `spark-ds41f:1107-tree-exact` 和中间 alias `spark-ds41f:1107`
+  已删除；未运行的
+  `spark-ds41f:binary-prefill-20261108-03` 在确认四机无容器引用后删除，
+  其源码与实验快照仍保留。用户明确不需要回退后，旧本地 serving 镜像
+  `spark-ds41f:1030` 也已从四机删除；当前只保留
+  `spark-ds41f:x1108`。上游 vLLM 基础镜像只保留在 spark-a 构建机。
 - 正式 1107 的已知质量变化必须单独记录，不能与性能门禁混淆。

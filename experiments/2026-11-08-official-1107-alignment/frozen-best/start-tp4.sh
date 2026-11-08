@@ -11,7 +11,7 @@
 # （rows=96：max_num_seqs 16 x (1+drafts 5)；capture ladder 1..96；
 # 2026-11-08 multi-size final: long_prefill 65424=65520-96；
 # engram table_memory=disk）。
-# 来源：config/cluster.json @ 2026-10-30-spark-ds41f-1030（镜像 spark-ds41f:1030）。
+# 来源：官方 spark-ds41f 1107 source-tree 重建 profile。
 # 站点渲染点只有四处：serve 模型路径、--host、--port、--api-key；逐 rank
 # 注入 VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
 # SPARKNET_ROCE_TOPOLOGY。其余固定键和 serve 参数不得丢失。
@@ -70,23 +70,14 @@ fi
   || die "runtime assets 必须精确为 /opt/runtime_assets/deepseek"
 [ "$NNODES" = "4" ] && [ "$TP_SIZE" = "4" ] \
   || die "deepseek 必须按 common.ring 使用 nnodes=4 的 TP4 环"
-if [ "${DS41F_ALLOW_UNVERIFIED_IMAGE:-0}" = "1" ]; then
-  case "$IMAGE" in
-    spark-ds41f:*) ;;
-    *) die "实验镜像 tag 不以 spark-ds41f: 开头: $IMAGE" ;;
-  esac
-  [[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]] \
-    || die "实验镜像 image ID 非法: $IMAGE_ID"
-else
-  case "$IMAGE" in
-    spark-ds41f:1030) ;;
-    *) die "镜像 tag 非本站已验收组合: $IMAGE" ;;
-  esac
-  case "$IMAGE_ID" in
-    sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41) ;;
-    *) die "镜像 image ID 非本站已验收组合: $IMAGE_ID" ;;
-  esac
-fi
+[ "${DS41F_ALLOW_UNVERIFIED_IMAGE:-0}" = "1" ] \
+  || die "镜像 tag/ID 必须由 config.yaml 显式登记并通过 allow_unverified_image 授权"
+case "$IMAGE" in
+  spark-ds41f:*) ;;
+  *) die "实验镜像 tag 不以 spark-ds41f: 开头: $IMAGE" ;;
+esac
+[[ "$IMAGE_ID" =~ ^sha256:[0-9a-f]{64}$ ]] \
+  || die "实验镜像 image ID 非法: $IMAGE_ID"
 
 read -r -a WORKER_TARGETS <<< "$WORKER_SSH_TARGETS"
 read -r -a WORKER_RANK_VALUES <<< "$WORKER_RANKS"

@@ -2006,22 +2006,16 @@ def _deepseek_ds41f_managed_env(
 
     image = str(engine.get("image", ""))
     image_id = str(engine.get("image_id", ""))
-    qualified_image = image == "spark-ds41f:1030"
-    qualified_image_id = (
-        image_id
-        == "sha256:84a8b73d0993200044b5eceb0892342d34a787416b7ae91e4b38f42fffc63e41"
-    )
-    if not qualified_image or not qualified_image_id:
-        # 实验镜像必须显式打开配置开关；默认生产配置仍只接受上述 tag+ID。
-        if engine.get("allow_unverified_image") is not True:
-            raise SystemExit(
-                "deepseek 镜像身份未登记为本站已验收组合（tag 与 image ID 必须同时匹配）: "
-                f"{image or '<empty>'} / {image_id or '<empty>'}"
-            )
-        if not re.fullmatch(r"spark-ds41f:[A-Za-z0-9][A-Za-z0-9_.-]{0,127}", image):
-            raise SystemExit(f"deepseek 实验镜像 tag 非法: {image or '<empty>'}")
-        if not re.fullmatch(r"sha256:[0-9a-f]{64}", image_id):
-            raise SystemExit(f"deepseek 实验镜像 image ID 非法: {image_id or '<empty>'}")
+    # 镜像由 config.yaml 显式登记 tag+ID；删除旧生产回退后不再内置隐式白名单。
+    if engine.get("allow_unverified_image") is not True:
+        raise SystemExit(
+            "deepseek 镜像身份未登记为本站已验收组合（tag 与 image ID 必须同时匹配）: "
+            f"{image or '<empty>'} / {image_id or '<empty>'}"
+        )
+    if not re.fullmatch(r"spark-ds41f:[A-Za-z0-9][A-Za-z0-9_.-]{0,127}", image):
+        raise SystemExit(f"deepseek 实验镜像 tag 非法: {image or '<empty>'}")
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", image_id):
+        raise SystemExit(f"deepseek 实验镜像 image ID 非法: {image_id or '<empty>'}")
 
     model_container_path = values.get("model_container_path", "")
     if not model_container_path.startswith("/"):
@@ -2107,11 +2101,10 @@ def _deepseek_ds41f_managed_env(
             raise SystemExit(f"deepseek experimental_container_env.{key} 必须是 1..1048576: {value!r}")
         managed_env[key] = text
 
-    if not (qualified_image and qualified_image_id):
-        managed_env["DS41F_ALLOW_UNVERIFIED_IMAGE"] = "1"
-        managed_env["DS41F_CONFIG_FILE"] = str(
-            engine.get("ds41f_config_file", "config/cluster.json")
-        )
+    managed_env["DS41F_ALLOW_UNVERIFIED_IMAGE"] = "1"
+    managed_env["DS41F_CONFIG_FILE"] = str(
+        engine.get("ds41f_config_file", "config/cluster.json")
+    )
     if any("\n" in value or "\t" in value for value in managed_env.values()):
         raise SystemExit("deepseek managed env 含非法换行或制表符")
     for key in managed_env:
