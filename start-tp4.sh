@@ -43,6 +43,10 @@ set -a
 source "$ENV_FILE"
 set +a
 CONFIG_FILE="${DS41F_CONFIG_FILE:-$ROOT/config/cluster.json}"
+case "$CONFIG_FILE" in
+  /*) ;;
+  *) CONFIG_FILE="$ROOT/$CONFIG_FILE" ;;
+esac
 
 container_name_for_rank() { printf '%s-r%s' "$TARGET_CONTAINER_PREFIX" "$1"; }
 
@@ -205,7 +209,7 @@ container_env_rows() {
   python3 - \
     "$ENV_FILE" "$FIXED_ENV_FILE" "$rank" \
     "$HEAD_MANAGEMENT_IP" "$WORKER_MANAGEMENT_IPS" \
-    "$SPARKNET_ROCE_PEER_HCAS_BY_RANK" <<'PY'
+    "$SPARKNET_ROCE_PEER_HCAS_BY_RANK" "$ROOT" "${DS41F_RUN_PROFILE:-}" <<'PY'
 import json
 import shlex
 import sys
@@ -247,7 +251,41 @@ missing_overrides = sorted(CONTAINER_OVERRIDE_KEYS - set(merged))
 if missing_overrides:
     raise SystemExit(f"合并 env 丢失站点覆盖键: {', '.join(missing_overrides)}")
 
-env = {key: merged[key] for key in set(fixed) | CONTAINER_OVERRIDE_KEYS}
+root = __import__("pathlib").Path(sys.argv[7]).resolve()
+profile_relative = sys.argv[8]
+if profile_relative:
+    profile_path = (root / profile_relative).resolve()
+    if root not in profile_path.parents:
+        raise SystemExit(f"运行 profile 越出目标根目录: {profile_relative}")
+    if not profile_path.is_file():
+        raise SystemExit(f"运行 profile 不存在: {profile_path}")
+    try:
+        profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"运行 profile JSON 非法: {profile_path}: {exc}") from exc
+    if not isinstance(profile, dict):
+        raise SystemExit(f"运行 profile 顶层必须是对象: {profile_path}")
+    unknown_profile_keys = sorted(set(profile) - {"environment", "serve_options"})
+    if unknown_profile_keys:
+        raise SystemExit(f"运行 profile 含未登记顶层键: {unknown_profile_keys}")
+    environment = profile.get("environment", {})
+    if not isinstance(environment, dict):
+        raise SystemExit("运行 profile.environment 必须是映射")
+    for key, value in environment.items():
+        if key not in merged:
+            raise SystemExit(f"运行 profile 不得新增容器环境键: {key}")
+        if value is None:
+            merged.pop(key)
+        elif isinstance(value, str):
+            merged[key] = value
+        else:
+            raise SystemExit(f"运行 profile.{key} 必须是字符串或 null")
+
+allowed = set(fixed) | CONTAINER_OVERRIDE_KEYS
+env = {key: merged[key] for key in allowed if key in merged}
+missing_after_profile = sorted(CONTAINER_OVERRIDE_KEYS - set(env))
+if missing_after_profile:
+    raise SystemExit(f"运行 profile 不得移除站点覆盖键: {', '.join(missing_after_profile)}")
 rank = sys.argv[3]
 if rank == "0":
     env["VLLM_HOST_IP"] = sys.argv[4]
@@ -274,6 +312,40 @@ for key in sorted(env):
 PY
 }
 
+run_profile_serve_rows() {
+  [ -n "${DS41F_RUN_PROFILE:-}" ] || return 0
+  python3 - "$ROOT" "$DS41F_RUN_PROFILE" <<'PY'
+import json
+import pathlib
+import re
+import sys
+
+root = pathlib.Path(sys.argv[1]).resolve()
+profile_path = (root / sys.argv[2]).resolve()
+if root not in profile_path.parents:
+    raise SystemExit(f"运行 profile 越出目标根目录: {sys.argv[2]}")
+if not profile_path.is_file():
+    raise SystemExit(f"运行 profile 不存在: {profile_path}")
+profile = json.loads(profile_path.read_text(encoding="utf-8"))
+if not isinstance(profile, dict):
+    raise SystemExit(f"运行 profile 顶层必须是对象: {profile_path}")
+unknown_profile_keys = sorted(set(profile) - {"environment", "serve_options"})
+if unknown_profile_keys:
+    raise SystemExit(f"运行 profile 含未登记顶层键: {unknown_profile_keys}")
+options = profile.get("serve_options", {})
+if not isinstance(options, dict):
+    raise SystemExit("运行 profile.serve_options 必须是映射")
+for flag, value in options.items():
+    if not isinstance(flag, str) or not re.fullmatch(r"--[a-z0-9][a-z0-9-]*", flag):
+        raise SystemExit(f"运行 profile 非法 serve flag: {flag!r}")
+    if not isinstance(value, str):
+        raise SystemExit(f"运行 profile.{flag} 必须是字符串")
+    if "\n" in value or "\t" in value:
+        raise SystemExit(f"运行 profile.{flag} 含非法换行或制表符")
+    print(f"{flag}\t{value}")
+PY
+}
+
 # 单个 rank 的完整 docker run argv（与上游 rendered_docker_command 同序：
 # name + docker_run_args + 排序后的 -e 集 + 卷 + 镜像 + serve + 分布式参数）。
 docker_command_for_rank() {
@@ -297,13 +369,27 @@ docker_command_for_rank() {
   # 站点渲染点：模型路径、--host、--port、--api-key。
   local -a serve_args=("${DS41F_SERVE_ARGS[@]}")
   serve_args[0]="$MODEL_CONTAINER_PATH"
-  local index
+  local index flag value found
   for index in "${!serve_args[@]}"; do
     case "${serve_args[$index]}" in
       --host) serve_args[$(( index + 1 ))]="$API_HOST" ;;
       --port) serve_args[$(( index + 1 ))]="$PORT" ;;
     esac
   done
+  while IFS=$'\t' read -r flag value; do
+    [ -n "$flag" ] || continue
+    found=0
+    for index in "${!serve_args[@]}"; do
+      if [ "${serve_args[$index]}" = "$flag" ]; then
+        found=$((found + 1))
+        [ "$found" -eq 1 ] || die "运行 profile serve flag 重复: $flag"
+        [ $((index + 1)) -lt "${#serve_args[@]}" ] \
+          || die "运行 profile serve flag 缺少基线值: $flag"
+        serve_args[$((index + 1))]="$value"
+      fi
+    done
+    [ "$found" -eq 1 ] || die "运行 profile serve flag 不在基线 argv 中: $flag"
+  done < <(run_profile_serve_rows)
   if [ -n "${API_KEY:-}" ]; then
     serve_args+=(--api-key "$API_KEY")
   fi

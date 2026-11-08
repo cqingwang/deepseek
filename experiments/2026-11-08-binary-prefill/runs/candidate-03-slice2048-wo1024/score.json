@@ -1,0 +1,20 @@
+{
+  "run": "candidate-03",
+  "image": "spark-ds41f:binary-prefill-20261108-01",
+  "image_id": "sha256:dce929a1e010a4dd3edab7b4b4d100c8da860c20865c7f18d8e6621d435cc23f",
+  "runtime": {
+    "SPARK_DS41F_MOE_SLICE_TOKENS": "2048",
+    "SPARK_DS41F_WO_SLICE_TOKENS": "1024"
+  },
+  "prefill_tps": {
+    "8192": 5855.582919472497,
+    "16384": 6713.497863077586,
+    "32768": 7136.903663125336,
+    "65536": 7142.2821376761985,
+    "131072": 7121.8601531462,
+    "262144": 6811.886740907057
+  },
+  "prefill_mean_tps": 6797.002246234145,
+  "delta_vs_D09": 8.197469230828574,
+  "failed": 0
+}

@@ -1,0 +1,23 @@
+dir=/opt/spark/deepseek/results/private/failed-starts/20261108T030503Z-deepseek
+=== rank 0 ===
+36:2026-11-08T03:04:56.835746607Z (Worker pid=155) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("RoCE all-reduce setup failed: " + "; ".join(failures))
+37:2026-11-08T03:04:56.835748639Z (Worker pid=155) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: RoCE all-reduce setup failed: rank 0: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 1: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 2: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 3: RoCE proxy setup failed: ibv_query_gid: Invalid argument
+75:2026-11-08T03:04:56.835812159Z (Worker pid=155) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("one-shot policy initialization failed") from exc
+76:2026-11-08T03:04:56.835813759Z (Worker pid=155) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: one-shot policy initialization failed
+200:2026-11-08T03:04:59.826572713Z (APIServer pid=1)     raise RuntimeError(
+201:2026-11-08T03:04:59.826574489Z (APIServer pid=1) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+=== rank 1 ===
+26:2026-11-08T03:04:56.827536197Z (Worker pid=112) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("RoCE all-reduce setup failed: " + "; ".join(failures))
+27:2026-11-08T03:04:56.827537349Z (Worker pid=112) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: RoCE all-reduce setup failed: rank 0: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 1: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 2: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 3: RoCE proxy setup failed: ibv_query_gid: Invalid argument
+65:2026-11-08T03:04:56.827574901Z (Worker pid=112) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("one-shot policy initialization failed") from exc
+66:2026-11-08T03:04:56.827575973Z (Worker pid=112) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: one-shot policy initialization failed
+=== rank 2 ===
+26:2026-11-08T03:04:56.879360780Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("RoCE all-reduce setup failed: " + "; ".join(failures))
+27:2026-11-08T03:04:56.879362732Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: RoCE all-reduce setup failed: rank 0: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 1: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 2: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 3: RoCE proxy setup failed: ibv_query_gid: Invalid argument
+65:2026-11-08T03:04:56.879426371Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("one-shot policy initialization failed") from exc
+66:2026-11-08T03:04:56.879428067Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: one-shot policy initialization failed
+=== rank 3 ===
+26:2026-11-08T03:04:56.827034264Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("RoCE all-reduce setup failed: " + "; ".join(failures))
+27:2026-11-08T03:04:56.827035416Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: RoCE all-reduce setup failed: rank 0: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 1: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 2: RoCE proxy setup failed: ibv_query_gid: Invalid argument; rank 3: RoCE proxy setup failed: ibv_query_gid: Invalid argument
+65:2026-11-08T03:04:56.827085208Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073]     raise RuntimeError("one-shot policy initialization failed") from exc
+66:2026-11-08T03:04:56.827086168Z (Worker pid=111) ERROR 11-08 03:04:56 [multiproc_executor.py:1073] RuntimeError: one-shot policy initialization failed

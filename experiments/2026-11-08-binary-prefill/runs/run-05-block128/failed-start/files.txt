@@ -1,0 +1,9 @@
+/opt/spark/deepseek/results/private/failed-starts/20261108T000249Z-deepseek
+rank-3.log	81094
+rank-2.log	81094
+rank-1-inspect.txt	34400
+rank-1.log	81094
+rank-2-inspect.txt	34305
+rank-3-inspect.txt	34307
+rank-0-inspect.txt	33372
+rank-0.log	94343

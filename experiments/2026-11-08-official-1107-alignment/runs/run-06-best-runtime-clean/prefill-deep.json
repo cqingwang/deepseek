@@ -1,0 +1,71 @@
+{
+ "schema": "servebench-prefill/1",
+ "tool": {
+  "name": "servebench",
+  "version": "0.1.0"
+ },
+ "started_utc": "2026-11-08T05:56:45+00:00",
+ "label": "run-06-best-runtime-clean-prefill-deep",
+ "server": {
+  "url": "http://127.0.0.1:8888",
+  "model": "deepseek-v4.1-flash",
+  "max_model_len": 1048576
+ },
+ "workload": {
+  "sizes": [524288, 1000000],
+  "repeats": 1,
+  "skipped": [],
+  "extra_body": {},
+  "question": "Summarize the document above in one sentence."
+ },
+ "prefill": [
+  {
+   "size": 524288,
+   "prompt_tokens": 533262,
+   "tps": {
+    "n": 1,
+    "mean": 7010.692899170293,
+    "sd": 0.0,
+    "min": 7010.692899170293,
+    "max": 7010.692899170293,
+    "ci95": null,
+    "ci95_pct": null
+   },
+   "samples": [7010.69],
+   "failed": 0
+  },
+  {
+   "size": 1000000,
+   "prompt_tokens": 1000466,
+   "tps": {
+    "n": 1,
+    "mean": 5629.705847857099,
+    "sd": 0.0,
+    "min": 5629.705847857099,
+    "max": 5629.705847857099,
+    "ci95": null,
+    "ci95_pct": null
+   },
+   "samples": [5629.71],
+   "failed": 0
+  }
+ ],
+ "samples": [
+  {
+   "size": 524288,
+   "repeat": 0,
+   "prompt_tokens": 533262,
+   "ttft_s": 76.0640934740004,
+   "tps": 7010.692899170293,
+   "error": null
+  },
+  {
+   "size": 1000000,
+   "repeat": 0,
+   "prompt_tokens": 1000466,
+   "ttft_s": 177.71194926300086,
+   "tps": 5629.705847857099,
+   "error": null
+  }
+ ]
+}

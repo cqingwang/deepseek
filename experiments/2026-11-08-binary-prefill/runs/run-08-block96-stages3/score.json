@@ -1,0 +1,14 @@
+{
+  "run": "run-08-block96-stages3",
+  "image": "spark-ds41f:binary-prefill-20261108-03",
+  "image_id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
+  "runtime": {
+    "SPARK_DS41F_PREFILL_BLOCK_M": "96",
+    "SPARK_DS41F_MOE_SLICE_TOKENS": "4096",
+    "SPARK_DS41F_WO_SLICE_TOKENS": "2048"
+  },
+  "prefill_mean_tps_across_repeats": 6864.70708764675,
+  "delta_vs_D10_tps": 88.04895050040614,
+  "delta_vs_D10_pct": 1.2992975109333615,
+  "retained_best": false
+}

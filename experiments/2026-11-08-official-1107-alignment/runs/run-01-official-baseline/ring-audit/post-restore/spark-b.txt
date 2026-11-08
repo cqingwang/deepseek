@@ -1,0 +1,80 @@
+identity
+spark-b
+2026-11-08T04:56:11Z
+containers
+gpu_compute
+routes
+ports opposite_addresses 10.251.20.10,10.251.20.13
+ports2 opposite_addresses 10.100.241.10,10.100.241.13
+10.100.241.13 via 10.100.241.1 dev enP2p1s0f0np0 src 10.100.241.2 
+10.251.20.10 via 10.251.20.6 dev enp1s0f1np1 src 10.251.20.5 
+tc
+--- enp1s0f0np0
+filter protocol [34997] pref 49152 flower chain 0 
+filter protocol [34997] pref 49152 flower chain 0 handle 0xc000 
+  dst_mac 4c:bb:47:80:f3:28
+  src_mac 4c:bb:47:80:f1:42
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1 installed 6561 sec used 6561 sec
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1 installed 6561 sec used 6561 sec
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val b20d0000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen
+	index 1 ref 1 bind 1 installed 6561 sec used 6561 sec
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+--- enp1s0f1np1
+filter protocol [34997] pref 49162 flower chain 0 
+filter protocol [34997] pref 49162 flower chain 0 handle 0xc00a 
+  dst_mac 4c:bb:47:80:f3:29
+  src_mac 4c:bb:47:80:b2:0d
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1 installed 6561 sec used 6561 sec
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1 installed 6561 sec used 6561 sec
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f1420000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen
+	index 2 ref 1 bind 1 installed 6561 sec used 6561 sec
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+--- enP2p1s0f0np0
+--- enP2p1s0f1np1
+markers
+  spark-ring-mesh-marker@rocep1s0f1.service   loaded active running RDMA-TX source marker on rocep1s0f1 (opposite-node traffic, UDP source port 65535 -> EtherType 0x88b5)
+  spark-ring-mesh-marker@roceP2p1s0f0.service loaded active running RDMA-TX source marker on roceP2p1s0f0 (opposite-node traffic, UDP source port 65535 -> EtherType 0x88b5)

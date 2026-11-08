@@ -1,0 +1,174 @@
+{
+  "scope": "official spark-ds41f 1107 decode target and six-size prefill ranking",
+  "official": {
+    "remote": "git@github.com:christopherowen/spark-ds41f.git",
+    "branch": "main",
+    "main_commit": "cc20ed18be1f7cbf5c6c53cdee945f7cc77d5fc5",
+    "release_commit": "59f523c543cb61e5a2d0df616cb4efa459677b35",
+    "release_image": "spark-ds41f:1107",
+    "release_image_id": "sha256:3f32a962ce04b7c8d85337cd427a8946b8b6bcaadd97cc8d8a8cd14e8d68a6ce",
+    "decode_target": {
+      "c1_tps": 82.623,
+      "c8_tps": 207.447,
+      "c16_tps": 272.863
+    },
+    "prefill_target": {
+      "32768_tps": 8508,
+      "131072_tps": 8657,
+      "262144_tps": 8261,
+      "524288_tps": 7460,
+      "1000000_tps": 6012
+    }
+  },
+  "local_image": {
+    "image": "spark-ds41f:1107-tree-exact",
+    "image_id": "sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4",
+    "rootfs_layer_count": 57,
+    "four_rank_identity_match": true
+  },
+  "primary_metric": "arithmetic mean of cold source-text prefill tok/s at 8192,16384,32768,65536,131072,262144",
+  "max_deployments": 10,
+  "deployments": [
+    {
+      "run": 1,
+      "id": "run-01-official-baseline",
+      "parameters": "16384 batch / 16288 threshold / 2 MiB all-gather / 4 channels / CUDA 32 / QPS unset",
+      "prefill_six_mean_tps": 7424.268098674291,
+      "decode_tps": {
+        "c1_official": 78.57,
+        "c8_official": 196.75333333333333,
+        "c16_official": 246.66
+      },
+      "prefill_deep_tps": {
+        "524288": 6586.745228786127,
+        "1000000": 5373.803438026373
+      },
+      "verdict": "official local baseline"
+    },
+    {
+      "run": 2,
+      "id": "run-02-ring-routes-restored-official",
+      "parameters": "same as run-01 after stopping all target containers and restoring the missing opposite-node /32 routes",
+      "prefill_six_mean_tps": 7456.037152540575,
+      "decode_quick_tps": {
+        "c1": 78.36666666666666,
+        "c2": 111.2,
+        "c3": 130.53333333333333,
+        "c4": 147.26666666666665,
+        "c8": 188.66666666666666,
+        "c16": 238.6
+      },
+      "verdict": "no material prefill gain; ring routes are a deployment-drift risk, not the main 1107 gap"
+    },
+    {
+      "run": 3,
+      "id": "run-03-proven-runtime",
+      "profile": "profiles/run-02-proven-runtime.json",
+      "parameters": "65520 batch / 65424 threshold / 8 MiB all-gather / 8 channels / CUDA 64 / QPS 2",
+      "prefill_six_tps": {
+        "8192": 6694.859010262859,
+        "16384": 7764.8597573175775,
+        "32768": 8310.21048442063,
+        "65536": 8349.163645343655,
+        "131072": 8257.25016201453,
+        "262144": 7843.780063337255
+      },
+      "prefill_six_mean_tps": 7870.020520449418,
+      "delta_vs_baseline_pct": 6.005611215822839,
+      "decode_quick_tps": {
+        "c1": 78.26666666666667,
+        "c2": 110.96666666666665,
+        "c3": 129.93333333333334,
+        "c4": 146.86666666666667,
+        "c8": 189.4,
+        "c16": 234.5
+      },
+      "verdict": "highest six-size mean; retained"
+    },
+    {
+      "run": 4,
+      "id": "run-04-batch-49152",
+      "profile": "profiles/run-03-batch-49152.json",
+      "parameters": "49152 batch / 49056 threshold, remaining values inherited from run-03",
+      "prefill_six_mean_tps": 7788.677028950559,
+      "decode_quick_tps": {
+        "c1": 78.2,
+        "c2": 111.16666666666667,
+        "c3": 129.9,
+        "c4": 148.06666666666666,
+        "c8": 188.26666666666665,
+        "c16": 237.0666666666667
+      },
+      "verdict": "about 1.0% below run-03; rejected"
+    },
+    {
+      "run": 5,
+      "id": "run-05-batch-65535-failed",
+      "profile": "profiles/run-04-batch-65535.json",
+      "parameters": "65535 batch / 65439 threshold",
+      "verdict": "startup failed before readiness: activation_swiglu_clamp grid=(1,65546,1) exceeds CUDA's 65535 single-dimension limit"
+    },
+    {
+      "run": 6,
+      "id": "run-06-best-runtime-clean",
+      "profile": "profiles/run-02-proven-runtime.json",
+      "parameters": "same as run-03; clean confirmation boot",
+      "prefill_six_mean_tps": 7807.383766994268,
+      "prefill_deep_tps": {
+        "524288": 7010.692899170293,
+        "1000000": 5629.705847857099
+      },
+      "decode_official_tps": {
+        "c1": 77.66,
+        "c8": 194.62,
+        "c16": 242.25333333333333
+      },
+      "verdict": "prefill remains above baseline; official decode target still not met"
+    },
+    {
+      "run": 7,
+      "id": "run-07-final-clean-profile",
+      "profile": "profiles/run-02-proven-runtime.json",
+      "parameters": "same effective runtime parameters as run-03; legacy binary-prefill env keys explicitly nulled",
+      "prefill_six_tps": {
+        "8192": 6682.424449018926,
+        "16384": 7772.609812213903,
+        "32768": 8317.211374701446,
+        "65536": 8368.32346637471,
+        "131072": 8272.845349465933,
+        "262144": 7841.712621786946
+      },
+      "prefill_six_mean_tps": 7875.854512260311,
+      "delta_vs_baseline_pct": 6.082571474845544,
+      "decode_quick_tps": {
+        "c1": 78.36666666666666,
+        "c8": 188.13333333333333,
+        "c16": 234.73333333333335
+      },
+      "verdict": "final clean profile and highest six-size mean; retained"
+    }
+  ],
+  "winner": {
+    "run": 7,
+    "prefill_six_mean_tps": 7875.854512260311,
+    "delta_vs_baseline_tps": 451.58641358602017,
+    "delta_vs_baseline_pct": 6.082571474845544,
+    "final_running_deployment": "run-07-final-clean-profile",
+    "final_profile": "profiles/run-02-proven-runtime.json"
+  },
+  "decode_gate": {
+    "target_met": false,
+    "clean_confirmation_vs_target_pct": {
+      "c1": -6.006292654392702,
+      "c8": -6.183940611588559,
+      "c16": -11.218737902780685
+    },
+    "clean_confirmation_vs_local_baseline_pct": {
+      "c1": -1.158456152475248,
+      "c8": -1.0841012237206292,
+      "c16": -1.7863523574155614
+    },
+    "gpu_observation": "2184-2190 MHz SM, 52-54 C, utilization 96%, active throttle flags 0"
+  },
+  "status": "best runtime profile retained; prefill improved; decode target remains open for image binary/build provenance work"
+}

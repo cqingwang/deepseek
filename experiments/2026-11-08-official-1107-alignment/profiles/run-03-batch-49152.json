@@ -1,0 +1,17 @@
+{
+  "environment": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "64",
+    "NCCL_IB_QPS_PER_CONNECTION": "2",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "SPARK_DS41F_MOE_SLICE_TOKENS": null,
+    "SPARK_DS41F_PREFILL_BLOCK_M": null,
+    "SPARK_DS41F_WO_SLICE_TOKENS": null,
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608"
+  },
+  "serve_options": {
+    "--limit-mm-per-prompt": "{\"image\":16}",
+    "--long-prefill-token-threshold": "49056",
+    "--max-num-batched-tokens": "49152"
+  }
+}

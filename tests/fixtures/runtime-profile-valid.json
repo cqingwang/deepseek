@@ -1,0 +1,9 @@
+{
+  "environment": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "48"
+  },
+  "serve_options": {
+    "--limit-mm-per-prompt": "{\"image\":32}",
+    "--max-num-batched-tokens": "32768"
+  }
+}

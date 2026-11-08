@@ -1,0 +1,10 @@
+dir=/opt/spark/deepseek/results/private/failed-starts/20261108T030207Z-deepseek
+=== rank 0 ===
+=== rank 1 ===
+17:2026-11-08T03:01:52.241292785Z (Worker pid=112) ERROR 11-08 03:01:52 [multiproc_executor.py:1073] WorkerProc failed to start.
+63:2026-11-08T03:01:52.241424065Z (Worker pid=112) ERROR 11-08 03:01:52 [multiproc_executor.py:1073]     raise RuntimeError(f"NCCL error: {error_str}")
+64:2026-11-08T03:01:52.241425921Z (Worker pid=112) ERROR 11-08 03:01:52 [multiproc_executor.py:1073] RuntimeError: NCCL error: unhandled system error (run with NCCL_DEBUG=INFO for details)
+66:2026-11-08T03:01:52.241429601Z [2026-11-08 03:01:52] spark-b:112:177 [0] misc/ibvwrap.cc:376 (wrap_ibv_modify_qp) NCCL WARN Call to ibv_modify_qp failed with 61 No data available, on dev rocep1s0f0:1, curr state INIT, next state RTR, local GID index 3, local GID ::, remote GID ::ffff:10.251.20.1
+69:2026-11-08T03:01:52.822821274Z [2026-11-08 03:01:52] spark-b:112:177 [0] misc/ibvwrap.cc:376 (wrap_ibv_modify_qp) NCCL WARN Call to ibv_modify_qp failed with 61 No data available, on dev roceP2p1s0f0:1, curr state INIT, next state RTR, local GID index 3, local GID ::, remote GID ::ffff:10.100.241.1
+=== rank 2 ===
+=== rank 3 ===

@@ -1,0 +1,5 @@
+Nov 07 00:15:30 spark-a kernel: ACPI GTDT: found 1 SBSA generic Watchdog(s).
+Nov 07 00:15:30 spark-a kernel: watchdog: NMI not fully supported
+Nov 07 00:15:30 spark-a kernel: watchdog: Hard watchdog permanently disabled
+Nov 08 02:55:54 spark-a kernel: oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=systemd-journald.service,mems_allowed=0,global_oom,task_memcg=/system.slice/docker-011311a12448b87daa4fdad21d164a4468202591700719bc17296454c254d861.scope,task=node,pid=2309,uid=0
+Nov 08 02:55:54 spark-a kernel: Out of memory: Killed process 2309 (node) total-vm:22102080kB, anon-rss:96384kB, file-rss:448kB, shmem-rss:0kB, UID:0 pgtables:18688kB oom_score_adj:0

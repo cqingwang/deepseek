@@ -1,0 +1,60 @@
+{
+  "frozen_at_utc": "2026-11-08T01:25:00Z",
+  "scope": "best 2026-11-08 binary prefill candidate",
+  "image": {
+    "tag": "spark-ds41f:binary-prefill-20261108-03",
+    "id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
+    "base": "spark-ds41f:1030",
+    "source_sha256": "acaeadccac9ffd3b2359e87d33fb86b2edd352fe2cf9b26bd4b459f3d55ea36c"
+  },
+  "runtime": {
+    "SPARK_DS41F_PREFILL_BLOCK_M": "160",
+    "SPARK_DS41F_MOE_SLICE_TOKENS": "4096",
+    "SPARK_DS41F_WO_SLICE_TOKENS": "2048",
+    "prefill_num_stages": 2
+  },
+  "best_measured": {
+    "run": "run-09-block160-stages2",
+    "mean_tps": 6954.147797455343,
+    "delta_vs_D10_tps": 177.4896603089995,
+    "delta_vs_D10_pct": 2.618
+  },
+  "final_clean_boot": {
+    "run": "run-10-final-block160",
+    "mean_tps": 6912.950991494007,
+    "delta_vs_D10_tps": 136.2928543476635,
+    "delta_vs_D10_pct": 2.011
+  },
+  "target_mean_tps": 8466.454229102294,
+  "target_reached": false,
+  "remaining_to_target_tps": 1512.3064316469508,
+  "final_gates": {
+    "c1_tps": 71.9,
+    "c2_long_tps": 104.28333333333335,
+    "c3_long_tps": 126.25,
+    "c4_tps": 138.66666666666666,
+    "quality_outputs_sha256": "6cf26aedc93c0c01bf81ed4dac8a67e77043222719930977e034aba70a9ff99a",
+    "perplexity": 1.1178292269357697,
+    "rank1_fraction": 1.0,
+    "prefill_1m_tps": 5290.0237158381715,
+    "failed": 0
+  },
+  "run10_evidence": "../runs/run-10-final-block160/",
+  "file_sha256": {
+    ".env.deepseek.example": "9e636cb0010f1184d88dca1535f49795fff07fec35d2d067034b892a6d7480fa",
+    "Dockerfile": "6e75b6f240701bdc905bd5de347461c1d9c37fba60498669f8281044b0c91548",
+    "build_candidate.sh": "ea63618e9a6311494877d80a8f3f8760b87d9cd970af62822f95a04df1c06a5c",
+    "deployment-config.yaml": "c9f18e514e3ffe09df2672f268d0a06d015b8ff1f7d10aa58cc8162a8b58b9dd",
+    "overlay/vllm/models/deepseek_v4_1/sp_prefill.py": "79ab41942f2d9e4463f3a9941f41774361781253d58fbd1ac95bd092ac54d7ea",
+    "overlay/vllm/models/deepseek_v4_1/tilelang/moe.py": "581a0f39ea7cd6c21a2037470bc0baf8aeb7995f07daf855ce73e11835fb78d1",
+    "parent-config.yaml": "3eb83f0acd5746706a7945b83f0204e4c635e360bf6961b39d4fe06617eafbaf",
+    "scores.json": "8784511396bd2d8810b1ecc7764e1ddd35e8e1d5a49f7323ee8e5503f1b6b1a8",
+    "start-tp4.sh": "708f597bebdaf3c95b29ee8aa4313a99922e0a8a96785255bddf8a1e3c4593be",
+    "target-cluster.json": "3ec1c58fec0bb9ad8bed1acf719e6c69b74fffa7d828be4503dd6bbc202b415d"
+  },
+  "notes": [
+    "native vLLM/NCCL not rebuilt; thin Python/TileLang overlay on spark-ds41f:1030",
+    "block_M=128 with stages=3 fails on dynamic shared memory; 160 uses stages=2",
+    "default parent config and template now point at this candidate"
+  ]
+}

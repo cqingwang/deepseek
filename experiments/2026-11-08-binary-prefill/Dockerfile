@@ -5,8 +5,7 @@ FROM ${BASE_IMAGE}
 
 ARG CANDIDATE_SOURCE_SHA256=unknown
 
-COPY overlay/vllm/models/deepseek_v4_1/sp_prefill.py \
-     /opt/spark-ds41f/candidate/vllm/vllm/models/deepseek_v4_1/sp_prefill.py
+COPY overlay/ /opt/spark-ds41f/candidate/vllm/
 
 LABEL local.spark-ds41f.experiment.name="binary-prefill-20261108" \
       local.spark-ds41f.experiment.source-sha256="${CANDIDATE_SOURCE_SHA256}" \

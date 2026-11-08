@@ -1,0 +1,175 @@
+common:
+  user: chan
+  spark_nodes:
+    spark-a:
+      hostname: spark-a
+      ssh: chan@192.168.2.180
+      management_ip: 192.168.2.180
+      management_if: wlP9s9
+    spark-b:
+      hostname: spark-b
+      ssh: chan@192.168.2.161
+      management_ip: 192.168.2.161
+      management_if: wlP9s9
+    spark-c:
+      hostname: spark-c
+      ssh: chan@192.168.2.102
+      management_ip: 192.168.2.102
+      management_if: wlP9s9
+    spark-d:
+      hostname: spark-d
+      ssh: chan@192.168.2.238
+      management_ip: 192.168.2.238
+      management_if: wlP9s9
+  ring:
+    mtu: 9000
+    roce_mtu: 4096
+    roce_gid_index: 3
+    hairpin_num_queues: 4
+    hairpin_queue_size: 8192
+    flow_steering_mode: hmfs
+    hw_tc_offload: 'on'
+    mesh:
+      runtime_root: /opt/spark-ring-mesh
+      state_root: /run/spark-ring-mesh
+      sparkring_commit: f16b5f43208c188c018c43820ccf52955006d1a5
+      probe_source_sha256: 8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792
+    nodes:
+      spark-a:
+        rank: 0
+        ports:
+        - interface: enp1s0f0np0
+          hca: rocep1s0f0
+          cidr: 10.251.20.1/30
+          neighbor: spark-b
+          neighbor_ip: 10.251.20.2
+        - interface: enp1s0f1np1
+          hca: rocep1s0f1
+          cidr: 10.251.20.14/30
+          neighbor: spark-d
+          neighbor_ip: 10.251.20.13
+        ports2:
+        - interface: enP2p1s0f0np0
+          hca: roceP2p1s0f0
+          cidr: 10.100.241.1/30
+          neighbor: spark-b
+          neighbor_ip: 10.100.241.2
+        - interface: enP2p1s0f1np1
+          hca: roceP2p1s0f1
+          cidr: 10.100.241.14/30
+          neighbor: spark-d
+          neighbor_ip: 10.100.241.13
+      spark-b:
+        rank: 1
+        ports:
+        - interface: enp1s0f0np0
+          hca: rocep1s0f0
+          cidr: 10.251.20.2/30
+          neighbor: spark-a
+          neighbor_ip: 10.251.20.1
+        - interface: enp1s0f1np1
+          hca: rocep1s0f1
+          cidr: 10.251.20.5/30
+          neighbor: spark-c
+          neighbor_ip: 10.251.20.6
+        ports2:
+        - interface: enP2p1s0f0np0
+          hca: roceP2p1s0f0
+          cidr: 10.100.241.2/30
+          neighbor: spark-a
+          neighbor_ip: 10.100.241.1
+        - interface: enP2p1s0f1np1
+          hca: roceP2p1s0f1
+          cidr: 10.100.241.5/30
+          neighbor: spark-c
+          neighbor_ip: 10.100.241.6
+      spark-c:
+        rank: 2
+        ports:
+        - interface: enp1s0f0np0
+          hca: rocep1s0f0
+          cidr: 10.251.20.9/30
+          neighbor: spark-d
+          neighbor_ip: 10.251.20.10
+        - interface: enp1s0f1np1
+          hca: rocep1s0f1
+          cidr: 10.251.20.6/30
+          neighbor: spark-b
+          neighbor_ip: 10.251.20.5
+        ports2:
+        - interface: enP2p1s0f0np0
+          hca: roceP2p1s0f0
+          cidr: 10.100.241.9/30
+          neighbor: spark-d
+          neighbor_ip: 10.100.241.10
+        - interface: enP2p1s0f1np1
+          hca: roceP2p1s0f1
+          cidr: 10.100.241.6/30
+          neighbor: spark-b
+          neighbor_ip: 10.100.241.5
+      spark-d:
+        rank: 3
+        ports:
+        - interface: enp1s0f0np0
+          hca: rocep1s0f0
+          cidr: 10.251.20.10/30
+          neighbor: spark-c
+          neighbor_ip: 10.251.20.9
+        - interface: enp1s0f1np1
+          hca: rocep1s0f1
+          cidr: 10.251.20.13/30
+          neighbor: spark-a
+          neighbor_ip: 10.251.20.14
+        ports2:
+        - interface: enP2p1s0f0np0
+          hca: roceP2p1s0f0
+          cidr: 10.100.241.10/30
+          neighbor: spark-c
+          neighbor_ip: 10.100.241.9
+        - interface: enP2p1s0f1np1
+          hca: roceP2p1s0f1
+          cidr: 10.100.241.13/30
+          neighbor: spark-a
+          neighbor_ip: 10.100.241.14
+  model_path: /opt/models
+  runtime_assets_root: /opt/runtime_assets
+  default_model: deepseek-ai/DeepSeek-V4.1-Flash-1017
+  default_engine: deepseek
+  api_url: http://0.0.0.0:8888/v1/models
+  api_key: deepseek
+  max_request: 9
+  max_token: 1000000
+  max_tokens: 65536
+  max_num_batched_tokens: 16384
+  mtp_num_tokens: 6
+  default_thinking: false
+  reasoning_effort: 75
+  master_port: 25000
+engines:
+  deepseek:
+    enabled: true
+    engine_dir: deepseek
+    env_dir: deepseek
+    start: start-tp4.sh serve
+    stop: stop.sh
+    remote_head: true
+    env_file: .env.deepseek
+    env_template: .env.deepseek.example
+    image: spark-ds41f:binary-prefill-20261108-03
+    image_id: sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635
+    skip_build: true
+    nnodes: 4
+    tensor_parallel_size: 4
+    model_container_path: /models/DeepSeek-V4.1-Flash-1017
+    nccl_ib_subnet_prefix_len_from_ring: true
+    models:
+    - id: deepseek-ai/DeepSeek-V4.1-Flash-1017
+      role: target
+    - id: deepseek-ai/DeepSeek-V4.1-Flash-1017-heretic
+      role: target
+    allow_unverified_image: true
+    ds41f_config_file: config/binary-prefill.cluster.json
+    experimental_container_env:
+      SPARK_DS41F_MOE_SLICE_TOKENS: '4096'
+      SPARK_DS41F_WO_SLICE_TOKENS: '2048'
+      SPARK_DS41F_PREFILL_BLOCK_M: '160'

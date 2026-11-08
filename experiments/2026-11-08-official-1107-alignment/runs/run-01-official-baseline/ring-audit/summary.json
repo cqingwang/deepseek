@@ -1,0 +1,69 @@
+{
+  "schema": "spark-ring-deployment-audit/v1",
+  "container_ring_identity": {
+    "libnccl.so.2": "9fe94504b5f789b2cfdb459cd29788b879c36df81d3ad8f6e0e1ecd462b4bd42",
+    "roce_proxy-256c711c72bc15fd.so": "8fbbbc7e8a1e23130e63e72d27919e6c4b225de40080ab714fbf8f04bafb5776",
+    "sparknet_python_tree_digest": "96b68cc767eb42b45bd9d5f0ba052c4ae107ef7a3b0763a8bb43710e4d8eca34",
+    "b12x_comm_roce_python_tree_digest": "65e00977ae02323f3f44ce8cd2ab006903c3433669dfcdf79bf8e0f580e5869e",
+    "four_rank_match": true
+  },
+  "kernel_modules": {
+    "mlx5_core.ko.zst": "8ef6aa97c3abeaffc7822a6966794bfd39e69085a9e2b532e478cbdfebf3872d",
+    "mlx5_ib.ko.zst": "3f5e52f4fa15583667ac1ce06401ea15be487675fc445ae5841f382248b90e2d",
+    "ib_core.ko.zst": "875566040d9760af9902ebc64cbb42f1c767b88b52c06ad486a315084642cbb5",
+    "ib_uverbs.ko.zst": "df10cf24e3fd4c8927360dc316dbaa76c7cef90b6aca44509dcbdaaff312c7ee",
+    "rdma_cm.ko.zst": "d5e2bcaee5b3ce8e4ee5ca7b007199cb56ac66d35db8b548d6d617fc4de683ed",
+    "rdma_ucm.ko.zst": "2bc057fdcf38f933679d8595cca7692ce1f93120d27f72b0e0fbbd2cc26459ff",
+    "vermagic": "7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64",
+    "four_rank_match": true
+  },
+  "marker_binary": {
+    "source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+    "file_sha256_by_node": {
+      "spark-a": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "spark-b": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "spark-c": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "spark-d": "2caad101b54013f194fa75464bda9c02e916179ddca2a31c9262ee7a169320d8"
+    },
+    "section_sha256_all_nodes": {
+      ".text": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132",
+      ".rodata": "9273ad041f120414277fdb933ec0c9eb620c4a8494d156f2c516df5083b69899",
+      ".eh_frame": "5b45ded977c659a82e345d15cc2e94948604ebcce0846ca253796500946f126e",
+      ".data": "ad9bc07df002da316320b6e36f2088a62f08776a6d03f80a6ba0d9d339cfe448"
+    },
+    "difference": "spark-d was compiled with GCC package 13.3.0-6ubuntu2~24.04 instead of ~24.04.1; executable sections are byte-identical, only .comment and Build ID differ",
+    "package_versions": {
+      "spark-a": "gcc-13 13.3.0-6ubuntu2~24.04.1; binutils 2.42-4ubuntu2.10; libc6 2.39-0ubuntu8.8",
+      "spark-b": "gcc-13 13.3.0-6ubuntu2~24.04.1; binutils 2.42-4ubuntu2.10; libc6 2.39-0ubuntu8.8",
+      "spark-c": "gcc-13 13.3.0-6ubuntu2~24.04.1; binutils 2.42-4ubuntu2.10; libc6 2.39-0ubuntu8.9",
+      "spark-d": "gcc-13 13.3.0-6ubuntu2~24.04; binutils 2.42-4ubuntu2.5; libc6 2.39-0ubuntu8.5"
+    }
+  },
+  "mesh_runtime": {
+    "service_active_enabled_all_nodes": true,
+    "active_markers_per_node": 2,
+    "hardware_tc_rules_per_node": 2,
+    "skip_sw_and_in_hw_all_rules": true,
+    "opposite_node_routes_expected_per_node": 2,
+    "before_restore": {
+      "spark-a": "missing both opposite-node /32 routes",
+      "spark-b": "present",
+      "spark-c": "missing both opposite-node /32 routes",
+      "spark-d": "present"
+    },
+    "after_restore_all_nodes_present": true,
+    "root_cause": "one-shot spark-ring-mesh.service is not rerun after systemd-networkd restart or mlx5 driver link reinitialization; runtime /32 routes are not declared in netplan",
+    "performance_control": "official-1107 six-size prefill mean changed by +0.43% after restoration and decode remained within noise; not the main local-vs-README gap"
+  },
+  "ports": {
+    "mtu": 9000,
+    "roce_active_mtu": 4096,
+    "gid_index": 3,
+    "hairpin_num_queues": 4,
+    "hairpin_queue_size": 8192,
+    "flow_steering_mode": "hmfs",
+    "hw_tc_offload": "on",
+    "all_16_functions_active": true,
+    "all_configured_pings_9000_byte_no_fragment": true
+  }
+}

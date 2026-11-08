@@ -1,0 +1,50 @@
+=== spark-a ===
+image=sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635
+state=OOM=false Restart=0 Status=running
+memguard=active
+failed_units=0
+images=spark-ds41f:binary-prefill-20261108-03,spark-ds41f:1030,dash-sparkdash:latest,vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e,public.ecr.aws/docker/library/node:22-bookworm-slim,
+stopped=0
+volumes=0
+dangling=0
+tmp_candidates=0
+df=/dev/nvme0n1p2  3.7T  845G  2.7T  24% /
+=== spark-b ===
+image=sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635
+state=OOM=false Restart=0 Status=running
+memguard=active
+failed_units=0
+images=spark-ds41f:binary-prefill-20261108-03,spark-ds41f:1030,
+stopped=0
+volumes=0
+dangling=0
+tmp_candidates=0
+df=/dev/nvme0n1p2  3.7T  818G  2.7T  23% /
+=== spark-c ===
+image=sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635
+state=OOM=false Restart=0 Status=running
+memguard=active
+failed_units=0
+images=spark-ds41f:binary-prefill-20261108-03,spark-ds41f:1030,
+stopped=0
+volumes=0
+dangling=0
+tmp_candidates=0
+df=/dev/nvme0n1p2  3.7T  811G  2.7T  23% /
+=== spark-d ===
+image=sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635
+state=OOM=false Restart=0 Status=running
+memguard=active
+failed_units=0
+images=spark-ds41f:binary-prefill-20261108-03,spark-ds41f:1030,
+stopped=0
+volumes=0
+dangling=0
+tmp_candidates=0
+df=/dev/nvme0n1p2  3.7T  811G  2.7T  23% /
+api_http=200
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          5         2         24.23GB   24.23GB (100%)
+Containers      2         2         33.3MB    0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B

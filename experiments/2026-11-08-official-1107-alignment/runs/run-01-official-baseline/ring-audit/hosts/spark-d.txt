@@ -1,0 +1,245 @@
+=== IDENTITY
+spark-d
+Linux spark-d 7.0.0-1019-nvidia-64k #19~24.04.2-Ubuntu SMP PREEMPT_DYNAMIC Sun Sep  6 20:24:04 UTC 2 aarch64 aarch64 aarch64 GNU/Linux
+580.178.04
+cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+=== SERVICES
+active
+enabled
+  spark-ring-mesh-marker@rocep1s0f0.service   loaded active running RDMA-TX source marker on rocep1s0f0 (opposite-node traffic, UDP source port 65535 -> EtherType 0x88b5)
+  spark-ring-mesh-marker@roceP2p1s0f1.service loaded active running RDMA-TX source marker on roceP2p1s0f1 (opposite-node traffic, UDP source port 65535 -> EtherType 0x88b5)
+=== MESH FILES
+0f9f192c1d1f99fb96bc9fa3efc2f4714014881395c5210ed58d0123c4c09924  /opt/spark-ring-mesh/hairpin.sh
+8228a6c3d9059913da03ac8a6187eb8c5e6708926637bcc42cbbb3165734b24c  /opt/spark-ring-mesh/wait-fabric.sh
+8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792  /opt/spark-ring-mesh/mlx5_rdma_tx_rewrite_probe.c
+2caad101b54013f194fa75464bda9c02e916179ddca2a31c9262ee7a169320d8  /opt/spark-ring-mesh/bin/mlx5-rdma-tx-rewrite-probe
+ac14794161cd0ac0f2ac58bc64b097155a6e6b444746252cdd65eb712d556e23  /opt/spark-ring-mesh/mesh-up.sh
+c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3  /opt/spark-ring-mesh/mesh-down.sh
+f117380a3eaf21ccdfc37bfb0cce400eeb223fd07deb07490ee36cdd6c27225e  /etc/systemd/system/spark-ring-mesh.service
+905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca  /etc/systemd/system/spark-ring-mesh-marker@.service
+=== PORTS
+--- PORT enp1s0f0np0 rocep1s0f0 10.251.20.10/30 neighbor=spark-c:10.251.20.9 gid=3 queue=8192
+operstate=up
+mtu=9000
+9: enp1s0f0np0    inet 10.251.20.10/30 brd 10.251.20.11 scope global noprefixroute enp1s0f0np0\       valid_lft forever preferred_lft forever
+gid=0000:0000:0000:0000:0000:ffff:0afb:140a gid_netdev=enp1s0f0np0
+hca_id:	rocep1s0f0
+	transport:			InfiniBand (0)
+	fw_ver:				28.45.4028
+	node_guid:			4cbb:4703:0080:abaf
+	sys_image_guid:			4cbb:4703:0080:abaf
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		4096 (5)
+			link_layer:		Ethernet
+driver: mlx5_core
+version: 7.0.0-1019-nvidia-64k
+firmware-version: 28.45.4028 (NVD0000000087)
+expansion-rom-version: 
+bus-info: 0000:01:00.0
+hw-tc-offload: on
+devlink hairpin_num_queues: 4
+devlink hairpin_queue_size: 8192
+devlink flow_steering_mode: hmfs
+TC ingress enp1s0f0np0
+PING 10.251.20.9
+PING 10.251.20.9 (10.251.20.9) from 10.251.20.10 enp1s0f0np0: 8972(9000) bytes of data.
+8980 bytes from 10.251.20.9: icmp_seq=1 ttl=64 time=0.117 ms
+
+--- 10.251.20.9 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.117/0.117/0.117/0.000 ms
+--- PORT enp1s0f1np1 rocep1s0f1 10.251.20.13/30 neighbor=spark-a:10.251.20.14 gid=3 queue=8192
+operstate=up
+mtu=9000
+10: enp1s0f1np1    inet 10.251.20.13/30 brd 10.251.20.15 scope global noprefixroute enp1s0f1np1\       valid_lft forever preferred_lft forever
+gid=0000:0000:0000:0000:0000:ffff:0afb:140d gid_netdev=enp1s0f1np1
+hca_id:	rocep1s0f1
+	transport:			InfiniBand (0)
+	fw_ver:				28.45.4028
+	node_guid:			4cbb:4703:0080:abb0
+	sys_image_guid:			4cbb:4703:0080:abaf
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		4096 (5)
+			link_layer:		Ethernet
+driver: mlx5_core
+version: 7.0.0-1019-nvidia-64k
+firmware-version: 28.45.4028 (NVD0000000087)
+expansion-rom-version: 
+bus-info: 0000:01:00.1
+hw-tc-offload: on
+devlink hairpin_num_queues: 4
+devlink hairpin_queue_size: 8192
+devlink flow_steering_mode: hmfs
+TC ingress enp1s0f1np1
+PING 10.251.20.14
+PING 10.251.20.14 (10.251.20.14) from 10.251.20.13 enp1s0f1np1: 8972(9000) bytes of data.
+8980 bytes from 10.251.20.14: icmp_seq=1 ttl=64 time=0.202 ms
+
+--- 10.251.20.14 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.202/0.202/0.202/0.000 ms
+--- PORT enP2p1s0f0np0 roceP2p1s0f0 10.100.241.10/30 neighbor=spark-c:10.100.241.9 gid=3 queue=8192
+operstate=up
+mtu=9000
+11: enP2p1s0f0np0    inet 10.100.241.10/30 brd 10.100.241.11 scope global noprefixroute enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+gid=0000:0000:0000:0000:0000:ffff:0a64:f10a gid_netdev=enP2p1s0f0np0
+hca_id:	roceP2p1s0f0
+	transport:			InfiniBand (0)
+	fw_ver:				28.45.4028
+	node_guid:			4cbb:4703:0080:abb3
+	sys_image_guid:			4cbb:4703:0080:abaf
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		4096 (5)
+			link_layer:		Ethernet
+driver: mlx5_core
+version: 7.0.0-1019-nvidia-64k
+firmware-version: 28.45.4028 (NVD0000000087)
+expansion-rom-version: 
+bus-info: 0002:01:00.0
+hw-tc-offload: on
+devlink hairpin_num_queues: 4
+devlink hairpin_queue_size: 8192
+devlink flow_steering_mode: hmfs
+TC ingress enP2p1s0f0np0
+filter protocol [34997] pref 49161 flower chain 0 
+filter protocol [34997] pref 49161 flower chain 0 handle 0xc009 
+  dst_mac 4c:bb:47:80:ab:b3
+  src_mac 4c:bb:47:80:b2:10
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1 installed 6247 sec used 6247 sec
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1 installed 6247 sec used 6247 sec
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f1470000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen
+	index 2 ref 1 bind 1 installed 6247 sec used 6247 sec
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+PING 10.100.241.9
+PING 10.100.241.9 (10.100.241.9) from 10.100.241.10 enP2p1s0f0np0: 8972(9000) bytes of data.
+8980 bytes from 10.100.241.9: icmp_seq=1 ttl=64 time=0.499 ms
+
+--- 10.100.241.9 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.499/0.499/0.499/0.000 ms
+--- PORT enP2p1s0f1np1 roceP2p1s0f1 10.100.241.13/30 neighbor=spark-a:10.100.241.14 gid=3 queue=8192
+operstate=up
+mtu=9000
+12: enP2p1s0f1np1    inet 10.100.241.13/30 brd 10.100.241.15 scope global noprefixroute enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+gid=0000:0000:0000:0000:0000:ffff:0a64:f10d gid_netdev=enP2p1s0f1np1
+hca_id:	roceP2p1s0f1
+	transport:			InfiniBand (0)
+	fw_ver:				28.45.4028
+	node_guid:			4cbb:4703:0080:abb4
+	sys_image_guid:			4cbb:4703:0080:abaf
+			state:			PORT_ACTIVE (4)
+			max_mtu:		4096 (5)
+			active_mtu:		4096 (5)
+			link_layer:		Ethernet
+driver: mlx5_core
+version: 7.0.0-1019-nvidia-64k
+firmware-version: 28.45.4028 (NVD0000000087)
+expansion-rom-version: 
+bus-info: 0002:01:00.1
+hw-tc-offload: on
+devlink hairpin_num_queues: 4
+devlink hairpin_queue_size: 8192
+devlink flow_steering_mode: hmfs
+TC ingress enP2p1s0f1np1
+filter protocol [34997] pref 49155 flower chain 0 
+filter protocol [34997] pref 49155 flower chain 0 handle 0xc003 
+  dst_mac 4c:bb:47:80:ab:b4
+  src_mac 4c:bb:47:80:f1:47
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1 installed 6247 sec used 6247 sec
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1 installed 6247 sec used 6247 sec
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val b2100000 mask 0000ffff
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen
+	index 1 ref 1 bind 1 installed 6247 sec used 6247 sec
+	Action statistics:
+	Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) 
+	backlog 0b 0p requeues 0
+	used_hw_stats delayed
+
+PING 10.100.241.14
+PING 10.100.241.14 (10.100.241.14) from 10.100.241.13 enP2p1s0f1np1: 8972(9000) bytes of data.
+8980 bytes from 10.100.241.14: icmp_seq=1 ttl=64 time=0.473 ms
+
+--- 10.100.241.14 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.473/0.473/0.473/0.000 ms
+=== ROUTES
+10.100.241.12/30 dev enP2p1s0f1np1 proto kernel scope link src 10.100.241.13 metric 107 
+10.100.241.2 via 10.100.241.14 dev enP2p1s0f1np1 src 10.100.241.13 
+10.100.241.8/30 dev enP2p1s0f0np0 proto kernel scope link src 10.100.241.10 metric 106 
+10.251.20.12/30 dev enp1s0f1np1 proto kernel scope link src 10.251.20.13 metric 105 
+10.251.20.5 via 10.251.20.9 dev enp1s0f0np0 src 10.251.20.10 
+10.251.20.8/30 dev enp1s0f0np0 proto kernel scope link src 10.251.20.10 metric 104 
+broadcast 10.100.241.11 dev enP2p1s0f0np0 table local proto kernel scope link src 10.100.241.10 
+broadcast 10.100.241.15 dev enP2p1s0f1np1 table local proto kernel scope link src 10.100.241.13 
+broadcast 10.251.20.11 dev enp1s0f0np0 table local proto kernel scope link src 10.251.20.10 
+broadcast 10.251.20.15 dev enp1s0f1np1 table local proto kernel scope link src 10.251.20.13 
+local 10.100.241.10 dev enP2p1s0f0np0 table local proto kernel scope host src 10.100.241.10 
+local 10.100.241.13 dev enP2p1s0f1np1 table local proto kernel scope host src 10.100.241.13 
+local 10.251.20.10 dev enp1s0f0np0 table local proto kernel scope host src 10.251.20.10 
+local 10.251.20.13 dev enp1s0f1np1 table local proto kernel scope host src 10.251.20.13 
+=== RDMA LINKS
+link rocep1s0f0/1 state ACTIVE physical_state LINK_UP netdev enp1s0f0np0 
+link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1 
+link roceP2p1s0f0/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f0np0 
+link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1 
+=== MODULES
+mlx5_core	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.ko.zst	8ef6aa97c3abeaffc7822a6966794bfd39e69085a9e2b532e478cbdfebf3872d
+version=srcversion=9EDFFBA662832EB66B40CB5
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64
+mlx5_ib	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/infiniband/hw/mlx5/mlx5_ib.ko.zst	3f5e52f4fa15583667ac1ce06401ea15be487675fc445ae5841f382248b90e2d
+version=srcversion=152CBA272DEDE166D9EDD64
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64
+ib_core	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/infiniband/core/ib_core.ko.zst	875566040d9760af9902ebc64cbb42f1c767b88b52c06ad486a315084642cbb5
+version=srcversion=7DE5023E3F670B9046F16FF
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64
+ib_uverbs	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/infiniband/core/ib_uverbs.ko.zst	df10cf24e3fd4c8927360dc316dbaa76c7cef90b6aca44509dcbdaaff312c7ee
+version=srcversion=E47EBAA404F85279F6600C7
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64
+rdma_cm	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/infiniband/core/rdma_cm.ko.zst	d5e2bcaee5b3ce8e4ee5ca7b007199cb56ac66d35db8b548d6d617fc4de683ed
+version=srcversion=AEDDB888FC402940200D1CB
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64
+rdma_ucm	/usr/lib/modules/7.0.0-1019-nvidia-64k/kernel/drivers/infiniband/core/rdma_ucm.ko.zst	2bc057fdcf38f933679d8595cca7692ce1f93120d27f72b0e0fbbd2cc26459ff
+version=srcversion=F35EE1F34A9A241F0018F13
+vermagic=7.0.0-1019-nvidia-64k SMP preempt mod_unload modversions aarch64

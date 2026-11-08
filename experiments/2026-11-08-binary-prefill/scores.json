@@ -1,0 +1,286 @@
+{
+  "primary_metric": "arithmetic mean of cold prefill tok/s at 8192,16384,32768,65536,131072,262144",
+  "baseline_round2_d01": {
+    "mean_tps": 6466.454229102293
+  },
+  "previous_best_d09": {
+    "mean_tps": 6788.804777003316
+  },
+  "previous_final_d10": {
+    "mean_tps": 6776.6581371463435
+  },
+  "target_mean_tps": 8466.454229102294,
+  "winner": {
+    "run": "09a",
+    "mean_tps": 6954.147797455343,
+    "delta_vs_D10_tps": 177.4896603089995,
+    "delta_vs_D10_pct": 2.618,
+    "delta_vs_D01_pct": 7.54
+  },
+  "final_clean_boot": {
+    "run": "10",
+    "mean_tps": 6912.950991494007,
+    "delta_vs_D10_tps": 136.2928543476635,
+    "delta_vs_D10_pct": 2.011,
+    "delta_vs_D01_pct": 6.904
+  },
+  "target_reached": false,
+  "remaining_to_target_tps": 1512.3064316469508,
+  "image": {
+    "tag": "spark-ds41f:binary-prefill-20261108-03",
+    "id": "sha256:af78e1ad16469fd47e898077144b88df094e6caec46818b71a505dd5e5620635",
+    "base": "spark-ds41f:1030",
+    "source_sha256": "acaeadccac9ffd3b2359e87d33fb86b2edd352fe2cf9b26bd4b459f3d55ea36c"
+  },
+  "runtime": {
+    "SPARK_DS41F_PREFILL_BLOCK_M": "160",
+    "SPARK_DS41F_MOE_SLICE_TOKENS": "4096",
+    "SPARK_DS41F_WO_SLICE_TOKENS": "2048",
+    "prefill_num_stages": 2
+  },
+  "deployments": [
+    {
+      "id": "01",
+      "source": "runs/candidate-01-slice8192-wo4096/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_MOE_SLICE_TOKENS": "8192",
+        "SPARK_DS41F_WO_SLICE_TOKENS": "4096"
+      },
+      "tps": {
+        "8192": 5867.8230568979425,
+        "16384": 6714.2581743026685,
+        "32768": 7089.867914385987,
+        "65536": 7179.498200508158,
+        "131072": 7104.831748623241,
+        "262144": 6790.7656468331625
+      },
+      "mean_tps": 6791.17412359186,
+      "delta_vs_D10_tps": 14.515986445516319,
+      "delta_vs_D10_pct": 0.21420567707182148,
+      "failed": 0
+    },
+    {
+      "id": "03",
+      "source": "runs/candidate-02-slice16384-wo8192/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_MOE_SLICE_TOKENS": "16384",
+        "SPARK_DS41F_WO_SLICE_TOKENS": "8192"
+      },
+      "tps": {
+        "8192": 5858.005671511688,
+        "16384": 6663.31953221667,
+        "32768": 7045.120044633124,
+        "65536": 7128.065402382446,
+        "131072": 7066.999903837343,
+        "262144": 6781.839031604844
+      },
+      "mean_tps": 6757.224931031019,
+      "delta_vs_D10_tps": -19.433206115324538,
+      "delta_vs_D10_pct": -0.28676680632303553,
+      "failed": 0
+    },
+    {
+      "id": "04",
+      "source": "runs/candidate-03-slice2048-wo1024/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_MOE_SLICE_TOKENS": "2048",
+        "SPARK_DS41F_WO_SLICE_TOKENS": "1024"
+      },
+      "tps": {
+        "8192": 5855.582919472497,
+        "16384": 6713.497863077586,
+        "32768": 7136.903663125336,
+        "65536": 7142.2821376761985,
+        "131072": 7121.8601531462,
+        "262144": 6811.886740907057
+      },
+      "mean_tps": 6797.002246234145,
+      "delta_vs_D10_tps": 20.34410908780137,
+      "delta_vs_D10_pct": 0.3002085788610831,
+      "failed": 0
+    },
+    {
+      "id": "06a",
+      "source": "runs/run-06-block128-stages2/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "128",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5870.885768294625,
+        "16384": 6740.882407811091,
+        "32768": 7204.850022861552,
+        "65536": 7237.0728254154,
+        "131072": 7181.288797363881,
+        "262144": 6865.307515995073
+      },
+      "mean_tps": 6850.0478896236045,
+      "delta_vs_D10_tps": 73.38975247726103,
+      "delta_vs_D10_pct": 1.0829785270556114,
+      "failed": 0
+    },
+    {
+      "id": "06b",
+      "source": "runs/run-06-block128-stages2/prefill-repeat.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "128",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5823.79048931867,
+        "16384": 6733.229513409692,
+        "32768": 7189.85218315663,
+        "65536": 7216.042090438927,
+        "131072": 7161.745394809212,
+        "262144": 6858.334740822696
+      },
+      "mean_tps": 6830.499068659304,
+      "delta_vs_D10_tps": 53.840931512960196,
+      "delta_vs_D10_pct": 0.7945056460474387,
+      "failed": 0
+    },
+    {
+      "id": "07",
+      "source": "runs/run-07-block192-stages2/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "192",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5487.40476705877,
+        "16384": 6382.275420948521,
+        "32768": 6881.738696077802,
+        "65536": 6975.526241020056,
+        "131072": 6939.518111540748,
+        "262144": 6649.073038965343
+      },
+      "mean_tps": 6552.589379268539,
+      "delta_vs_D10_tps": -224.06875787780427,
+      "delta_vs_D10_pct": -3.306478700018356,
+      "failed": 0
+    },
+    {
+      "id": "08a",
+      "source": "runs/run-08-block96-stages3/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "96",
+        "stages": "3"
+      },
+      "tps": {
+        "8192": 5807.576583592924,
+        "16384": 6800.46467422523,
+        "32768": 7218.982803244522,
+        "65536": 7284.309954174843,
+        "131072": 7231.167776315025,
+        "262144": 6911.758735824437
+      },
+      "mean_tps": 6875.710087896162,
+      "delta_vs_D10_tps": 99.05195074981839,
+      "delta_vs_D10_pct": 1.4616636806107142,
+      "failed": 0
+    },
+    {
+      "id": "08b",
+      "source": "runs/run-08-block96-stages3/prefill-repeat.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "96",
+        "stages": "3"
+      },
+      "tps": {
+        "8192": 5736.284004374569,
+        "16384": 6740.298179796613,
+        "32768": 7241.507767328933,
+        "65536": 7302.315096888675,
+        "131072": 7202.303678987667,
+        "262144": 6899.515797007578
+      },
+      "mean_tps": 6853.704087397338,
+      "delta_vs_D10_tps": 77.04595025099479,
+      "delta_vs_D10_pct": 1.1369313412560533,
+      "failed": 0
+    },
+    {
+      "id": "09a",
+      "source": "runs/run-09-block160-stages2/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "160",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5914.698312171817,
+        "16384": 6818.505360909445,
+        "32768": 7303.928236362446,
+        "65536": 7379.228679260045,
+        "131072": 7312.196700900687,
+        "262144": 6996.329495127617
+      },
+      "mean_tps": 6954.147797455343,
+      "delta_vs_D10_tps": 177.4896603089992,
+      "delta_vs_D10_pct": 2.619132568250526,
+      "failed": 0
+    },
+    {
+      "id": "09b",
+      "source": "runs/run-09-block160-stages2/prefill-repeat.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "160",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5876.674357184299,
+        "16384": 6823.3819886847405,
+        "32768": 7267.8192972140405,
+        "65536": 7384.670178229746,
+        "131072": 7299.198092307812,
+        "262144": 6982.028676700971
+      },
+      "mean_tps": 6938.9620983869345,
+      "delta_vs_D10_tps": 162.30396124059098,
+      "delta_vs_D10_pct": 2.3950442527256754,
+      "failed": 0
+    },
+    {
+      "id": "10",
+      "source": "runs/run-10-final-block160/prefill.json",
+      "runtime": {
+        "SPARK_DS41F_PREFILL_BLOCK_M": "160",
+        "stages": "2"
+      },
+      "tps": {
+        "8192": 5792.746219249828,
+        "16384": 6818.30790957056,
+        "32768": 7299.166765046795,
+        "65536": 7316.325132920125,
+        "131072": 7287.778991094943,
+        "262144": 6963.380931081797
+      },
+      "mean_tps": 6912.950991494007,
+      "delta_vs_D10_tps": 136.2928543476637,
+      "delta_vs_D10_pct": 2.0112104165410427,
+      "failed": 0
+    }
+  ],
+  "failed_attempts": [
+    {
+      "id": "02",
+      "reason": "\u5408\u5e76 env \u4e22\u5931\u56fa\u5b9a\u952e\uff1b\u6a21\u677f\u952e\u96c6\u66f4\u65b0\u672a\u91cd\u5efa .env\uff0c\u542f\u52a8\u524d fail-closed",
+      "counted": true
+    },
+    {
+      "id": "05",
+      "reason": "block_M=128 stages=3 \u52a8\u6001 shared memory 103168 bytes \u8d85\u8fc7\u9650\u5236",
+      "counted": true
+    }
+  ],
+  "final_gates": {
+    "c1_tps": 71.9,
+    "c2_long_tps": 104.28333333333335,
+    "c3_long_tps": 126.25,
+    "c4_tps": 138.66666666666666,
+    "quality_outputs_sha256": "6cf26aedc93c0c01bf81ed4dac8a67e77043222719930977e034aba70a9ff99a",
+    "perplexity": 1.1178292269357697,
+    "rank1_fraction": 1.0,
+    "prefill_1m_tps": 5290.0237158381715,
+    "failed": 0
+  }
+}
