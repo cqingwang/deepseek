@@ -60,6 +60,7 @@ SHAPE_KEYS = {"extends", "nodes", "nodes_config", "fabric", "sizing", "environme
 SWITCHED_STRIP_RING_KEYS = (
     "NCCL_SWITCHLESS_BIDIRECTIONAL", "NCCL_MIN_TRAFFIC_PER_CHANNEL",
     "NCCL_THREAD_THRESHOLDS", "NCCL_ALGO", "NCCL_MIN_NCHANNELS",
+    "NCCL_P2P_NET_CHUNKSIZE",
     "NCCL_ALGO_PLUGIN", "NCCL_TUNER_PLUGIN", "NCCL_GRAPH_FILE", "NCCL_TOPO_FILE",
     "NCCL_COLLNET_ENABLE", "NCCL_CUMEM_HOST_ENABLE", "NCCL_GIN_ENABLE",
     "NCCL_IB_SUBNET_PREFIX_LEN", "NCCL_MNNVL_ENABLE", "NCCL_PAT_ENABLE",
@@ -405,10 +406,18 @@ def overlay(arm: dict, base: dict) -> dict:
     if "engram_on_disk" in sets:
         _with_engram_on_disk(cluster, cluster.pop("engram_on_disk"))
     for dotted in arm.get("unset", []):
-        *parents, last = dotted.split(".")
+        parts = dotted.split(".")
         node = cluster
-        for part in parents:
-            node = node.get(part, {}) if isinstance(node, dict) else {}
+        last = parts[-1]
+        for idx, part in enumerate(parts[:-1]):
+            if not isinstance(node, dict):
+                node = {}
+                break
+            rest = ".".join(parts[idx:])
+            if rest in node:
+                last = rest
+                break
+            node = node.get(part, {})
         if not isinstance(node, dict) or last not in node:
             raise SystemExit(f"the arm unsets {dotted}, which its base does not set")
         del node[last]
