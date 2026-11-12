@@ -1,0 +1,18 @@
+{
+  "hypothesis": "The locally rebuilt vLLM stable extensions were slower than the base nightly's precompiled extensions.",
+  "image": "spark-ds41f:x1112-baseext",
+  "image_id": "sha256:d3da38012d3b6d077bd849d183213f95bb274cbdaba4562773aecb1c9d1a75ad",
+  "extension_sha256": {
+    "_C_stable_libtorch.abi3.so": "703713e2a922bbf7461cedcb01b1030c9026953dd56dd9282b4d3afe6424396f",
+    "_moe_C_stable_libtorch.abi3.so": "3c971bc6a84f3b9873faaa56e62b529d860deb27312310d3ce011dbe95bbeb2c"
+  },
+  "protocol": "closed c16, 60 s warmup, 120 s in 6 windows, 256 max tokens, thinking=false",
+  "c16_tps": 241.025,
+  "steps_per_s": 7.016654293426803,
+  "tokens_per_step": 34.37974093104193,
+  "failed_requests": 0,
+  "control_x1112_c16_tps": 244.1916666666667,
+  "verdict": "rejected",
+  "reason": "The precompiled base extensions are not faster; no material decode gain.",
+  "cleanup": "The temporary image, Dockerfile, distribution logs and result directory were removed after recording this receipt."
+}

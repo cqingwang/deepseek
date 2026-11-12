@@ -1,0 +1,104 @@
+{
+ "schema": "servebench-suite/1",
+ "suite": {
+  "name": "official-main-x1112-c1-c2-c4-prose-daily",
+  "version": 1,
+  "description": "Daily-load prose-only check at c1, c2 and c4.",
+  "steps": [
+   {
+    "id": "c1",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 1,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c2",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 2,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c4",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 4,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   }
+  ]
+ },
+ "suite_sha256": "cbe24684ec1410b6068f256ee0f694b94ab78997bb2af638b9fe58183063ef47",
+ "label": "x1112-c1c2c4-prose-daily-run-01",
+ "corpus": null,
+ "started_utc": "2026-11-12T10:34:15+00:00",
+ "steps": [
+  {
+   "id": "c1",
+   "command": "run",
+   "output": "c1.json",
+   "exit": 0,
+   "seconds": 42.5
+  },
+  {
+   "id": "c2",
+   "command": "run",
+   "output": "c2.json",
+   "exit": 0,
+   "seconds": 43.6
+  },
+  {
+   "id": "c4",
+   "command": "run",
+   "output": "c4.json",
+   "exit": 0,
+   "seconds": 42.4
+  }
+ ],
+ "metadata": {
+  "deployment": "official-main-x1112-20261112",
+  "local_parent_commit": "4cb310c",
+  "deepseek_merge_commit": "a563669f755c200514b630951400bd515f450ae5",
+  "official_main_commit": "1d5065b7",
+  "image": "spark-ds41f:x1112",
+  "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+  "image_build_identity": "rsync-be6268927d80ecc477145ca8fb235ed2",
+  "runtime": "official config/cluster.json tp4-ring",
+  "topology": "4-node switchless ring A-B-C-D-A",
+  "served_models": [
+   "deepseek-v4.1-flash",
+   "deepseek-v4.1-flash-weightless"
+  ]
+ },
+ "finished_utc": "2026-11-12T10:36:24+00:00"
+}

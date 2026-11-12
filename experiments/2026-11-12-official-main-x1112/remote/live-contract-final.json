@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "failures": [],
+  "ranks": [
+    {
+      "rank": 0,
+      "host": "192.168.2.180",
+      "container": "deepseek-r0",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 85,
+      "serve_argv_sha256": "5dd20715ffbe04bf1ed0d515dc18d13ebaac1130b6639c52e09f56887cae4a84",
+      "max_num_batched_tokens": "16384",
+      "long_prefill_token_threshold": "16288",
+      "cuda_device_max_connections": "32",
+      "nccl_channels": "4",
+      "allgather_max_bytes": "2097152"
+    },
+    {
+      "rank": 1,
+      "host": "192.168.2.161",
+      "container": "deepseek-r1",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 85,
+      "serve_argv_sha256": "8a299d568fb3c33e961be817936f70802ed3a7ab1682a6d39c1130e7bee90111",
+      "max_num_batched_tokens": "16384",
+      "long_prefill_token_threshold": "16288",
+      "cuda_device_max_connections": "32",
+      "nccl_channels": "4",
+      "allgather_max_bytes": "2097152"
+    },
+    {
+      "rank": 2,
+      "host": "192.168.2.102",
+      "container": "deepseek-r2",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 85,
+      "serve_argv_sha256": "5e6e3083ff9b953b29d5456223bfab5bb34927205ce5aff86acd7b0723551005",
+      "max_num_batched_tokens": "16384",
+      "long_prefill_token_threshold": "16288",
+      "cuda_device_max_connections": "32",
+      "nccl_channels": "4",
+      "allgather_max_bytes": "2097152"
+    },
+    {
+      "rank": 3,
+      "host": "192.168.2.238",
+      "container": "deepseek-r3",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 85,
+      "serve_argv_sha256": "5ee97153698a4445cf6d0fec7f3ef3c917cc041b39b4b49e97bfe99446ce0757",
+      "max_num_batched_tokens": "16384",
+      "long_prefill_token_threshold": "16288",
+      "cuda_device_max_connections": "32",
+      "nccl_channels": "4",
+      "allgather_max_bytes": "2097152"
+    }
+  ]
+}

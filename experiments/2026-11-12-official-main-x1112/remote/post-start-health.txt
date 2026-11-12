@@ -1,0 +1,5 @@
+2 ['deepseek-v4.1-flash', 'deepseek-v4.1-flash-weightless']
+spark-a deepseek-r0 running oom=false restart=0 image=sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece memguard=active
+spark-b deepseek-r1 running oom=false restart=0 image=sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece memguard=active
+spark-c deepseek-r2 running oom=false restart=0 image=sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece memguard=active
+spark-d deepseek-r3 running oom=false restart=0 image=sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece memguard=active

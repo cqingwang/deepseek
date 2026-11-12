@@ -9,9 +9,8 @@
 # cluster.json `container.docker_run_args`，DS41F_SERVE_ARGS =
 # `serve_args` 经 scripts/recipe.py:resolve(..., "tp4-ring") 渲染后的定值
 # （rows=96：max_num_seqs 16 x (1+drafts 5)；capture ladder 1..96；
-# 2026-11-08 multi-size final: long_prefill 65424=65520-96；
-# engram table_memory=disk）。
-# 来源：官方 spark-ds41f 1107 source-tree 重建 profile。
+# long_prefill 16288=16384-96；engram table_memory=disk）。
+# 来源：官方 latest-main config/cluster.json 的 tp4-ring 配方。
 # 站点渲染点只有四处：serve 模型路径、--host、--port、--api-key；逐 rank
 # 注入 VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
 # SPARKNET_ROCE_TOPOLOGY。其余固定键和 serve 参数不得丢失。
@@ -140,7 +139,7 @@ DS41F_SERVE_ARGS=(
   --gpu-memory-utilization
   0.82
   --max-num-batched-tokens
-  65520
+  16384
   --kv-cache-memory-bytes
   11274289152
   --max-cudagraph-capture-size
@@ -166,7 +165,7 @@ DS41F_SERVE_ARGS=(
   --prefix-cache-retention-interval
   8192
   --long-prefill-token-threshold
-  65424
+  16288
   --async-scheduling
   --reasoning-parser
   deepseek_v41

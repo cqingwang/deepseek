@@ -1,0 +1,54 @@
+{
+  "scope": "exact, reference-checked cleanup only; no docker system prune and no wildcard removal",
+  "kept": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "build_base_on_spark_a": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "services": "deepseek-r0..r3 plus memguard.sh on all four nodes",
+    "results": [
+      "x1112-c1c2c4-prose-daily-run-01-20261112T1132Z",
+      "x1112-c1c2c4-prose-daily-run-02-20261112T1132Z",
+      "x1112-verified-run-01",
+      "x1112-verified-profile-short"
+    ],
+    "abtest_source": "spark/docs/spark-ds41f"
+  },
+  "removed_on_all_nodes": [
+    "docker image spark-ds41f:x1108 (image ID sha256:7525b09690aeb666919f7a48071111a185c40edf85583c8d483b08ccb3bdf5d4)",
+    "/tmp/ring-probe.text"
+  ],
+  "removed_result_directories": [
+    "x1112-c1c2c4-run-01-20261112T0955Z",
+    "x1112-c1c2c4-run-02-20261112T1021Z",
+    "x1112-c1c2c4-prose-run-01-20261112T1048Z",
+    "x1112-c1c2c4-prose-short-run-01-20261112T1115Z",
+    "x1112-baseext-short"
+  ],
+  "removed_local_obsolete_files": [
+    "acceptance-c1-c2-c4.json",
+    "acceptance-c1-c2-c4-prose.json",
+    "acceptance-c1-c2-c4-prose-short.json",
+    "baseext-build.json",
+    "baseext.Dockerfile",
+    "remote/baseext-*.log",
+    "remote/c1c2c4-run-01/",
+    "remote/c1c2c4-prose-run-01/",
+    "remote/live-contract-pid1-final.json",
+    "remote/parameter-consumers.json",
+    "__pycache__"
+  ],
+  "not_removed": [
+    "Docker build cache on spark-a, retained for the original-source abtest image build",
+    "historical benchmark receipts and release evidence",
+    "user model weights, GLP vector and runtime caches"
+  ],
+  "verification": {
+    "images_remaining": "spark-ds41f:x1112 on all four nodes",
+    "target_running": true,
+    "oom_killed": false,
+    "restarts": 0,
+    "api_http": 200,
+    "memguard_processes": 4,
+    "live_contract": "remote/live-contract-closeout.json ok=true"
+  }
+}

@@ -1,0 +1,4 @@
+spark-a containers=[] gpu_compute=0 memguard=[] failed_units=5
+spark-b containers=[] gpu_compute=0 memguard=[] failed_units=0
+spark-c containers=[] gpu_compute=0 memguard=[] failed_units=0
+spark-d containers=[] gpu_compute=0 memguard=[] failed_units=0

@@ -169,6 +169,8 @@ COPY --from=tilelang-source . /workspace/tilelang/
 COPY --from=tile_kernels-source . /workspace/tile_kernels/
 ARG TILELANG_COMPILE_JOBS=4
 ARG TILE_KERNELS_VERSION=unrecorded
+ARG PIP_INDEX_URL=https://pypi.org/simple
+ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 RUN set -eux; \
     z3=$(python3 -c 'import importlib.metadata as m; print(m.version("z3-solver"))'); \
     printf 'z3-solver==%s\n' "$z3" > /tmp/tilelang-build-constraints.txt; \

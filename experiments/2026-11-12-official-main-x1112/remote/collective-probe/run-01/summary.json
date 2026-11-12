@@ -1,0 +1,57 @@
+{
+  "probe": "/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-12-official-main-x1112/run_collective_probe.py",
+  "image": "spark-ds41f:x1112",
+  "master_addr": "192.168.2.180",
+  "master_port": 29581,
+  "ranks": {
+    "0": {
+      "rank": 0,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 8,
+      "stderr_tail": "[rank0]: Traceback (most recent call last):\n[rank0]:   File \"/probe.py\", line 359, in <module>\n[rank0]:     main()\n[rank0]:   File \"/probe.py\", line 281, in main\n[rank0]:     ports_before = port_counters() if args.port_samples else None\n[rank0]:                    ^^^^^^^^^^^^^^^\n[rank0]:   File \"/probe.py\", line 41, in port_counters\n[rank0]:     output = subprocess.check_output(['ethtool', '-S', netdev.name], text=True, timeout=10)\n[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank0]:   File \"/usr/lib/python3.12/subprocess.py\", line 466, in check_output\n[rank0]:     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank0]:   File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n[rank0]:     with Popen(*popenargs, **kwargs) as process:\n[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank0]:   File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n[rank0]:     self._execute_child(args, executable, preexec_fn, close_fds,\n[rank0]:   File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n[rank0]:     raise child_exception_type(errno_num, err_msg, err_filename)\n[rank0]: FileNotFoundError: [Errno 2] No such file or directory: 'ethtool'\n[rank0]:[W1112 07:02:47.843061389 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())"
+    },
+    "1": {
+      "rank": 1,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 8,
+      "stderr_tail": "[rank1]: Traceback (most recent call last):\n[rank1]:   File \"/probe.py\", line 359, in <module>\n[rank1]:     main()\n[rank1]:   File \"/probe.py\", line 281, in main\n[rank1]:     ports_before = port_counters() if args.port_samples else None\n[rank1]:                    ^^^^^^^^^^^^^^^\n[rank1]:   File \"/probe.py\", line 41, in port_counters\n[rank1]:     output = subprocess.check_output(['ethtool', '-S', netdev.name], text=True, timeout=10)\n[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank1]:   File \"/usr/lib/python3.12/subprocess.py\", line 466, in check_output\n[rank1]:     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank1]:   File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n[rank1]:     with Popen(*popenargs, **kwargs) as process:\n[rank1]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank1]:   File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n[rank1]:     self._execute_child(args, executable, preexec_fn, close_fds,\n[rank1]:   File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n[rank1]:     raise child_exception_type(errno_num, err_msg, err_filename)\n[rank1]: FileNotFoundError: [Errno 2] No such file or directory: 'ethtool'\n[rank1]:[W1112 07:02:46.658082794 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())"
+    },
+    "2": {
+      "rank": 2,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 8,
+      "stderr_tail": "[rank2]: Traceback (most recent call last):\n[rank2]:   File \"/probe.py\", line 359, in <module>\n[rank2]:     main()\n[rank2]:   File \"/probe.py\", line 281, in main\n[rank2]:     ports_before = port_counters() if args.port_samples else None\n[rank2]:                    ^^^^^^^^^^^^^^^\n[rank2]:   File \"/probe.py\", line 41, in port_counters\n[rank2]:     output = subprocess.check_output(['ethtool', '-S', netdev.name], text=True, timeout=10)\n[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank2]:   File \"/usr/lib/python3.12/subprocess.py\", line 466, in check_output\n[rank2]:     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank2]:   File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n[rank2]:     with Popen(*popenargs, **kwargs) as process:\n[rank2]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank2]:   File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n[rank2]:     self._execute_child(args, executable, preexec_fn, close_fds,\n[rank2]:   File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n[rank2]:     raise child_exception_type(errno_num, err_msg, err_filename)\n[rank2]: FileNotFoundError: [Errno 2] No such file or directory: 'ethtool'\n[rank2]:[W1112 07:02:47.858450637 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())"
+    },
+    "3": {
+      "rank": 3,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 8,
+      "stderr_tail": "[rank3]: Traceback (most recent call last):\n[rank3]:   File \"/probe.py\", line 359, in <module>\n[rank3]:     main()\n[rank3]:   File \"/probe.py\", line 281, in main\n[rank3]:     ports_before = port_counters() if args.port_samples else None\n[rank3]:                    ^^^^^^^^^^^^^^^\n[rank3]:   File \"/probe.py\", line 41, in port_counters\n[rank3]:     output = subprocess.check_output(['ethtool', '-S', netdev.name], text=True, timeout=10)\n[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank3]:   File \"/usr/lib/python3.12/subprocess.py\", line 466, in check_output\n[rank3]:     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank3]:   File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n[rank3]:     with Popen(*popenargs, **kwargs) as process:\n[rank3]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n[rank3]:   File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n[rank3]:     self._execute_child(args, executable, preexec_fn, close_fds,\n[rank3]:   File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n[rank3]:     raise child_exception_type(errno_num, err_msg, err_filename)\n[rank3]: FileNotFoundError: [Errno 2] No such file or directory: 'ethtool'\n[rank3]:[W1112 07:02:47.337148978 ProcessGroupNCCL.cpp:1624] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())"
+    }
+  },
+  "passed": false
+}

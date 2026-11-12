@@ -1,0 +1,3 @@
+physical rank order (parent common.ring): spark-a -> spark-b -> spark-c -> spark-d -> spark-a
+live inventory matches configured fabric: MTU=9000, RoCE MTU=4096, GID index=3
+wrote /tmp/ring-audit-latest/fabric.json and mesh-up-<node>.sh / mesh-down-<node>.sh; runtime env remains parent-managed

@@ -1,0 +1,12 @@
+{
+  "tag": "spark-ds41f:x1112",
+  "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+  "deployment_commit": "rsync-be6268927d80ecc477145ca8fb235ed2",
+  "compile_jobs": 8,
+  "max_compile_jobs": null,
+  "nccl_compile_jobs": 4,
+  "smoke_cpu_limit": null,
+  "elapsed_seconds": 448,
+  "min_available_gib": 110.3,
+  "built_utc": "2026-11-12T04:49:51Z"
+}

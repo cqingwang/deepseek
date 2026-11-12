@@ -1,0 +1,57 @@
+{
+  "probe": "/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-12-official-main-x1112/run_collective_probe.py",
+  "image": "spark-ds41f:x1112",
+  "master_addr": "192.168.2.180",
+  "master_port": 29581,
+  "ranks": {
+    "3": {
+      "rank": 3,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 0,
+      "stderr_tail": "/usr/bin/python3: can't find '__main__' module in '/probe.py'"
+    },
+    "2": {
+      "rank": 2,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 0,
+      "stderr_tail": "/usr/bin/python3: can't find '__main__' module in '/probe.py'"
+    },
+    "1": {
+      "rank": 1,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 0,
+      "stderr_tail": "/usr/bin/python3: can't find '__main__' module in '/probe.py'"
+    },
+    "0": {
+      "rank": 0,
+      "returncode": 1,
+      "passed": false,
+      "transport": null,
+      "checks": 0,
+      "numerical_checks": 0,
+      "timing_count": 0,
+      "timings": [],
+      "json_records": 0,
+      "stderr_tail": "Traceback (most recent call last):\n  File \"/probe.py\", line 129, in <module>\n    main()\n  File \"/probe.py\", line 43, in main\n    init_distributed_environment(\n  File \"/opt/spark-ds41f/candidate/vllm/vllm/distributed/parallel_state.py\", line 2000, in init_distributed_environment\n    torch.distributed.init_process_group(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py\", line 83, in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_logger.py\", line 97, in wrapper\n    func_return = func(*args, **kwargs)\n                  ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/distributed_c10d.py\", line 1892, in init_process_group\n    store, rank, world_size = next(rendezvous_iterator)\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/rendezvous.py\", line 232, in _tcp_rendezvous_handler\n    store = _create_c10d_store(\n            ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/rendezvous.py\", line 199, in _create_c10d_store\n    return TCPStore(\n           ^^^^^^^^^\ntorch.distributed.DistStoreError: Timed out after 91 seconds waiting for clients. 1/4 clients joined."
+    }
+  },
+  "passed": false
+}

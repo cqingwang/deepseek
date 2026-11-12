@@ -1,0 +1,15 @@
+{
+  "deployment": "official-main-x1112-20261112",
+  "local_parent_commit": "4cb310c",
+  "deepseek_merge_commit": "a563669f755c200514b630951400bd515f450ae5",
+  "official_main_commit": "bbfe2618efbd3e2143363eb9262d1c7fb89e5460",
+  "image": "spark-ds41f:x1112",
+  "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+  "image_build_identity": "rsync-be6268927d80ecc477145ca8fb235ed2",
+  "runtime": "official config/cluster.json tp4-ring",
+  "topology": "4-node switchless ring A-B-C-D-A",
+  "served_models": [
+    "deepseek-v4.1-flash",
+    "deepseek-v4.1-flash-weightless"
+  ]
+}

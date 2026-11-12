@@ -1,0 +1,7 @@
+--- api ---
+2 ['deepseek-v4.1-flash', 'deepseek-v4.1-flash-weightless']
+--- nodes ---
+spark-a containers=deepseek-r0:Up About an hour  gpu_compute=1 memguard=active
+spark-b containers=deepseek-r1:Up About an hour  gpu_compute=1 memguard=inactive
+spark-c containers=deepseek-r2:Up About an hour  gpu_compute=1 memguard=inactive
+spark-d containers=deepseek-r3:Up About an hour  gpu_compute=1 memguard=inactive

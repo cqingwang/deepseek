@@ -1,0 +1,770 @@
+[New LWP 3307372]
+[New LWP 3304911]
+[New LWP 3304897]
+[New LWP 3304896]
+[New LWP 3304895]
+[New LWP 3304893]
+[New LWP 3304892]
+[New LWP 3304879]
+[New LWP 3304878]
+[New LWP 3304877]
+[New LWP 3304876]
+[New LWP 3304875]
+[New LWP 3304874]
+[New LWP 3304873]
+[New LWP 3304872]
+[New LWP 3304871]
+[New LWP 3304870]
+[New LWP 3304869]
+[New LWP 3304868]
+[New LWP 3304867]
+[New LWP 3304866]
+[New LWP 3304865]
+[New LWP 3304864]
+[New LWP 3304863]
+[New LWP 3304862]
+[New LWP 3304861]
+[New LWP 3304860]
+[New LWP 3304859]
+[New LWP 3304858]
+[New LWP 3304857]
+[New LWP 3304856]
+[New LWP 3304855]
+[New LWP 3304707]
+[New LWP 3304706]
+[New LWP 3304705]
+[New LWP 3304704]
+[New LWP 3304703]
+[New LWP 3304702]
+[New LWP 3304701]
+[New LWP 3304700]
+[New LWP 3304685]
+[New LWP 3304673]
+[New LWP 3304672]
+[New LWP 3304671]
+[New LWP 3304617]
+[New LWP 3304607]
+[New LWP 3304602]
+[New LWP 3304588]
+[New LWP 3304291]
+[New LWP 3304115]
+[New LWP 3304114]
+[New LWP 3304101]
+[New LWP 3304100]
+[New LWP 3304099]
+[New LWP 3304098]
+[New LWP 3304097]
+[New LWP 3304096]
+[New LWP 3304095]
+[New LWP 3304094]
+[New LWP 3304093]
+[New LWP 3304092]
+[New LWP 3303372]
+[New LWP 3301869]
+[New LWP 3301868]
+[New LWP 3301867]
+[New LWP 3301866]
+[New LWP 3301865]
+[New LWP 3301864]
+[New LWP 3301863]
+[New LWP 3301357]
+[New LWP 3301326]
+[New LWP 3301325]
+[New LWP 3301324]
+[New LWP 3301323]
+[New LWP 3301322]
+[New LWP 3301321]
+[New LWP 3301320]
+
+warning: Target and debugger are in different PID namespaces; thread lists and other data are likely unreliable.  Connect to gdbserver inside the container.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000e657cfbd8e94 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+
+Thread 78 (Thread 0xe65744f8f180 (LWP 3301320) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 77 (Thread 0xe65740f7f180 (LWP 3301321) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 76 (Thread 0xe6573cf6f180 (LWP 3301322) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 75 (Thread 0xe65738f5f180 (LWP 3301323) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 74 (Thread 0xe65734f4f180 (LWP 3301324) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 73 (Thread 0xe65730f3f180 (LWP 3301325) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 72 (Thread 0xe6572cf2f180 (LWP 3301326) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e657553cf69c in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/numpy/_core/../../numpy.libs/libscipy_openblas64_-128b20d9.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 71 (Thread 0xe6572343f180 (LWP 3301357) "cuda00006000019"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657cfabec90 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#2  0x0000e657cfb6cd90 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#3  0x0000e657cfaad968 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#4  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 70 (Thread 0xe656eaf5f180 (LWP 3301863) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 69 (Thread 0xe656e6f4f180 (LWP 3301864) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 68 (Thread 0xe656e2f3f180 (LWP 3301865) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 67 (Thread 0xe656def2f180 (LWP 3301866) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 66 (Thread 0xe656daf1f180 (LWP 3301867) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 65 (Thread 0xe656d6f0f180 (LWP 3301868) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 64 (Thread 0xe656d2eff180 (LWP 3301869) "python3"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e656edf83514 in blas_thread_server () from target:/usr/local/lib/python3.12/dist-packages/cv2/../opencv_python_headless.libs/libopenblasp-r0-e3ea6fd1.3.15.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 63 (Thread 0xe656bd2ef180 (LWP 3303372) "pt_tcpstore_uv"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65777fa99d4 in uv.io_poll () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65777f9b374 in uv_run () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#3  0x0000e657764f7244 in c10d::detail::LibUVStoreDaemon::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 62 (Thread 0xe6545b4ff180 (LWP 3304092) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 61 (Thread 0xe654534df180 (LWP 3304093) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 60 (Thread 0xe654574ef180 (LWP 3304094) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 59 (Thread 0xe6544f4cf180 (LWP 3304095) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 58 (Thread 0xe6544b4bf180 (LWP 3304096) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 57 (Thread 0xe654474af180 (LWP 3304097) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 56 (Thread 0xe6544349f180 (LWP 3304098) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 55 (Thread 0xe6543f48f180 (LWP 3304099) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 54 (Thread 0xe6543b47f180 (LWP 3304100) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 53 (Thread 0xe6543746f180 (LWP 3304101) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 52 (Thread 0xe6543345f180 (LWP 3304114) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 51 (Thread 0xe6542f44f180 (LWP 3304115) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 50 (Thread 0xe6542742f180 (LWP 3304291) "cuda-EvtHandlr"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657cfabec90 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#2  0x0000e657cfb6cd90 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#3  0x0000e657cfaad968 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#4  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 49 (Thread 0xe654035cf180 (LWP 3304588) "VLLM::Worker"):
+#0  0x0000e65800f21248 in read () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6545efd5650 in ibv_get_async_event () from target:/lib/aarch64-linux-gnu/libibverbs.so
+#2  0x0000e6577e974848 [PAC] in wrap_ibv_get_async_event (context=<optimized out>, event=event@entry=0xe654035ce768) at misc/ibvwrap.cc:140
+#3  0x0000e6577e9b5358 in ncclIbAsyncThreadMain (args=0xe6578095bb00 <ncclIbDevs>) at transport/net_ib/common.cc:114
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 48 (Thread 0xe653ff5bf180 (LWP 3304602) "VLLM::Worker"):
+#0  0x0000e65800f21248 in read () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6545efd5650 in ibv_get_async_event () from target:/lib/aarch64-linux-gnu/libibverbs.so
+#2  0x0000e6577e974848 [PAC] in wrap_ibv_get_async_event (context=<optimized out>, event=event@entry=0xe653ff5be768) at misc/ibvwrap.cc:140
+#3  0x0000e6577e9b5358 in ncclIbAsyncThreadMain (args=0xe6578095cc40 <ncclIbDevs+4416>) at transport/net_ib/common.cc:114
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 47 (Thread 0xe653fb5af180 (LWP 3304607) "VLLM::Worker"):
+#0  0x0000e65800f21248 in read () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6545efd5650 in ibv_get_async_event () from target:/lib/aarch64-linux-gnu/libibverbs.so
+#2  0x0000e6577e974848 [PAC] in wrap_ibv_get_async_event (context=<optimized out>, event=event@entry=0xe653fb5ae768) at misc/ibvwrap.cc:140
+#3  0x0000e6577e9b5358 in ncclIbAsyncThreadMain (args=0xe6578095dd80 <ncclIbDevs+8832>) at transport/net_ib/common.cc:114
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 46 (Thread 0xe653f759f180 (LWP 3304617) "VLLM::Worker"):
+#0  0x0000e65800f21248 in read () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6545efd5650 in ibv_get_async_event () from target:/lib/aarch64-linux-gnu/libibverbs.so
+#2  0x0000e6577e974848 [PAC] in wrap_ibv_get_async_event (context=<optimized out>, event=event@entry=0xe653f759e768) at misc/ibvwrap.cc:140
+#3  0x0000e6577e9b5358 in ncclIbAsyncThreadMain (args=0xe6578095eec0 <ncclIbDevs+13248>) at transport/net_ib/common.cc:114
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 45 (Thread 0xe653f358f180 (LWP 3304671) "VLLM::Worker"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577ea2e150 in poll (__timeout=<optimized out>, __nfds=<optimized out>, __fds=<optimized out>) at /usr/include/aarch64-linux-gnu/bits/poll2.h:39
+#2  rasThreadMain () at ras/ras.cc:614
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 44 (Thread 0xe6542b43f180 (LWP 3304672) "VLLM::Worker"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577e90c55c in poll (__timeout=500, __nfds=74, __fds=0x1923cad0) at /usr/include/aarch64-linux-gnu/bits/poll2.h:39
+#2  ncclProxyService (_args=0x16d78110) at proxy.cc:1780
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 43 (Thread 0xe653eb49f180 (LWP 3304673) "VLLM::Worker"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577e9032b8 in poll (__timeout=500, __nfds=1, __fds=0xe653eb49e758) at /usr/include/aarch64-linux-gnu/bits/poll2.h:39
+#2  ncclProxyServiceUDS (_args=0x16d78110) at proxy.cc:2000
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 42 (Thread 0xe653e53df180 (LWP 3304685) "VLLM::Worker"):
+#0  0x0000e65800f15c0c in sched_yield () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577e9050a0 in __gthread_yield () at /usr/include/aarch64-linux-gnu/c++/13/bits/gthr-default.h:693
+#2  std::this_thread::yield () at /usr/include/c++/13/bits/std_thread.h:366
+#3  ncclProxyProgress (proxyState_=0x16d78110) at proxy.cc:1005
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 41 (Thread 0xe653db29f180 (LWP 3304700) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 40 (Thread 0xe653d728f180 (LWP 3304701) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 39 (Thread 0xe653d327f180 (LWP 3304702) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 38 (Thread 0xe653cf26f180 (LWP 3304703) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 37 (Thread 0xe653cb25f180 (LWP 3304704) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 36 (Thread 0xe653c724f180 (LWP 3304705) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 35 (Thread 0xe6539ffff180 (LWP 3304706) "VLLM::Worker"):
+#0  0x0000e65800f29764 in syscall () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e657584abb8c in gomp_barrier_wait_end () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#2  0x0000e657584a91b8 in gomp_thread_start () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libgomp.so.1
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 34 (Thread 0xe6539bfef180 (LWP 3304707) "sparknet-proxy"):
+#0  0x0000e65800efbd90 in clock_nanosleep () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800f060bc in nanosleep () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e6545c622164 in proxy_main () from target:/opt/sparknet/roce/roce_proxy-256c711c72bc15fd.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 33 (Thread 0xe65397fdf180 (LWP 3304855) "ZMQbg/Reaper"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6570913e250 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#2  0x0000e65709160664 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#3  0x0000e65709189850 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#4  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 32 (Thread 0xe65393fcf180 (LWP 3304856) "ZMQbg/IO/0"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6570913e250 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#2  0x0000e65709160664 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#3  0x0000e65709189850 in ?? () from target:/usr/local/lib/python3.12/dist-packages/zmq/backend/cython/../../../pyzmq.libs/libzmq-97580724.so.5.2.5
+#4  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 31 (Thread 0xe6538ffbf180 (LWP 3304857) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 30 (Thread 0xe6538bfaf180 (LWP 3304858) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 29 (Thread 0xe65387f9f180 (LWP 3304859) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 28 (Thread 0xe65383f8f180 (LWP 3304860) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 27 (Thread 0xe6537ff7f180 (LWP 3304861) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 26 (Thread 0xe6537bf6f180 (LWP 3304862) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 25 (Thread 0xe65377f5f180 (LWP 3304863) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 24 (Thread 0xe65373f4f180 (LWP 3304864) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 23 (Thread 0xe6536ff3f180 (LWP 3304865) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 22 (Thread 0xe6536bf2f180 (LWP 3304866) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 21 (Thread 0xe65367f1f180 (LWP 3304867) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 20 (Thread 0xe65363f0f180 (LWP 3304868) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 19 (Thread 0xe6535feff180 (LWP 3304869) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 18 (Thread 0xe6535beef180 (LWP 3304870) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 17 (Thread 0xe65357edf180 (LWP 3304871) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 16 (Thread 0xe65353ecf180 (LWP 3304872) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 15 (Thread 0xe6534febf180 (LWP 3304873) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 14 (Thread 0xe6534beaf180 (LWP 3304874) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 13 (Thread 0xe65347e9f180 (LWP 3304875) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 12 (Thread 0xe65343e8f180 (LWP 3304876) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 11 (Thread 0xe6533fe7f180 (LWP 3304877) "pt_nccl_watchdg"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ac2900 in c10d::ProcessGroupNCCL::Watchdog::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65759ac4958 in c10d::ProcessGroupNCCL::Watchdog::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 10 (Thread 0xe6533be6f180 (LWP 3304878) "gloo_tcp_loop"):
+#0  0x0000e65800f2be74 in epoll_pwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65776a5567c in gloo::transport::tcp::Loop::run() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#2  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 9 (Thread 0xe65337e5f180 (LWP 3304879) "pt_nccl_heartbt"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec4d20 in pthread_cond_timedwait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65759ab71f8 in c10d::ProcessGroupNCCL::HeartbeatMonitor::runLoop() () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cuda.so
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 8 (Thread 0xe65333e4f180 (LWP 3304892) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 7 (Thread 0xe6532fe3f180 (LWP 3304893) "pt_gloo_runloop"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e65800247dc0 in std::condition_variable::wait(std::unique_lock<std::mutex>&) () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#3  0x0000e657764c6ab4 [PAC] in c10d::ProcessGroupGloo::runLoop(int) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 6 (Thread 0xe6532be2f180 (LWP 3304895) "VLLM::Worker"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577e90c55c in poll (__timeout=500, __nfds=74, __fds=0x16c91dc0) at /usr/include/aarch64-linux-gnu/bits/poll2.h:39
+#2  ncclProxyService (_args=0x167c8a40) at proxy.cc:1780
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 5 (Thread 0xe6532443f180 (LWP 3304896) "VLLM::Worker"):
+#0  0x0000e65800f20bdc in poll () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e6577e9032b8 in poll (__timeout=500, __nfds=1, __fds=0xe6532443e758) at /usr/include/aarch64-linux-gnu/bits/poll2.h:39
+#2  ncclProxyServiceUDS (_args=0x167c8a40) at proxy.cc:2000
+#3  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#5  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 4 (Thread 0xe6532042f180 (LWP 3304897) "VLLM::Worker"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e6577e904d3c in ncclProxyGetPostedOps (proxyState=proxyState@entry=0x167c8a40, added=added@entry=0xe6532042e830) at proxy.cc:854
+#3  0x0000e6577e905118 in ncclProxyProgress (proxyState_=0x167c8a40) at proxy.cc:997
+#4  0x0000e65800281ae0 in ?? () from target:/lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#6  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 3 (Thread 0xe653162ef180 (LWP 3304911) "VLLM::Worker"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ecd3cc in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x00000000005a55ec in PyThread_acquire_lock_timed ()
+#3  0x00000000005ed7bc [PAC] in ?? ()
+#4  0x00000000004cbe58 [PAC] in ?? ()
+#5  0x00000000004c37fc [PAC] in PyObject_Vectorcall ()
+#6  0x0000000000564354 [PAC] in _PyEval_EvalFrameDefault ()
+#7  0x00000000004c6de4 [PAC] in ?? ()
+#8  0x00000000005679d0 [PAC] in _PyEval_EvalFrameDefault ()
+#9  0x00000000004c6de4 [PAC] in ?? ()
+#10 0x00000000006e49a0 [PAC] in ?? ()
+#11 0x0000000000686250 [PAC] in ?? ()
+#12 0x0000e65800ec582c [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#13 0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 2 (Thread 0xe653041ef180 (LWP 3307372) "VLLM::Worker_TP"):
+#0  0x0000e65800ec1d6c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#1  0x0000e65800ec49f0 in pthread_cond_wait () from target:/lib/aarch64-linux-gnu/libc.so.6
+#2  0x0000e653c0082d80 in bounce_copy_worker () from target:/opt/spark-ds41f/native/direct_io/5448aae1f7de76d2cb1d516e/_direct_io_storage.cpython-312-aarch64-linux-gnu.so
+#3  0x0000e65800ec582c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#4  0x0000e65800f2bb4c in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+
+Thread 1 (Thread 0xe658011e46a0 (LWP 3301314) "VLLM::Worker_TP"):
+#0  0x0000e657cfbd8e94 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#1  0x0000e657cf9deedc in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#2  0x0000e657cfa18f64 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#3  0x0000e657d06d3dac in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#4  0x0000e657d06d41c8 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#5  0x0000e657cf9e9cfc in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#6  0x0000e657d06d27a8 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#7  0x0000e657cfaa4988 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#8  0x0000e657cfaa5038 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#9  0x0000e657cf9a5a20 in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#10 0x0000e657cfadccec in ?? () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#11 0x0000e657cfacccb4 in cuModuleLoadData () from target:/lib/aarch64-linux-gnu/libcuda.so.1
+#12 0x0000e65689ce3f54 in tvm::runtime::CUDAModuleNode::GetFunc(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) () from target:/usr/local/lib/python3.12/dist-packages/tilelang/lib/libtvm_runtime.so
+#13 0x0000e65689cda95c in ?? () from target:/usr/local/lib/python3.12/dist-packages/tilelang/lib/libtvm_runtime.so
+#14 0x0000e65689ce4810 in tvm::ffi::details::FunctionObjImpl<tvm::ffi::Function::FromPacked<tvm::runtime::detail::PackFuncVoidAddr_<0, tvm::runtime::CUDAWrappedFunc>(tvm::runtime::CUDAWrappedFunc, std::vector<tvm::runtime::detail::ArgConvertCode, std::allocator<tvm::runtime::detail::ArgConvertCode> > const&)::{lambda(tvm::ffi::PackedArgs, tvm::ffi::Any*)#1}&>(tvm::runtime::detail::PackFuncVoidAddr_<0, tvm::runtime::CUDAWrappedFunc>(tvm::runtime::CUDAWrappedFunc, std::vector<tvm::runtime::detail::ArgConvertCode, std::allocator<tvm::runtime::detail::ArgConvertCode> > const&)::{lambda(tvm::ffi::PackedArgs, tvm::ffi::Any*)#1}&)::{lambda(tvm::ffi::AnyView const*, int, tvm::ffi::Any*)#1}>::CppCall(tvm::ffi::FunctionObj const*, tvm::ffi::AnyView const*, int, tvm::ffi::Any*) () from target:/usr/local/lib/python3.12/dist-packages/tilelang/lib/libtvm_runtime.so
+#15 0x0000e65689ce2dcc in tvm::ffi::details::FunctionObjImpl<tvm::ffi::Function::FromPacked<tvm::runtime::detail::PackFuncVoidAddr_<0, tvm::runtime::CUDAWrappedFunc>(tvm::runtime::CUDAWrappedFunc, std::vector<tvm::runtime::detail::ArgConvertCode, std::allocator<tvm::runtime::detail::ArgConvertCode> > const&)::{lambda(tvm::ffi::PackedArgs, tvm::ffi::Any*)#1}&>(tvm::runtime::detail::PackFuncVoidAddr_<0, tvm::runtime::CUDAWrappedFunc>(tvm::runtime::CUDAWrappedFunc, std::vector<tvm::runtime::detail::ArgConvertCode, std::allocator<tvm::runtime::detail::ArgConvertCode> > const&)::{lambda(tvm::ffi::PackedArgs, tvm::ffi::Any*)#1}&)::{lambda(tvm::ffi::AnyView const*, int, tvm::ffi::Any*)#1}>::SafeCall(void*, TVMFFIAny const*, int, TVMFFIAny*) () from target:/usr/local/lib/python3.12/dist-packages/tilelang/lib/libtvm_runtime.so
+#16 0x0000e653c30e1df0 in __tvm_ffi_oneshot_allgather () from target:/cache/spark-ds41f/jit/tilelang/0.1.15_snapshot_35f15411cf3af0fc06a1cb0097215b1372a40464/linux-aarch64/kernels/1d694c5d568e5f3b5c307c3f8e9bda1f92b47a857c1a53d8e8ecf9f8520a436a/executable.so
+#17 0x0000e653c30e1e74 in __tvm_ffi_main () from target:/cache/spark-ds41f/jit/tilelang/0.1.15_snapshot_35f15411cf3af0fc06a1cb0097215b1372a40464/linux-aarch64/kernels/1d694c5d568e5f3b5c307c3f8e9bda1f92b47a857c1a53d8e8ecf9f8520a436a/executable.so
+#18 0x0000e656bf9e7ea8 in ?? () from target:/usr/local/lib/python3.12/dist-packages/tvm_ffi/lib/libtvm_ffi.so
+#19 0x0000e656bf9e7960 in ?? () from target:/usr/local/lib/python3.12/dist-packages/tvm_ffi/lib/libtvm_ffi.so
+#20 0x0000e656bf898c8c in ?? () from target:/usr/local/lib/python3.12/dist-packages/tvm_ffi/core.abi3.so
+#21 0x00000000004c512c in PyObject_Call ()
+#22 0x00000000005679d0 [PAC] in _PyEval_EvalFrameDefault ()
+#23 0x00000000004c4724 [PAC] in _PyObject_Call_Prepend ()
+#24 0x00000000005294d0 [PAC] in ?? ()
+#25 0x00000000004c512c [PAC] in PyObject_Call ()
+#26 0x00000000005679d0 [PAC] in _PyEval_EvalFrameDefault ()
+#27 0x00000000004c4724 [PAC] in _PyObject_Call_Prepend ()
+#28 0x00000000005294d0 [PAC] in ?? ()
+#29 0x00000000004c2c48 [PAC] in _PyObject_MakeTpCall ()
+#30 0x0000000000564354 [PAC] in _PyEval_EvalFrameDefault ()
+#31 0x00000000004c37fc [PAC] in PyObject_Vectorcall ()
+#32 0x0000e6577afe89f4 [PAC] in pybind11::detail::unpacking_collector<(pybind11::return_value_policy)1>::call(_object*) const () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#33 0x0000e6577b3cc1a8 in pybind11::object pybind11::detail::object_api<pybind11::handle>::operator()<(pybind11::return_value_policy)1, pybind11::detail::args_proxy, pybind11::detail::kwargs_proxy>(pybind11::detail::args_proxy&&, pybind11::detail::kwargs_proxy&&) const () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#34 0x0000e6577b794194 in torch::impl::dispatch::PythonKernelHolder::operator()(c10::OperatorHandle const&, c10::DispatchKeySet, std::vector<c10::IValue, std::allocator<c10::IValue> >*) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#35 0x0000e65775a982c8 in torch::autograd::VariableHooks::basic_autograd_not_implemented_fallback(c10::OperatorHandle const&, c10::DispatchKeySet, std::vector<c10::IValue, std::allocator<c10::IValue> >*) const () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#36 0x0000e657762e464c in c10::Dispatcher::callBoxed(c10::OperatorHandle const&, std::vector<c10::IValue, std::allocator<c10::IValue> >*) const [clone .isra.0] () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_cpu.so
+#37 0x0000e6577b4d8280 in torch::jit::invokeOperatorFromPython(c10::ArrayRef<std::shared_ptr<torch::jit::Operator> >, pybind11::args const&, pybind11::kwargs const&, std::optional<c10::DispatchKey>) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#38 0x0000e6577b4d88f8 in torch::jit::_get_operation_for_overload_or_packet(c10::ArrayRef<std::shared_ptr<torch::jit::Operator> >, c10::Symbol, pybind11::args const&, pybind11::kwargs const&, bool, std::optional<c10::DispatchKey>) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#39 0x0000e6577b4d8aec in torch::jit::_get_operation_for_overload_or_packet(std::vector<std::shared_ptr<torch::jit::Operator>, std::allocator<std::shared_ptr<torch::jit::Operator> > > const&, c10::Symbol, pybind11::args const&, pybind11::kwargs const&, bool, std::optional<c10::DispatchKey>) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#40 0x0000e6577b3ad0e8 in pybind11::cpp_function::initialize<torch::jit::initJITBindings(_object*)::{lambda(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#2}::operator()(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const::{lambda(pybind11::args const&, pybind11::kwargs const&)#1}, pybind11::object, pybind11::args const&, pybind11::kwargs const&, pybind11::name, pybind11::doc>(torch::jit::initJITBindings(_object*)::{lambda(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#2}::operator()(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const::{lambda(pybind11::args const&, pybind11::kwargs const&)#1}&&, pybind11::object (*)(pybind11::args const&, pybind11::kwargs const&), pybind11::name const&, pybind11::doc const&)::{lambda(pybind11::detail::function_call&)#1}::_FUN(pybind11::detail::function_call&) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#41 0x0000e6577ace7784 in pybind11::cpp_function::dispatcher(_object*, _object* const*, unsigned long, _object*) () from target:/usr/local/lib/python3.12/dist-packages/torch/lib/libtorch_python.so
+#42 0x0000000000503dac in ?? ()
+#43 0x00000000004c51d8 [PAC] in PyObject_Call ()
+#44 0x00000000005679d0 [PAC] in _PyEval_EvalFrameDefault ()
+#45 0x00000000004c4814 [PAC] in _PyObject_Call_Prepend ()
+#46 0x00000000005294d0 [PAC] in ?? ()
+#47 0x00000000004c2d00 [PAC] in _PyObject_MakeTpCall ()
+#48 0x0000000000564354 [PAC] in _PyEval_EvalFrameDefault ()
+#49 0x00000000004c4814 [PAC] in _PyObject_Call_Prepend ()
+#50 0x0000000000522ec4 [PAC] in ?? ()
+#51 0x000000000051e604 [PAC] in ?? ()
+#52 0x00000000004c512c [PAC] in PyObject_Call ()
+#53 0x00000000005679d0 [PAC] in _PyEval_EvalFrameDefault ()
+#54 0x00000000005626a4 [PAC] in PyEval_EvalCode ()
+#55 0x000000000059b6f0 [PAC] in PyRun_StringFlags ()
+#56 0x000000000067e514 [PAC] in PyRun_SimpleStringFlags ()
+#57 0x000000000068acd0 [PAC] in Py_RunMain ()
+#58 0x000000000068a7d8 [PAC] in Py_BytesMain ()
+#59 0x0000e65800e684c4 [PAC] in ?? () from target:/lib/aarch64-linux-gnu/libc.so.6
+#60 0x0000e65800e68598 in __libc_start_main () from target:/lib/aarch64-linux-gnu/libc.so.6
+#61 0x00000000005f6270 in _start ()
+[Inferior 1 (process 3301314) detached]

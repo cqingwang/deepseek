@@ -1,0 +1,48 @@
+{
+  "identity": {
+    "official_main": "bbfe2618efbd3e2143363eb9262d1c7fb89e5460",
+    "deepseek_merge_head": "a563669f755c200514b630951400bd515f450ae5",
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece"
+  },
+  "official_reference": {
+    "tp4_c1_prose_tps": 77.8,
+    "tp4_c2_prose_tps": null,
+    "tp4_c4_prose_tps": null,
+    "note": "The latest official README gives TP4 c1 prose through tps_by_style, but no TP4 c2/c4 prose value. Values from other protocols are not substituted."
+  },
+  "prose_daily_runs": {
+    "run-01": {
+      "c1": 72.03333333333333,
+      "c2": 105.1,
+      "c4": 144.6
+    },
+    "run-02": {
+      "c1": 71.3,
+      "c2": 106.7,
+      "c4": 145.86666666666667
+    }
+  },
+  "prose_daily_mean": {
+    "c1": 71.66666666666667,
+    "c2": 105.9,
+    "c4": 145.23333333333332
+  },
+  "prose_daily_delta_pct": {
+    "c1": -7.883,
+    "c2": null,
+    "c4": null
+  },
+  "frozen_prefill_verified_run_01": {
+    "32768": 8578.886028318835,
+    "131072": 8736.471392948388,
+    "262144": 8341.0511707379,
+    "524288": 7511.46093356127,
+    "1000000": 5993.058846317269
+  },
+  "rejected_omp1_c16": {
+    "control_omp8": 244.36666666666667,
+    "candidate_omp1": 238.2,
+    "delta_pct": -2.523
+  }
+}

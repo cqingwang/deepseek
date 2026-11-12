@@ -1445,6 +1445,11 @@ def command_build_image(args: argparse.Namespace) -> int:
             rendered += ["--build-arg", f"{key}={value}"]
         if os.environ.get("GITHUB_TOKEN"):
             rendered += ["--secret", "id=github_token,env=GITHUB_TOKEN"]
+        if os.environ.get("PIP_INDEX_URL"):
+            rendered += ["--build-arg", f"PIP_INDEX_URL={os.environ['PIP_INDEX_URL']}"]
+        for key in ("HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "no_proxy"):
+            if os.environ.get(key):
+                rendered += ["--build-arg", f"{key}={os.environ[key]}"]
         return rendered + [str(context / "empty")]
 
     if not args.apply:

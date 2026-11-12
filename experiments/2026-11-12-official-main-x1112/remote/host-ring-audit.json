@@ -1,0 +1,136 @@
+{
+  "ok": true,
+  "source": "spark/config.yaml common.ring + generated sparkring plan",
+  "generated": "spark/deepseek/experiments/2026-11-12-official-main-x1112/remote/host-ring-generated",
+  "nodes": {
+    "spark-a": {
+      "host": "192.168.2.180",
+      "rank": 0,
+      "service": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f0.service",
+        "spark-ring-mesh-marker@roceP2p1s0f1.service"
+      ],
+      "expected_routes": {
+        "10.100.241.9/32": "10.100.241.9 via 10.100.241.13 dev enP2p1s0f1np1 src 10.100.241.14",
+        "10.251.20.6/32": "10.251.20.6 via 10.251.20.2 dev enp1s0f0np0 src 10.251.20.1"
+      },
+      "tc_rules": {
+        "enP2p1s0f0np0:49159": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc007 \n  dst_mac 4c:bb:47:80:f1:46\n  src_mac 4c:bb:47:80:f3:2c\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val abb40000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen\n\tindex 1 ref 1 bind 1 installed 237260 sec used 237260 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enP2p1s0f1np1:49165": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00d \n  dst_mac 4c:bb:47:80:f1:47\n  src_mac 4c:bb:47:80:ab:b4\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f32c0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen\n\tindex 2 ref 1 bind 1 installed 237260 sec used 237260 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-a.sh": "feb18b638862f2023570a978cab0cc2ca75c273ef25a785ebc19515ca3e3b025",
+        "/opt/spark-ring-mesh/mesh-down-spark-a.sh": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241",
+        "/opt/spark-ring-mesh/mesh-up.sh": "feb18b638862f2023570a978cab0cc2ca75c273ef25a785ebc19515ca3e3b025",
+        "/opt/spark-ring-mesh/mesh-down.sh": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "feb18b638862f2023570a978cab0cc2ca75c273ef25a785ebc19515ca3e3b025",
+        "mesh-down": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-b": {
+      "host": "192.168.2.161",
+      "rank": 1,
+      "service": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f1.service",
+        "spark-ring-mesh-marker@roceP2p1s0f0.service"
+      ],
+      "expected_routes": {
+        "10.100.241.13/32": "10.100.241.13 via 10.100.241.1 dev enP2p1s0f0np0 src 10.100.241.2",
+        "10.251.20.10/32": "10.251.20.10 via 10.251.20.6 dev enp1s0f1np1 src 10.251.20.5"
+      },
+      "tc_rules": {
+        "enp1s0f0np0:49152": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc000 \n  dst_mac 4c:bb:47:80:f3:28\n  src_mac 4c:bb:47:80:f1:42\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val b20d0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen\n\tindex 1 ref 1 bind 1 installed 237260 sec used 237260 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enp1s0f1np1:49162": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00a \n  dst_mac 4c:bb:47:80:f3:29\n  src_mac 4c:bb:47:80:b2:0d\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 237260 sec used 237260 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f1420000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen\n\tindex 2 ref 1 bind 1 installed 237260 sec used 237260 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-b.sh": "3c5ac1bcd4e63989193cb229e3e80dbd72e29b176c0ec6b25a4f61ca9691cf25",
+        "/opt/spark-ring-mesh/mesh-down-spark-b.sh": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778",
+        "/opt/spark-ring-mesh/mesh-up.sh": "3c5ac1bcd4e63989193cb229e3e80dbd72e29b176c0ec6b25a4f61ca9691cf25",
+        "/opt/spark-ring-mesh/mesh-down.sh": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "3c5ac1bcd4e63989193cb229e3e80dbd72e29b176c0ec6b25a4f61ca9691cf25",
+        "mesh-down": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-c": {
+      "host": "192.168.2.102",
+      "rank": 2,
+      "service": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f1.service",
+        "spark-ring-mesh-marker@roceP2p1s0f0.service"
+      ],
+      "expected_routes": {
+        "10.100.241.14/32": "10.100.241.14 via 10.100.241.10 dev enP2p1s0f0np0 src 10.100.241.9",
+        "10.251.20.1/32": "10.251.20.1 via 10.251.20.5 dev enp1s0f1np1 src 10.251.20.6"
+      },
+      "tc_rules": {
+        "enp1s0f0np0:49166": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00e \n  dst_mac 4c:bb:47:80:b2:0c\n  src_mac 4c:bb:47:80:ab:af\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 237262 sec used 237261 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 237262 sec used 237261 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f3290000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen\n\tindex 2 ref 1 bind 1 installed 237262 sec used 237261 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enp1s0f1np1:49156": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc004 \n  dst_mac 4c:bb:47:80:b2:0d\n  src_mac 4c:bb:47:80:f3:29\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 237262 sec used 237262 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 237262 sec used 237262 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val abaf0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen\n\tindex 1 ref 1 bind 1 installed 237262 sec used 237262 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-c.sh": "015dd99c15b911fb0e3c8e3c4c9db3d9150f22c31f687eeddf52dba3c292238d",
+        "/opt/spark-ring-mesh/mesh-down-spark-c.sh": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e",
+        "/opt/spark-ring-mesh/mesh-up.sh": "015dd99c15b911fb0e3c8e3c4c9db3d9150f22c31f687eeddf52dba3c292238d",
+        "/opt/spark-ring-mesh/mesh-down.sh": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "015dd99c15b911fb0e3c8e3c4c9db3d9150f22c31f687eeddf52dba3c292238d",
+        "mesh-down": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-d": {
+      "host": "192.168.2.238",
+      "rank": 3,
+      "service": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f0.service",
+        "spark-ring-mesh-marker@roceP2p1s0f1.service"
+      ],
+      "expected_routes": {
+        "10.100.241.2/32": "10.100.241.2 via 10.100.241.14 dev enP2p1s0f1np1 src 10.100.241.13",
+        "10.251.20.5/32": "10.251.20.5 via 10.251.20.9 dev enp1s0f0np0 src 10.251.20.10"
+      },
+      "tc_rules": {
+        "enP2p1s0f0np0:49161": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc009 \n  dst_mac 4c:bb:47:80:ab:b3\n  src_mac 4c:bb:47:80:b2:10\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 237265 sec used 7119 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 22530 bytes 189 pkt (dropped 0, overlimits 0 requeues 0) \n\tSent software 0 bytes 0 pkt\n\tSent hardware 22530 bytes 189 pkt\n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 237265 sec used 7119 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f1470000 mask 0000ffff\n\tAction statistics:\n\tSent 22530 bytes 189 pkt (dropped 0, overlimits 0 requeues 0) \n\tSent software 0 bytes 0 pkt\n\tSent hardware 22530 bytes 189 pkt\n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen\n\tindex 2 ref 1 bind 1 installed 237265 sec used 7119 sec\n\tAction statistics:\n\tSent 22530 bytes 189 pkt (dropped 0, overlimits 0 requeues 0) \n\tSent software 0 bytes 0 pkt\n\tSent hardware 22530 bytes 189 pkt\n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enP2p1s0f1np1:49155": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc003 \n  dst_mac 4c:bb:47:80:ab:b4\n  src_mac 4c:bb:47:80:f1:47\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 237265 sec used 237265 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 237265 sec used 237265 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val b2100000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen\n\tindex 1 ref 1 bind 1 installed 237265 sec used 237265 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-d.sh": "ac14794161cd0ac0f2ac58bc64b097155a6e6b444746252cdd65eb712d556e23",
+        "/opt/spark-ring-mesh/mesh-down-spark-d.sh": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3",
+        "/opt/spark-ring-mesh/mesh-up.sh": "ac14794161cd0ac0f2ac58bc64b097155a6e6b444746252cdd65eb712d556e23",
+        "/opt/spark-ring-mesh/mesh-down.sh": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "ac14794161cd0ac0f2ac58bc64b097155a6e6b444746252cdd65eb712d556e23",
+        "mesh-down": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2caad101b54013f194fa75464bda9c02e916179ddca2a31c9262ee7a169320d8",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    }
+  },
+  "failures": [],
+  "official_alignment": {
+    "fabric": "cabled four-node ring A-B-C-D-A with two PCIe paths per neighbour",
+    "transport": "oneshot-ring4",
+    "mtu": 9000,
+    "roce_mtu": 4096,
+    "gid_index": 3,
+    "site_address_divergence": "Official node-map convention uses per-cable /24 subnets. This site's parent SSOT intentionally uses point-to-point /30 links; live inventory matches the parent /30 endpoints and uses NCCL_IB_SUBNET_PREFIX_LEN=30."
+  }
+}
