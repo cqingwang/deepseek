@@ -1,0 +1,47 @@
+{
+  "nodes": {
+    "spark-a": "192.168.2.180",
+    "spark-b": "192.168.2.161",
+    "spark-c": "192.168.2.102",
+    "spark-d": "192.168.2.238"
+  },
+  "kernel": "7.0.0-1019-nvidia-64k",
+  "page_size_bytes": 65536,
+  "cpu_governor": "performance",
+  "transparent_hugepage": "never",
+  "vm_min_free_kbytes": 45166,
+  "swap": "/swap-64k.img 16G active",
+  "memory_saver": "dgx-spark-memory-saver/0.4.1 installed on the 64 KiB kernel",
+  "ring": {
+    "layout": "/30",
+    "link_speed_mb_s": 200000,
+    "mtu": 9000,
+    "roce_mtu": 4096,
+    "gid_index": 3,
+    "mesh_service": "active on all four nodes",
+    "active_markers_per_node": 2,
+    "host_ring_audit": "ok=true"
+  },
+  "container_runtime": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "running_on_all_ranks": true,
+    "oom_killed": false,
+    "restart_count": 0,
+    "steady_memguard": "active on all four nodes",
+    "api_models_http": 200
+  },
+  "official_requirement_deltas": {
+    "control_plane": "Wi-Fi wlP9s9 remains in use; official doctor warns this can add control-plane tail latency",
+    "fan_control": {
+      "status": "reverted to absent after controlled probe",
+      "attempted_version": "v0.1.4",
+      "result": "module built and loaded, but EC/FF-A probe returned -EBADMSG and refused to create dgx_ec_fan_floor",
+      "acpi_fallback": "two ACPI Fan cooling devices report max_state=100, but setting 0 -> 100 for 15 seconds did not change fan RPM; restored 0/0",
+      "fleet_bios": "5.36_0ACUM028 / 2026-09-04",
+      "board": "P4242",
+      "official_significance": "bench-only fan-floor precondition, not a serving requirement"
+    },
+    "base_image": "org.opencontainers.image.base.digest and the remote vllm base RepoDigest both equal sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf"
+  }
+}

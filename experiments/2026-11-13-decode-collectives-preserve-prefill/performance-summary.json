@@ -1,0 +1,54 @@
+{
+  "identity": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece"
+  },
+  "short_prose": {
+    "protocol": "208 official prose prompts; 10s warmup + 30s + 3 windows; 2 runs",
+    "verified_8x8_cuda64_ag8m_qps2": {
+      "c1": 69.65,
+      "c2": 104.06666666666666,
+      "c4": 142.16666666666669
+    },
+    "official_coll_4x4_cuda32_ag8m_qps2": {
+      "c1": {
+        "runs": [69.53333333333333, 67.86666666666667],
+        "mean": 68.7
+      },
+      "c2": {
+        "runs": [103.10000000000001, 103.39999999999999],
+        "mean": 103.25
+      },
+      "c4": {
+        "runs": [143.0, 140.33333333333334],
+        "mean": 141.66666666666669
+      }
+    },
+    "arm_delta_pct": {
+      "c1": -1.3639626704953334,
+      "c2": -0.7847533632286963,
+      "c4": -0.3516998827667095
+    }
+  },
+  "live_contract": {
+    "ok": true,
+    "env_keys": 86,
+    "cuda_device_max_connections": 32,
+    "nccl_channels": 4,
+    "allgather_max_bytes": 8388608,
+    "nccl_ib_qps_per_connection": 2,
+    "max_num_batched_tokens": 65520,
+    "long_prefill_token_threshold": 65424
+  },
+  "target_policy_collective_probe": {
+    "runtime_proxy": {
+      "max_gather_bytes": 8388608,
+      "slot_bytes": 8388608,
+      "max_size": 2097152,
+      "dispatch_max_bytes": 2097152
+    },
+    "geomean_slowdown_vs_official_1107_pct": 16.412788149904635,
+    "conclusion": "the 8 MiB all-gather env is consumed and enlarges the runtime slot, but does not explain the collective gap"
+  },
+  "decision": "reject CUDA32 + NCCL 4/4; restore CUDA64 + NCCL 8/8 verified profile"
+}

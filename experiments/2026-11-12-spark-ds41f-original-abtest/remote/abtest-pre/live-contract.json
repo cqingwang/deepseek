@@ -1,0 +1,148 @@
+{
+  "ok": true,
+  "image": "spark-ds41f:x1112-original",
+  "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+  "nodes": {
+    "0": {
+      "host": "192.168.2.180",
+      "container_id": "c14cc1c5e589b923a43da8350e35f1bf2c1f96ec4d0b44ae14a5fb117b7f300f",
+      "image": "spark-ds41f:x1112-original",
+      "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+      "env_keys": 85,
+      "argv_tokens": 83,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/blobs": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/home/chan/projects/spark-ds41f/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        },
+        "/models": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        }
+      }
+    },
+    "1": {
+      "host": "192.168.2.161",
+      "container_id": "ce6d0704fc589a801c5b53544ae8980ee2341ce2932f2173c3091cdd7476deff",
+      "image": "spark-ds41f:x1112-original",
+      "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/models": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/blobs": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/home/chan/projects/spark-ds41f/cache",
+          "readonly": false
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        }
+      }
+    },
+    "2": {
+      "host": "192.168.2.102",
+      "container_id": "cf5544de7b84e17972206b22fff7de255215d9b01b3927ee6ce11eff3336596c",
+      "image": "spark-ds41f:x1112-original",
+      "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/models": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/blobs": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/home/chan/projects/spark-ds41f/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        }
+      }
+    },
+    "3": {
+      "host": "192.168.2.238",
+      "container_id": "a2e48f9bba97eaca6427a5f6ae116d8511ab6ae181e1683931a7605195199615",
+      "image": "spark-ds41f:x1112-original",
+      "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/models": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/blobs": {
+          "source": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/home/chan/projects/spark-ds41f/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        }
+      }
+    }
+  },
+  "failures": []
+}

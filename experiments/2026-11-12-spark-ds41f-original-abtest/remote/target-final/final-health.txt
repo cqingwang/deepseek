@@ -1,0 +1,20 @@
+===== target final health =====
+192.168.2.180:
+status=running oom=false restart=0 image=spark-ds41f:x1112
+1088712 bash /opt/spark/deepseek/scripts/memguard.sh
+active
+2000
+60000
+api=200
+192.168.2.161:
+status=running oom=false restart=0 image=spark-ds41f:x1112
+411284 bash /opt/spark/deepseek/scripts/memguard.sh
+active
+192.168.2.102:
+status=running oom=false restart=0 image=spark-ds41f:x1112
+388327 bash /opt/spark/deepseek/scripts/memguard.sh
+active
+192.168.2.238:
+status=running oom=false restart=0 image=spark-ds41f:x1112
+382387 bash /opt/spark/deepseek/scripts/memguard.sh
+active

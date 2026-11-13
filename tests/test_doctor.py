@@ -1290,7 +1290,7 @@ class NewUserOnboardingTest(unittest.TestCase):
 
     def test_kernel_profile_mismatch_warns_instead_of_failing(self) -> None:
         policy = spark.read_json("config/kernel-trial.json")
-        profile = {"release": policy["candidate"], "page_size": 65536, "memory_saver_required": True}
+        profile = {"release": policy["stable"], "page_size": 65536, "memory_saver_required": True}
         data = {"kernel": "7.0.0-1024-nvidia", "page_size": 4096, "driver": "580.142"}
         findings = [spark.Warn(p) for p in spark.kernel_readiness.profile_problems("dgx1", data, profile, policy)]
         errors, warnings = spark.split_findings(findings)
@@ -1303,7 +1303,7 @@ class NewUserOnboardingTest(unittest.TestCase):
             "sp1: missing or empty /boot/vmlinuz-7.0.0-1019-nvidia-64k",
             "sp2: serving profile recommends 7.0.0-1019-nvidia-64k / 65536-byte pages; running '6.17.0-1019-nvidia' / 4096",
             "sp1: memory-saver DKMS 0.1.3 is missing or not installed for 7.0.0-1019-nvidia-64k",
-            "sp2: candidate UVM does not select the expected memory-saver DKMS module",
+            "sp2: stable UVM does not select the expected memory-saver DKMS module",
             "sp1: 64 KiB swap or boot memory service is not active",
             "sp1: nvme0 sleeps in PS3 (11 ms to wake) after 100 ms idle",
             "sp1: NVMe interrupt coalescing is on (nvme0=0x00000107)",

@@ -1,0 +1,42 @@
+
+== spark-b (rank 1) ==
+host	spark-b
+kernel	7.0.0-1019-nvidia-64k
+pagesize	65536
+driver	580.178.04
+os_meta	missing
+kho	yes
+uvm_pack	Y
+swap_64k	yes
+swap_active	yes
+min_free	45166
+thp	yes
+kernel_memory	active
+kernel_memory_enabled	enabled
+modeset	Y
+modeset_override	absent
+default_target	multi-user.target
+display_manager	inactive
+secure_boot	SecureBoot disabled 
+fan_dkms	
+fan_service	absent
+fan_module	absent
+fan_cooling_device	0
+mem_saver_dkms	dgx-spark-memory-saver/0.4.1, 7.0.0-1019-nvidia-64k, aarch64: installed (Original modules exist)
+grub_pin	yes
+sudo	yes
+kho_package	installed
+nosnap_pin	yes
+bt_profiles	disable-installed
+host_recovery	pass
+containers	
+package	linux-image-7.0.0-1019-nvidia-64k	7.0.0-1019.19~24.04.2
+package	linux-modules-7.0.0-1019-nvidia-64k	7.0.0-1019.19~24.04.2
+package	linux-headers-7.0.0-1019-nvidia-64k	7.0.0-1019.19~24.04.2
+package	linux-tools-7.0.0-1019-nvidia-64k	7.0.0-1019.19~24.04.2
+package	linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k	7.0.0-1019.19~24.04.2+2
+WARN: dgx-spark-ota-update-meta=missing; terminal-only targeted profile does not install it
+WARN: snapd remains pinned by /etc/apt/preferences.d/nosnap.pref
+WARN: Bluetooth profile package state: disable-installed
+WARN: fan-floor control is absent; serving does not require it, but benchmark pre-cooling is unavailable
+PASS: host preparation matches the 64K profile

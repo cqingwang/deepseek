@@ -1074,11 +1074,11 @@ The first candidate on frozen candidate-54 (owner, 2026-11-11): six of the owner
 arenas from whole 2 MiB blocks, L3-aware CPU placement; it contains #1008), #1096 (B12X removed), #989 and #982 Part A
 (sparknet multi-stage collectives and PDL chaining), #974 (the CUDA 13.5.37 toolchain, selected per lock since
 #1135) and, from 2026-11-12, #1145 (the direct loader accepts the TP3 display carve-out under CUDA 13.5's compat
-driver). Its control, `no974/`, is the same build on CUDA 13.0.2. Marks, sources and the verification plan are in its
-README.
+driver), and #738 (GLP Spec v3 runtime; msuiche's, included on the owner's instruction). Its control, `no974/`, is the
+same build on CUDA 13.0.2. Marks, sources and the verification plan are in its README.
 
-- **Series:** [candidate-55/vllm/series](candidate-55/vllm/series) (`0001..0804`, 677 patches; `patch_head`
-  `3987ee2f`, `expected_tree` `e8c20f54`, with #1134 at `6757c7a1`); sparknet `0001..0003` on `1fd6a1fb` (tree
+- **Series:** [candidate-55/vllm/series](candidate-55/vllm/series) (`0001..0805`, 678 patches; `patch_head`
+  `d6d4319e`, `expected_tree` `8aaae3df`, with #1134 at `6757c7a1` and #738's `0805`); sparknet `0001..0003` on `1fd6a1fb` (tree
   `e06f6a06`).
 - **Status:**
   - The first build (tree `980e3812`, images `8793529c` and the control's `f870f811`) is superseded. Its release
@@ -1088,7 +1088,20 @@ README.
     prefill 3.25% slower, and the control showed the same. No switched boot reached ready: sp1's memguard stopped
     `tp4-switched` (#1134's `0800` on 4 KiB pages), and `tp3-switched` failed at weight load (#974's compat driver
     with the TP3 carve-out).
-  - #1134 at `6757c7a1` and #1145 are folded in, and the third build is next.
+  - The third build (tree `e8c20f54`, #1134 at `6757c7a1` and #1145; images `ad905a6d` and the control's
+    `1d02f07b`) passed its release tests, and every boot reached ready on all three testbeds. Every gate gave
+    candidate-54's hashes, TP4 and TP3. Against candidate-54's recorded runs (cross-session):
+    - c1 decode is 1.63% faster at `tp4-ring` and 2.35% faster at `tp4-switched`.
+    - At `tp4-ring`, the grid is 0.67% slower and 256K prefill 3.37% slower; the control shows the 256K
+      regression too.
+    - At `tp4-switched`, the grid is 1.11% slower and prefill the same.
+    - At `tp3-switched`, the grid is 2.29% faster and `stall-3` 1.32% slower.
+    - Against the control at `tp4-ring`, everything is the same.
+    - The own marks of #974, #1134, #989 and #982 are not yet run
+      ([receipts/third-build](candidate-55/receipts/third-build/README.md)).
+  - #738 is folded in as `0805` (tree `8aaae3df`), with a GLP-27 qualification arm at `tp4-ring`. Every measured
+    arm keeps GLP-39. GLP-39's steered replies were recorded on the third build as #738's reference. The fourth
+    build is next.
 
 ## Candidates 55-58 (removed 2026-11-11)
 

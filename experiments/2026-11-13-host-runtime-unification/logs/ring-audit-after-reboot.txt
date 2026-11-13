@@ -1,0 +1,9 @@
+{
+  "ok": false,
+  "out": "/tmp/ring-audit-after-host-unify.json",
+  "failures": [
+    "spark-a: missing live route 10.100.241.9/32",
+    "spark-a: missing live route 10.251.20.6/32",
+    "spark-b: missing live route 10.251.20.10/32"
+  ]
+}

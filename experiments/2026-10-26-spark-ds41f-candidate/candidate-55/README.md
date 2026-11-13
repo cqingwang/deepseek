@@ -3,8 +3,9 @@
 The first candidate on frozen [candidate-54](../candidate-54/README.md) (tag `candidate-54`): six of the owner's PRs
 that change the platform under the model rather than one kernel. Chosen by the owner on 2026-11-11 ("check 1134 and
 include the cuda 13.5 setup for candidate-55", "also add the b12x removal", "also add the sparknet rework PR": "both
-#989 and #982"), with #1134's new head and #1145 added on 2026-11-12 ("Yes, rebuild"). It is a candidate, not a
-merged base: verified against candidate-54's recorded runs, not release-qualified.
+#989 and #982"), with #1134's new head and #1145 added on 2026-11-12 ("Yes, rebuild"), and #738's GLP Spec v3 runtime
+added the same day ("prepare the GLP update into candidate-55"). It is a candidate, not a merged base: verified
+against candidate-54's recorded runs, not release-qualified.
 
 | PR | What | Carried as |
 | --- | --- | --- |
@@ -14,11 +15,21 @@ merged base: verified against candidate-54's recorded runs, not release-qualifie
 | #989 | sparknet: one persistent multi-stage kernel per collective, 8 thread blocks, no single-slot cap, so SP prefill collectives up to 16 MiB stay on sparknet | sparknet `0002` |
 | #982 | sparknet: PDL chaining of the four one-shot collectives (Part A) | sparknet `0003` (re-placed in #989's stage loop); vLLM `0803` (its PDL-chain test entry) |
 | #974 | CUDA 13.5.37 toolchain (nvcc/ptxas, cudart) and cuBLASLt 13.10.0.20 | `sources.cuda_toolkit` in this lock (hash-locked debs) |
+| #738 | GLP's reader takes Spec v3 (`hc_fold_pre_engram`) beside Spec v1; a Spec v3 vector folds the stream mean and projects each covered layer's attention write. A Spec v1 vector (GLP-39) steers as before | vLLM `0805` (rebased on candidate-55, [receipts/glp-rebase](receipts/glp-rebase/README.md)) |
 
 ## Selection
 
-- **Authors:** every PR is christopherowen's, and every patch's `From:` is Christopher Owen's. #1134's `0800` at
-  `37a7f0ac` read `test <test@example.com>`; at `6757c7a1` it is Christopher Owen's.
+- **Authors:** every PR but #738 is christopherowen's, and every other patch's `From:` is Christopher Owen's. #1134's
+  `0800` at `37a7f0ac` read `test <test@example.com>`; at `6757c7a1` it is Christopher Owen's.
+- **#738 is an exception to the owner-only rule, on the owner's instruction** (2026-11-12: "prepare the GLP update
+  into candidate-55"). #738 is msuiche's PR, merged to `main` as an experiment folder
+  ([2026-10-31-glp-specv3-fold-steering](../../2026-10-31-glp-specv3-fold-steering/README.md)), and its patch's
+  `From:` is Matt Suiche, co-authored by Christopher Owen. `0805` keeps that authorship.
+- **#738 is carried as its patch:** `0805`, rebased by hand in two `nvidia/model.py` hunks. Its GLP-27 profiles are
+  replaced by [glp27-tp4.json](glp27-tp4.json), which extends this candidate's `tp4.json`.
+- **#985 is not carried.** It switches the default vector to GLP-27 in `config/cluster.json`, which `spark-ds41f-1107`'s
+  image cannot read. Every measured arm here keeps GLP-39, and GLP-27 runs on a qualification arm only. The switch
+  belongs in the promotion commit of a release whose image reads Spec v3.
 - **#1134 is carried in part:** its vLLM and sparknet patches only, at head `6757c7a1` (owner, 2026-11-12: "Yes,
   rebuild").
   - **This head's `0800`** replaces the one of `37a7f0ac`, which replaced the one first carried (heads `2d0c6c0b` and
@@ -53,8 +64,8 @@ merged base: verified against candidate-54's recorded runs, not release-qualifie
 
 - vLLM ([vllm/series](vllm/series)): candidate-54's 672 patches by relative path, then `0800`, `0801` (#1134's files,
   unchanged), `0802` (#1096 rebased, [receipts/b12x-rebase](receipts/b12x-rebase/README.md)), `0803` (#982's test
-  entry) and `0804` (#1145's file, unchanged). 677 patches, `patch_head` `3987ee2f`, `expected_tree` `e8c20f54`,
-  `patchset_sha256` `6d17c16f`.
+  entry), `0804` (#1145's file, unchanged) and `0805` (#738 rebased, [receipts/glp-rebase](receipts/glp-rebase/README.md)).
+  678 patches, `patch_head` `d6d4319e`, `expected_tree` `8aaae3df`, `patchset_sha256` `6fdf03dc`.
 - sparknet ([sparknet/series](sparknet/series)) on `1fd6a1fb`: `0001` (#1134), `0002` (#989), `0003` (#982 Part A,
   [receipts/sparknet-stack](receipts/sparknet-stack/README.md)). `patch_head` `1fdf8dc7`, `expected_tree` `e06f6a06`,
   `patchset_sha256` `60bb1942`.
@@ -62,8 +73,8 @@ merged base: verified against candidate-54's recorded runs, not release-qualifie
   debs, 1.51 GB). Every other source is candidate-54's.
 - Recorded by `bin/spark build prepare --lock` on dgx4 for both locks (the same vLLM and sparknet trees), the heads
   copied into each `upstreams.lock.json`; the 23 debs downloaded and verified against the lockfile there. Recorded
-  again for #1134 at `37a7f0ac` (vLLM tree `ed91c273`), and for #1134 at `6757c7a1` with #1145 (tree `e8c20f54`).
-  Both times a `git am` replay on dgx3 gives the same tree. The provenance, SHA-256 and author of each patch are in
+  again for #1134 at `37a7f0ac` (vLLM tree `ed91c273`), for #1134 at `6757c7a1` with #1145 (tree `e8c20f54`), and with
+  #738's `0805` (tree `8aaae3df`). Each time a `git am` replay on dgx3 gives the same tree. The provenance, SHA-256 and author of each patch are in
   [receipts/selection.json](receipts/selection.json).
 - **What #1096 changes on the serving path:** one TileLang kernel, `engram_resident_lookup_kernel`, whose row bound
   is now `0 <= n_tok <= tokens` (bit-identical inside it, recompiled); the rest is renames, dead fields, the deleted
@@ -85,6 +96,7 @@ unchanged. The control can: it must give candidate-54's TP4 hashes `18d61961`/`d
 | #1096 | Its release-test selection passes; no B12X module is imported at startup | Inert: the control's gate gives candidate-54's hashes; time to ready not worse (three startup RPC rounds skipped) |
 | #989 | Its `bench_pipelined_collectives.py` on sp1..sp4 (TP4) and sp1..sp3 (TP3): collectives of 4-16 MiB faster than PyNCCL beyond the interval, outputs bit-exact | Prefill at 32K and 256K not worse at `tp4-ring` and `tp4-switched` |
 | #982 | Its `bench_pdl_direct_stage.py` chains on sp1..sp4, Part A only: chain time at M=1..32 faster beyond the interval; the PDL-chain source test passes | The gate on 12 boots at `tp4-ring` and the c1 decision check: every boot identical. #982 makes more graph edges programmatic, the class of hazard `0799` fixed |
+| #738 (declared 2026-11-12, before the fourth build) | Its suite passes in the release tests: the GLP kernel and model tests, `glp_steer_write`'s PDL-chain entry, the weightless, CED and SP-prefill model tests. The image's reader accepts GLP-39 and GLP-27 on the head (#1149's GLP reader check in `cluster start`'s preflight, at the boots of `tp4.json` and `glp27-tp4.json`) | **Spec v1 unchanged:** GLP-39's steered replies ([glp39-steered-tp4.json](glp39-steered-tp4.json), `dual_probe.py`) identical in token IDs and log probabilities to the third build's on both boots: steered `739b8abc`, stock `9872053e` ([dual_replies.py](dual_replies.py)). **Stock unchanged:** every gate gives candidate-54's hashes with GLP-39 configured, and [qualify-glp27-tp4.json](qualify-glp27-tp4.json)'s gate runs give them with GLP-27 configured. **GLP-27 qualified at `tp4-ring`:** every `dual_probe.py` check passes on both boots; its steered speed and AdvBench rates are recorded, not gated |
 | #1145 (declared 2026-11-12, before the third build) | Its test (`test_external_dmabuf_carveout_loads_and_rejects_out_of_bounds`) passes where `/dev/dri/card0` exists, and the release tests pass | Every `tp3-switched` boot loads its weights (no `batch destination exceeds CUDA device allocation`); inert at `tp4-ring`, where the carve-out is off: the gate gives candidate-54's hashes |
 
 ## Verification
@@ -96,6 +108,14 @@ unchanged. The control can: it must give candidate-54's TP4 hashes `18d61961`/`d
 - **c1 decision check:** 4 boots at `tp4-ring` and `tp4-switched`.
 - **Screens:** two boots against candidate-54's recorded screens
   ([candidate-54/receipts/references](../candidate-54/receipts/references), `candidate-54-0799-<testbed>-…`).
+- **GLP (from the fourth build):** GLP-39's steered replies on 2 boots at `tp4-ring`, against the third build's
+  ([glp39-steered-tp4.json](glp39-steered-tp4.json), run `-b3` before the fourth build and `-b4` after). The GLP-27
+  qualification on 2 boots at `tp4-ring` ([qualify-glp27-tp4.json](qualify-glp27-tp4.json)): the temperature-0 gate
+  on the stock name, [dual_probe.py](../../2026-10-28-glp-dual-serving/dual_probe.py) `--speed`, 16 distinct streams
+  and [advbench.py](../../2026-10-28-glp-dual-serving/advbench.py), as GLP-39 was qualified for `glp-3`
+  ([2026-10-28-glp-dual-serving](../../2026-10-28-glp-dual-serving/README.md)). GLP-27 at TP3 is not qualified.
+  `advbench.py` prints every reply; its output stays on dgx1 under `results/private`, and the receipts keep only each
+  boot's summary line (the rates per name).
 - **Pre-launch defragmentation:** candidate-55's and the control's boots defragment before launch, but candidate-54's
   recorded references were taken without it. A difference against those references includes the defragmentation,
   which counts as part of #1134.
@@ -109,7 +129,9 @@ adds (`tests/quantization/test_mxfp4_csf.py` and `tests/v1/core/test_contiguous_
 selected files (156 gate, 61 excluded), 0 problems, the same at both trees. The gate manifest has 157 files and 16
 deselected tests at `003fd4cc`, bundled in [bundles/release-tests](bundles/release-tests). The test files of #1134's
 new `0800` (`test_direct_loader.py`, `test_direct_loader_cuda.py`) are gate files. `0803`'s `test_sparknet_oneshot_collectives_pdl_sources` is a gate
-test that passes only with sparknet `0003` in the image.
+test that passes only with sparknet `0003` in the image. #738's test files (`test_deepseek_v41_tilelang_glp.py`,
+`test_deepseek_v4_1_glp.py`) were gate files already, and so are the other files of its suite. With `0805` the check
+is unchanged (217 files, 0 problems), and the gate manifest changes only its head (`d6d4319e`).
 
 **First build** (image `8793529c`, dgx4, 2,656 s): 2 failed, 10,242 passed, 357 skipped
 ([receipts/release-tests-8793529c](receipts/release-tests-8793529c)). The two failures were
@@ -150,7 +172,7 @@ deployment `e90b1e8a`):
 - **Release tests on `4aff1368`:** pass, 10,242 passed, 357 skipped, 0 failed, 2,652 s on dgx4
   ([receipts/release-tests-4aff1368](receipts/release-tests-4aff1368)).
 
-### `tp4-ring`: gates pass, screen mixed
+### Second build at `tp4-ring`: gates pass, screen mixed
 
 Details and every run in [receipts/tp4-ring](receipts/tp4-ring/README.md) (2026-11-11 23:56Z to 2026-11-12 04:17Z).
 
@@ -170,7 +192,7 @@ Details and every run in [receipts/tp4-ring](receipts/tp4-ring/README.md) (2026-
   pre-launch defragmentation. The series misses #989's serving mark (prefill not worse at 32K and 256K) at
   `tp4-ring`. Which change causes it is not yet measured.
 
-### `tp4-switched` and `tp3-switched`: no boot reaches ready
+### Second build at `tp4-switched` and `tp3-switched`: no boot reaches ready
 
 The failed starts' logs are in [receipts/failed-starts](receipts/failed-starts); each failure rolled the testbed back
 to candidate-54.
@@ -193,3 +215,72 @@ to candidate-54.
 tree `ed91c273` and stay as its record. The third build replaces both images, and its gates and screens are run
 again at every testbed. Their specs' runs are named `<run>-b3`, so the second build's result folders on the nodes
 (which the receipts list by hash) are not overwritten.
+
+**Third build** (dgx1's window, jobs `20261112T070706-build.json` and `20261112T073136-build.json`, 07:07-08:38Z):
+
+| Image | Image ID | Layers | Note |
+| --- | --- | --- | --- |
+| `spark-ds41f:candidate-55` | `ad905a6d` | 56 | Built on dgx4 in 11 min by the first job, which then failed on a stale control image still referenced by exited containers |
+| `spark-ds41f:candidate-55-no974` | `1d02f07b` | 53 | Built on dgx4 in 10 min by the second job |
+
+- Each image has the same layers on all of dgx1..dgx4. `ad905a6d` was then shipped to sp1..sp4 and sp5..sp7.
+- **Release tests on `ad905a6d`:** pass, 10,243 passed, 357 skipped, 0 failed, 2,628 s on dgx4
+  ([receipts/release-tests-ad905a6d](receipts/release-tests-ad905a6d)). The one pass more than `4aff1368` is
+  `0804`'s carve-out test, which ran because dgx4 has `/dev/dri/card0`.
+
+### Third build: every boot ready, every gate identical
+
+Details and every run in [receipts/third-build](receipts/third-build/README.md) (2026-11-12 08:02Z to 13:02Z, deployment
+`bbfe2618`). Every boot reached ready (44 of 44) and no memory guard fired.
+
+| Check | `tp4-ring` | `tp4-switched` | `tp3-switched` |
+| --- | --- | --- | --- |
+| Gate | 12 of 12 boots, 48 of 48 runs; control 2 of 2, 8 of 8; candidate-54's TP4 hashes 18d61961/d6568649 | 4 of 4, 16 of 16; the same hashes | 4 of 4, 16 of 16; candidate-54's TP3 hashes 5c22ce41/bce6092e |
+| c1 decisions | 4 of 4 boots agree, and with candidate-54's 4 on the 58 requests both sent | 4 of 4, and with candidate-54's on the 57 both sent | not run |
+| c1 paired decode against candidate-54 | **-1.59% ± 0.17%** decode time (+1.63% tok/s) | **-2.28% ± 0.08%** (+2.35% tok/s) | `single-stream` +1.42% decode, `sampled` c1 +1.60% |
+| Screen against candidate-54: grid | **0.67% slower** (control 0.22%, same) | **1.11% slower** | 2.29% faster |
+| c16 (c8 at TP3) | paired decode +0.75% (better), output +0.86% (same) | +1.49% and +1.47% (better) | +0.43% and +0.57% (same) |
+| Prefill | 32K the same (-2.31%), **256K 3.37% slower** (control 3.08%) | 32K and 256K the same | 32K 6,401 and 256K 6,329 tok/s (first TP3 measurement); `stall-3` **1.32% slower** |
+| candidate-55 against the control, same window | grid, c16 and prefill the same; model step identical (KL 0) | | |
+| Time to ready, engine | 105.0 s mean, candidate-54 101.0 s; the control the same as candidate-55 | 117-127 s | 112-126 s |
+
+All screen and c1 comparisons are against candidate-54's recorded runs, so cross-session.
+
+- **The third build fixes both switched failures:** #1134's `0800` at `6757c7a1` passes sp1's memguard on 4 KiB pages,
+  and #1145's `0804` lets `tp3-switched` load its weights.
+- **#974 changes no temperature-0 output at TP3 either**, and its serving mark at `tp4-ring` passes again: against
+  the control, grid, c16 and prefill are the same.
+- **The 256K regression at `tp4-ring` is in the control too**, and does not appear at `tp4-switched`. Its cause is
+  among #1134, #1096, #989, #982 and the pre-launch defragmentation.
+- **The grid is slower on both TP4 testbeds and faster at TP3.** The cause is under investigation separately.
+- **Boot times:** the engine's startup is about 4 s longer than candidate-54's at `tp4-ring`, in the control too. In
+  3 of 66 boots over both builds, the time before launch (stopping the previous engine and the pre-launch
+  defragmentation) was about 57 s longer than usual; the engine's own time was normal.
+
+Marks after the third build:
+
+| PR | Own mark | Serving mark |
+| --- | --- | --- |
+| #974 | Not run | **Met** at `tp4-ring`: not worse than the control on grid, c16 and prefill |
+| #1134 | Not run | Every boot reaches ready: **met** (44 of 44). The screens' repeat boots differ by 0.4% or less on the grid and decode rows, inside the recorded A/A floors; against candidate-54's repeats some rows are further apart and some closer, which two boots cannot separate |
+| #1096 | Release tests pass; the no-B12X smoke passed on the first build's images | Inert: **met** (the control gives candidate-54's hashes). Time to ready not worse: **not met as measured** (engine +4 s, cross-session; not attributed between #1134 and #1096) |
+| #989 | Not run | Prefill not worse: **met** at `tp4-switched`, **missed** at `tp4-ring` (256K 3.37% slower, the control too; not attributed) |
+| #982 | Not run | **Met:** 12 of 12 gate boots identical at `tp4-ring`, and the c1 decision checks agree |
+| #1145 | **Met:** its test passes on dgx4 (`/dev/dri/card0`), and the release tests pass | **Met:** every `tp3-switched` boot loads its weights; inert at TP4 (candidate-54's hashes) |
+
+**GLP-39's steered replies on the third build** (2026-11-12, before #738 is folded in): [glp39-steered-tp4.json](glp39-steered-tp4.json)
+boots `tp4.json` (the third build's image, GLP-39 configured, as every measured arm) twice at `tp4-ring` and runs
+[dual_probe.py](../../2026-10-28-glp-dual-serving/dual_probe.py) without `--speed`. Its steered replies (token IDs and
+log probabilities, greedy) are the reference for #738's claim that a Spec v1 vector steers as before. Both boots
+pass every check, steering changes all 8 prompts, and both give the same replies: steered `739b8abc`, stock
+`9872053e` ([receipts/third-build](receipts/third-build/README.md)).
+
+**#738 folded in** (2026-11-12, owner: "prepare the GLP update into candidate-55"):
+- **Series and locks:** `0805` added after `0804`. The vLLM tree is `8aaae3df`, both locks are re-recorded, and
+  every profile's `vllm.tree` label follows.
+- **GLP-27:** [glp27-tp4.json](glp27-tp4.json) adds it, with [qualify-glp27-tp4.json](qualify-glp27-tp4.json) and
+  #738's marks declared above. The file is in the Hugging Face cache on dgx1..dgx4 at revision `4d570926`, with
+  sha256 `24e97d41`. AdvBench's data is on dgx1.
+- **Third build:** its images and results are of tree `e8c20f54` and stay as its record.
+- **Fourth build:** it replaces both images and runs every gate, check and screen again. Its specs' runs are named
+  `<run>-b4`.

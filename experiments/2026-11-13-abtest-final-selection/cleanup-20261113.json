@@ -1,0 +1,69 @@
+{
+  "completed": true,
+  "removed": {
+    "image": {
+      "tag": "spark-ds41f:x1112-original",
+      "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+      "nodes": [
+        "192.168.2.180",
+        "192.168.2.161",
+        "192.168.2.102",
+        "192.168.2.238"
+      ]
+    },
+    "directories": {
+      "192.168.2.180": {
+        "/opt/abtest": "1.8G",
+        "/opt/abtest-results": "2.1M",
+        "/opt/abtest-inputs": "88K",
+        "/home/chan/projects/spark-ds41f": "empty"
+      },
+      "192.168.2.161": {
+        "/opt/abtest": "1.4G",
+        "/home/chan/projects/spark-ds41f": "empty"
+      },
+      "192.168.2.102": {
+        "/opt/abtest": "1.5G",
+        "/home/chan/projects/spark-ds41f": "empty"
+      },
+      "192.168.2.238": {
+        "/opt/abtest": "1.5G",
+        "/home/chan/projects/spark-ds41f": "empty"
+      }
+    }
+  },
+  "preserved": {
+    "target_image": {
+      "tag": "spark-ds41f:x1112",
+      "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece"
+    },
+    "target_containers": [
+      "deepseek-r0",
+      "deepseek-r1",
+      "deepseek-r2",
+      "deepseek-r3"
+    ],
+    "official_base_image_on_head": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "official_base_image_role": "build prerequisite only, not a serving target",
+    "local_experiment_evidence": "spark/deepseek/experiments/",
+    "remote_prompt_copy": "/opt/spark/deepseek/experiments/2026-11-12-spark-ds41f-original-abtest/prose-prompts-official.jsonl"
+  },
+  "final_checks": {
+    "abtest_paths_absent_on_all_nodes": true,
+    "x1112_original_absent_on_all_nodes": true,
+    "only_deepseek_containers_running": true,
+    "target_containers_oom_killed": false,
+    "target_restart_count": 0,
+    "api_models_http": 200,
+    "live_contract_ok": true,
+    "env_keys": 86,
+    "profile": {
+      "cuda_device_max_connections": "64",
+      "nccl_channels": "8/8",
+      "allgather_max_bytes": "8388608",
+      "nccl_ib_qps_per_connection": "2",
+      "max_num_batched_tokens": "65520",
+      "long_prefill_token_threshold": "65424"
+    }
+  }
+}

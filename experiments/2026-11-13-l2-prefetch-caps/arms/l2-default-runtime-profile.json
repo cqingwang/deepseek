@@ -1,0 +1,15 @@
+{
+  "environment": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "64",
+    "NCCL_MAX_NCHANNELS": "8",
+    "NCCL_MIN_NCHANNELS": "8",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "8388608",
+    "VLLM_DS41_L2_PREFETCH_WO_MB": "20",
+    "VLLM_DS41_L2_PREFETCH_FFN_MB": "16",
+    "VLLM_DS41_L2_PREFETCH_NEXT_MB": "20"
+  },
+  "serve_options": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "identity": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "official_main_previous": "2b9a6fb6feb4efc5c0bd7f980f36226f02e3441d",
+    "official_main_latest": "d8a24bf98d9acc6db6c9d8351c43fe2cb7685f44",
+    "local_merge_head": "2b9a6fb6feb4efc5c0bd7f980f36226f02e3441d",
+    "runtime_tree_changed": false
+  },
+  "short_prose": {
+    "protocol": "208 official prose prompts; 10s warmup + 30s + 3 windows; 2 runs; thinking=false",
+    "l2_default_20_16_20": {
+      "c1": {
+        "runs": [69.8, 69.5],
+        "mean": 69.65
+      },
+      "c2": {
+        "runs": [104.26666666666667, 103.86666666666667],
+        "mean": 104.06666666666666
+      },
+      "c4": {
+        "runs": [141.83333333333334, 142.5],
+        "mean": 142.16666666666669
+      }
+    },
+    "l2_cap_15_12_12": {
+      "c1": {
+        "runs": [68.93333333333334, 69.23333333333333],
+        "mean": 69.08333333333334
+      },
+      "c2": {
+        "runs": [102.5, 102.86666666666667],
+        "mean": 102.68333333333334
+      },
+      "c4": {
+        "runs": [140.5, 139.53333333333333],
+        "mean": 140.01666666666665
+      }
+    },
+    "caps_delta_pct": {
+      "c1": -0.8135917683656291,
+      "c2": -1.3292761050608504,
+      "c4": -1.5123094958968575
+    }
+  },
+  "official_long_c1": {
+    "protocol": "default 256 prompts; 60s warmup + 300s + 10 windows; thinking=false; _tps_by_style()",
+    "default_reference": {
+      "overall": 76.97,
+      "prose": 72.6,
+      "code": 105.7,
+      "steps_per_s": 32.803337294061464,
+      "tokens_per_step": 2.3607632608444855
+    },
+    "l2_cap_15_12_12": {
+      "overall": 76.6,
+      "prose": 72.2,
+      "code": 106.1,
+      "steps_per_s": 32.39666659172231,
+      "tokens_per_step": 2.3667924853442583
+    },
+    "final_verified_u30": {
+      "overall": 77.18666666666667,
+      "prose": 72.7,
+      "code": 106.6,
+      "steps_per_s": 32.68996184786142,
+      "tokens_per_step": 2.3635546315033595
+    },
+    "final_two_run_prose_mean": 72.65,
+    "official_prose": 77.8,
+    "caps_prose_delta_vs_default_pct": -0.550964187327807,
+    "final_two_run_prose_delta_pct": -6.619537275064261
+  },
+  "u24_vs_u30": {
+    "protocol": "same image and verified profile; 208 official prose prompts; 10s warmup + 30s + 3 windows; 2 runs",
+    "u30_mesh": {
+      "c1": 69.65,
+      "c2": 104.06666666666666,
+      "c4": 142.16666666666669
+    },
+    "u24_direct": {
+      "c1": 69.56666666666668,
+      "c2": 103.4,
+      "c4": 142.08333333333334
+    },
+    "u24_delta_pct": {
+      "c1": -0.11964584828906277,
+      "c2": -0.6406149903907643,
+      "c4": -0.05861664712779602
+    },
+    "decision": "no gain; restore /30 and spark-ring-mesh"
+  },
+  "parameter_consumption": {
+    "caps_env": {
+      "VLLM_DS41_L2_PREFETCH_WO_MB": "15",
+      "VLLM_DS41_L2_PREFETCH_FFN_MB": "12",
+      "VLLM_DS41_L2_PREFETCH_NEXT_MB": "12"
+    },
+    "caps_budget_bytes_by_rank": {
+      "WO": 15000000,
+      "FFN": 12000000,
+      "NEXT": 12000000
+    },
+    "default_budget_bytes": {
+      "WO": 20000000,
+      "FFN": 16000000,
+      "NEXT": 20000000
+    },
+    "default_runtime_plan_example_mb": {
+      "WO": 18.9,
+      "FFN": 14.8,
+      "NEXT": 14.8
+    },
+    "caps_runtime_plan_example_mb": {
+      "WO": 15.0,
+      "FFN": 12.0,
+      "NEXT": 12.0
+    }
+  },
+  "decision": "reject caps and /24 direct; restore the verified 20/16/20 default runtime profile, /30 links and spark-ring-mesh"
+}

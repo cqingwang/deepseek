@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "out": "/tmp/ring-audit-after-wait-fabric-fix.json",
+  "failures": []
+}
+{"ok": true, "failures": []}

@@ -1,0 +1,63 @@
+{
+  "original": {
+    "source": "spark/docs/spark-ds41f",
+    "commit": "bbfe2618efbd3e2143363eb9262d1c7fb89e5460",
+    "image": "spark-ds41f:x1112-original",
+    "profile": "/opt/abtest/spark-ds41f/config/abtest.local.json"
+  },
+  "target": {
+    "source": "spark/deepseek",
+    "commit": "7f61d7a0",
+    "image": "spark-ds41f:x1112",
+    "site": "/opt/spark/deepseek/config/cluster.json"
+  },
+  "environment_differences": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": {
+      "original": "32",
+      "target": "64"
+    },
+    "NCCL_IB_QPS_PER_CONNECTION": {
+      "original": null,
+      "target": "2"
+    },
+    "NCCL_IB_SUBNET_PREFIX_LEN": {
+      "original": "24",
+      "target": "30"
+    },
+    "NCCL_MAX_NCHANNELS": {
+      "original": "4",
+      "target": "8"
+    },
+    "NCCL_MIN_NCHANNELS": {
+      "original": "4",
+      "target": "8"
+    },
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": {
+      "original": "2097152",
+      "target": "8388608"
+    }
+  },
+  "serve_option_differences": {
+    "--api-key": {
+      "original": null,
+      "target": "deepseek"
+    },
+    "--long-prefill-token-threshold": {
+      "original": "16288",
+      "target": "65424"
+    },
+    "--max-num-batched-tokens": {
+      "original": "16384",
+      "target": "65520"
+    },
+    "--port": {
+      "original": "8000",
+      "target": "8888"
+    }
+  },
+  "non_runtime_differences": {
+    "image_dockerfile": "target adds only PIP_INDEX_URL build plumbing; runtime source labels are unchanged",
+    "host_ring": "original abtest uses /24 cable-stripe subnets and stops spark-ring-mesh; target uses /30 and the shared host mesh",
+    "control_interface": "both original abtest and current target use wlP9s9"
+  }
+}

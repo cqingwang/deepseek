@@ -1,0 +1,8 @@
+{
+  "ok": false,
+  "out": "/tmp/ring-audit-after-wait-fabric-boot2.json",
+  "failures": [
+    "spark-b: missing live route 10.100.241.13/32",
+    "spark-d: missing live route 10.100.241.2/32"
+  ]
+}

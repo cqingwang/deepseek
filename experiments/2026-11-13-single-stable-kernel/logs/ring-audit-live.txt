@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "out": "/tmp/ring-audit-single-stable-kernel-live.json",
+  "failures": []
+}
+{"ok": true, "failures": []}

@@ -55,7 +55,7 @@ def key_enrolled(returncode, output):
 
 
 def collect(policy):
-    target = policy["candidate"]
+    target = policy["stable"]
     data = {"kernel": os.uname().release, "page_size": os.sysconf("SC_PAGE_SIZE"),
             "errors": [], "packages": {}, "modules": {}, "files": {}}
     def read(label, *args):
@@ -87,10 +87,14 @@ def collect(policy):
     for name in policy["packages"]:
         value = probe("dpkg-query", "-W", "-f=${Status}|${Version}", name)
         data["packages"][name] = value.removeprefix("install ok installed|") if value.startswith("install ok installed|") else ""
-    for release in (policy["fallback"], target):
-        for kind in ("vmlinuz", "initrd.img", "config"):
-            path = f"/boot/{kind}-{release}"
-            data["files"][path] = Path(path).is_file() and Path(path).stat().st_size > 0
+    for kind in ("vmlinuz", "initrd.img", "config"):
+        path = f"/boot/{kind}-{target}"
+        data["files"][path] = Path(path).is_file() and Path(path).stat().st_size > 0
+    data["boot_images"] = sorted(
+        path.name.removeprefix("vmlinuz-")
+        for path in Path("/boot").glob("vmlinuz-*")
+        if path.is_file()
+    )
     data["headers"] = Path(f"/lib/modules/{target}/build/Makefile").is_file()
     data["cpu_tools"] = Path(f"/usr/lib/linux-tools/{target}/cpupower").is_file()
     data["running_cpu_tools"] = Path(f"/usr/lib/linux-tools/{data['kernel']}/cpupower").is_file()
@@ -167,9 +171,9 @@ def findings(name, data, policy):
     """Warnings plus separate corrective commands; never execute corrections."""
     issues = []
     fixes = []
-    target = policy["candidate"]
+    target = policy["stable"]
     running = data.get("kernel")
-    expected_page = 65536 if running == target else 4096 if running == policy["fallback"] else None
+    expected_page = 65536 if running == target else None
     if expected_page is None or data.get("page_size") != expected_page:
         issues.append(f"{name}: running kernel/page size is outside the prepared pair: {running!r}/{data.get('page_size')!r}")
     if data.get("driver") != policy["driver"]:
@@ -186,17 +190,21 @@ def findings(name, data, policy):
                                         and bool(installed) and installed.startswith(version + "+"))
     missing = [p for p, version in policy["packages"].items() if not matches(p, version)]
     if missing:
-        issues.append(f"{name}: 64 KiB package versions differ: {', '.join(missing)}")
+        issues.append(f"{name}: stable 64 KiB package versions differ: {', '.join(missing)}")
         fixes.append(f"{name}: sudo apt-get install " + " ".join(
             p if p.startswith("linux-modules-nvidia-") else f"{p}={policy['packages'][p]}" for p in missing))
-    for path in [f"/boot/{kind}-{release}" for release in (policy["fallback"], target)
+    for path in [f"/boot/{kind}-{target}"
                  for kind in ("vmlinuz", "initrd.img", "config")]:
         if not data.get("files", {}).get(path):
             issues.append(f"{name}: missing or empty {path}")
+    if data.get("boot_images") != [target]:
+        issues.append(
+            f"{name}: /boot must contain exactly {target}, got {data.get('boot_images')!r}"
+        )
     if not data.get("headers") or not data.get("config_64k"):
-        issues.append(f"{name}: candidate headers or CONFIG_ARM64_64K_PAGES=y missing")
+        issues.append(f"{name}: stable headers or CONFIG_ARM64_64K_PAGES=y missing")
     if not data.get("cpu_tools"):
-        issues.append(f"{name}: candidate cpupower tool is missing; nv-cpu-governor.service cannot run on that kernel")
+        issues.append(f"{name}: stable cpupower tool is missing; nv-cpu-governor.service cannot run on that kernel")
     if data.get("running_cpu_tools") is False:
         issues.append(f"{name}: running cpupower tool is missing for {running}; nv-cpu-governor.service cannot run")
     if data.get("governors") != ["performance"]:
@@ -207,25 +215,23 @@ def findings(name, data, policy):
         if info.get("vermagic", "").split()[:1] != [target]:
             issues.append(f"{name}: {module} is not prepared for {target}")
         if module.startswith("nvidia") and info.get("version") != policy["driver"]:
-            issues.append(f"{name}: candidate {module} driver version differs from {policy['driver']}")
+            issues.append(f"{name}: stable {module} driver version differs from {policy['driver']}")
     if "installed" not in data.get("fan_dkms", ""):
         issues.append(f"{name}: fan-control DKMS is not installed for {target}")
         fixes.append(f"{name}: sudo dkms autoinstall -k {target}")
     if data.get("secure_boot") == "SecureBoot enabled" and (not data.get("fan_signer") or not data.get("fan_key_enrolled")):
-        issues.append(f"{name}: Secure Boot is enabled but the candidate fan signature/enrolled key is unverified")
+        issues.append(f"{name}: Secure Boot is enabled but the stable fan signature/enrolled key is unverified")
     grub = data.get("grub", {})
     if target not in grub.get("entries", {}).values():
-        issues.append(f"{name}: candidate is missing from GRUB")
+        issues.append(f"{name}: stable kernel is missing from GRUB")
         fixes.append(f"{name}: sudo update-grub")
-    default = policy.get("default", policy["fallback"])
+    default = policy.get("default", target)
     if grub.get("default_kernel") != default:
         issues.append(f"{name}: normal boot is not explicitly pinned to {default} (GRUB default {grub.get('default')!r})")
-        fixes.append(f"{name}: restore the configured entry in /etc/default/grub.d/zz-spark-kernel-trial.cfg, then sudo update-grub")
+        fixes.append(f"{name}: restore the configured entry in {policy.get('stable_grub_config', '/etc/default/grub.d/zz-spark-kernel-stable.cfg')}, then sudo update-grub")
     if grub.get("next_entry") or grub.get("initrdfail") or grub.get("prev_entry"):
         issues.append(f"{name}: a GRUB next-boot/recovery override is armed; kernel is not merely staged")
         fixes.append(f"{name}: inspect sudo grub-editenv list; cancel an unintended one-shot with sudo grub-editenv unset next_entry (review recovery state separately)")
-    if data.get("page_size") == 4096 and "active_swap" in data and data.get("active_swap") != ["/swap.img"]:
-        issues.append(f"{name}: 4 KiB swap (/swap.img) is not active")
     if data.get("page_size") == 65536:
         if "[never]" not in data.get("thp", "") or data.get("min_free_kbytes") != "45166":
             issues.append(f"{name}: 64 KiB THP/reserve policy differs from never/45166 KiB")
@@ -254,19 +260,19 @@ def findings(name, data, policy):
 
 
 def memory_saver_problems(name, data, policy):
-    """Preparation warnings apply to both profiles; loaded checks apply at 64 KiB."""
+    """Preparation and loaded-module checks for the single stable 64 KiB profile."""
     saver = policy.get("memory_saver")
     if not saver:
         return []
     issues = []
-    expected = f"{saver['package']}/{saver['version']}, {policy['candidate']}, aarch64: installed"
+    expected = f"{saver['package']}/{saver['version']}, {policy['stable']}, aarch64: installed"
     if not any(line == expected or line.startswith(expected + " (")
                for line in data.get("memory_saver_dkms", "").splitlines()):
-        issues.append(f"{name}: memory-saver DKMS {saver['version']} is missing or not installed for {policy['candidate']}")
+        issues.append(f"{name}: memory-saver DKMS {saver['version']} is missing or not installed for {policy['stable']}")
     disk = data.get("memory_saver_disk", {})
     if (disk.get("srcversion") != saver["srcversion"] or
             "/updates/dkms/" not in disk.get("filename", "")):
-        issues.append(f"{name}: candidate UVM does not select the expected memory-saver DKMS module")
+        issues.append(f"{name}: stable UVM does not select the expected memory-saver DKMS module")
     if data.get("secure_boot") == "SecureBoot enabled" and not disk.get("signer"):
         issues.append(f"{name}: memory-saver module has no readable Secure Boot signer")
     if data.get("page_size") == 65536:

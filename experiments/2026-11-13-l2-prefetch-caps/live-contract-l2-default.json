@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "failures": [],
+  "ranks": [
+    {
+      "rank": 0,
+      "host": "192.168.2.180",
+      "container": "deepseek-r0",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 89,
+      "serve_argv_sha256": "3d4420630102c1d60a7390a228149ff9972d5f0252e9394928a3f726a8d66388",
+      "max_num_batched_tokens": "65520",
+      "long_prefill_token_threshold": "65424",
+      "cuda_device_max_connections": "64",
+      "nccl_channels": "8",
+      "allgather_max_bytes": "8388608",
+      "nccl_ib_qps_per_connection": "2"
+    },
+    {
+      "rank": 1,
+      "host": "192.168.2.161",
+      "container": "deepseek-r1",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 89,
+      "serve_argv_sha256": "b5e7fa933d57afd3fd0cf09e9ebda14dfb48bcbb02223ed68c8dddc16f6981ae",
+      "max_num_batched_tokens": "65520",
+      "long_prefill_token_threshold": "65424",
+      "cuda_device_max_connections": "64",
+      "nccl_channels": "8",
+      "allgather_max_bytes": "8388608",
+      "nccl_ib_qps_per_connection": "2"
+    },
+    {
+      "rank": 2,
+      "host": "192.168.2.102",
+      "container": "deepseek-r2",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 89,
+      "serve_argv_sha256": "6e74858616fab4fc49dac3046ad26ed053b740b93d60f977e03f0ee8f21db745",
+      "max_num_batched_tokens": "65520",
+      "long_prefill_token_threshold": "65424",
+      "cuda_device_max_connections": "64",
+      "nccl_channels": "8",
+      "allgather_max_bytes": "8388608",
+      "nccl_ib_qps_per_connection": "2"
+    },
+    {
+      "rank": 3,
+      "host": "192.168.2.238",
+      "container": "deepseek-r3",
+      "image": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+      "env_keys_matched": 89,
+      "serve_argv_sha256": "87c06417d47e367d1bcdc335936c46707f5859f1bf98b4c7a5cf5ca347cb8290",
+      "max_num_batched_tokens": "65520",
+      "long_prefill_token_threshold": "65424",
+      "cuda_device_max_connections": "64",
+      "nccl_channels": "8",
+      "allgather_max_bytes": "8388608",
+      "nccl_ib_qps_per_connection": "2"
+    }
+  ]
+}

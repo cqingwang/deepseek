@@ -9,8 +9,7 @@ spec = importlib.util.spec_from_file_location("kernel_readiness", ROOT / "script
 kernel = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(kernel)
 POLICY = json.loads((ROOT / "config/kernel-trial.json").read_text())
-OLD = POLICY["fallback"]
-NEW = POLICY["candidate"]
+STABLE = POLICY["stable"]
 
 
 def menu(uuid="node-a", default=None):
@@ -21,37 +20,37 @@ else
  set default="{default_id if default is None else default}"
 fi
 submenu 'Advanced options' $menuentry_id_option 'gnulinux-advanced-{uuid}' {{
- menuentry 'old' $menuentry_id_option 'gnulinux-{OLD}-advanced-{uuid}' {{
-  linux /boot/vmlinuz-{OLD} root=UUID={uuid}
- }}
- menuentry 'new' $menuentry_id_option 'gnulinux-{NEW}-advanced-{uuid}' {{
-  linux /boot/vmlinuz-{NEW} root=UUID={uuid}
+ menuentry 'stable' $menuentry_id_option 'gnulinux-{STABLE}-advanced-{uuid}' {{
+  linux /boot/vmlinuz-{STABLE} root=UUID={uuid}
  }}
 }}
 '''
 
 
 def ready(uuid="node-a"):
-    return {"kernel": OLD, "page_size": 4096, "driver": POLICY["driver"],
-            "loaded_nvidia_sources": {"nvidia": "stock-rm", "nvidia_uvm": "stock-uvm"},
-            "uvm_leaf_packing": "stock",
-            "memory_saver_dkms": f"dgx-spark-memory-saver/{POLICY['memory_saver']['version']}, {NEW}, aarch64: installed (Original modules exist)",
+    return {"kernel": STABLE, "page_size": 65536, "driver": POLICY["driver"],
+            "loaded_nvidia_sources": {"nvidia": "stock-rm", "nvidia_uvm": POLICY['memory_saver']['srcversion']},
+            "uvm_leaf_packing": "Y",
+            "memory_saver_dkms": f"dgx-spark-memory-saver/{POLICY['memory_saver']['version']}, {STABLE}, aarch64: installed (Original modules exist)",
             "memory_saver_disk": {"srcversion": POLICY['memory_saver']['srcversion'],
-                                  "filename": f"/lib/modules/{NEW}/updates/dkms/nvidia-uvm.ko.zst", "signer": "Fleet key"},
-            "thp": "always [madvise] never", "min_free_kbytes": "45166",
+                                  "filename": f"/lib/modules/{STABLE}/updates/dkms/nvidia-uvm.ko.zst", "signer": "Fleet key"},
+            "thp": "always madvise [never]", "min_free_kbytes": "45166",
+            "active_swap": ["/swap-64k.img"], "memory_service": "active",
+            "memory_service_unit": "spark-ds41f-kernel-memory.service",
             "secure_boot": "SecureBoot enabled", "fan_signer": "Fleet key", "fan_key_enrolled": True,
             "errors": [], "packages": POLICY["packages"].copy(),
-            "files": {f"/boot/{kind}-{release}": True for kind in ("config", "vmlinuz", "initrd.img") for release in (OLD, NEW)},
+            "files": {f"/boot/{kind}-{STABLE}": True for kind in ("config", "vmlinuz", "initrd.img")},
+            "boot_images": [STABLE],
             "headers": True, "config_64k": True,
             "cpu_tools": True, "governors": ["performance"],
-            "modules": {m: {"vermagic": NEW + " SMP", "version": POLICY["driver"]} for m in
+            "modules": {m: {"vermagic": STABLE + " SMP", "version": POLICY["driver"]} for m in
                         ("nvidia", "nvidia_uvm", "nvidia_drm", "mlx5_core", "mlx5_ib", "dgx_ec_fan_control")},
-            "fan_dkms": f"dgx-spark-fan-control/0.1.4, {NEW}, aarch64: installed",
+            "fan_dkms": f"dgx-spark-fan-control/0.1.4, {STABLE}, aarch64: installed",
             "grub": kernel.grub_inventory(menu(uuid), "")}
 
 
 class ReadinessTest(unittest.TestCase):
-    def test_staged_not_running_is_success(self):
+    def test_single_stable_kernel_is_success(self):
         self.assertEqual(kernel.findings("dgx1", ready(), POLICY), ([], []))
 
     def test_missing_package_is_not_installed(self):
@@ -76,14 +75,14 @@ class ReadinessTest(unittest.TestCase):
 
     def test_wrong_driver_and_vermagic(self):
         data = ready()
-        data["modules"]["nvidia"] = {"version": "wrong", "vermagic": OLD}
+        data["modules"]["nvidia"] = {"version": "wrong", "vermagic": "7.0.0-1025-nvidia"}
         issues, _ = kernel.findings("dgx1", data, POLICY)
         self.assertEqual(sum("nvidia" in x for x in issues), 2)
 
     def test_missing_fan_and_initrd(self):
         data = ready()
         data["fan_dkms"] = "built"
-        data["files"][f"/boot/initrd.img-{NEW}"] = False
+        data["files"][f"/boot/initrd.img-{STABLE}"] = False
         issues, fixes = kernel.findings("dgx1", data, POLICY)
         self.assertTrue(any("initrd" in x for x in issues))
         self.assertTrue(any("dkms autoinstall" in x for x in fixes))
@@ -103,10 +102,13 @@ class ReadinessTest(unittest.TestCase):
     def test_node_specific_grub_ids_do_not_cause_drift(self):
         self.assertEqual(kernel.alignment({"dgx1": ready("a"), "dgx2": ready("b")}), [])
 
-    def test_mixed_pages_and_kernels_are_reported(self):
+    def test_second_kernel_and_page_size_are_reported(self):
         second = ready()
-        second.update(kernel=NEW, page_size=65536)
+        second.update(kernel="7.0.0-1025-nvidia", page_size=4096,
+                      boot_images=["7.0.0-1025-nvidia"])
         self.assertEqual(len(kernel.alignment({"dgx1": ready(), "dgx2": second})), 2)
+        self.assertTrue(any("/boot must contain exactly" in x for x in
+                            kernel.findings("dgx2", second, POLICY)[0]))
 
     def test_failed_probe_never_passes_alignment(self):
         issues = kernel.alignment({"dgx1": ready(), "dgx2": {"errors": ["SSH failed"]}})
@@ -115,7 +117,7 @@ class ReadinessTest(unittest.TestCase):
     def test_same_driver_version_does_not_hide_different_loaded_uvm(self):
         second = ready()
         second["loaded_nvidia_sources"]["nvidia_uvm"] = "trial-uvm"
-        second["uvm_leaf_packing"] = "Y"
+        second["uvm_leaf_packing"] = "N"
         issues = kernel.alignment({"dgx1": ready(), "dgx2": second})
         self.assertEqual(len(issues), 2)
         self.assertTrue(any("loaded_nvidia_sources" in x for x in issues))
@@ -131,15 +133,15 @@ class ReadinessTest(unittest.TestCase):
         data["driver"] = "wrong"
         self.assertTrue(any("loaded driver" in x for x in kernel.findings("dgx1", data, POLICY)[0]))
 
-    def test_kernel_page_size_disagreement(self):
+    def test_non_stable_page_size_is_reported(self):
         data = ready()
-        data["page_size"] = 65536
+        data["page_size"] = 4096
         self.assertTrue(any("kernel/page size" in x for x in kernel.findings("dgx1", data, POLICY)[0]))
 
     def test_unsigned_fan_is_not_ready_under_secure_boot(self):
         data = ready()
         data["fan_signer"] = ""
-        self.assertTrue(any("candidate fan signature" in x for x in kernel.findings("dgx1", data, POLICY)[0]))
+        self.assertTrue(any("stable fan signature" in x for x in kernel.findings("dgx1", data, POLICY)[0]))
 
     def test_mokutil_enrollment_exit_status_is_not_shell_success(self):
         self.assertTrue(kernel.key_enrolled(1, "/root/key.der is already enrolled\n"))
@@ -148,47 +150,47 @@ class ReadinessTest(unittest.TestCase):
 
     def test_64k_boot_requires_its_swap_and_memory_policy(self):
         data = ready()
-        data.update(kernel=NEW, page_size=65536)
+        data.update(active_swap=[], memory_service="", thp="always madvise [never]")
         issues, fixes = kernel.findings("dgx1", data, POLICY)
         self.assertTrue(any("64 KiB swap" in x for x in issues))
-        # The service is spark-ds41f's since the release after spark-ds41f-1022 (host/kernel-memory).
         self.assertTrue(any("journalctl -u spark-ds41f-kernel-memory.service" in x for x in fixes))
-        data.update(thp="always madvise [never]", active_swap=["/swap-64k.img"], memory_service="active",
-                    memory_service_unit="spark-ds41f-kernel-memory.service")
-        data["uvm_leaf_packing"] = "Y"
-        data["loaded_nvidia_sources"]["nvidia_uvm"] = POLICY["memory_saver"]["srcversion"]
+        data.update(active_swap=["/swap-64k.img"], memory_service="active")
         self.assertEqual(kernel.findings("dgx1", data, POLICY), ([], []))
 
     def test_legacy_spark3_memory_service_is_the_same_policy(self):
         data = ready()
-        data.update(kernel=NEW, page_size=65536, thp="always madvise [never]",
+        data.update(thp="always madvise [never]",
                     active_swap=["/swap-64k.img"], memory_service="active",
                     memory_service_unit="spark3-kernel-memory.service")
-        data["uvm_leaf_packing"] = "Y"
-        data["loaded_nvidia_sources"]["nvidia_uvm"] = POLICY["memory_saver"]["srcversion"]
         issues, fixes = kernel.findings("dgx1", data, POLICY)
         self.assertTrue(any("still spark3-kernel-memory.service" in x for x in issues))
         self.assertFalse(any("is not active" in x for x in issues))
         self.assertTrue(any("journalctl -u spark3-kernel-memory.service" in x for x in fixes))
 
-    def test_missing_memory_saver_warns_even_on_stock_kernel(self):
+    def test_missing_memory_saver_warns_on_stable_kernel(self):
         data = ready()
         data["memory_saver_dkms"] = ""
         data["memory_saver_disk"]["srcversion"] = "stock"
         issues, fixes = kernel.findings("dgx1", data, POLICY)
         self.assertTrue(any("memory-saver DKMS" in x and "missing" in x for x in issues))
         self.assertTrue(any("dkms install" in x for x in fixes))
-        profile = {"release": OLD, "page_size": 4096, "memory_saver_required": False}
+        profile = {"release": STABLE, "page_size": 65536, "memory_saver_required": False}
         self.assertEqual(kernel.profile_problems("dgx1", data, profile, POLICY), [])
 
-    def test_large_profile_refuses_stock_kernel_even_with_installed_module(self):
-        profile = {"release": NEW, "page_size": 65536, "memory_saver_required": True}
-        self.assertTrue(kernel.profile_problems("dgx1", ready(), profile, POLICY))
+    def test_large_profile_requires_stable_memory_saver_module(self):
+        profile = {"release": STABLE, "page_size": 65536, "memory_saver_required": True}
+        data = ready()
+        data["memory_saver_dkms"] = ""
+        data["memory_saver_disk"]["srcversion"] = "stock"
+        data["loaded_nvidia_sources"]["nvidia_uvm"] = "stock-uvm"
+        data["uvm_leaf_packing"] = "stock"
+        self.assertTrue(kernel.profile_problems("dgx1", data, profile, POLICY))
 
     def test_disk_install_does_not_hide_unloaded_or_disabled_packing(self):
-        profile = {"release": NEW, "page_size": 65536, "memory_saver_required": True}
+        profile = {"release": STABLE, "page_size": 65536, "memory_saver_required": True}
         data = ready()
-        data.update(kernel=NEW, page_size=65536)
+        data.update(uvm_leaf_packing="N",
+                    loaded_nvidia_sources={"nvidia": "stock-rm", "nvidia_uvm": "stock-uvm"})
         self.assertEqual(len(kernel.profile_problems("dgx1", data, profile, POLICY)), 2)
         data["loaded_nvidia_sources"]["nvidia_uvm"] = POLICY["memory_saver"]["srcversion"]
         data["uvm_leaf_packing"] = "N"
@@ -202,18 +204,18 @@ class ReadinessTest(unittest.TestCase):
         data["memory_saver_disk"]["signer"] = ""
         self.assertEqual(len(kernel.memory_saver_problems("dgx1", data, POLICY)), 2)
 
-    def test_promoted_default_is_distinct_from_retained_fallback(self):
+    def test_stable_default_resolves_to_stable_kernel(self):
         data = ready()
-        new_id = next(k for k,v in data["grub"]["entries"].items() if v == NEW)
-        data["grub"] = kernel.grub_inventory(menu(default=new_id), "")
-        self.assertEqual(kernel.findings("dgx1", data, dict(POLICY, default=NEW)), ([], []))
+        stable_id = next(k for k,v in data["grub"]["entries"].items() if v == STABLE)
+        data["grub"] = kernel.grub_inventory(menu(default=stable_id), "")
+        self.assertEqual(kernel.findings("dgx1", data, dict(POLICY, default=STABLE)), ([], []))
 
 
 class RmQualificationTest(unittest.TestCase):
     def test_loaded_binary_identity_required_even_when_release_matches(self):
         policy = dict(POLICY, rm_build_note="candidate-build")
-        profile = {"release": NEW, "page_size": 65536}
-        data = {"kernel": NEW, "page_size": 65536, "driver": policy["driver"]}
+        profile = {"release": STABLE, "page_size": 65536}
+        data = {"kernel": STABLE, "page_size": 65536, "driver": policy["driver"]}
         self.assertTrue(kernel.profile_problems("node", data, profile, policy))
         data["rm_build_note"] = "stock-build"
         self.assertTrue(kernel.profile_problems("node", data, profile, policy))
@@ -222,8 +224,8 @@ class RmQualificationTest(unittest.TestCase):
 
     def test_system_pool_policy_required(self):
         policy = dict(POLICY, rm_system_memory_pools="0")
-        profile = {"release": NEW, "page_size": 65536}
-        data = {"kernel": NEW, "page_size": 65536, "rm_system_memory_pools": "529"}
+        profile = {"release": STABLE, "page_size": 65536}
+        data = {"kernel": STABLE, "page_size": 65536, "rm_system_memory_pools": "529"}
         self.assertTrue(kernel.profile_problems("node", data, profile, policy))
         data["rm_system_memory_pools"] = "0"
         self.assertEqual(kernel.profile_problems("node", data, profile, policy), [])

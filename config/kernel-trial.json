@@ -1,7 +1,6 @@
 {
-  "purpose": "Promoted 64 KiB memory-saver host requirements and retained 4 KiB fallback. Serving profiles define their required running kernel.",
-  "fallback": "7.0.0-1019-nvidia",
-  "candidate": "7.0.0-1019-nvidia-64k",
+  "purpose": "Single stable 64 KiB kernel stack for serving. No alternate kernel, 4 KiB rollback, crashdump kernel, or duplicate prebuilt kernel driver copy is retained.",
+  "stable": "7.0.0-1019-nvidia-64k",
   "driver": "580.178.04",
   "fan_signing_certificate": "/root/.local/share/dgx-spark-fan-control/keys/MOK.der",
   "packages": {
@@ -9,9 +8,41 @@
     "linux-image-7.0.0-1019-nvidia-64k": "7.0.0-1019.19~24.04.2",
     "linux-modules-7.0.0-1019-nvidia-64k": "7.0.0-1019.19~24.04.2",
     "linux-headers-7.0.0-1019-nvidia-64k": "7.0.0-1019.19~24.04.2",
-    "linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k": "7.0.0-1019.19~24.04.2"
+    "linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k": "7.0.0-1019.19~24.04.2",
+    "linux-nvidia-7.0-headers-7.0.0-1019": "7.0.0-1019.19~24.04.2",
+    "linux-nvidia-7.0-tools-7.0.0-1019": "7.0.0-1019.19~24.04.2"
   },
   "default": "7.0.0-1019-nvidia-64k",
+  "stable_grub_config": "/etc/default/grub.d/zz-spark-kernel-stable.cfg",
+  "retired_boot_files": [
+    "/boot/initrd.img-6.17.0-1029"
+  ],
+  "retired_unowned_files": [
+    "/boot/initrd.img-6.17.0-1029"
+  ],
+  "retired_packages": [
+    "linux-headers-7.0.0-1025-nvidia",
+    "linux-headers-nvidia-hwe-24.04",
+    "linux-image-7.0.0-1025-nvidia",
+    "linux-image-nvidia-hwe-24.04",
+    "linux-modules-7.0.0-1025-nvidia",
+    "linux-modules-nvidia-580-open-7.0.0-1025-nvidia",
+    "linux-modules-nvidia-580-open-nvidia-hwe-24.04",
+    "linux-modules-nvidia-fs-7.0.0-1025-nvidia",
+    "linux-nvidia-7.0-headers-7.0.0-1025",
+    "linux-nvidia-7.0-tools-7.0.0-1025",
+    "linux-nvidia-hwe-24.04",
+    "linux-tools-7.0.0-1025-nvidia",
+    "linux-tools-nvidia-hwe-24.04",
+    "linux-modules-nvidia-580-open-6.17.0-1029-nvidia",
+    "nvidia-driver-580-open",
+    "nvidia-system-core",
+    "nvidia-crashdump",
+    "linux-crashdump",
+    "kdump-tools",
+    "kexec-tools",
+    "makedumpfile"
+  ],
   "memory_saver": {
     "package": "dgx-spark-memory-saver",
     "version": "0.4.1",

@@ -1,0 +1,200 @@
+PASS: apt plan is limited to the headless runtime profile
+backup=/var/backups/spark-host-runtime/20261113T012838Z
+Reading package lists...
+Building dependency tree...
+Reading state information...
+dgx-release is already the newest version (7.6.0).
+dgx-release set to manually installed.
+dgx-spark-mlnx-hotplug is already the newest version (26.01-1).
+nvidia-dgx-telemetry is already the newest version (8.13).
+nvidia-disable-bt-profiles is already the newest version (26.03-1).
+nvidia-raid-config is already the newest version (25.10-1).
+nvidia-spark-avahi-conf is already the newest version (1.0-1).
+nvidia-spark-baud-rate is already the newest version (25.09-1).
+nvidia-spark-default-remove-nvidia-fs-pkg is already the newest version (25.09-2).
+nvidia-spark-fstab-config is already the newest version (1.0.0-1).
+nvidia-spark-grub-kho is already the newest version (1.0-1).
+nvidia-spark-grub-pci is already the newest version (1.0-1).
+nvidia-spark-initcall-bl is already the newest version (1.0-2).
+nvidia-spark-limits is already the newest version (1.0-1).
+nvidia-spark-mlnx-firmware-manager is already the newest version (6.0.1-1).
+nvidia-spark-ota-check is already the newest version (1.0.23-1).
+nvidia-spark-realtek-mod-options is already the newest version (1.1-1).
+nvidia-spark-repo is already the newest version (1.1-1).
+lldpd is already the newest version (1.0.18-1ubuntu0.1).
+nvidia-spark-wifi-fw-ppa is already the newest version (1.2-1).
+nvidia-lvfs-config is already the newest version (25.09-1).
+nvidia-nvme-options is already the newest version (26.02-1).
+nvidia-grub-params is already the newest version (25.10-1).
+nvidia-disable-aqc-nic is already the newest version (25.10-1).
+nv-common-apis is already the newest version (26.08-2).
+nv-common-apis set to manually installed.
+nv-grubserial is already the newest version (26.03-1).
+nv-iommu is already the newest version (25.12-1).
+nv-ipmi-devintf is already the newest version (25.10-1).
+nv-limits is already the newest version (25.10-1).
+nv-no-grubmenu is already the newest version (26.01-1).
+nv-persistence-mode is already the newest version (25.10-1).
+nv-update-disable is already the newest version (25.10-1).
+nvidia-repo-keys is already the newest version (26.07-1).
+nvidia-repo-keys set to manually installed.
+linux-headers-7.0.0-1025-nvidia is already the newest version (7.0.0-1025.26~24.04.1).
+linux-headers-nvidia-hwe-24.04 is already the newest version (7.0.0-1025.26~24.04.1).
+linux-image-nvidia-hwe-24.04 is already the newest version (7.0.0-1025.26~24.04.1).
+linux-modules-nvidia-fs-7.0.0-1025-nvidia is already the newest version (7.0.0-1025.26~24.04.1).
+linux-nvidia-7.0-headers-7.0.0-1025 is already the newest version (7.0.0-1025.26~24.04.1).
+linux-nvidia-7.0-tools-7.0.0-1025 is already the newest version (7.0.0-1025.26~24.04.1).
+linux-nvidia-hwe-24.04 is already the newest version (7.0.0-1025.26~24.04.1).
+linux-tools-7.0.0-1025-nvidia is already the newest version (7.0.0-1025.26~24.04.1).
+linux-tools-nvidia-hwe-24.04 is already the newest version (7.0.0-1025.26~24.04.1).
+The following packages were automatically installed and are no longer required:
+  android-libbase android-libboringssl android-libcutils android-liblog
+  android-libziparchive android-sdk-platform-tools-common
+  nvidia-desktop-default-remove-gnome-software-deb
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 187 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+base-files is already the newest version (13ubuntu10.5).
+ubuntu-release-upgrader-core is already the newest version (1:24.04.29).
+python3-distupgrade is already the newest version (1:24.04.29).
+libc6 is already the newest version (2.39-0ubuntu8.9).
+libc-bin is already the newest version (2.39-0ubuntu8.9).
+libc-dev-bin is already the newest version (2.39-0ubuntu8.9).
+libc-devtools is already the newest version (2.39-0ubuntu8.9).
+libc6-dev is already the newest version (2.39-0ubuntu8.9).
+libc6-dbg is already the newest version (2.39-0ubuntu8.9).
+locales is already the newest version (2.39-0ubuntu8.9).
+gcc-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-base is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libgcc-s1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgcc-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libstdc++6 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libstdc++-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libasan8 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libatomic1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgomp1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libhwasan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libitm1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+liblsan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libtsan2 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libubsan1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libcc1-0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+binutils is already the newest version (2.42-4ubuntu2.10).
+binutils-common is already the newest version (2.42-4ubuntu2.10).
+binutils-aarch64-linux-gnu is already the newest version (2.42-4ubuntu2.10).
+libbinutils is already the newest version (2.42-4ubuntu2.10).
+libctf0 is already the newest version (2.42-4ubuntu2.10).
+libctf-nobfd0 is already the newest version (2.42-4ubuntu2.10).
+libsframe1 is already the newest version (2.42-4ubuntu2.10).
+libgprofng0 is already the newest version (2.42-4ubuntu2.10).
+dpkg is already the newest version (1.22.6ubuntu6.6).
+dpkg-dev is already the newest version (1.22.6ubuntu6.6).
+libdpkg-perl is already the newest version (1.22.6ubuntu6.6).
+systemd is already the newest version (255.4-1ubuntu8.18).
+systemd-sysv is already the newest version (255.4-1ubuntu8.18).
+systemd-resolved is already the newest version (255.4-1ubuntu8.18).
+systemd-timesyncd is already the newest version (255.4-1ubuntu8.18).
+systemd-dev is already the newest version (255.4-1ubuntu8.18).
+libsystemd0 is already the newest version (255.4-1ubuntu8.18).
+libsystemd-shared is already the newest version (255.4-1ubuntu8.18).
+udev is already the newest version (255.4-1ubuntu8.18).
+util-linux is already the newest version (2.39.3-9ubuntu6.6).
+bsdutils is already the newest version (1:2.39.3-9ubuntu6.6).
+mount is already the newest version (2.39.3-9ubuntu6.6).
+libblkid1 is already the newest version (2.39.3-9ubuntu6.6).
+libfdisk1 is already the newest version (2.39.3-9ubuntu6.6).
+libsmartcols1 is already the newest version (2.39.3-9ubuntu6.6).
+libuuid1 is already the newest version (2.39.3-9ubuntu6.6).
+fdisk is already the newest version (2.39.3-9ubuntu6.6).
+eject is already the newest version (2.39.3-9ubuntu6.6).
+apt is already the newest version (2.8.4ubuntu0.1).
+libapt-pkg6.0t64 is already the newest version (2.8.4ubuntu0.1).
+python3-apt is already the newest version (2.7.7ubuntu5.3).
+procps is already the newest version (2:4.0.4-4ubuntu3.3).
+libproc2-0 is already the newest version (2:4.0.4-4ubuntu3.3).
+coreutils is already the newest version (9.4-3ubuntu6.3).
+kmod is already the newest version (31+20240202-2ubuntu7.2).
+iproute2 is already the newest version (6.1.0-1ubuntu6.4).
+libevent-2.1-7t64 is already the newest version (2.1.12-stable-9ubuntu2.2).
+libevent-core-2.1-7t64 is already the newest version (2.1.12-stable-9ubuntu2.2).
+netplan.io is already the newest version (1.1.2-8ubuntu1~24.04.3).
+netplan-generator is already the newest version (1.1.2-8ubuntu1~24.04.3).
+python3-netplan is already the newest version (1.1.2-8ubuntu1~24.04.3).
+network-manager is already the newest version (1.46.0-1ubuntu2.8).
+openssh-client is already the newest version (1:9.6p1-3ubuntu13.20).
+openssh-server is already the newest version (1:9.6p1-3ubuntu13.20).
+openssh-sftp-server is already the newest version (1:9.6p1-3ubuntu13.20).
+ssh is already the newest version (1:9.6p1-3ubuntu13.20).
+nftables is already the newest version (1.0.9-1ubuntu0.1).
+nvme-cli is already the newest version (2.8-1ubuntu0.1).
+smartmontools is already the newest version (7.4-2build1).
+multipath-tools is already the newest version (0.9.4-5ubuntu8.2).
+kpartx is already the newest version (0.9.4-5ubuntu8.2).
+rsync is already the newest version (3.2.7-1ubuntu1.5).
+tar is already the newest version (1.35+dfsg-3ubuntu0.4).
+gzip is already the newest version (1.12-1ubuntu3.2).
+xz-utils is already the newest version (5.6.1+really5.4.5-1ubuntu0.4).
+zstd is already the newest version (1.5.5+dfsg2-2build1.1).
+libzstd1 is already the newest version (1.5.5+dfsg2-2build1.1).
+ca-certificates is already the newest version (20260816ubuntu0.24.04.2).
+openssl is already the newest version (3.0.13-0ubuntu3.16).
+libssl3t64 is already the newest version (3.0.13-0ubuntu3.16).
+gnupg is already the newest version (2.4.4-2ubuntu17.6).
+gnupg-utils is already the newest version (2.4.4-2ubuntu17.6).
+gpg is already the newest version (2.4.4-2ubuntu17.6).
+gpg-agent is already the newest version (2.4.4-2ubuntu17.6).
+gpgconf is already the newest version (2.4.4-2ubuntu17.6).
+gpgsm is already the newest version (2.4.4-2ubuntu17.6).
+gpgv is already the newest version (2.4.4-2ubuntu17.6).
+dirmngr is already the newest version (2.4.4-2ubuntu17.6).
+keyboxd is already the newest version (2.4.4-2ubuntu17.6).
+python3.12 is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-venv is already the newest version (3.12.3-1ubuntu0.17).
+python3-minimal is already the newest version (3.12.3-0ubuntu2.1).
+python3 is already the newest version (3.12.3-0ubuntu2.1).
+libpython3.12t64 is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-stdlib is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+linux-libc-dev is already the newest version (6.8.0-149.149).
+numactl is already the newest version (2.0.18-1ubuntu0.24.04.1).
+wireless-regdb is already the newest version (2026.05.30-0ubuntu1~24.04.1).
+wpasupplicant is already the newest version (2:2.11-0ubuntu5~24.04.1).
+lldpd is already the newest version (1.0.18-1ubuntu0.1).
+ethtool is already the newest version (1:6.7-1build1).
+rdma-core is already the newest version (50.0-2ubuntu0.2).
+ibverbs-providers is already the newest version (50.0-2ubuntu0.2).
+mstflint is already the newest version (4.26.0+1-2ubuntu3).
+The following packages were automatically installed and are no longer required:
+  android-libbase android-libboringssl android-libcutils android-liblog
+  android-libziparchive android-sdk-platform-tools-common
+  nvidia-desktop-default-remove-gnome-software-deb
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 187 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'snapd' is not installed, so not removed
+Package 'nvidia-prime' is not installed, so not removed
+Package 'nvidia-desktop-default-snaps' is not installed, so not removed
+Package 'dgx-spark-ota-update-meta' is not installed, so not removed
+Package 'nvidia-spark-run-apt-upgrade' is not installed, so not removed
+Package 'nvidia-enable-bt-profiles' is not installed, so not removed
+The following packages were automatically installed and are no longer required:
+  android-libbase android-libboringssl android-libcutils android-liblog
+  android-libziparchive android-sdk-platform-tools-common
+  nvidia-desktop-default-remove-gnome-software-deb
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 187 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+runtime-unification-applied
+backup: spark-a:/var/backups/spark-host-runtime/20261113T012838Z

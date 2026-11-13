@@ -1,0 +1,345 @@
+{
+  "identity": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "official_main_before": "bbfe2618",
+    "official_main_synced": "2b9a6fb6",
+    "runtime_tree_unchanged": true
+  },
+  "prose_cap_2200": {
+    "c1": {
+      "runs": [
+        70.0,
+        70.26666666666667
+      ],
+      "mean": 70.13333333333333
+    },
+    "c2": {
+      "runs": [
+        104.63333333333333,
+        104.89999999999999
+      ],
+      "mean": 104.76666666666665
+    },
+    "c4": {
+      "runs": [
+        144.0,
+        143.0666666666667
+      ],
+      "mean": 143.53333333333336
+    }
+  },
+  "prose_cap_2593": {
+    "c1": {
+      "runs": [
+        71.33333333333333,
+        71.33333333333333
+      ],
+      "mean": 71.33333333333333
+    },
+    "c2": {
+      "runs": [
+        105.43333333333334,
+        104.73333333333333
+      ],
+      "mean": 105.08333333333334
+    },
+    "c4": {
+      "runs": [
+        143.9,
+        143.93333333333334
+      ],
+      "mean": 143.91666666666669
+    }
+  },
+  "prose_cap_delta_pct": {
+    "c1": 0.522813688212949,
+    "c2": 0.0954502068087919,
+    "c4": -4.263256414560601e-14
+  },
+  "official_long_c1": {
+    "overall_2200": 78.03333333333333,
+    "overall_2593": 78.73666666666666,
+    "prose_2200": 73.6,
+    "prose_2593": 74.5,
+    "official_prose": 77.8,
+    "prose_delta_pct": -4.24164524421593
+  },
+  "prefill_cap_2593": {
+    "32768": {
+      "tps": 8640.729967110783,
+      "official": 8508,
+      "delta_pct": 1.5600607323787319
+    },
+    "131072": {
+      "tps": 8710.095046181208,
+      "official": 8657,
+      "delta_pct": 0.6133192350838312
+    },
+    "262144": {
+      "tps": 8367.688632315238,
+      "official": 8261,
+      "delta_pct": 1.291473578443747
+    },
+    "524288": {
+      "tps": 7550.673562217205,
+      "official": 7460,
+      "delta_pct": 1.2154633004987314
+    },
+    "1000000": {
+      "tps": 6018.645991333749,
+      "official": 6012,
+      "delta_pct": 0.11054543136641559
+    }
+  },
+  "persisted_clock_cap_mhz": 2593,
+  "short_window_protocol": "208 official prose prompts; 10s warmup + 30s + 3 windows; 2 rounds",
+  "official_prose_protocol": "default 256 prompts; 60s warmup + 300s + 10 windows; _tps_by_style()",
+  "prefill_three_rounds": {
+    "32768": {
+      "runs": [
+        8578.886028318835,
+        8552.548050129211,
+        8640.729967110783
+      ],
+      "mean": 8590.72134851961,
+      "official": 8508,
+      "delta_pct": 0.972277251053244
+    },
+    "131072": {
+      "runs": [
+        8736.471392948388,
+        8689.028069707014,
+        8710.095046181208
+      ],
+      "mean": 8711.864836278872,
+      "official": 8657,
+      "delta_pct": 0.6337626923746287
+    },
+    "262144": {
+      "runs": [
+        8341.0511707379,
+        8319.649573396286,
+        8367.688632315238
+      ],
+      "mean": 8342.796458816474,
+      "official": 8261,
+      "delta_pct": 0.9901520253779772
+    },
+    "524288": {
+      "runs": [
+        7511.46093356127,
+        7502.8146077536285,
+        7550.673562217205
+      ],
+      "mean": 7521.649701177368,
+      "official": 7460,
+      "delta_pct": 0.8264035010371096
+    },
+    "1000000": {
+      "runs": [
+        5993.058846317269,
+        5984.054880344178,
+        6018.645991333749
+      ],
+      "mean": 5998.586572665065,
+      "official": 6012,
+      "delta_pct": -0.2231109004480092
+    }
+  },
+  "prose_cap_2593_direct_lock": {
+    "c1": {
+      "runs": [
+        71.33333333333333,
+        71.33333333333333
+      ],
+      "mean": 71.33333333333333
+    },
+    "c2": {
+      "runs": [
+        105.43333333333334,
+        104.73333333333333
+      ],
+      "mean": 105.08333333333334
+    },
+    "c4": {
+      "runs": [
+        143.9,
+        143.93333333333334
+      ],
+      "mean": 143.91666666666669
+    }
+  },
+  "prose_cap_2593_persisted_normal": {
+    "c1": {
+      "runs": [
+        70.43333333333334,
+        70.56666666666666
+      ],
+      "mean": 70.5
+    },
+    "c2": {
+      "runs": [
+        104.83333333333333,
+        104.89999999999999
+      ],
+      "mean": 104.86666666666666
+    },
+    "c4": {
+      "runs": [
+        143.29999999999998,
+        143.76666666666665
+      ],
+      "mean": 143.5333333333333
+    }
+  },
+  "prose_cap_delta_note": "final comparison uses the persisted service state after a fresh normal stop/start; the direct-lock exploratory runs are retained separately and are not used as the stability mean.",
+  "final_runtime": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "clock_cap_mhz": 2200,
+    "profile": "CUDA64/NCCL8+8/8MiB; batch 65520; long-prefill 65424"
+  },
+  "final_short_prose_cap2200": {
+    "c1": {
+      "runs": [
+        69.93333333333334,
+        70.23333333333333
+      ],
+      "mean": 70.08333333333334
+    },
+    "c2": {
+      "runs": [
+        104.13333333333333,
+        104.26666666666667
+      ],
+      "mean": 104.19999999999999
+    },
+    "c4": {
+      "runs": [
+        142.06666666666666,
+        143.4
+      ],
+      "mean": 142.73333333333335
+    }
+  },
+  "final_long_c1_cap2200": {
+    "overall": 77.48,
+    "prose": 73.0,
+    "code": 106.5,
+    "official_prose": 77.8,
+    "prose_delta_pct": -6.169665809768632
+  },
+  "rejected_clock_experiments": {
+    "direct_lock_2593_short": {
+      "c1": 71.33,
+      "c2": 105.08,
+      "c4": 143.92,
+      "reason": "not reproducible after normal stop/start"
+    },
+    "persisted_2593_short": {
+      "c1": 70.5,
+      "c2": 104.87,
+      "c4": 143.53,
+      "reason": "short c1 delta within boot noise; final long prose 73.4 below 2200 73.6"
+    },
+    "cap_3003_short_c1": 71.33,
+    "decision": "restore original sparkDash 2200 MHz cap; no drop-in retained"
+  },
+  "prefill_final_cap2200": {
+    "32768": {
+      "runs": [
+        8578.886028318835,
+        8552.548050129211
+      ],
+      "mean": 8565.717039224022,
+      "official": 8508,
+      "delta_pct": 0.6783855103904779
+    },
+    "131072": {
+      "runs": [
+        8736.471392948388,
+        8689.028069707014
+      ],
+      "mean": 8712.749731327702,
+      "official": 8657,
+      "delta_pct": 0.6439844210200052
+    },
+    "262144": {
+      "runs": [
+        8341.0511707379,
+        8319.649573396286
+      ],
+      "mean": 8330.350372067092,
+      "official": 8261,
+      "delta_pct": 0.8394912488450812
+    },
+    "524288": {
+      "runs": [
+        7511.46093356127,
+        7502.8146077536285
+      ],
+      "mean": 7507.137770657449,
+      "official": 7460,
+      "delta_pct": 0.6318736013062987
+    },
+    "1000000": {
+      "runs": [
+        5993.058846317269,
+        5984.054880344178
+      ],
+      "mean": 5988.556863330723,
+      "official": 6012,
+      "delta_pct": -0.38993906635523823
+    }
+  },
+  "u30_mesh_probe": {
+    "passed": true,
+    "per_rank_geomean_vs_official": {
+      "0": 1.16437882791142,
+      "1": 1.1438110840653681,
+      "2": 1.1463540385898214,
+      "3": 1.1540414730552617
+    },
+    "mean_geomean_vs_official": 1.1521186202184737,
+    "observed_slowdown_pct": 15.211862021847367
+  },
+  "rejected_runtime_qps1": {
+    "runs": [
+      69.66666666666667,
+      69.96666666666665
+    ],
+    "mean": 69.81666666666666,
+    "reason": "no same-boot ABBA resolution; cross-boot means differ by 0.29%, within noise; restored validated QPS=2"
+  },
+  "final_short_prose_current_boot": {
+    "c1": {
+      "runs": [
+        69.3,
+        69.76666666666667
+      ],
+      "mean": 69.53333333333333
+    },
+    "c2": {
+      "runs": [
+        103.7,
+        103.43333333333334
+      ],
+      "mean": 103.56666666666666
+    },
+    "c4": {
+      "runs": [
+        142.26666666666668,
+        142.06666666666666
+      ],
+      "mean": 142.16666666666669
+    }
+  },
+  "final_long_c1_current_boot": {
+    "overall": 76.97,
+    "prose": 72.6,
+    "code": 105.7,
+    "official_prose": 77.8,
+    "prose_delta_pct": -6.683804627249357
+  }
+}

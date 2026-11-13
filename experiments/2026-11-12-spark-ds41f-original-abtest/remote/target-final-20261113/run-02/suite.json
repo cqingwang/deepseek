@@ -1,0 +1,89 @@
+{
+ "schema": "servebench-suite/1",
+ "suite": {
+  "name": "spark-ds41f-original-official-prose-c1-c2-c4",
+  "version": 1,
+  "description": "Official prose-style classification (208 default prompts) at daily c1/c2/c4.",
+  "steps": [
+   {
+    "id": "c1",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 1,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "/opt/abtest-inputs/prose-prompts-official.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c2",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 2,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "/opt/abtest-inputs/prose-prompts-official.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c4",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 4,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "/opt/abtest-inputs/prose-prompts-official.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   }
+  ]
+ },
+ "suite_sha256": "97dcd59b054da2639b1bf0e3e4a0488edf617f47e60ba64280379c1811706a51",
+ "label": "target-20261113-prose-02",
+ "corpus": null,
+ "started_utc": "2026-11-12T18:49:45+00:00",
+ "steps": [
+  {
+   "id": "c1",
+   "command": "run",
+   "output": "c1.json",
+   "exit": 0,
+   "seconds": 43.2
+  },
+  {
+   "id": "c2",
+   "command": "run",
+   "output": "c2.json",
+   "exit": 0,
+   "seconds": 44.0
+  },
+  {
+   "id": "c4",
+   "command": "run",
+   "output": "c4.json",
+   "exit": 0,
+   "seconds": 42.9
+  }
+ ],
+ "finished_utc": "2026-11-12T18:51:55+00:00"
+}

@@ -1,0 +1,208 @@
+{"id": "d000", "text": "Explain hash maps to a curious teenager, with one concrete example."}
+{"id": "d001", "text": "Write a short story in which compound interest changes the main character's day."}
+{"id": "d003", "text": "Compare two different approaches to the water cycle and say when you would choose each."}
+{"id": "d004", "text": "Give a step-by-step plan for a beginner who wants to get started with earthquake-resistant buildings."}
+{"id": "d005", "text": "Summarize the history of public-key cryptography in a few paragraphs."}
+{"id": "d006", "text": "Write a dialogue between a skeptic and an expert about chess openings."}
+{"id": "d008", "text": "List the ten most important terms someone should know about learning a musical instrument as an adult, with one-line definitions."}
+{"id": "d009", "text": "Write a letter to a friend recommending they learn about the history of timekeeping, and explain why."}
+{"id": "d010", "text": "Design a one-week lesson plan that teaches jazz improvisation, day by day."}
+{"id": "d011", "text": "Describe a realistic problem involving garbage collection in programming languages and work through how to solve it."}
+{"id": "d012", "text": "Write a product description for an imaginary gadget built around bicycle maintenance."}
+{"id": "d013", "text": "Explain the trade-offs and risks involved in map projections, with numbers where you can."}
+{"id": "d015", "text": "Argue for and then against the claim that the immune system matters more than people think."}
+{"id": "d016", "text": "Explain photosynthesis to a curious teenager, with one concrete example."}
+{"id": "d017", "text": "Write a short story in which rainwater harvesting changes the main character's day."}
+{"id": "d019", "text": "Compare two different approaches to database indexing and say when you would choose each."}
+{"id": "d020", "text": "Give a step-by-step plan for a beginner who wants to get started with open-source licensing."}
+{"id": "d021", "text": "Summarize the history of sourdough baking in a few paragraphs."}
+{"id": "d022", "text": "Write a dialogue between a skeptic and an expert about solar panels."}
+{"id": "d024", "text": "List the ten most important terms someone should know about electric grids, with one-line definitions."}
+{"id": "d025", "text": "Write a letter to a friend recommending they learn about hash maps, and explain why."}
+{"id": "d026", "text": "Design a one-week lesson plan that teaches compound interest, day by day."}
+{"id": "d027", "text": "Describe a realistic problem involving ocean tides and work through how to solve it."}
+{"id": "d028", "text": "Write a product description for an imaginary gadget built around the water cycle."}
+{"id": "d029", "text": "Explain the trade-offs and risks involved in earthquake-resistant buildings, with numbers where you can."}
+{"id": "d031", "text": "Argue for and then against the claim that chess openings matters more than people think."}
+{"id": "d032", "text": "Explain the printing press to a curious teenager, with one concrete example."}
+{"id": "d033", "text": "Write a short story in which the immune system changes the main character's day."}
+{"id": "d035", "text": "Compare two different approaches to migratory birds and say when you would choose each."}
+{"id": "d036", "text": "Give a step-by-step plan for a beginner who wants to get started with sleep and memory."}
+{"id": "d037", "text": "Summarize the history of plate tectonics in a few paragraphs."}
+{"id": "d038", "text": "Write a dialogue between a skeptic and an expert about beekeeping."}
+{"id": "d040", "text": "List the ten most important terms someone should know about coffee roasting, with one-line definitions."}
+{"id": "d041", "text": "Write a letter to a friend recommending they learn about photosynthesis, and explain why."}
+{"id": "d042", "text": "Design a one-week lesson plan that teaches rainwater harvesting, day by day."}
+{"id": "d043", "text": "Describe a realistic problem involving urban gardening and work through how to solve it."}
+{"id": "d044", "text": "Write a product description for an imaginary gadget built around database indexing."}
+{"id": "d045", "text": "Explain the trade-offs and risks involved in open-source licensing, with numbers where you can."}
+{"id": "d047", "text": "Argue for and then against the claim that solar panels matters more than people think."}
+{"id": "d048", "text": "Explain public-key cryptography to a curious teenager, with one concrete example."}
+{"id": "d049", "text": "Write a short story in which chess openings changes the main character's day."}
+{"id": "d051", "text": "Compare two different approaches to learning a musical instrument as an adult and say when you would choose each."}
+{"id": "d052", "text": "Give a step-by-step plan for a beginner who wants to get started with the history of timekeeping."}
+{"id": "d053", "text": "Summarize the history of jazz improvisation in a few paragraphs."}
+{"id": "d054", "text": "Write a dialogue between a skeptic and an expert about garbage collection in programming languages."}
+{"id": "d056", "text": "List the ten most important terms someone should know about map projections, with one-line definitions."}
+{"id": "d057", "text": "Write a letter to a friend recommending they learn about the printing press, and explain why."}
+{"id": "d058", "text": "Design a one-week lesson plan that teaches the immune system, day by day."}
+{"id": "d059", "text": "Describe a realistic problem involving the Roman road network and work through how to solve it."}
+{"id": "d060", "text": "Write a product description for an imaginary gadget built around migratory birds."}
+{"id": "d061", "text": "Explain the trade-offs and risks involved in sleep and memory, with numbers where you can."}
+{"id": "d063", "text": "Argue for and then against the claim that beekeeping matters more than people think."}
+{"id": "d064", "text": "Explain sourdough baking to a curious teenager, with one concrete example."}
+{"id": "d065", "text": "Write a short story in which solar panels changes the main character's day."}
+{"id": "d067", "text": "Compare two different approaches to electric grids and say when you would choose each."}
+{"id": "d068", "text": "Give a step-by-step plan for a beginner who wants to get started with hash maps."}
+{"id": "d069", "text": "Summarize the history of compound interest in a few paragraphs."}
+{"id": "d070", "text": "Write a dialogue between a skeptic and an expert about ocean tides."}
+{"id": "d072", "text": "List the ten most important terms someone should know about earthquake-resistant buildings, with one-line definitions."}
+{"id": "d073", "text": "Write a letter to a friend recommending they learn about public-key cryptography, and explain why."}
+{"id": "d074", "text": "Design a one-week lesson plan that teaches chess openings, day by day."}
+{"id": "d075", "text": "Describe a realistic problem involving machine translation and work through how to solve it."}
+{"id": "d076", "text": "Write a product description for an imaginary gadget built around learning a musical instrument as an adult."}
+{"id": "d077", "text": "Explain the trade-offs and risks involved in the history of timekeeping, with numbers where you can."}
+{"id": "d079", "text": "Argue for and then against the claim that garbage collection in programming languages matters more than people think."}
+{"id": "d080", "text": "Explain plate tectonics to a curious teenager, with one concrete example."}
+{"id": "d081", "text": "Write a short story in which beekeeping changes the main character's day."}
+{"id": "d083", "text": "Compare two different approaches to coffee roasting and say when you would choose each."}
+{"id": "d084", "text": "Give a step-by-step plan for a beginner who wants to get started with photosynthesis."}
+{"id": "d085", "text": "Summarize the history of rainwater harvesting in a few paragraphs."}
+{"id": "d086", "text": "Write a dialogue between a skeptic and an expert about urban gardening."}
+{"id": "d088", "text": "List the ten most important terms someone should know about open-source licensing, with one-line definitions."}
+{"id": "d089", "text": "Write a letter to a friend recommending they learn about sourdough baking, and explain why."}
+{"id": "d090", "text": "Design a one-week lesson plan that teaches solar panels, day by day."}
+{"id": "d091", "text": "Describe a realistic problem involving volcanoes and work through how to solve it."}
+{"id": "d092", "text": "Write a product description for an imaginary gadget built around electric grids."}
+{"id": "d093", "text": "Explain the trade-offs and risks involved in hash maps, with numbers where you can."}
+{"id": "d095", "text": "Argue for and then against the claim that ocean tides matters more than people think."}
+{"id": "d096", "text": "Explain jazz improvisation to a curious teenager, with one concrete example."}
+{"id": "d097", "text": "Write a short story in which garbage collection in programming languages changes the main character's day."}
+{"id": "d099", "text": "Compare two different approaches to map projections and say when you would choose each."}
+{"id": "d100", "text": "Give a step-by-step plan for a beginner who wants to get started with the printing press."}
+{"id": "d101", "text": "Summarize the history of the immune system in a few paragraphs."}
+{"id": "d102", "text": "Write a dialogue between a skeptic and an expert about the Roman road network."}
+{"id": "d104", "text": "List the ten most important terms someone should know about sleep and memory, with one-line definitions."}
+{"id": "d105", "text": "Write a letter to a friend recommending they learn about plate tectonics, and explain why."}
+{"id": "d106", "text": "Design a one-week lesson plan that teaches beekeeping, day by day."}
+{"id": "d107", "text": "Describe a realistic problem involving budgeting for a household and work through how to solve it."}
+{"id": "d108", "text": "Write a product description for an imaginary gadget built around coffee roasting."}
+{"id": "d109", "text": "Explain the trade-offs and risks involved in photosynthesis, with numbers where you can."}
+{"id": "d111", "text": "Argue for and then against the claim that urban gardening matters more than people think."}
+{"id": "d112", "text": "Explain compound interest to a curious teenager, with one concrete example."}
+{"id": "d113", "text": "Write a short story in which ocean tides changes the main character's day."}
+{"id": "d115", "text": "Compare two different approaches to earthquake-resistant buildings and say when you would choose each."}
+{"id": "d116", "text": "Give a step-by-step plan for a beginner who wants to get started with public-key cryptography."}
+{"id": "d117", "text": "Summarize the history of chess openings in a few paragraphs."}
+{"id": "d118", "text": "Write a dialogue between a skeptic and an expert about machine translation."}
+{"id": "d120", "text": "List the ten most important terms someone should know about the history of timekeeping, with one-line definitions."}
+{"id": "d121", "text": "Write a letter to a friend recommending they learn about jazz improvisation, and explain why."}
+{"id": "d122", "text": "Design a one-week lesson plan that teaches garbage collection in programming languages, day by day."}
+{"id": "d123", "text": "Describe a realistic problem involving bicycle maintenance and work through how to solve it."}
+{"id": "d124", "text": "Write a product description for an imaginary gadget built around map projections."}
+{"id": "d125", "text": "Explain the trade-offs and risks involved in the printing press, with numbers where you can."}
+{"id": "d127", "text": "Argue for and then against the claim that the Roman road network matters more than people think."}
+{"id": "d128", "text": "Explain rainwater harvesting to a curious teenager, with one concrete example."}
+{"id": "d129", "text": "Write a short story in which urban gardening changes the main character's day."}
+{"id": "d131", "text": "Compare two different approaches to open-source licensing and say when you would choose each."}
+{"id": "d132", "text": "Give a step-by-step plan for a beginner who wants to get started with sourdough baking."}
+{"id": "d133", "text": "Summarize the history of solar panels in a few paragraphs."}
+{"id": "d134", "text": "Write a dialogue between a skeptic and an expert about volcanoes."}
+{"id": "d136", "text": "List the ten most important terms someone should know about hash maps, with one-line definitions."}
+{"id": "d137", "text": "Write a letter to a friend recommending they learn about compound interest, and explain why."}
+{"id": "d138", "text": "Design a one-week lesson plan that teaches ocean tides, day by day."}
+{"id": "d139", "text": "Describe a realistic problem involving the water cycle and work through how to solve it."}
+{"id": "d140", "text": "Write a product description for an imaginary gadget built around earthquake-resistant buildings."}
+{"id": "d141", "text": "Explain the trade-offs and risks involved in public-key cryptography, with numbers where you can."}
+{"id": "d143", "text": "Argue for and then against the claim that machine translation matters more than people think."}
+{"id": "d144", "text": "Explain the immune system to a curious teenager, with one concrete example."}
+{"id": "d145", "text": "Write a short story in which the Roman road network changes the main character's day."}
+{"id": "d147", "text": "Compare two different approaches to sleep and memory and say when you would choose each."}
+{"id": "d148", "text": "Give a step-by-step plan for a beginner who wants to get started with plate tectonics."}
+{"id": "d149", "text": "Summarize the history of beekeeping in a few paragraphs."}
+{"id": "d150", "text": "Write a dialogue between a skeptic and an expert about budgeting for a household."}
+{"id": "d152", "text": "List the ten most important terms someone should know about photosynthesis, with one-line definitions."}
+{"id": "d153", "text": "Write a letter to a friend recommending they learn about rainwater harvesting, and explain why."}
+{"id": "d154", "text": "Design a one-week lesson plan that teaches urban gardening, day by day."}
+{"id": "d155", "text": "Describe a realistic problem involving database indexing and work through how to solve it."}
+{"id": "d156", "text": "Write a product description for an imaginary gadget built around open-source licensing."}
+{"id": "d157", "text": "Explain the trade-offs and risks involved in sourdough baking, with numbers where you can."}
+{"id": "d159", "text": "Argue for and then against the claim that volcanoes matters more than people think."}
+{"id": "d160", "text": "Explain chess openings to a curious teenager, with one concrete example."}
+{"id": "d161", "text": "Write a short story in which machine translation changes the main character's day."}
+{"id": "d163", "text": "Compare two different approaches to the history of timekeeping and say when you would choose each."}
+{"id": "d164", "text": "Give a step-by-step plan for a beginner who wants to get started with jazz improvisation."}
+{"id": "d165", "text": "Summarize the history of garbage collection in programming languages in a few paragraphs."}
+{"id": "d166", "text": "Write a dialogue between a skeptic and an expert about bicycle maintenance."}
+{"id": "d168", "text": "List the ten most important terms someone should know about the printing press, with one-line definitions."}
+{"id": "d169", "text": "Write a letter to a friend recommending they learn about the immune system, and explain why."}
+{"id": "d170", "text": "Design a one-week lesson plan that teaches the Roman road network, day by day."}
+{"id": "d171", "text": "Describe a realistic problem involving migratory birds and work through how to solve it."}
+{"id": "d172", "text": "Write a product description for an imaginary gadget built around sleep and memory."}
+{"id": "d173", "text": "Explain the trade-offs and risks involved in plate tectonics, with numbers where you can."}
+{"id": "d175", "text": "Argue for and then against the claim that budgeting for a household matters more than people think."}
+{"id": "d176", "text": "Explain solar panels to a curious teenager, with one concrete example."}
+{"id": "d177", "text": "Write a short story in which volcanoes changes the main character's day."}
+{"id": "d179", "text": "Compare two different approaches to hash maps and say when you would choose each."}
+{"id": "d180", "text": "Give a step-by-step plan for a beginner who wants to get started with compound interest."}
+{"id": "d181", "text": "Summarize the history of ocean tides in a few paragraphs."}
+{"id": "d182", "text": "Write a dialogue between a skeptic and an expert about the water cycle."}
+{"id": "d184", "text": "List the ten most important terms someone should know about public-key cryptography, with one-line definitions."}
+{"id": "d185", "text": "Write a letter to a friend recommending they learn about chess openings, and explain why."}
+{"id": "d186", "text": "Design a one-week lesson plan that teaches machine translation, day by day."}
+{"id": "d187", "text": "Describe a realistic problem involving learning a musical instrument as an adult and work through how to solve it."}
+{"id": "d188", "text": "Write a product description for an imaginary gadget built around the history of timekeeping."}
+{"id": "d189", "text": "Explain the trade-offs and risks involved in jazz improvisation, with numbers where you can."}
+{"id": "d191", "text": "Argue for and then against the claim that bicycle maintenance matters more than people think."}
+{"id": "d192", "text": "Explain beekeeping to a curious teenager, with one concrete example."}
+{"id": "d193", "text": "Write a short story in which budgeting for a household changes the main character's day."}
+{"id": "d195", "text": "Compare two different approaches to photosynthesis and say when you would choose each."}
+{"id": "d196", "text": "Give a step-by-step plan for a beginner who wants to get started with rainwater harvesting."}
+{"id": "d197", "text": "Summarize the history of urban gardening in a few paragraphs."}
+{"id": "d198", "text": "Write a dialogue between a skeptic and an expert about database indexing."}
+{"id": "d200", "text": "List the ten most important terms someone should know about sourdough baking, with one-line definitions."}
+{"id": "d201", "text": "Write a letter to a friend recommending they learn about solar panels, and explain why."}
+{"id": "d202", "text": "Design a one-week lesson plan that teaches volcanoes, day by day."}
+{"id": "d203", "text": "Describe a realistic problem involving electric grids and work through how to solve it."}
+{"id": "d204", "text": "Write a product description for an imaginary gadget built around hash maps."}
+{"id": "d205", "text": "Explain the trade-offs and risks involved in compound interest, with numbers where you can."}
+{"id": "d207", "text": "Argue for and then against the claim that the water cycle matters more than people think."}
+{"id": "d208", "text": "Explain garbage collection in programming languages to a curious teenager, with one concrete example."}
+{"id": "d209", "text": "Write a short story in which bicycle maintenance changes the main character's day."}
+{"id": "d211", "text": "Compare two different approaches to the printing press and say when you would choose each."}
+{"id": "d212", "text": "Give a step-by-step plan for a beginner who wants to get started with the immune system."}
+{"id": "d213", "text": "Summarize the history of the Roman road network in a few paragraphs."}
+{"id": "d214", "text": "Write a dialogue between a skeptic and an expert about migratory birds."}
+{"id": "d216", "text": "List the ten most important terms someone should know about plate tectonics, with one-line definitions."}
+{"id": "d217", "text": "Write a letter to a friend recommending they learn about beekeeping, and explain why."}
+{"id": "d218", "text": "Design a one-week lesson plan that teaches budgeting for a household, day by day."}
+{"id": "d219", "text": "Describe a realistic problem involving coffee roasting and work through how to solve it."}
+{"id": "d220", "text": "Write a product description for an imaginary gadget built around photosynthesis."}
+{"id": "d221", "text": "Explain the trade-offs and risks involved in rainwater harvesting, with numbers where you can."}
+{"id": "d223", "text": "Argue for and then against the claim that database indexing matters more than people think."}
+{"id": "d224", "text": "Explain ocean tides to a curious teenager, with one concrete example."}
+{"id": "d225", "text": "Write a short story in which the water cycle changes the main character's day."}
+{"id": "d227", "text": "Compare two different approaches to public-key cryptography and say when you would choose each."}
+{"id": "d228", "text": "Give a step-by-step plan for a beginner who wants to get started with chess openings."}
+{"id": "d229", "text": "Summarize the history of machine translation in a few paragraphs."}
+{"id": "d230", "text": "Write a dialogue between a skeptic and an expert about learning a musical instrument as an adult."}
+{"id": "d232", "text": "List the ten most important terms someone should know about jazz improvisation, with one-line definitions."}
+{"id": "d233", "text": "Write a letter to a friend recommending they learn about garbage collection in programming languages, and explain why."}
+{"id": "d234", "text": "Design a one-week lesson plan that teaches bicycle maintenance, day by day."}
+{"id": "d235", "text": "Describe a realistic problem involving map projections and work through how to solve it."}
+{"id": "d236", "text": "Write a product description for an imaginary gadget built around the printing press."}
+{"id": "d237", "text": "Explain the trade-offs and risks involved in the immune system, with numbers where you can."}
+{"id": "d239", "text": "Argue for and then against the claim that migratory birds matters more than people think."}
+{"id": "d240", "text": "Explain urban gardening to a curious teenager, with one concrete example."}
+{"id": "d241", "text": "Write a short story in which database indexing changes the main character's day."}
+{"id": "d243", "text": "Compare two different approaches to sourdough baking and say when you would choose each."}
+{"id": "d244", "text": "Give a step-by-step plan for a beginner who wants to get started with solar panels."}
+{"id": "d245", "text": "Summarize the history of volcanoes in a few paragraphs."}
+{"id": "d246", "text": "Write a dialogue between a skeptic and an expert about electric grids."}
+{"id": "d248", "text": "List the ten most important terms someone should know about compound interest, with one-line definitions."}
+{"id": "d249", "text": "Write a letter to a friend recommending they learn about ocean tides, and explain why."}
+{"id": "d250", "text": "Design a one-week lesson plan that teaches the water cycle, day by day."}
+{"id": "d251", "text": "Describe a realistic problem involving earthquake-resistant buildings and work through how to solve it."}
+{"id": "d252", "text": "Write a product description for an imaginary gadget built around public-key cryptography."}
+{"id": "d253", "text": "Explain the trade-offs and risks involved in chess openings, with numbers where you can."}
+{"id": "d255", "text": "Argue for and then against the claim that learning a musical instrument as an adult matters more than people think."}

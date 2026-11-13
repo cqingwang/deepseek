@@ -1,0 +1,268 @@
+===== 192.168.2.180 =====
+spark-a
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enP7s7           DOWN           
+wlP9s9           UP             192.168.2.180/24 240e:3a2:5603:820:6b83:50d:11a1:b79b/64 240e:3a2:5603:820:58a5:a46a:2876:a4fc/64 fe80::d329:b10:5dce:1404/64 
+docker0          DOWN           172.17.0.1/16 fe80::9cbb:56ff:fe43:eeab/64 
+enp1s0f0np0      UP             10.251.20.1/30 fe80::4ebb:47ff:fe80:f142/64 
+enp1s0f1np1      UP             10.251.20.14/30 fe80::4ebb:47ff:fe80:f143/64 
+enP2p1s0f0np0    UP             10.100.241.1/30 fe80::4ebb:47ff:fe80:f146/64 
+enP2p1s0f1np1    UP             10.100.241.14/30 fe80::4ebb:47ff:fe80:f147/64 
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.180 metric 600 
+10.100.241.0/30 dev enP2p1s0f0np0 proto kernel scope link src 10.100.241.1 metric 106 
+10.100.241.9 via 10.100.241.13 dev enP2p1s0f1np1 src 10.100.241.14 
+10.100.241.12/30 dev enP2p1s0f1np1 proto kernel scope link src 10.100.241.14 metric 107 
+10.251.20.0/30 dev enp1s0f0np0 proto kernel scope link src 10.251.20.1 metric 104 
+10.251.20.6 via 10.251.20.2 dev enp1s0f0np0 src 10.251.20.1 
+10.251.20.12/30 dev enp1s0f1np1 proto kernel scope link src 10.251.20.14 metric 105 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.180 metric 600 
+===enp1s0f0np0===
+===enp1s0f1np1===
+===enP2p1s0f0np0===
+filter protocol [34997] pref 49159 flower chain 0 
+filter protocol [34997] pref 49159 flower chain 0 handle 0xc007 
+  dst_mac 4c:bb:47:80:f1:46
+  src_mac 4c:bb:47:80:f3:2c
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val abb40000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen
+	index 1 ref 1 bind 1
+	used_hw_stats delayed
+
+===enP2p1s0f1np1===
+filter protocol [34997] pref 49165 flower chain 0 
+filter protocol [34997] pref 49165 flower chain 0 handle 0xc00d 
+  dst_mac 4c:bb:47:80:f1:47
+  src_mac 4c:bb:47:80:ab:b4
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f32c0000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen
+	index 2 ref 1 bind 1
+	used_hw_stats delayed
+
+===== 192.168.2.161 =====
+spark-b
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enP7s7           DOWN           
+wlP9s9           UP             192.168.2.161/24 240e:3a2:5603:820:7fe1:9a32:4c78:6ec0/64 240e:3a2:5603:820:8a5f:bd58:7690:34c5/64 240e:3a2:5603:820::5b9/128 240e:3a2:5603:820:39ba:ac5f:61bf:129/64 fe80::5928:9ca3:a2c4:ba39/64 
+docker0          DOWN           172.17.0.1/16 
+enp1s0f0np0      UP             10.251.20.2/30 fe80::4ebb:47ff:fe80:f328/64 
+enp1s0f1np1      UP             10.251.20.5/30 fe80::4ebb:47ff:fe80:f329/64 
+enP2p1s0f0np0    UP             10.100.241.2/30 fe80::4ebb:47ff:fe80:f32c/64 
+enP2p1s0f1np1    UP             10.100.241.5/30 fe80::4ebb:47ff:fe80:f32d/64 
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.161 metric 600 
+10.100.241.0/30 dev enP2p1s0f0np0 proto kernel scope link src 10.100.241.2 metric 106 
+10.100.241.4/30 dev enP2p1s0f1np1 proto kernel scope link src 10.100.241.5 metric 107 
+10.100.241.13 via 10.100.241.1 dev enP2p1s0f0np0 src 10.100.241.2 
+10.251.20.0/30 dev enp1s0f0np0 proto kernel scope link src 10.251.20.2 metric 104 
+10.251.20.4/30 dev enp1s0f1np1 proto kernel scope link src 10.251.20.5 metric 105 
+10.251.20.10 via 10.251.20.6 dev enp1s0f1np1 src 10.251.20.5 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.161 metric 600 
+===enp1s0f0np0===
+filter protocol [34997] pref 49152 flower chain 0 
+filter protocol [34997] pref 49152 flower chain 0 handle 0xc000 
+  dst_mac 4c:bb:47:80:f3:28
+  src_mac 4c:bb:47:80:f1:42
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val b20d0000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen
+	index 1 ref 1 bind 1
+	used_hw_stats delayed
+
+===enp1s0f1np1===
+filter protocol [34997] pref 49162 flower chain 0 
+filter protocol [34997] pref 49162 flower chain 0 handle 0xc00a 
+  dst_mac 4c:bb:47:80:f3:29
+  src_mac 4c:bb:47:80:b2:0d
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f1420000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen
+	index 2 ref 1 bind 1
+	used_hw_stats delayed
+
+===enP2p1s0f0np0===
+===enP2p1s0f1np1===
+===== 192.168.2.102 =====
+spark-c
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enP7s7           DOWN           
+wlP9s9           UP             192.168.2.102/24 240e:3a2:5603:820:27cb:1584:fa41:28bc/64 240e:3a2:5603:820:6d6f:f066:a894:871c/64 240e:3a2:5603:820::ffe/128 240e:3a2:5603:820:d6bc:d43f:ebe6:747d/64 fe80::82b0:4fc7:dc67:973a/64 
+docker0          DOWN           172.17.0.1/16 
+enp1s0f0np0      UP             10.251.20.9/30 fe80::4ebb:47ff:fe80:b20c/64 
+enp1s0f1np1      UP             10.251.20.6/30 fe80::4ebb:47ff:fe80:b20d/64 
+enP2p1s0f0np0    UP             10.100.241.9/30 fe80::4ebb:47ff:fe80:b210/64 
+enP2p1s0f1np1    UP             10.100.241.6/30 fe80::4ebb:47ff:fe80:b211/64 
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.102 metric 600 
+10.100.241.4/30 dev enP2p1s0f1np1 proto kernel scope link src 10.100.241.6 metric 107 
+10.100.241.8/30 dev enP2p1s0f0np0 proto kernel scope link src 10.100.241.9 metric 106 
+10.100.241.14 via 10.100.241.10 dev enP2p1s0f0np0 src 10.100.241.9 
+10.251.20.1 via 10.251.20.5 dev enp1s0f1np1 src 10.251.20.6 
+10.251.20.4/30 dev enp1s0f1np1 proto kernel scope link src 10.251.20.6 metric 105 
+10.251.20.8/30 dev enp1s0f0np0 proto kernel scope link src 10.251.20.9 metric 104 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.102 metric 600 
+===enp1s0f0np0===
+filter protocol [34997] pref 49166 flower chain 0 
+filter protocol [34997] pref 49166 flower chain 0 handle 0xc00e 
+  dst_mac 4c:bb:47:80:b2:0c
+  src_mac 4c:bb:47:80:ab:af
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f3290000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen
+	index 2 ref 1 bind 1
+	used_hw_stats delayed
+
+===enp1s0f1np1===
+filter protocol [34997] pref 49156 flower chain 0 
+filter protocol [34997] pref 49156 flower chain 0 handle 0xc004 
+  dst_mac 4c:bb:47:80:b2:0d
+  src_mac 4c:bb:47:80:f3:29
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val abaf0000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen
+	index 1 ref 1 bind 1
+	used_hw_stats delayed
+
+===enP2p1s0f0np0===
+===enP2p1s0f1np1===
+===== 192.168.2.238 =====
+spark-d
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enP7s7           DOWN           
+wlP9s9           UP             192.168.2.238/24 240e:3a2:5603:820:6d4a:6096:89e6:5ab0/64 240e:3a2:5603:820:3143:cb47:acb1:1593/64 240e:3a2:5603:820::ffe/128 240e:3a2:5603:820:ac81:15b:7f0e:12d6/64 fe80::1f41:4f4:4b85:33fd/64 
+docker0          DOWN           172.17.0.1/16 
+enp1s0f0np0      UP             10.251.20.10/30 fe80::4ebb:47ff:fe80:abaf/64 
+enp1s0f1np1      UP             10.251.20.13/30 fe80::4ebb:47ff:fe80:abb0/64 
+enP2p1s0f0np0    UP             10.100.241.10/30 fe80::4ebb:47ff:fe80:abb3/64 
+enP2p1s0f1np1    UP             10.100.241.13/30 fe80::4ebb:47ff:fe80:abb4/64 
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.238 metric 600 
+10.100.241.2 via 10.100.241.14 dev enP2p1s0f1np1 src 10.100.241.13 
+10.100.241.8/30 dev enP2p1s0f0np0 proto kernel scope link src 10.100.241.10 metric 106 
+10.100.241.12/30 dev enP2p1s0f1np1 proto kernel scope link src 10.100.241.13 metric 107 
+10.251.20.5 via 10.251.20.9 dev enp1s0f0np0 src 10.251.20.10 
+10.251.20.8/30 dev enp1s0f0np0 proto kernel scope link src 10.251.20.10 metric 104 
+10.251.20.12/30 dev enp1s0f1np1 proto kernel scope link src 10.251.20.13 metric 105 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.238 metric 600 
+===enp1s0f0np0===
+===enp1s0f1np1===
+===enP2p1s0f0np0===
+filter protocol [34997] pref 49161 flower chain 0 
+filter protocol [34997] pref 49161 flower chain 0 handle 0xc009 
+  dst_mac 4c:bb:47:80:ab:b3
+  src_mac 4c:bb:47:80:b2:10
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 3 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 4 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val f1470000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen
+	index 2 ref 1 bind 1
+	used_hw_stats delayed
+
+===enP2p1s0f1np1===
+filter protocol [34997] pref 49155 flower chain 0 
+filter protocol [34997] pref 49155 flower chain 0 handle 0xc003 
+  dst_mac 4c:bb:47:80:ab:b4
+  src_mac 4c:bb:47:80:f1:47
+  eth_type 88b5
+  skip_sw
+  in_hw in_hw_count 1
+	action order 1:  pedit action pipe keys 1
+ 	 index 1 ref 1 bind 1
+	 key #0  at eth+12: val 08000000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 2:  pedit action pipe keys 2
+ 	 index 2 ref 1 bind 1
+	 key #0  at eth+0: val 4cbb4780 mask 00000000
+	 key #1  at eth+4: val b2100000 mask 0000ffff
+	used_hw_stats delayed
+
+	action order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen
+	index 1 ref 1 bind 1
+	used_hw_stats delayed
+

@@ -1,0 +1,44 @@
+PASS: apt plan is limited to the headless runtime profile
+backup=/var/backups/spark-host-kernel-retire/20261113T021049Z
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'linux-headers-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-headers-nvidia-hwe-24.04' is not installed, so not removed
+Package 'linux-image-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-image-nvidia-hwe-24.04' is not installed, so not removed
+Package 'linux-modules-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-modules-nvidia-580-open-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-modules-nvidia-580-open-nvidia-hwe-24.04' is not installed, so not removed
+Package 'linux-modules-nvidia-fs-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-nvidia-7.0-headers-7.0.0-1025' is not installed, so not removed
+Package 'linux-nvidia-7.0-tools-7.0.0-1025' is not installed, so not removed
+Package 'linux-nvidia-hwe-24.04' is not installed, so not removed
+Package 'linux-tools-7.0.0-1025-nvidia' is not installed, so not removed
+Package 'linux-tools-nvidia-hwe-24.04' is not installed, so not removed
+Package 'linux-modules-nvidia-580-open-6.17.0-1029-nvidia' is not installed, so not removed
+Package 'nvidia-driver-580-open' is not installed, so not removed
+Package 'nvidia-system-core' is not installed, so not removed
+Package 'nvidia-crashdump' is not installed, so not removed
+Package 'linux-crashdump' is not installed, so not removed
+Package 'kdump-tools' is not installed, so not removed
+Package 'kexec-tools' is not installed, so not removed
+Package 'makedumpfile' is not installed, so not removed
+The following packages were automatically installed and are no longer required:
+  bpfcc-tools bpftrace dgx-repo hpc-sdk-repo ieee-data ipcalc libbpfcc
+  libclang-cpp18 libclang1-18 libllvm18 libtss2-fapi1t64
+  libtss2-tcti-libtpms0t64 libtss2-tcti-spi-helper0t64 libtss2-tctildr0t64
+  msecli nv-cpu-governor nv-env-paths nvgpu-services-list
+  nvidia-desktop-default-remove-gnome-software-deb
+  nvidia-disable-init-on-alloc nvidia-disable-numa-balancing nvidia-earlycon
+  nvidia-enable-power-meter-cap nvidia-esm-hook-epilogue
+  nvidia-kernel-defaults nvidia-pci-realloc nvidia-redfish-config
+  nvidia-relaxed-ordering-gpu nvidia-relaxed-ordering-nvme python3-bpfcc
+  python3-netaddr tpm2-tools ubuntu-advantage-tools ubuntu-kernel-accessories
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 188 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+kernel-retirement-applied
+backup: spark-b:/var/backups/spark-host-kernel-retire/20261113T021049Z

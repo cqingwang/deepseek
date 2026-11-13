@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install the pinned dgx-spark-memory-saver DKMS module for the candidate 64 KiB kernel.
+# Install the pinned dgx-spark-memory-saver DKMS module for the stable 64 KiB kernel.
 # Run on each node with the serving cluster stopped.
 set -euo pipefail
 
@@ -11,7 +11,7 @@ m = p["memory_saver"]
 print(m["repository"])
 print(m["revision"])
 print(m["version"])
-print(p["candidate"])
+print(p["stable"])
 PY
 )
 

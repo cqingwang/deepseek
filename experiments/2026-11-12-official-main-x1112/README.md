@@ -128,6 +128,19 @@
 - 因此当前结论是：代码、镜像、参数、ring 数据面和二进制身份已对齐；
   prose c1 性能仍未达到官方，c2/c4 缺官方同协议数值。不能宣称最终性能达标。
 
+## 2026-11-13 原版 A/B 后的更新
+
+后续以原版 `spark-ds41f@bbfe2618` 独立镜像完成四机 A/B，并按官方
+NVMe doctor 项调整宿主；最终 target 的 frozen prefill 已达到官方
+32K..1M 两轮均值（`+0.68% / +0.64% / +0.84% / +0.63% / -0.39%`）。
+
+decode 仍未达标：官方长窗口 c1/prose 为 `82.62 / 77.8`，target 为
+`78.38 / 73.9`；但原版源码同宿主为 `78.74 / 74.5`，target 相对原版
+仅 `-0.46%` 左右。因此剩余差距不能归因于 target 代码或参数错位。
+完整证据、命令和结论见
+[`2026-11-12-spark-ds41f-original-abtest/README.md`](../2026-11-12-spark-ds41f-original-abtest/README.md)
+及同日工程记忆。
+
 ## 回归与证据
 
 - 本地父级测试：`72 passed`。
@@ -172,3 +185,17 @@ ssh chan@192.168.2.180 'cd /opt/spark/deepseek && \
   --label <new-label> \
   --metadata experiments/2026-11-12-official-main-x1112/metadata.json'
 ```
+
+## 2026-11-13 后续同步
+
+- official/main 已前进到 `2b9a6fb6`；新增内容不触达已部署
+  vLLM/TileLang/sparknet/NCCL source lock，因此镜像 `x1112` 不重建。
+- 官方同源码 1107 性能臂在本机仍为 c1 `78.29 tok/s`（官方 `82.62`），
+  同协议 collective 几何平均慢约 `15.4%`，差异归到当前站点环网/
+  宿主边界。
+- 2593/3003 MHz clock 试验均未稳定复现收益，已恢复 sparkDash
+  原始 2200 MHz。最终 208-prompt prose c1/c2/c4 为
+  `69.53/103.57/142.17 tok/s`；官方 long-window c1 overall
+  `76.97`、prose `72.6`，仍差 `6.68%`；最终 prefill 5 档全部达标。
+- 记录与复现：
+  `spark/deepseek/experiments/2026-11-13-clock-cap-decode/`。

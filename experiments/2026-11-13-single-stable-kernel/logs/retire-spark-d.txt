@@ -1,0 +1,130 @@
+PASS: apt plan is limited to the headless runtime profile
+backup=/var/backups/spark-host-kernel-retire/20261113T020049Z
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  dgx-release dgx-repo hpc-sdk-repo ipcalc libgail-common libgail18t64
+  libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common libtss2-fapi1t64
+  libtss2-tcti-libtpms0t64 libtss2-tcti-spi-helper0t64 libtss2-tctildr0t64
+  msecli nv-cpu-governor nv-env-paths nv-grubserial nv-iommu nv-ipmi-devintf
+  nv-limits nv-update-disable nvgpu-services-list nvidia-disable-init-on-alloc
+  nvidia-disable-numa-balancing nvidia-earlycon nvidia-enable-power-meter-cap
+  nvidia-esm-hook-epilogue nvidia-kernel-defaults nvidia-nvme-options
+  nvidia-pci-realloc nvidia-raid-config nvidia-redfish-config
+  nvidia-relaxed-ordering-gpu nvidia-relaxed-ordering-nvme python3-psutil
+  tpm2-tools ubuntu-advantage-tools
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  kdump-tools* kexec-tools* linux-crashdump* linux-headers-7.0.0-1025-nvidia*
+  linux-headers-nvidia-hwe-24.04* linux-image-7.0.0-1025-nvidia*
+  linux-image-nvidia-hwe-24.04* linux-modules-7.0.0-1025-nvidia*
+  linux-modules-nvidia-580-open-6.17.0-1029-nvidia*
+  linux-modules-nvidia-580-open-7.0.0-1025-nvidia*
+  linux-modules-nvidia-580-open-nvidia-hwe-24.04*
+  linux-modules-nvidia-fs-7.0.0-1025-nvidia*
+  linux-nvidia-7.0-headers-7.0.0-1025* linux-nvidia-7.0-tools-7.0.0-1025*
+  linux-nvidia-hwe-24.04* linux-tools-7.0.0-1025-nvidia*
+  linux-tools-nvidia-hwe-24.04* makedumpfile* nvidia-crashdump*
+  nvidia-driver-580-open* nvidia-system-core*
+The following held packages will be changed:
+  nvidia-driver-580-open
+0 upgraded, 0 newly installed, 21 to remove and 291 not upgraded.
+After this operation, 480 MB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 180864 files and directories currently installed.)
+Removing nvidia-system-core (2404.26.01-1) ...
+Removing nvidia-crashdump (25.08-1) ...
+Removing /var/lib/kdump/initramfs-tools/hooks/cleanup
+Removing /var/lib/kdump/initramfs-tools/hooks/makedump
+Removing /var/lib/kdump/initramfs-tools/scripts/init-bottom/makedump
+Removing linux-crashdump (6.8.0-79.79) ...
+Removing kdump-tools (1:1.10.3ubuntu2) ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Removing kexec-tools (1:2.0.28-0ubuntu3) ...
+Removing linux-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Removing linux-headers-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Removing linux-headers-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Removing nvidia-driver-580-open (580.178.04-0ubuntu0.24.04.1) ...
+Removing linux-modules-nvidia-580-open-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Removing linux-modules-nvidia-580-open-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Removing linux-image-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Removing linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Removing linux-image-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+I: /boot/vmlinuz.old is now a symlink to vmlinuz-7.0.0-1019-nvidia-64k
+I: /boot/initrd.img.old is now a symlink to initrd.img-7.0.0-1019-nvidia-64k
+/etc/kernel/postrm.d/initramfs-tools:
+update-initramfs: Deleting /boot/initrd.img-7.0.0-1025-nvidia
+/etc/kernel/postrm.d/kdump-tools:
+kdump-tools: Removing kdump tracking files for kernel version: 7.0.0-1025-nvidia
+/etc/kernel/postrm.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Removing linux-modules-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Removing linux-nvidia-7.0-headers-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Removing linux-tools-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Removing linux-tools-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Removing linux-nvidia-7.0-tools-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Removing makedumpfile (1:1.7.5-1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for initramfs-tools (0.142ubuntu25.5) ...
+update-initramfs: Generating /boot/initrd.img-7.0.0-1019-nvidia-64k
+grep: /usr/share/plymouth/themes/nvidia/nvidia.plymouth: No such file or directory
+W: plymouth module (/usr/lib/aarch64-linux-gnu/plymouth//.so) missing, skipping that theme.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 133922 files and directories currently installed.)
+Purging configuration files for linux-modules-nvidia-580-open-6.17.0-1029-nvidia (6.17.0-1029.29+1) ...
+Purging configuration files for linux-modules-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+dpkg: warning: while removing linux-modules-7.0.0-1025-nvidia, directory '/lib/modules/7.0.0-1025-nvidia' not empty so not removed
+Purging configuration files for nvidia-crashdump (25.08-1) ...
+dpkg-divert: warning: please specify --no-rename explicitly, the default will change to --rename in 1.20.x
+Removing 'diversion of /etc/kernel/postinst.d/kdump-tools to /etc/kernel/postinst.d/kdump-tools.distrib by nvidia-crashdump'
+Purging configuration files for linux-image-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Purging configuration files for kdump-tools (1:1.10.3ubuntu2) ...
+Purging configuration files for linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Purging configuration files for linux-modules-nvidia-580-open-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Purging configuration files for kexec-tools (1:2.0.28-0ubuntu3) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+kernel-retirement-applied
+backup: spark-d:/var/backups/spark-host-kernel-retire/20261113T020049Z

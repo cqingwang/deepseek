@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -101,6 +102,13 @@ def inspect_rank(rank: int, host: str | None, name: str) -> dict:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cuda-connections", default="64")
+    parser.add_argument("--nccl-channels", default="8")
+    parser.add_argument("--allgather-max-bytes", default="8388608")
+    parser.add_argument("--nccl-ib-qps-per-connection", default="2")
+    args = parser.parse_args()
+
     commands = expected_commands()
     summaries = []
     failures: list[str] = []
@@ -136,14 +144,25 @@ def main() -> int:
             failures.append(f"rank {rank}: batch is not verified profile 65520")
         if serve_value("--long-prefill-token-threshold") != "65424":
             failures.append(f"rank {rank}: threshold is not verified profile 65424")
-        if actual_env.get("CUDA_DEVICE_MAX_CONNECTIONS") != "64":
-            failures.append(f"rank {rank}: CUDA connections is not verified profile 64")
-        if actual_env.get("NCCL_MAX_NCHANNELS") != "8" or actual_env.get("NCCL_MIN_NCHANNELS") != "8":
-            failures.append(f"rank {rank}: NCCL channels are not verified profile 8/8")
-        if actual_env.get("SPARKNET_ROCE_ALLGATHER_MAX_BYTES") != "8388608":
-            failures.append(f"rank {rank}: all-gather max is not verified profile 8 MiB")
-        if actual_env.get("NCCL_IB_QPS_PER_CONNECTION") != "2":
-            failures.append(f"rank {rank}: QPS per connection is not verified profile 2")
+        if actual_env.get("CUDA_DEVICE_MAX_CONNECTIONS") != args.cuda_connections:
+            failures.append(
+                f"rank {rank}: CUDA connections is not {args.cuda_connections}"
+            )
+        if (
+            actual_env.get("NCCL_MAX_NCHANNELS") != args.nccl_channels
+            or actual_env.get("NCCL_MIN_NCHANNELS") != args.nccl_channels
+        ):
+            failures.append(
+                f"rank {rank}: NCCL channels are not {args.nccl_channels}/{args.nccl_channels}"
+            )
+        if actual_env.get("SPARKNET_ROCE_ALLGATHER_MAX_BYTES") != args.allgather_max_bytes:
+            failures.append(
+                f"rank {rank}: all-gather max is not {args.allgather_max_bytes}"
+            )
+        if actual_env.get("NCCL_IB_QPS_PER_CONNECTION") != args.nccl_ib_qps_per_connection:
+            failures.append(
+                f"rank {rank}: QPS per connection is not {args.nccl_ib_qps_per_connection}"
+            )
 
         summaries.append(
             {

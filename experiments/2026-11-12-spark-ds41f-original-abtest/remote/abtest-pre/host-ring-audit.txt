@@ -1,0 +1,253 @@
+===== 192.168.2.180 =====
+spark-a
+7.0.0-1019-nvidia-64k
+65536
+9: enp1s0f0np0    inet 10.12.1.1/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.14.1.1/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.12.2.1/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.14.2.1/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+10.12.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.12.1.1 
+10.12.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.12.2.1 
+10.14.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.14.1.1 
+10.14.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.14.2.1 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:42 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 42f180000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:43 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 42f180000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:46 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 42f180000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:47 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 42f180000347bb4c parentbus pci parentdev 0002:01:00.1 
+TC enp1s0f0np0
+TC enp1s0f1np1
+TC enP2p1s0f0np0
+TC enP2p1s0f1np1
+inactive
+link rocep1s0f0/1 state ACTIVE physical_state LINK_UP netdev enp1s0f0np0 
+link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1 
+link roceP2p1s0f0/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f0np0 
+link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1 
+IB rocep1s0f0
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB rocep1s0f1
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f0
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f1
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+===== 192.168.2.161 =====
+spark-b
+7.0.0-1019-nvidia-64k
+65536
+9: enp1s0f0np0    inet 10.12.1.2/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.23.1.2/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.12.2.2/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.23.2.2/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+10.12.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.12.1.2 
+10.12.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.12.2.2 
+10.23.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.23.1.2 
+10.23.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.23.2.2 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:28 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 28f380000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:29 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 28f380000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:2c brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 28f380000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:2d brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 28f380000347bb4c parentbus pci parentdev 0002:01:00.1 
+TC enp1s0f0np0
+TC enp1s0f1np1
+TC enP2p1s0f0np0
+TC enP2p1s0f1np1
+inactive
+link rocep1s0f0/1 state ACTIVE physical_state LINK_UP netdev enp1s0f0np0 
+link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1 
+link roceP2p1s0f0/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f0np0 
+link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1 
+IB rocep1s0f0
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB rocep1s0f1
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f0
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f1
+	fw_ver:				28.50.1002
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+===== 192.168.2.102 =====
+spark-c
+7.0.0-1019-nvidia-64k
+65536
+9: enp1s0f0np0    inet 10.34.1.3/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.23.1.3/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.34.2.3/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.23.2.3/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+10.23.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.23.1.3 
+10.23.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.23.2.3 
+10.34.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.34.1.3 
+10.34.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.34.2.3 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:0c brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 0cb280000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:0d brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 0cb280000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:10 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 0cb280000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:11 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 0cb280000347bb4c parentbus pci parentdev 0002:01:00.1 
+TC enp1s0f0np0
+TC enp1s0f1np1
+TC enP2p1s0f0np0
+TC enP2p1s0f1np1
+inactive
+link rocep1s0f0/1 state ACTIVE physical_state LINK_UP netdev enp1s0f0np0 
+link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1 
+link roceP2p1s0f0/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f0np0 
+link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1 
+IB rocep1s0f0
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB rocep1s0f1
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f0
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f1
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+===== 192.168.2.238 =====
+spark-d
+7.0.0-1019-nvidia-64k
+65536
+9: enp1s0f0np0    inet 10.34.1.4/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.14.1.4/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.34.2.4/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.14.2.4/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+10.14.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.14.1.4 
+10.14.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.14.2.4 
+10.34.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.34.1.4 
+10.34.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.34.2.4 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:af brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid afab80000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b0 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid afab80000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b3 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid afab80000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b4 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid afab80000347bb4c parentbus pci parentdev 0002:01:00.1 
+TC enp1s0f0np0
+TC enp1s0f1np1
+TC enP2p1s0f0np0
+TC enP2p1s0f1np1
+inactive
+link rocep1s0f0/1 state ACTIVE physical_state LINK_UP netdev enp1s0f0np0 
+link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1 
+link roceP2p1s0f0/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f0np0 
+link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1 
+IB rocep1s0f0
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB rocep1s0f1
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f0
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+IB roceP2p1s0f1
+	fw_ver:				28.45.4028
+			state:			PORT_ACTIVE (4)
+			active_mtu:		4096 (5)
+			sm_lid:			0
+			port_lid:		0
+			link_layer:		Ethernet
+===== path-pings =====
+A-10.12.1.2
+3 packets transmitted, 3 received, 0% packet loss, time 2004ms
+rtt min/avg/max/mdev = 0.465/0.677/1.102/0.300 ms
+A-10.12.2.2
+3 packets transmitted, 3 received, 0% packet loss, time 2046ms
+rtt min/avg/max/mdev = 0.451/0.594/0.779/0.137 ms
+A-10.14.1.4
+3 packets transmitted, 3 received, 0% packet loss, time 2070ms
+rtt min/avg/max/mdev = 0.203/0.530/0.834/0.258 ms
+A-10.14.2.4
+3 packets transmitted, 3 received, 0% packet loss, time 2046ms
+rtt min/avg/max/mdev = 0.098/0.134/0.178/0.033 ms
+B-10.23.1.3
+3 packets transmitted, 3 received, 0% packet loss, time 2061ms
+rtt min/avg/max/mdev = 0.787/0.901/1.052/0.111 ms
+B-10.23.2.3
+3 packets transmitted, 3 received, 0% packet loss, time 2069ms
+rtt min/avg/max/mdev = 0.283/0.544/0.846/0.231 ms
+C-10.34.1.4
+3 packets transmitted, 3 received, 0% packet loss, time 2045ms
+rtt min/avg/max/mdev = 0.464/0.689/0.839/0.162 ms
+C-10.34.2.4
+3 packets transmitted, 3 received, 0% packet loss, time 2023ms
+rtt min/avg/max/mdev = 0.760/0.864/1.010/0.106 ms

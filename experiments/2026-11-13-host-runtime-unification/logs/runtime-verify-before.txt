@@ -1,0 +1,213 @@
+
+== spark-a (rank 0) ==
+snapshot: /tmp/ds41f-runtime-verify.91EUQf/spark-a.txt
+
+== spark-b (rank 1) ==
+snapshot: /tmp/ds41f-runtime-verify.91EUQf/spark-b.txt
+
+== spark-c (rank 2) ==
+snapshot: /tmp/ds41f-runtime-verify.91EUQf/spark-c.txt
+
+== spark-d (rank 3) ==
+snapshot: /tmp/ds41f-runtime-verify.91EUQf/spark-d.txt
+FAIL: spark-a: run_apt_upgrade_unit=enabled expected disabled
+FAIL: spark-a: os=Ubuntu 24.04.4 LTS expected Ubuntu 24.04.5 LTS
+FAIL: spark-a: base-files=13ubuntu10.4 expected 13ubuntu10.5
+FAIL: spark-a: dgx-release=7.5.0 expected 7.6.0
+FAIL: spark-a: nvidia-dgx-telemetry=7.3 expected 8.13
+FAIL: spark-a: nvidia-disable-bt-profiles=<absent> expected 26.03-1
+FAIL: spark-a: nvidia-disable-aqc-nic=25.06-1 expected 25.10-1
+FAIL: spark-a: nv-common-apis=26.03-2 expected 26.08-2
+FAIL: spark-a: nvidia-repo-keys=26.02-1 expected 26.07-1
+FAIL: spark-a: required-absent package is installed: nvidia-spark-run-apt-upgrade
+FAIL: spark-a: required-absent package is installed: nvidia-enable-bt-profiles
+FAIL: spark-b: run_apt_upgrade_unit=enabled expected disabled
+FAIL: spark-b: os=Ubuntu 24.04.4 LTS expected Ubuntu 24.04.5 LTS
+FAIL: spark-b: base-files=13ubuntu10.4 expected 13ubuntu10.5
+FAIL: spark-b: dgx-release=7.5.0 expected 7.6.0
+FAIL: spark-b: nvidia-dgx-telemetry=7.3 expected 8.13
+FAIL: spark-b: nvidia-disable-bt-profiles=<absent> expected 26.03-1
+FAIL: spark-b: nvidia-disable-aqc-nic=25.06-1 expected 25.10-1
+FAIL: spark-b: nv-common-apis=26.03-2 expected 26.08-2
+FAIL: spark-b: nvidia-repo-keys=26.02-1 expected 26.07-1
+FAIL: spark-b: required-absent package is installed: nvidia-spark-run-apt-upgrade
+FAIL: spark-b: required-absent package is installed: nvidia-enable-bt-profiles
+FAIL: spark-c: spark_repo_pin=no expected yes
+FAIL: spark-c: dgx-release=7.2.3 expected 7.6.0
+FAIL: spark-c: dgx-spark-mlnx-hotplug=<absent> expected 26.01-1
+FAIL: spark-c: nvidia-dgx-telemetry=2.1 expected 8.13
+FAIL: spark-c: nvidia-disable-bt-profiles=25.07-3 expected 26.03-1
+FAIL: spark-c: nvidia-raid-config=25.01-1 expected 25.10-1
+FAIL: spark-c: nvidia-spark-avahi-conf=<absent> expected 1.0-1
+FAIL: spark-c: nvidia-spark-baud-rate=<absent> expected 25.09-1
+FAIL: spark-c: nvidia-spark-default-remove-nvidia-fs-pkg=<absent> expected 25.09-2
+FAIL: spark-c: nvidia-spark-fstab-config=<absent> expected 1.0.0-1
+FAIL: spark-c: nvidia-spark-grub-pci=<absent> expected 1.0-1
+FAIL: spark-c: nvidia-spark-initcall-bl=1.0-1 expected 1.0-2
+FAIL: spark-c: nvidia-spark-limits=<absent> expected 1.0-1
+FAIL: spark-c: nvidia-spark-mlnx-firmware-manager=5.0.8-1 expected 6.0.1-1
+FAIL: spark-c: nvidia-spark-ota-check=<absent> expected 1.0.23-1
+FAIL: spark-c: nvidia-spark-realtek-mod-options=<absent> expected 1.1-1
+FAIL: spark-c: nvidia-spark-repo=<absent> expected 1.1-1
+FAIL: spark-c: lldpd=<absent> expected 1.0.18-1build3
+FAIL: spark-c: nvidia-spark-wifi-fw-ppa=1.0-1 expected 1.2-1
+FAIL: spark-c: nvidia-lvfs-config=<absent> expected 25.09-1
+FAIL: spark-c: nvidia-nvme-options=25.03-1 expected 26.02-1
+FAIL: spark-c: nvidia-grub-params=24.11-1 expected 25.10-1
+FAIL: spark-c: nvidia-disable-aqc-nic=25.06-1 expected 25.10-1
+FAIL: spark-c: nv-common-apis=25.08-4 expected 26.08-2
+FAIL: spark-c: nv-grubserial=25.07-1 expected 26.03-1
+FAIL: spark-c: nv-iommu=25.08-2 expected 25.12-1
+FAIL: spark-c: nv-ipmi-devintf=24.12-1 expected 25.10-1
+FAIL: spark-c: nv-limits=24.12-1 expected 25.10-1
+FAIL: spark-c: nv-no-grubmenu=25.08-1 expected 26.01-1
+FAIL: spark-c: nv-persistence-mode=25.09-1 expected 25.10-1
+FAIL: spark-c: nv-update-disable=24.12-1 expected 25.10-1
+FAIL: spark-c: nvidia-repo-keys=25.06-1 expected 26.07-1
+FAIL: spark-c: required-absent package is installed: dgx-spark-ota-update-meta
+FAIL: spark-c: core package missing: libevent-2.1-7t64
+FAIL: spark-c: core package missing: lldpd
+FAIL: spark-d: spark_repo_pin=no expected yes
+FAIL: spark-d: os=Ubuntu 24.04.3 LTS expected Ubuntu 24.04.5 LTS
+FAIL: spark-d: base-files=13ubuntu10.3 expected 13ubuntu10.5
+FAIL: spark-d: dgx-release=7.2.3 expected 7.6.0
+FAIL: spark-d: dgx-spark-mlnx-hotplug=<absent> expected 26.01-1
+FAIL: spark-d: nvidia-dgx-telemetry=2.1 expected 8.13
+FAIL: spark-d: nvidia-disable-bt-profiles=25.07-3 expected 26.03-1
+FAIL: spark-d: nvidia-raid-config=25.01-1 expected 25.10-1
+FAIL: spark-d: nvidia-spark-avahi-conf=<absent> expected 1.0-1
+FAIL: spark-d: nvidia-spark-baud-rate=<absent> expected 25.09-1
+FAIL: spark-d: nvidia-spark-default-remove-nvidia-fs-pkg=<absent> expected 25.09-2
+FAIL: spark-d: nvidia-spark-fstab-config=<absent> expected 1.0.0-1
+FAIL: spark-d: nvidia-spark-grub-pci=<absent> expected 1.0-1
+FAIL: spark-d: nvidia-spark-initcall-bl=1.0-1 expected 1.0-2
+FAIL: spark-d: nvidia-spark-limits=<absent> expected 1.0-1
+FAIL: spark-d: nvidia-spark-mlnx-firmware-manager=5.0.8-1 expected 6.0.1-1
+FAIL: spark-d: nvidia-spark-ota-check=<absent> expected 1.0.23-1
+FAIL: spark-d: nvidia-spark-realtek-mod-options=<absent> expected 1.1-1
+FAIL: spark-d: nvidia-spark-repo=<absent> expected 1.1-1
+FAIL: spark-d: lldpd=<absent> expected 1.0.18-1build3
+FAIL: spark-d: nvidia-spark-wifi-fw-ppa=1.0-1 expected 1.2-1
+FAIL: spark-d: nvidia-lvfs-config=<absent> expected 25.09-1
+FAIL: spark-d: nvidia-nvme-options=25.03-1 expected 26.02-1
+FAIL: spark-d: nvidia-grub-params=24.11-1 expected 25.10-1
+FAIL: spark-d: nvidia-disable-aqc-nic=25.06-1 expected 25.10-1
+FAIL: spark-d: nv-common-apis=25.08-4 expected 26.08-2
+FAIL: spark-d: nv-grubserial=25.07-1 expected 26.03-1
+FAIL: spark-d: nv-iommu=25.08-2 expected 25.12-1
+FAIL: spark-d: nv-ipmi-devintf=24.12-1 expected 25.10-1
+FAIL: spark-d: nv-limits=24.12-1 expected 25.10-1
+FAIL: spark-d: nv-no-grubmenu=25.08-1 expected 26.01-1
+FAIL: spark-d: nv-persistence-mode=25.09-1 expected 25.10-1
+FAIL: spark-d: nv-update-disable=24.12-1 expected 25.10-1
+FAIL: spark-d: nvidia-repo-keys=25.06-1 expected 26.07-1
+FAIL: spark-d: required-absent package is installed: dgx-spark-ota-update-meta
+FAIL: spark-d: core package missing: libevent-2.1-7t64
+FAIL: spark-d: core package missing: lldpd
+FAIL: core package drift: base-files: spark-a=13ubuntu10.4, spark-b=13ubuntu10.4, spark-c=13ubuntu10.5, spark-d=13ubuntu10.3
+FAIL: core package drift: ubuntu-release-upgrader-core: spark-a=1:24.04.28, spark-b=1:24.04.28, spark-c=1:24.04.27, spark-d=1:24.04.27
+FAIL: core package drift: python3-distupgrade: spark-a=1:24.04.28, spark-b=1:24.04.28, spark-c=1:24.04.27, spark-d=1:24.04.27
+FAIL: core package drift: libc6: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: libc-bin: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: libc-dev-bin: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: libc-devtools: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: libc6-dev: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: libc6-dbg: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: locales: spark-a=2.39-0ubuntu8.8, spark-b=2.39-0ubuntu8.8, spark-c=2.39-0ubuntu8.9, spark-d=2.39-0ubuntu8.5
+FAIL: core package drift: gcc-13: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: gcc-13-base: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: gcc-13-aarch64-linux-gnu: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: g++-13: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: g++-13-aarch64-linux-gnu: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: cpp-13: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: cpp-13-aarch64-linux-gnu: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: libgcc-s1: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libgcc-13-dev: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: libstdc++6: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libstdc++-13-dev: spark-a=13.3.0-6ubuntu2~24.04.1, spark-b=13.3.0-6ubuntu2~24.04.1, spark-c=13.3.0-6ubuntu2~24.04.1, spark-d=13.3.0-6ubuntu2~24.04
+FAIL: core package drift: libasan8: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libatomic1: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libgomp1: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libhwasan0: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libitm1: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: liblsan0: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libtsan2: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libubsan1: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: libcc1-0: spark-a=14.2.0-4ubuntu2~24.04.1, spark-b=14.2.0-4ubuntu2~24.04.1, spark-c=14.2.0-4ubuntu2~24.04.1, spark-d=14.2.0-4ubuntu2~24.04
+FAIL: core package drift: binutils: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: binutils-common: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: binutils-aarch64-linux-gnu: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: libbinutils: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: libctf0: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: libctf-nobfd0: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: libsframe1: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: libgprofng0: spark-a=2.42-4ubuntu2.10, spark-b=2.42-4ubuntu2.10, spark-c=2.42-4ubuntu2.10, spark-d=2.42-4ubuntu2.5
+FAIL: core package drift: dpkg: spark-a=1.22.6ubuntu6.6, spark-b=1.22.6ubuntu6.6, spark-c=1.22.6ubuntu6.6, spark-d=1.22.6ubuntu6.1
+FAIL: core package drift: dpkg-dev: spark-a=1.22.6ubuntu6.6, spark-b=1.22.6ubuntu6.6, spark-c=1.22.6ubuntu6.6, spark-d=1.22.6ubuntu6.1
+FAIL: core package drift: libdpkg-perl: spark-a=1.22.6ubuntu6.6, spark-b=1.22.6ubuntu6.6, spark-c=1.22.6ubuntu6.6, spark-d=1.22.6ubuntu6.1
+FAIL: core package drift: systemd: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: systemd-sysv: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: systemd-resolved: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: systemd-timesyncd: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: systemd-dev: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: libsystemd0: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: libsystemd-shared: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: udev: spark-a=255.4-1ubuntu8.17, spark-b=255.4-1ubuntu8.17, spark-c=255.4-1ubuntu8.17, spark-d=255.4-1ubuntu8.10
+FAIL: core package drift: util-linux: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: bsdutils: spark-a=1:2.39.3-9ubuntu6.5, spark-b=1:2.39.3-9ubuntu6.5, spark-c=1:2.39.3-9ubuntu6.6, spark-d=1:2.39.3-9ubuntu6.3
+FAIL: core package drift: mount: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: libblkid1: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: libfdisk1: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: libsmartcols1: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: libuuid1: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: fdisk: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: eject: spark-a=2.39.3-9ubuntu6.5, spark-b=2.39.3-9ubuntu6.5, spark-c=2.39.3-9ubuntu6.6, spark-d=2.39.3-9ubuntu6.3
+FAIL: core package drift: python3-apt: spark-a=2.7.7ubuntu5.2, spark-b=2.7.7ubuntu5.2, spark-c=2.7.7ubuntu5.3, spark-d=2.7.7ubuntu5
+FAIL: core package drift: procps: spark-a=2:4.0.4-4ubuntu3.2, spark-b=2:4.0.4-4ubuntu3.2, spark-c=2:4.0.4-4ubuntu3.3, spark-d=2:4.0.4-4ubuntu3.2
+FAIL: core package drift: libproc2-0: spark-a=2:4.0.4-4ubuntu3.2, spark-b=2:4.0.4-4ubuntu3.2, spark-c=2:4.0.4-4ubuntu3.3, spark-d=2:4.0.4-4ubuntu3.2
+FAIL: core package drift: coreutils: spark-a=9.4-3ubuntu6.2, spark-b=9.4-3ubuntu6.2, spark-c=9.4-3ubuntu6.3, spark-d=9.4-3ubuntu6
+FAIL: core package drift: kmod: spark-a=31+20240202-2ubuntu7.2, spark-b=31+20240202-2ubuntu7.2, spark-c=31+20240202-2ubuntu7.2, spark-d=31+20240202-2ubuntu7.1
+FAIL: core package drift: iproute2: spark-a=6.1.0-1ubuntu6.4, spark-b=6.1.0-1ubuntu6.4, spark-c=6.1.0-1ubuntu6.4, spark-d=6.1.0-1ubuntu6.2
+FAIL: core package drift: libevent-2.1-7t64: spark-a=2.1.12-stable-9ubuntu2, spark-b=2.1.12-stable-9ubuntu2, spark-c=<absent>, spark-d=<absent>
+FAIL: core package drift: netplan.io: spark-a=1.1.2-8ubuntu1~24.04.2, spark-b=1.1.2-8ubuntu1~24.04.2, spark-c=1.1.2-2~ubuntu24.04.2, spark-d=1.1.2-2~ubuntu24.04.2
+FAIL: core package drift: netplan-generator: spark-a=1.1.2-8ubuntu1~24.04.2, spark-b=1.1.2-8ubuntu1~24.04.2, spark-c=1.1.2-2~ubuntu24.04.2, spark-d=1.1.2-2~ubuntu24.04.2
+FAIL: core package drift: python3-netplan: spark-a=1.1.2-8ubuntu1~24.04.2, spark-b=1.1.2-8ubuntu1~24.04.2, spark-c=1.1.2-2~ubuntu24.04.2, spark-d=1.1.2-2~ubuntu24.04.2
+FAIL: core package drift: network-manager: spark-a=1.46.0-1ubuntu2.8, spark-b=1.46.0-1ubuntu2.8, spark-c=1.46.0-1ubuntu2.2, spark-d=1.46.0-1ubuntu2.2
+FAIL: core package drift: openssh-client: spark-a=1:9.6p1-3ubuntu13.18, spark-b=1:9.6p1-3ubuntu13.18, spark-c=1:9.6p1-3ubuntu13.19, spark-d=1:9.6p1-3ubuntu13.14
+FAIL: core package drift: openssh-server: spark-a=1:9.6p1-3ubuntu13.18, spark-b=1:9.6p1-3ubuntu13.18, spark-c=1:9.6p1-3ubuntu13.19, spark-d=1:9.6p1-3ubuntu13.14
+FAIL: core package drift: openssh-sftp-server: spark-a=1:9.6p1-3ubuntu13.18, spark-b=1:9.6p1-3ubuntu13.18, spark-c=1:9.6p1-3ubuntu13.19, spark-d=1:9.6p1-3ubuntu13.14
+FAIL: core package drift: ssh: spark-a=1:9.6p1-3ubuntu13.18, spark-b=1:9.6p1-3ubuntu13.18, spark-c=1:9.6p1-3ubuntu13.14, spark-d=1:9.6p1-3ubuntu13.14
+FAIL: core package drift: nftables: spark-a=1.0.9-1ubuntu0.1, spark-b=1.0.9-1ubuntu0.1, spark-c=1.0.9-1ubuntu0.1, spark-d=1.0.9-1build1
+FAIL: core package drift: multipath-tools: spark-a=0.9.4-5ubuntu8.2, spark-b=0.9.4-5ubuntu8.2, spark-c=0.9.4-5ubuntu8, spark-d=0.9.4-5ubuntu8
+FAIL: core package drift: kpartx: spark-a=0.9.4-5ubuntu8.2, spark-b=0.9.4-5ubuntu8.2, spark-c=0.9.4-5ubuntu8, spark-d=0.9.4-5ubuntu8
+FAIL: core package drift: rsync: spark-a=3.2.7-1ubuntu1.5, spark-b=3.2.7-1ubuntu1.5, spark-c=3.2.7-1ubuntu1.5, spark-d=3.2.7-1ubuntu1.2
+FAIL: core package drift: tar: spark-a=1.35+dfsg-3ubuntu0.4, spark-b=1.35+dfsg-3ubuntu0.4, spark-c=1.35+dfsg-3ubuntu0.4, spark-d=1.35+dfsg-3build1
+FAIL: core package drift: gzip: spark-a=1.12-1ubuntu3.2, spark-b=1.12-1ubuntu3.2, spark-c=1.12-1ubuntu3.2, spark-d=1.12-1ubuntu3.1
+FAIL: core package drift: xz-utils: spark-a=5.6.1+really5.4.5-1ubuntu0.3, spark-b=5.6.1+really5.4.5-1ubuntu0.3, spark-c=5.6.1+really5.4.5-1ubuntu0.3, spark-d=5.6.1+really5.4.5-1ubuntu0.2
+FAIL: core package drift: ca-certificates: spark-a=20260601~24.04.1, spark-b=20260601~24.04.1, spark-c=20260601~24.04.1, spark-d=20240203
+FAIL: core package drift: openssl: spark-a=3.0.13-0ubuntu3.12, spark-b=3.0.13-0ubuntu3.12, spark-c=3.0.13-0ubuntu3.15, spark-d=3.0.13-0ubuntu3.5
+FAIL: core package drift: libssl3t64: spark-a=3.0.13-0ubuntu3.12, spark-b=3.0.13-0ubuntu3.12, spark-c=3.0.13-0ubuntu3.15, spark-d=3.0.13-0ubuntu3.5
+FAIL: core package drift: gnupg: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gnupg-utils: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gpg: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gpg-agent: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gpgconf: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gpgsm: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: gpgv: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: dirmngr: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: keyboxd: spark-a=2.4.4-2ubuntu17.4, spark-b=2.4.4-2ubuntu17.4, spark-c=2.4.4-2ubuntu17.6, spark-d=2.4.4-2ubuntu17.3
+FAIL: core package drift: python3.12: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: python3.12-minimal: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: python3.12-venv: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: python3-minimal: spark-a=3.12.3-0ubuntu2.1, spark-b=3.12.3-0ubuntu2.1, spark-c=3.12.3-0ubuntu2.1, spark-d=3.12.3-0ubuntu2
+FAIL: core package drift: python3: spark-a=3.12.3-0ubuntu2.1, spark-b=3.12.3-0ubuntu2.1, spark-c=3.12.3-0ubuntu2.1, spark-d=3.12.3-0ubuntu2
+FAIL: core package drift: libpython3.12t64: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: libpython3.12-stdlib: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: libpython3.12-minimal: spark-a=3.12.3-1ubuntu0.15, spark-b=3.12.3-1ubuntu0.15, spark-c=3.12.3-1ubuntu0.17, spark-d=3.12.3-1ubuntu0.8
+FAIL: core package drift: linux-libc-dev: spark-a=6.8.0-137.137, spark-b=6.8.0-137.137, spark-c=6.8.0-139.139, spark-d=6.8.0-79.79
+FAIL: core package drift: numactl: spark-a=2.0.18-1ubuntu0.24.04.1, spark-b=2.0.18-1ubuntu0.24.04.1, spark-c=2.0.18-1build1, spark-d=2.0.18-1build1
+FAIL: core package drift: wireless-regdb: spark-a=2026.02.04-0ubuntu1~24.04.1, spark-b=2026.02.04-0ubuntu1~24.04.1, spark-c=2026.05.30-0ubuntu1~24.04.1, spark-d=2024.10.07-0ubuntu2~24.04.1
+FAIL: core package drift: wpasupplicant: spark-a=2:2.11-0ubuntu5~24.04.1, spark-b=2:2.11-0ubuntu5~24.04.1, spark-c=2:2.10-21ubuntu0.2+bssmaxbump, spark-d=2:2.10-21ubuntu0.2+bssmaxbump
+FAIL: core package drift: lldpd: spark-a=1.0.18-1build3, spark-b=1.0.18-1build3, spark-c=<absent>, spark-d=<absent>
+
+runtime verification evidence: /tmp/ds41f-runtime-verify.91EUQf

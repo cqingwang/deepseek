@@ -1,0 +1,90 @@
+{
+  "official": {
+    "decode_default_c1_tps": 82.62333333333333,
+    "decode_prose_tps": 77.8,
+    "prefill_tps": {
+      "32768": 8508,
+      "131072": 8657,
+      "262144": 8261,
+      "524288": 7460,
+      "1000000": 6012
+    }
+  },
+  "original": {
+    "image": "spark-ds41f:x1112-original",
+    "image_id": "sha256:132322fe63e099c87d44be0ab0742bcc8204b06250720de77ab4650fd909dadb",
+    "wifi_default_c1_tps": 78.41333333333333,
+    "wifi_prose_tps": 74.2,
+    "overlay_default_c1_tps": 78.71666666666667,
+    "overlay_prose_tps": 74.5,
+    "overlay_nvme_default_c1_tps": 78.73666666666666,
+    "overlay_nvme_prose_tps": 74.5,
+    "clock_lock_short_c1_tps": 70.36666666666667,
+    "clock_lock_short_steps_per_s": 34.1997259785914,
+    "clock_lock_observed_sm_mhz": 2574,
+    "nvme_32k_prefill_tps": 8152.784200910578,
+    "baseline_prefill_tps": {
+      "32768": 7901.398112646668,
+      "131072": 8126.172699806516,
+      "262144": 7768.037644017837,
+      "524288": 7049.813641111992,
+      "1000000": 5706.446587101568
+    }
+  },
+  "target": {
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "default_c1_tps": 78.37666666666667,
+    "prose_tps": 73.9,
+    "delta_vs_official_default_c1_pct": -5.14,
+    "delta_vs_official_prose_pct": -5.01,
+    "delta_vs_original_overlay_nvme_c1_pct": -0.457,
+    "prefill_tps": {
+      "32768": 8552.548050129211,
+      "131072": 8689.028069707014,
+      "262144": 8319.649573396286,
+      "524288": 7502.8146077536285,
+      "1000000": 5984.054880344178
+    },
+    "prefill_previous_run_tps": {
+      "32768": 8578.886,
+      "131072": 8736.471,
+      "262144": 8341.051,
+      "524288": 7511.461,
+      "1000000": 5993.059
+    },
+    "prefill_two_run_mean_tps": {
+      "32768": 8565.717025064605,
+      "131072": 8712.749534853507,
+      "262144": 8330.350286698143,
+      "524288": 7507.137803876814,
+      "1000000": 5988.5569401720895
+    },
+    "prefill_delta_vs_official_pct": {
+      "32768": 0.524,
+      "131072": 0.37,
+      "262144": 0.71,
+      "524288": 0.574,
+      "1000000": -0.465
+    },
+    "prefill_two_run_mean_delta_vs_official_pct": {
+      "32768": 0.678,
+      "131072": 0.644,
+      "262144": 0.839,
+      "524288": 0.632,
+      "1000000": -0.39
+    },
+    "prose_short_two_run_mean_tps": {
+      "c1": 70.83333333333333,
+      "c2": 105.38333333333333,
+      "c4": 144.5
+    }
+  },
+  "verdict": {
+    "prefill": "pass",
+    "decode": "open; original source baseline has the same host-level gap",
+    "target_relative_to_original": "within 0.46% on default c1",
+    "clock_lock": "no material benefit; reverted",
+    "nvme_apst": "persisted with /etc/modprobe.d/nvme-apst.conf and initramfs"
+  }
+}

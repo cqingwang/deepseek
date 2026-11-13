@@ -1,0 +1,15 @@
+{
+  "overall": 76.6,
+  "steps_per_s": 32.39666659172231,
+  "tokens_per_step": 2.3667924853442583,
+  "tps_by_style": {
+    "code": {
+      "requests": 13,
+      "tps": 106.1
+    },
+    "prose": {
+      "requests": 68,
+      "tps": 72.2
+    }
+  }
+}

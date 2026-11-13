@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "image": "spark-ds41f:x1113-1107perf2",
+  "image_id": "sha256:7b8657f05ddc5fcd884909cb7c42a3e9166835f61302d879404534a8ffa25eb4",
+  "nodes": {
+    "0": {
+      "host": "192.168.2.180",
+      "container_id": "bdaf88d5634375ca08b510f4176f7f4c9a64b50aa6ca501882f68cbf89596979",
+      "image": "spark-ds41f:x1113-1107perf2",
+      "image_id": "sha256:7b8657f05ddc5fcd884909cb7c42a3e9166835f61302d879404534a8ffa25eb4",
+      "env_keys": 85,
+      "argv_tokens": 83,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        },
+        "/hub": {
+          "source": "/home/chan/.cache/huggingface/hub",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/opt/abtest/spark-ds41f-perf2/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        }
+      }
+    },
+    "1": {
+      "host": "192.168.2.161",
+      "container_id": "9a181afc6e213100a0141aee1ba25ce3cc131c18d79705645e238fc2c39551bb",
+      "image": "spark-ds41f:x1113-1107perf2",
+      "image_id": "sha256:7b8657f05ddc5fcd884909cb7c42a3e9166835f61302d879404534a8ffa25eb4",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/cache": {
+          "source": "/opt/abtest/spark-ds41f-perf2/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        },
+        "/hub": {
+          "source": "/home/chan/.cache/huggingface/hub",
+          "readonly": true
+        }
+      }
+    },
+    "2": {
+      "host": "192.168.2.102",
+      "container_id": "512b229e0ad06a2794d8883cd50c66d51b89e10ff36c9ec2f13ea7d36e859f8f",
+      "image": "spark-ds41f:x1113-1107perf2",
+      "image_id": "sha256:7b8657f05ddc5fcd884909cb7c42a3e9166835f61302d879404534a8ffa25eb4",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/hub": {
+          "source": "/home/chan/.cache/huggingface/hub",
+          "readonly": true
+        },
+        "/cache": {
+          "source": "/opt/abtest/spark-ds41f-perf2/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        }
+      }
+    },
+    "3": {
+      "host": "192.168.2.238",
+      "container_id": "e187bc8de96dc305d3ca96574e33c2ae1277120306bd1f75869850b5eef46859",
+      "image": "spark-ds41f:x1113-1107perf2",
+      "image_id": "sha256:7b8657f05ddc5fcd884909cb7c42a3e9166835f61302d879404534a8ffa25eb4",
+      "env_keys": 85,
+      "argv_tokens": 84,
+      "state": {
+        "status": "running",
+        "oom_killed": false,
+        "restart_count": 0
+      },
+      "mounts": {
+        "/cache": {
+          "source": "/opt/abtest/spark-ds41f-perf2/cache",
+          "readonly": false
+        },
+        "/glp/vector.gguf": {
+          "source": "/home/chan/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
+          "readonly": true
+        },
+        "/hub": {
+          "source": "/home/chan/.cache/huggingface/hub",
+          "readonly": true
+        },
+        "/dev/dri/card0": {
+          "source": "/dev/dri/by-path/pci-000f:01:00.0-card",
+          "readonly": false
+        }
+      }
+    }
+  },
+  "failures": []
+}

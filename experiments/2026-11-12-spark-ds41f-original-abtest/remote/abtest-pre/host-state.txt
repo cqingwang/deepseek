@@ -1,0 +1,124 @@
+collected_at=2026-11-12T14:09:11Z
+===== 192.168.2.180 =====
+spark-a
+2026-11-12T14:09:11+00:00
+7.0.0-1019-nvidia-64k
+65536
+NVIDIA GB10, 34, 208 MHz, [N/A], 0x0000000000000004, 4.65 W
+3810368 python3 ./bin/spark --cluster-config config/abtest.local.json build image --tag spark-ds41f:x1112-original --max-compile-jobs 2 --apply
+3810985 docker buildx build --platform linux/arm64 --network host --load --file /opt/abtest/spark-ds41f/docker/Dockerfile --tag spark-ds41f:x1112-original --build-context vllm-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/vllm-source --build-context nccl-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/nccl-source --build-context cutlass-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/cutlass-source --build-context cutlass-dsl-wheels=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/cutlass-dsl-wheels --build-context vllm-deletions=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/vllm-deletions --build-context b12x-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/b12x-source --build-context tilelang-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/tilelang-source --build-context tile_kernels-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/tile_kernels-source --build-context sparknet-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/sparknet-source --build-arg BASE_IMAGE=docker.io/vllm/vllm-openai@sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf --build-arg BASE_IMAGE_NAME=docker.io/vllm/vllm-openai --build-arg BASE_IMAGE_DIGEST=sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf --build-arg DEPLOYMENT_COMMIT=bbfe2618efbd3e2143363eb9262d1c7fb89e5460 --build-arg VLLM_COMPILE_JOBS=2 --build-arg VLLM_NVCC_THREADS=2 --build-arg NCCL_COMPILE_JOBS=2 --build-arg VLLM_UPSTREAM=https://github.com/local-inference-lab/vllm --build-arg VLLM_REF=integration/karmic-kraken-beta --build-arg VLLM_REVISION=19f2c20ed4d64ae22bd009ceacadd85e2a81e354 --build-arg VLLM_PATCH_HEAD=2756478b60b90700b9918b457aeb38657da637b5 --build-arg VLLM_TREE=ed1bdb7a7684da33d403a055521ac0c4dd7ca670 --build-arg NCCL_UPSTREAM=https://github.com/NVIDIA/nccl --build-arg NCCL_REF=refs/tags/v2.30.7-1 --build-arg NCCL_REVISION=73cf112295c33aee2b895f329f592f2a9b4b0f97 --build-arg NCCL_PATCH_HEAD=eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6 --build-arg NCCL_TREE=6af10aa730a64fcee8781d62340a9c9184e79469 --build-arg B12X_UPSTREAM=https://github.com/local-inference-lab/b12x --build-arg B12X_REF=integration/karmic-kraken-beta --build-arg B12X_REVISION=236ddff04a5f5064084b46464800b70b34ec7d8c --build-arg B12X_PATCH_HEAD=69e5795e2141fbb5fa2b3af096d51e754939bb41 --build-arg B12X_TREE=1a647a311ca55d45070ab83d60668d9c8fb8886c --build-arg TILELANG_UPSTREAM=https://github.com/tile-ai/tilelang --build-arg TILELANG_REF=main --build-arg TILELANG_REVISION=2123e412ce2217b324c50c4ec967213906456ac5 --build-arg TILELANG_PATCH_HEAD=92a1d3a0eba72b440297d4090bbfc498a47b0eb6 --build-arg TILELANG_TREE=e2b001828fd4e38e6a2eee61f818d5083cb1335f --build-arg TILELANG_VERSION=0.1.15+snapshot.35f15411cf3af0fc06a1cb0097215b1372a40464 --build-arg TILE_KERNELS_UPSTREAM=https://github.com/deepseek-ai/TileKernels --build-arg TILE_KERNELS_REF=main --build-arg TILE_KERNELS_REVISION=66258df6175d2f630ffecb04c5ab66bff8a2ae6a --build-arg TILE_KERNELS_PATCH_HEAD=edfa64d018bc64006fcb07c95c32fa196363c0ae --build-arg TILE_KERNELS_TREE=cb2fa41c8af290204c81c547ed678ebf957cca53 --build-arg TILE_KERNELS_VERSION=2.0.0 --build-arg SPARKNET_UPSTREAM=https://github.com/christopherowen/dgx-spark-networking --build-arg SPARKNET_REF=main --build-arg SPARKNET_REVISION=1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf --build-arg SPARKNET_PATCH_HEAD=1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf --build-arg SPARKNET_TREE=8cc28a5cd3e683c1f114ed843453e3ce34f323e0 --build-arg SPARKNET_VERSION=0.5.0 --build-arg RUNTIME_STAGE=runtime-tilelang-sparknet --build-arg TILELANG_COMPILE_JOBS=2 --build-arg TILELANG_BASE_STAGE=runtime /opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/empty
+3811012 /usr/libexec/docker/cli-plugins/docker-buildx buildx build --platform linux/arm64 --network host --load --file /opt/abtest/spark-ds41f/docker/Dockerfile --tag spark-ds41f:x1112-original --build-context vllm-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/vllm-source --build-context nccl-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/nccl-source --build-context cutlass-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/cutlass-source --build-context cutlass-dsl-wheels=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/cutlass-dsl-wheels --build-context vllm-deletions=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/vllm-deletions --build-context b12x-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/b12x-source --build-context tilelang-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/tilelang-source --build-context tile_kernels-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/tile_kernels-source --build-context sparknet-source=/opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/sparknet-source --build-arg BASE_IMAGE=docker.io/vllm/vllm-openai@sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf --build-arg BASE_IMAGE_NAME=docker.io/vllm/vllm-openai --build-arg BASE_IMAGE_DIGEST=sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf --build-arg DEPLOYMENT_COMMIT=bbfe2618efbd3e2143363eb9262d1c7fb89e5460 --build-arg VLLM_COMPILE_JOBS=2 --build-arg VLLM_NVCC_THREADS=2 --build-arg NCCL_COMPILE_JOBS=2 --build-arg VLLM_UPSTREAM=https://github.com/local-inference-lab/vllm --build-arg VLLM_REF=integration/karmic-kraken-beta --build-arg VLLM_REVISION=19f2c20ed4d64ae22bd009ceacadd85e2a81e354 --build-arg VLLM_PATCH_HEAD=2756478b60b90700b9918b457aeb38657da637b5 --build-arg VLLM_TREE=ed1bdb7a7684da33d403a055521ac0c4dd7ca670 --build-arg NCCL_UPSTREAM=https://github.com/NVIDIA/nccl --build-arg NCCL_REF=refs/tags/v2.30.7-1 --build-arg NCCL_REVISION=73cf112295c33aee2b895f329f592f2a9b4b0f97 --build-arg NCCL_PATCH_HEAD=eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6 --build-arg NCCL_TREE=6af10aa730a64fcee8781d62340a9c9184e79469 --build-arg B12X_UPSTREAM=https://github.com/local-inference-lab/b12x --build-arg B12X_REF=integration/karmic-kraken-beta --build-arg B12X_REVISION=236ddff04a5f5064084b46464800b70b34ec7d8c --build-arg B12X_PATCH_HEAD=69e5795e2141fbb5fa2b3af096d51e754939bb41 --build-arg B12X_TREE=1a647a311ca55d45070ab83d60668d9c8fb8886c --build-arg TILELANG_UPSTREAM=https://github.com/tile-ai/tilelang --build-arg TILELANG_REF=main --build-arg TILELANG_REVISION=2123e412ce2217b324c50c4ec967213906456ac5 --build-arg TILELANG_PATCH_HEAD=92a1d3a0eba72b440297d4090bbfc498a47b0eb6 --build-arg TILELANG_TREE=e2b001828fd4e38e6a2eee61f818d5083cb1335f --build-arg TILELANG_VERSION=0.1.15+snapshot.35f15411cf3af0fc06a1cb0097215b1372a40464 --build-arg TILE_KERNELS_UPSTREAM=https://github.com/deepseek-ai/TileKernels --build-arg TILE_KERNELS_REF=main --build-arg TILE_KERNELS_REVISION=66258df6175d2f630ffecb04c5ab66bff8a2ae6a --build-arg TILE_KERNELS_PATCH_HEAD=edfa64d018bc64006fcb07c95c32fa196363c0ae --build-arg TILE_KERNELS_TREE=cb2fa41c8af290204c81c547ed678ebf957cca53 --build-arg TILE_KERNELS_VERSION=2.0.0 --build-arg SPARKNET_UPSTREAM=https://github.com/christopherowen/dgx-spark-networking --build-arg SPARKNET_REF=main --build-arg SPARKNET_REVISION=1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf --build-arg SPARKNET_PATCH_HEAD=1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf --build-arg SPARKNET_TREE=8cc28a5cd3e683c1f114ed843453e3ce34f323e0 --build-arg SPARKNET_VERSION=0.5.0 --build-arg RUNTIME_STAGE=runtime-tilelang-sparknet --build-arg TILELANG_COMPILE_JOBS=2 --build-arg TILELANG_BASE_STAGE=runtime /opt/abtest/spark-ds41f/.work/build/vllm-19f2c20ed4d6-b12x-236ddff04a5f-b00ad50c/context/empty
+3821613 zsh -c hostname; date -Is; uname -r; getconf PAGESIZE; docker ps -a --format '{{.Names}} {{.Image}} {{.Status}}'; nvidia-smi --query-gpu=name,temperature.gpu,clocks.sm,clocks.mem,clocks_throttle_reasons.active,power.draw --format=csv,noheader; pgrep -af 'memguard|vllm|spark-ds41f' || true; ip -4 -o addr show; ip -4 route; for f in enp1s0f0np0 enp1s0f1np1 enP2p1s0f0np0 enP2p1s0f1np1; do ip -d link show $f | sed -n '1,2p'; done; tc filter show dev enp1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enp1s0f1np1 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f1np1 ingress 2>/dev/null || true; systemctl is-active spark-ring-mesh.service 2>/dev/null || true; cat /sys/module/nvidia_drm/parameters/fbdev 2>/dev/null || true
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+7: wlP9s9    inet 192.168.2.180/24 brd 192.168.2.255 scope global dynamic noprefixroute wlP9s9\       valid_lft 29278sec preferred_lft 29278sec
+8: docker0    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0\       valid_lft forever preferred_lft forever
+9: enp1s0f0np0    inet 10.12.1.1/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.14.1.1/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.12.2.1/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.14.2.1/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.180 metric 600 
+10.12.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.12.1.1 
+10.12.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.12.2.1 
+10.14.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.14.1.1 
+10.14.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.14.2.1 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.180 metric 600 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:42 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 42f180000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:43 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 42f180000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:46 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 42f180000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f1:47 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 42f180000347bb4c parentbus pci parentdev 0002:01:00.1 
+inactive
+===== 192.168.2.161 =====
+spark-b
+2026-11-12T14:09:12+00:00
+7.0.0-1019-nvidia-64k
+65536
+NVIDIA GB10, 32, 208 MHz, [N/A], 0x0000000000000000, 3.09 W
+3201876 zsh -c hostname; date -Is; uname -r; getconf PAGESIZE; docker ps -a --format '{{.Names}} {{.Image}} {{.Status}}'; nvidia-smi --query-gpu=name,temperature.gpu,clocks.sm,clocks.mem,clocks_throttle_reasons.active,power.draw --format=csv,noheader; pgrep -af 'memguard|vllm|spark-ds41f' || true; ip -4 -o addr show; ip -4 route; for f in enp1s0f0np0 enp1s0f1np1 enP2p1s0f0np0 enP2p1s0f1np1; do ip -d link show $f | sed -n '1,2p'; done; tc filter show dev enp1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enp1s0f1np1 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f1np1 ingress 2>/dev/null || true; systemctl is-active spark-ring-mesh.service 2>/dev/null || true; cat /sys/module/nvidia_drm/parameters/fbdev 2>/dev/null || true
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+7: wlP9s9    inet 192.168.2.161/24 brd 192.168.2.255 scope global dynamic noprefixroute wlP9s9\       valid_lft 25303sec preferred_lft 25303sec
+8: docker0    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0\       valid_lft forever preferred_lft forever
+9: enp1s0f0np0    inet 10.12.1.2/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.23.1.2/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.12.2.2/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.23.2.2/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.161 metric 600 
+10.12.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.12.1.2 
+10.12.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.12.2.2 
+10.23.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.23.1.2 
+10.23.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.23.2.2 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.161 metric 600 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:28 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 28f380000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:29 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 28f380000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:2c brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 28f380000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:f3:2d brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 28f380000347bb4c parentbus pci parentdev 0002:01:00.1 
+inactive
+===== 192.168.2.102 =====
+spark-c
+2026-11-12T22:09:12+08:00
+7.0.0-1019-nvidia-64k
+65536
+NVIDIA GB10, 32, 208 MHz, [N/A], 0x0000000000000000, 4.74 W
+3179835 zsh -c hostname; date -Is; uname -r; getconf PAGESIZE; docker ps -a --format '{{.Names}} {{.Image}} {{.Status}}'; nvidia-smi --query-gpu=name,temperature.gpu,clocks.sm,clocks.mem,clocks_throttle_reasons.active,power.draw --format=csv,noheader; pgrep -af 'memguard|vllm|spark-ds41f' || true; ip -4 -o addr show; ip -4 route; for f in enp1s0f0np0 enp1s0f1np1 enP2p1s0f0np0 enP2p1s0f1np1; do ip -d link show $f | sed -n '1,2p'; done; tc filter show dev enp1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enp1s0f1np1 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f1np1 ingress 2>/dev/null || true; systemctl is-active spark-ring-mesh.service 2>/dev/null || true; cat /sys/module/nvidia_drm/parameters/fbdev 2>/dev/null || true
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+7: wlP9s9    inet 192.168.2.102/24 brd 192.168.2.255 scope global dynamic noprefixroute wlP9s9\       valid_lft 25105sec preferred_lft 25105sec
+8: docker0    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0\       valid_lft forever preferred_lft forever
+9: enp1s0f0np0    inet 10.34.1.3/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.23.1.3/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.34.2.3/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.23.2.3/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.102 metric 600 
+10.23.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.23.1.3 
+10.23.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.23.2.3 
+10.34.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.34.1.3 
+10.34.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.34.2.3 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.102 metric 600 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:0c brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 0cb280000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:0d brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 0cb280000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:10 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid 0cb280000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:b2:11 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid 0cb280000347bb4c parentbus pci parentdev 0002:01:00.1 
+inactive
+===== 192.168.2.238 =====
+spark-d
+2026-11-12T22:09:13+08:00
+7.0.0-1019-nvidia-64k
+65536
+NVIDIA GB10, 32, 208 MHz, [N/A], 0x0000000000000004, 4.41 W
+3173517 zsh -c hostname; date -Is; uname -r; getconf PAGESIZE; docker ps -a --format '{{.Names}} {{.Image}} {{.Status}}'; nvidia-smi --query-gpu=name,temperature.gpu,clocks.sm,clocks.mem,clocks_throttle_reasons.active,power.draw --format=csv,noheader; pgrep -af 'memguard|vllm|spark-ds41f' || true; ip -4 -o addr show; ip -4 route; for f in enp1s0f0np0 enp1s0f1np1 enP2p1s0f0np0 enP2p1s0f1np1; do ip -d link show $f | sed -n '1,2p'; done; tc filter show dev enp1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enp1s0f1np1 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f0np0 ingress 2>/dev/null || true; tc filter show dev enP2p1s0f1np1 ingress 2>/dev/null || true; systemctl is-active spark-ring-mesh.service 2>/dev/null || true; cat /sys/module/nvidia_drm/parameters/fbdev 2>/dev/null || true
+1: lo    inet 127.0.0.1/8 scope host lo\       valid_lft forever preferred_lft forever
+7: wlP9s9    inet 192.168.2.238/24 brd 192.168.2.255 scope global dynamic noprefixroute wlP9s9\       valid_lft 43105sec preferred_lft 43105sec
+8: docker0    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0\       valid_lft forever preferred_lft forever
+9: enp1s0f0np0    inet 10.34.1.4/24 scope global enp1s0f0np0\       valid_lft forever preferred_lft forever
+10: enp1s0f1np1    inet 10.14.1.4/24 scope global enp1s0f1np1\       valid_lft forever preferred_lft forever
+11: enP2p1s0f0np0    inet 10.34.2.4/24 scope global enP2p1s0f0np0\       valid_lft forever preferred_lft forever
+12: enP2p1s0f1np1    inet 10.14.2.4/24 scope global enP2p1s0f1np1\       valid_lft forever preferred_lft forever
+default via 192.168.2.1 dev wlP9s9 proto dhcp src 192.168.2.238 metric 600 
+10.14.1.0/24 dev enp1s0f1np1 proto kernel scope link src 10.14.1.4 
+10.14.2.0/24 dev enP2p1s0f1np1 proto kernel scope link src 10.14.2.4 
+10.34.1.0/24 dev enp1s0f0np0 proto kernel scope link src 10.34.1.4 
+10.34.2.0/24 dev enP2p1s0f0np0 proto kernel scope link src 10.34.2.4 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.2.0/24 dev wlP9s9 proto kernel scope link src 192.168.2.238 metric 600 
+9: enp1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:af brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid afab80000347bb4c parentbus pci parentdev 0000:01:00.0 
+10: enp1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b0 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid afab80000347bb4c parentbus pci parentdev 0000:01:00.1 
+11: enP2p1s0f0np0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b3 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p0 switchid afab80000347bb4c parentbus pci parentdev 0002:01:00.0 
+12: enP2p1s0f1np1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 4c:bb:47:80:ab:b4 brd ff:ff:ff:ff:ff:ff promiscuity 0  allmulti 0 minmtu 68 maxmtu 9978 addrgenmode eui64 numtxqueues 424 numrxqueues 20 gso_max_size 65536 gso_max_segs 65535 tso_max_size 524280 tso_max_segs 65535 gro_max_size 65536 portname p1 switchid afab80000347bb4c parentbus pci parentdev 0002:01:00.1 
+inactive

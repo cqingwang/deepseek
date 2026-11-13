@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "out": "/tmp/ring-audit-after-dispatcher-peer-reboot.json",
+  "failures": []
+}
+{"ok": true, "failures": []}

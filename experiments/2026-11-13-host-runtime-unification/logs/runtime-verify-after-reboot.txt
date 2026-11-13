@@ -1,0 +1,15 @@
+
+== spark-a (rank 0) ==
+snapshot: /tmp/ds41f-runtime-verify.1qFvku/spark-a.txt
+
+== spark-b (rank 1) ==
+snapshot: /tmp/ds41f-runtime-verify.1qFvku/spark-b.txt
+
+== spark-c (rank 2) ==
+snapshot: /tmp/ds41f-runtime-verify.1qFvku/spark-c.txt
+
+== spark-d (rank 3) ==
+snapshot: /tmp/ds41f-runtime-verify.1qFvku/spark-d.txt
+PASS: four-node headless runtime profile is identical
+
+runtime verification evidence: /tmp/ds41f-runtime-verify.1qFvku

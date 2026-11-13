@@ -1,0 +1,12 @@
+{
+  "environment": {
+    "CUDA_DEVICE_MAX_CONNECTIONS": "32",
+    "NCCL_MAX_NCHANNELS": "4",
+    "NCCL_MIN_NCHANNELS": "4",
+    "SPARKNET_ROCE_ALLGATHER_MAX_BYTES": "2097152"
+  },
+  "serve_options": {
+    "--max-num-batched-tokens": "65520",
+    "--long-prefill-token-threshold": "65424"
+  }
+}

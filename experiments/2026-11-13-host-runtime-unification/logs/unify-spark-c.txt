@@ -1,0 +1,797 @@
+PASS: apt plan is limited to the headless runtime profile
+backup=/var/backups/spark-host-runtime/20261113T012501Z
+Reading package lists...
+Building dependency tree...
+Reading state information...
+nvidia-spark-grub-kho is already the newest version (1.0-1).
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libevent-2.1-7t64 libevent-core-2.1-7t64
+Suggested packages:
+  snmpd
+Recommended packages:
+  ubuntu-kernel-accessories
+The following NEW packages will be installed:
+  dgx-spark-mlnx-hotplug libevent-2.1-7t64 linux-headers-7.0.0-1025-nvidia
+  linux-headers-nvidia-hwe-24.04 linux-image-nvidia-hwe-24.04
+  linux-modules-nvidia-fs-7.0.0-1025-nvidia
+  linux-nvidia-7.0-headers-7.0.0-1025 linux-nvidia-7.0-tools-7.0.0-1025
+  linux-nvidia-hwe-24.04 linux-tools-7.0.0-1025-nvidia
+  linux-tools-nvidia-hwe-24.04 lldpd nvidia-lvfs-config
+  nvidia-spark-avahi-conf nvidia-spark-baud-rate
+  nvidia-spark-default-remove-nvidia-fs-pkg nvidia-spark-fstab-config
+  nvidia-spark-grub-pci nvidia-spark-limits nvidia-spark-ota-check
+  nvidia-spark-realtek-mod-options nvidia-spark-repo
+The following packages will be upgraded:
+  dgx-release libevent-core-2.1-7t64 nv-common-apis nv-grubserial nv-iommu
+  nv-ipmi-devintf nv-limits nv-no-grubmenu nv-persistence-mode
+  nv-update-disable nvidia-dgx-telemetry nvidia-disable-aqc-nic
+  nvidia-disable-bt-profiles nvidia-grub-params nvidia-nvme-options
+  nvidia-raid-config nvidia-repo-keys nvidia-spark-initcall-bl
+  nvidia-spark-mlnx-firmware-manager nvidia-spark-wifi-fw-ppa
+20 upgraded, 22 newly installed, 0 to remove and 264 not upgraded.
+Need to get 40.7 MB of archives.
+After this operation, 155 MB of additional disk space will be used.
+Get:1 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libevent-2.1-7t64 arm64 2.1.12-stable-9ubuntu2.2 [141 kB]
+Get:2 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/universe arm64 lldpd arm64 1.0.18-1ubuntu0.1 [201 kB]
+Get:3 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libevent-core-2.1-7t64 arm64 2.1.12-stable-9ubuntu2.2 [90.6 kB]
+Get:4 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-nvidia-7.0-headers-7.0.0-1025 all 7.0.0-1025.26~24.04.1 [15.0 MB]
+Get:5 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-headers-7.0.0-1025-nvidia arm64 7.0.0-1025.26~24.04.1 [3,602 kB]
+Get:6 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-headers-nvidia-hwe-24.04 arm64 7.0.0-1025.26~24.04.1 [2,894 B]
+Get:7 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-modules-nvidia-fs-7.0.0-1025-nvidia arm64 7.0.0-1025.26~24.04.1 [297 kB]
+Get:8 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-image-nvidia-hwe-24.04 arm64 7.0.0-1025.26~24.04.1 [3,008 B]
+Get:9 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-nvidia-7.0-tools-7.0.0-1025 arm64 7.0.0-1025.26~24.04.1 [6,751 kB]
+Get:10 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-nvidia-hwe-24.04 arm64 7.0.0-1025.26~24.04.1 [2,942 B]
+Get:11 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-tools-7.0.0-1025-nvidia arm64 7.0.0-1025.26~24.04.1 [216 kB]
+Get:12 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-tools-nvidia-hwe-24.04 arm64 7.0.0-1025.26~24.04.1 [2,904 B]
+Get:13 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-common-apis all 26.08-2 [24.2 kB]
+Get:14 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 dgx-release all 7.6.0 [3,058 B]
+Get:15 https://repo.download.nvidia.com/spark/ubuntu/arm64 noble-updates/common arm64 nvidia-dgx-telemetry arm64 8.13 [4,559 kB]
+Get:16 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 dgx-spark-mlnx-hotplug all 26.01-1 [4,328 B]
+Get:17 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-grubserial all 26.03-1 [5,324 B]
+Get:18 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-iommu all 25.12-1 [5,464 B]
+Get:19 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-ipmi-devintf all 25.10-1 [4,028 B]
+Get:20 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-limits all 25.10-1 [4,040 B]
+Get:21 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-no-grubmenu all 26.01-1 [4,404 B]
+Get:22 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-persistence-mode all 25.10-1 [4,340 B]
+Get:23 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nv-update-disable all 25.10-1 [4,072 B]
+Get:24 https://repo.download.nvidia.com/spark/ubuntu/arm64 noble-updates/common arm64 nvidia-disable-aqc-nic all 25.10-1 [2,388 B]
+Get:25 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-disable-bt-profiles all 26.03-1 [5,204 B]
+Get:26 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-grub-params all 25.10-1 [1,936 B]
+Get:27 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-lvfs-config all 25.09-1 [1,940 B]
+Get:28 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-nvme-options all 26.02-1 [3,356 B]
+Get:29 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-raid-config all 25.10-1 [26.8 kB]
+Get:30 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-repo-keys all 26.07-1 [15.8 kB]
+Get:31 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-avahi-conf arm64 1.0-1 [2,652 B]
+Get:32 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 nvidia-spark-baud-rate all 25.09-1 [1,824 B]
+Get:33 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-default-remove-nvidia-fs-pkg all 25.09-2 [2,900 B]
+Get:34 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-fstab-config arm64 1.0.0-1 [1,928 B]
+Get:35 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-grub-pci arm64 1.0-1 [1,534 B]
+Get:36 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-initcall-bl arm64 1.0-2 [1,828 B]
+Get:37 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-limits all 1.0-1 [1,508 B]
+Get:38 https://repo.download.nvidia.com/spark/ubuntu/arm64 noble-updates/common arm64 nvidia-spark-mlnx-firmware-manager arm64 6.0.1-1 [9,678 kB]
+Get:39 https://repo.download.nvidia.com/spark/ubuntu/arm64 noble-updates/common arm64 nvidia-spark-ota-check arm64 1.0.23-1 [18.1 kB]
+Get:40 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-realtek-mod-options arm64 1.1-1 [1,544 B]
+Get:41 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 nvidia-spark-repo arm64 1.1-1 [3,012 B]
+Get:42 https://repo.download.nvidia.com/spark/ubuntu/arm64 noble-updates/common arm64 nvidia-spark-wifi-fw-ppa arm64 1.2-1 [1,576 B]
+Fetched 40.7 MB in 3s (12.1 MB/s)
+Selecting previously unselected package libevent-2.1-7t64:arm64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 145855 files and directories currently installed.)
+Preparing to unpack .../00-libevent-2.1-7t64_2.1.12-stable-9ubuntu2.2_arm64.deb ...
+Unpacking libevent-2.1-7t64:arm64 (2.1.12-stable-9ubuntu2.2) ...
+Selecting previously unselected package lldpd.
+Preparing to unpack .../01-lldpd_1.0.18-1ubuntu0.1_arm64.deb ...
+Unpacking lldpd (1.0.18-1ubuntu0.1) ...
+Preparing to unpack .../02-nv-common-apis_26.08-2_all.deb ...
+Unpacking nv-common-apis (26.08-2) over (25.08-4) ...
+Preparing to unpack .../03-dgx-release_7.6.0_all.deb ...
+Unpacking dgx-release (7.6.0) over (7.2.3) ...
+Preparing to unpack .../04-nvidia-dgx-telemetry_8.13_arm64.deb ...
+Sign of Life service stopped and disabled.
+Telemetry service stopped and disabled.
+Pre remove completed successfully.
+Telemetry data '/opt/nvidia/dgx-telemetry/data' directory created.
+Pre install completed successfully.
+Unpacking nvidia-dgx-telemetry (8.13) over (2.1) ...
+Post remove completed successfully.
+Selecting previously unselected package dgx-spark-mlnx-hotplug.
+Preparing to unpack .../05-dgx-spark-mlnx-hotplug_26.01-1_all.deb ...
+Unpacking dgx-spark-mlnx-hotplug (26.01-1) ...
+Preparing to unpack .../06-libevent-core-2.1-7t64_2.1.12-stable-9ubuntu2.2_arm64.deb ...
+Unpacking libevent-core-2.1-7t64:arm64 (2.1.12-stable-9ubuntu2.2) over (2.1.12-stable-9ubuntu2) ...
+Selecting previously unselected package linux-nvidia-7.0-headers-7.0.0-1025.
+Preparing to unpack .../07-linux-nvidia-7.0-headers-7.0.0-1025_7.0.0-1025.26~24.04.1_all.deb ...
+Unpacking linux-nvidia-7.0-headers-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-headers-7.0.0-1025-nvidia.
+Preparing to unpack .../08-linux-headers-7.0.0-1025-nvidia_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-headers-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-headers-nvidia-hwe-24.04.
+Preparing to unpack .../09-linux-headers-nvidia-hwe-24.04_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-headers-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-modules-nvidia-fs-7.0.0-1025-nvidia.
+Preparing to unpack .../10-linux-modules-nvidia-fs-7.0.0-1025-nvidia_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-image-nvidia-hwe-24.04.
+Preparing to unpack .../11-linux-image-nvidia-hwe-24.04_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-image-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-nvidia-7.0-tools-7.0.0-1025.
+Preparing to unpack .../12-linux-nvidia-7.0-tools-7.0.0-1025_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-nvidia-7.0-tools-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-nvidia-hwe-24.04.
+Preparing to unpack .../13-linux-nvidia-hwe-24.04_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-tools-7.0.0-1025-nvidia.
+Preparing to unpack .../14-linux-tools-7.0.0-1025-nvidia_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-tools-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Selecting previously unselected package linux-tools-nvidia-hwe-24.04.
+Preparing to unpack .../15-linux-tools-nvidia-hwe-24.04_7.0.0-1025.26~24.04.1_arm64.deb ...
+Unpacking linux-tools-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Preparing to unpack .../16-nv-grubserial_26.03-1_all.deb ...
+Unpacking nv-grubserial (26.03-1) over (25.07-1) ...
+Preparing to unpack .../17-nv-iommu_25.12-1_all.deb ...
+Unpacking nv-iommu (25.12-1) over (25.08-2) ...
+Preparing to unpack .../18-nv-ipmi-devintf_25.10-1_all.deb ...
+Unpacking nv-ipmi-devintf (25.10-1) over (24.12-1) ...
+Preparing to unpack .../19-nv-limits_25.10-1_all.deb ...
+Unpacking nv-limits (25.10-1) over (24.12-1) ...
+Preparing to unpack .../20-nv-no-grubmenu_26.01-1_all.deb ...
+Unpacking nv-no-grubmenu (26.01-1) over (25.08-1) ...
+Preparing to unpack .../21-nv-persistence-mode_25.10-1_all.deb ...
+Unpacking nv-persistence-mode (25.10-1) over (25.09-1) ...
+Preparing to unpack .../22-nv-update-disable_25.10-1_all.deb ...
+Unpacking nv-update-disable (25.10-1) over (24.12-1) ...
+Preparing to unpack .../23-nvidia-disable-aqc-nic_25.10-1_all.deb ...
+Unpacking nvidia-disable-aqc-nic (25.10-1) over (25.06-1) ...
+postrm called with unknown argument 'upgrade'
+dpkg: warning: old nvidia-disable-aqc-nic package post-removal script subprocess returned error exit status 1
+dpkg: trying script from the new package instead ...
+dpkg: ... it looks like that went OK
+Preparing to unpack .../24-nvidia-disable-bt-profiles_26.03-1_all.deb ...
+Removing bluetooth systemd override file...
+Unpacking nvidia-disable-bt-profiles (26.03-1) over (25.07-3) ...
+Failed to restart bluetooth.service: Unit bluetooth.service not found.
+Preparing to unpack .../25-nvidia-grub-params_25.10-1_all.deb ...
+Unpacking nvidia-grub-params (25.10-1) over (24.11-1) ...
+Selecting previously unselected package nvidia-lvfs-config.
+Preparing to unpack .../26-nvidia-lvfs-config_25.09-1_all.deb ...
+Unpacking nvidia-lvfs-config (25.09-1) ...
+Preparing to unpack .../27-nvidia-nvme-options_26.02-1_all.deb ...
+Unpacking nvidia-nvme-options (26.02-1) over (25.03-1) ...
+Preparing to unpack .../28-nvidia-raid-config_25.10-1_all.deb ...
+Unpacking nvidia-raid-config (25.10-1) over (25.01-1) ...
+Preparing to unpack .../29-nvidia-repo-keys_26.07-1_all.deb ...
+Unpacking nvidia-repo-keys (26.07-1) over (25.06-1) ...
+Selecting previously unselected package nvidia-spark-avahi-conf.
+Preparing to unpack .../30-nvidia-spark-avahi-conf_1.0-1_arm64.deb ...
+Unpacking nvidia-spark-avahi-conf (1.0-1) ...
+Selecting previously unselected package nvidia-spark-baud-rate.
+Preparing to unpack .../31-nvidia-spark-baud-rate_25.09-1_all.deb ...
+Unpacking nvidia-spark-baud-rate (25.09-1) ...
+Selecting previously unselected package nvidia-spark-default-remove-nvidia-fs-pkg.
+Preparing to unpack .../32-nvidia-spark-default-remove-nvidia-fs-pkg_25.09-2_all.deb ...
+Unpacking nvidia-spark-default-remove-nvidia-fs-pkg (25.09-2) ...
+Selecting previously unselected package nvidia-spark-fstab-config.
+Preparing to unpack .../33-nvidia-spark-fstab-config_1.0.0-1_arm64.deb ...
+Unpacking nvidia-spark-fstab-config (1.0.0-1) ...
+Selecting previously unselected package nvidia-spark-grub-pci.
+Preparing to unpack .../34-nvidia-spark-grub-pci_1.0-1_arm64.deb ...
+Unpacking nvidia-spark-grub-pci (1.0-1) ...
+Preparing to unpack .../35-nvidia-spark-initcall-bl_1.0-2_arm64.deb ...
+Unpacking nvidia-spark-initcall-bl (1.0-2) over (1.0-1) ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Selecting previously unselected package nvidia-spark-limits.
+Preparing to unpack .../36-nvidia-spark-limits_1.0-1_all.deb ...
+Unpacking nvidia-spark-limits (1.0-1) ...
+Preparing to unpack .../37-nvidia-spark-mlnx-firmware-manager_6.0.1-1_arm64.deb ...
+removed '/opt/nvidia/spark-mlnx-firmware-manager/firmwares/firmware-metadata.json'
+removed '/opt/nvidia/spark-mlnx-firmware-manager/firmwares/fw-ConnectX7-28.50.1002.bin'
+removed '/opt/nvidia/spark-mlnx-firmware-manager/firmwares/fw-ConnectX7.bin'
+Removed existing firmware files.
+Removed existing flag files.
+Unpacking nvidia-spark-mlnx-firmware-manager (6.0.1-1) over (5.0.8-1) ...
+Selecting previously unselected package nvidia-spark-ota-check.
+Preparing to unpack .../38-nvidia-spark-ota-check_1.0.23-1_arm64.deb ...
+Unpacking nvidia-spark-ota-check (1.0.23-1) ...
+Selecting previously unselected package nvidia-spark-realtek-mod-options.
+Preparing to unpack .../39-nvidia-spark-realtek-mod-options_1.1-1_arm64.deb ...
+Unpacking nvidia-spark-realtek-mod-options (1.1-1) ...
+Selecting previously unselected package nvidia-spark-repo.
+Preparing to unpack .../40-nvidia-spark-repo_1.1-1_arm64.deb ...
+Unpacking nvidia-spark-repo (1.1-1) ...
+Preparing to unpack .../41-nvidia-spark-wifi-fw-ppa_1.2-1_arm64.deb ...
+Unpacking nvidia-spark-wifi-fw-ppa (1.2-1) over (1.0-1) ...
+Setting up nvidia-grub-params (25.10-1) ...
+Setting up nvidia-dgx-telemetry (8.13) ...
+Post install completed successfully.
+Setting up nv-common-apis (26.08-2) ...
+Installing new version of config file /etc/nvidia-platform.d/nvidia-platform-configs.json ...
+Setting up nvidia-disable-bt-profiles (26.03-1) ...
+Installing new version of config file /etc/wireplumber/bluetooth.lua.d/50-bluez-config.lua ...
+Installing bluetooth systemd override file...
+Creating bluetooth systemd override directory...
+*** System restart required ***
+Setting up nvidia-spark-initcall-bl (1.0-2) ...
+Installing new version of config file /etc/default/grub.d/nvidia-spark-initcall-bl.cfg ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-spark-fstab-config (1.0.0-1) ...
+Existing swap filesystem type found, skipping configuration.
+Setting up nv-iommu (25.12-1) ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-spark-repo (1.1-1) ...
+Setting up nvidia-spark-mlnx-firmware-manager (6.0.1-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-spark-mlnx-firmware-manager.service → /usr/lib/systemd/system/nvidia-spark-mlnx-firmware-manager.service.
+Setting up nv-limits (25.10-1) ...
+Setting up libevent-2.1-7t64:arm64 (2.1.12-stable-9ubuntu2.2) ...
+Setting up dgx-release (7.6.0) ...
+Setting up nv-grubserial (26.03-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-grubserial.service → /usr/lib/systemd/system/nvidia-grubserial.service.
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-spark-realtek-mod-options (1.1-1) ...
+update-initramfs: deferring update (trigger activated)
+Setting up linux-nvidia-7.0-headers-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Setting up nvidia-nvme-options (26.02-1) ...
+[0;1;31mFailed to enable unit: Unit file /etc/systemd/system/nvidia-nvme-interrupt-coalescing.service is masked.[0m
+[0;1;31mFailed to start nvidia-nvme-interrupt-coalescing.service: Unit nvidia-nvme-interrupt-coalescing.service is masked.[0m
+Setting up lldpd (1.0.18-1ubuntu0.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/lldpd.service → /usr/lib/systemd/system/lldpd.service.
+Setting up nv-persistence-mode (25.10-1) ...
+Created symlink /etc/systemd/system/basic.target.wants/nvidia-persistenced.service → /usr/lib/systemd/system/nvidia-persistenced.service.
+Setting up dgx-spark-mlnx-hotplug (26.01-1) ...
+Setting up linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Setting up linux-headers-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+/etc/kernel/header_postinst.d/dkms:
+Sign command: /usr/bin/kmodsign
+Signing key: /var/lib/shim-signed/mok/MOK.priv
+Public certificate (MOK): /var/lib/shim-signed/mok/MOK.der
+
+Autoinstall of module dgx-spark-memory-saver/0.4.1 for kernel 7.0.0-1025-nvidia (aarch64)
+Warning: The /var/lib/dkms/dgx-spark-memory-saver/0.4.1/7.0.0-1025-nvidia/aarch64/dkms.conf
+for module dgx-spark-memory-saver/0.4.1 includes BUILD_EXCLUSIVE directives
+which do not match this kernel/arch/config for any modules.
+This indicates that it should not be built.
+
+Autoinstall on 7.0.0-1025-nvidia was skipped for module(s) dgx-spark-memory-saver.
+Setting up nvidia-spark-grub-pci (1.0-1) ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-raid-config (25.10-1) ...
+Setting up nv-ipmi-devintf (25.10-1) ...
+Setting up nv-update-disable (25.10-1) ...
+Setting up nvidia-spark-default-remove-nvidia-fs-pkg (25.09-2) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-spark-remove-once.service → /usr/lib/systemd/system/nvidia-spark-remove-once.service.
+Setting up nvidia-spark-limits (1.0-1) ...
+Setting up nvidia-spark-baud-rate (25.09-1) ...
+Updating GRUB command line baud rate from 115200 to 921600
+GRUB configuration updated successfully
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-spark-wifi-fw-ppa (1.2-1) ...
+Installing new version of config file /etc/apt/sources.list.d/canonical-nvidia-ubuntu-linux-firmware-mbssid-patches-noble.sources ...
+Setting up nvidia-spark-ota-check (1.0.23-1) ...
+Setting up nvidia-disable-aqc-nic (25.10-1) ...
+Setting up linux-nvidia-7.0-tools-7.0.0-1025 (7.0.0-1025.26~24.04.1) ...
+Setting up libevent-core-2.1-7t64:arm64 (2.1.12-stable-9ubuntu2.2) ...
+Setting up nv-no-grubmenu (26.01-1) ...
+Installing new version of config file /etc/default/grub.d/no-grubmenu.cfg ...
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Setting up nvidia-repo-keys (26.07-1) ...
+Setting up nvidia-lvfs-config (25.09-1) ...
+Adding EspLocation to existing [fwupd] section in /etc/fwupd/fwupd.conf
+Configuration added successfully
+Setting up nvidia-spark-avahi-conf (1.0-1) ...
+Setting up linux-tools-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+Setting up linux-image-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Setting up linux-headers-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Setting up linux-tools-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Setting up linux-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for initramfs-tools (0.142ubuntu25.5) ...
+update-initramfs: Generating /boot/initrd.img-7.0.0-1025-nvidia
+grep: /usr/share/plymouth/themes/nvidia/nvidia.plymouth: No such file or directory
+W: plymouth module (/usr/lib/aarch64-linux-gnu/plymouth//.so) missing, skipping that theme.
+Processing triggers for linux-image-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1) ...
+/etc/kernel/postinst.d/dkms:
+Sign command: /usr/bin/kmodsign
+Signing key: /var/lib/shim-signed/mok/MOK.priv
+Public certificate (MOK): /var/lib/shim-signed/mok/MOK.der
+
+Autoinstall of module dgx-spark-memory-saver/0.4.1 for kernel 7.0.0-1025-nvidia (aarch64)
+Warning: The /var/lib/dkms/dgx-spark-memory-saver/0.4.1/7.0.0-1025-nvidia/aarch64/dkms.conf
+for module dgx-spark-memory-saver/0.4.1 includes BUILD_EXCLUSIVE directives
+which do not match this kernel/arch/config for any modules.
+This indicates that it should not be built.
+
+Autoinstall on 7.0.0-1025-nvidia was skipped for module(s) dgx-spark-memory-saver.
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-7.0.0-1025-nvidia
+grep: /usr/share/plymouth/themes/nvidia/nvidia.plymouth: No such file or directory
+W: plymouth module (/usr/lib/aarch64-linux-gnu/plymouth//.so) missing, skipping that theme.
+/etc/kernel/postinst.d/kdump-tools:
+kdump-tools: Generating /var/lib/kdump/initrd.img-7.0.0-1025-nvidia
+grep: /usr/share/plymouth/themes/nvidia/nvidia.plymouth: No such file or directory
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/disable-init-on-alloc.cfg'
+Sourcing file `/etc/default/grub.d/grubserial.cfg'
+Sourcing file `/etc/default/grub.d/iommu.cfg'
+Sourcing file `/etc/default/grub.d/kdump-tools.cfg'
+Sourcing file `/etc/default/grub.d/no-grubmenu.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-console-settings.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-earlycon.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-initcall-bl.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-kho.cfg'
+Sourcing file `/etc/default/grub.d/nvidia-spark-pci.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-console.cfg'
+Sourcing file `/etc/default/grub.d/zz-spark-kernel-trial.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-7.0.0-1025-nvidia
+Found initrd image: /boot/initrd.img-7.0.0-1025-nvidia
+Found linux image: /boot/vmlinuz-7.0.0-1019-nvidia-64k
+Found initrd image: /boot/initrd.img-7.0.0-1019-nvidia-64k
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Reading package lists...
+Building dependency tree...
+Reading state information...
+base-files is already the newest version (13ubuntu10.5).
+libc6 is already the newest version (2.39-0ubuntu8.9).
+libc-bin is already the newest version (2.39-0ubuntu8.9).
+libc-dev-bin is already the newest version (2.39-0ubuntu8.9).
+libc-devtools is already the newest version (2.39-0ubuntu8.9).
+libc6-dev is already the newest version (2.39-0ubuntu8.9).
+libc6-dbg is already the newest version (2.39-0ubuntu8.9).
+locales is already the newest version (2.39-0ubuntu8.9).
+gcc-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-base is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libgcc-s1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgcc-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libstdc++6 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libstdc++-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libasan8 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libatomic1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgomp1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libhwasan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libitm1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+liblsan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libtsan2 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libubsan1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libcc1-0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+binutils is already the newest version (2.42-4ubuntu2.10).
+binutils-common is already the newest version (2.42-4ubuntu2.10).
+binutils-aarch64-linux-gnu is already the newest version (2.42-4ubuntu2.10).
+libbinutils is already the newest version (2.42-4ubuntu2.10).
+libctf0 is already the newest version (2.42-4ubuntu2.10).
+libctf-nobfd0 is already the newest version (2.42-4ubuntu2.10).
+libsframe1 is already the newest version (2.42-4ubuntu2.10).
+libgprofng0 is already the newest version (2.42-4ubuntu2.10).
+dpkg is already the newest version (1.22.6ubuntu6.6).
+dpkg-dev is already the newest version (1.22.6ubuntu6.6).
+libdpkg-perl is already the newest version (1.22.6ubuntu6.6).
+util-linux is already the newest version (2.39.3-9ubuntu6.6).
+bsdutils is already the newest version (1:2.39.3-9ubuntu6.6).
+mount is already the newest version (2.39.3-9ubuntu6.6).
+libblkid1 is already the newest version (2.39.3-9ubuntu6.6).
+libfdisk1 is already the newest version (2.39.3-9ubuntu6.6).
+libsmartcols1 is already the newest version (2.39.3-9ubuntu6.6).
+libuuid1 is already the newest version (2.39.3-9ubuntu6.6).
+fdisk is already the newest version (2.39.3-9ubuntu6.6).
+eject is already the newest version (2.39.3-9ubuntu6.6).
+python3-apt is already the newest version (2.7.7ubuntu5.3).
+procps is already the newest version (2:4.0.4-4ubuntu3.3).
+libproc2-0 is already the newest version (2:4.0.4-4ubuntu3.3).
+coreutils is already the newest version (9.4-3ubuntu6.3).
+kmod is already the newest version (31+20240202-2ubuntu7.2).
+iproute2 is already the newest version (6.1.0-1ubuntu6.4).
+libevent-2.1-7t64 is already the newest version (2.1.12-stable-9ubuntu2.2).
+libevent-core-2.1-7t64 is already the newest version (2.1.12-stable-9ubuntu2.2).
+nftables is already the newest version (1.0.9-1ubuntu0.1).
+nvme-cli is already the newest version (2.8-1ubuntu0.1).
+smartmontools is already the newest version (7.4-2build1).
+rsync is already the newest version (3.2.7-1ubuntu1.5).
+tar is already the newest version (1.35+dfsg-3ubuntu0.4).
+gzip is already the newest version (1.12-1ubuntu3.2).
+zstd is already the newest version (1.5.5+dfsg2-2build1.1).
+libzstd1 is already the newest version (1.5.5+dfsg2-2build1.1).
+gnupg is already the newest version (2.4.4-2ubuntu17.6).
+gnupg-utils is already the newest version (2.4.4-2ubuntu17.6).
+gpg is already the newest version (2.4.4-2ubuntu17.6).
+gpg-agent is already the newest version (2.4.4-2ubuntu17.6).
+gpgconf is already the newest version (2.4.4-2ubuntu17.6).
+gpgsm is already the newest version (2.4.4-2ubuntu17.6).
+gpgv is already the newest version (2.4.4-2ubuntu17.6).
+dirmngr is already the newest version (2.4.4-2ubuntu17.6).
+keyboxd is already the newest version (2.4.4-2ubuntu17.6).
+python3.12 is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-venv is already the newest version (3.12.3-1ubuntu0.17).
+python3-minimal is already the newest version (3.12.3-0ubuntu2.1).
+python3 is already the newest version (3.12.3-0ubuntu2.1).
+libpython3.12t64 is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-stdlib is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+wireless-regdb is already the newest version (2026.05.30-0ubuntu1~24.04.1).
+lldpd is already the newest version (1.0.18-1ubuntu0.1).
+ethtool is already the newest version (1:6.7-1build1).
+rdma-core is already the newest version (50.0-2ubuntu0.2).
+ibverbs-providers is already the newest version (50.0-2ubuntu0.2).
+mstflint is already the newest version (4.26.0+1-2ubuntu3).
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  apt-utils liblzma5 libnetplan1 libnm0 libnss-systemd libnuma1 libpam-systemd
+  libudev1 linux-tools-common
+Suggested packages:
+  apt-doc aptitude | synaptic | wajig multipath-tools-boot openvswitch-switch
+  libteam-utils keychain libpam-ssh monkeysphere ssh-askpass molly-guard
+  systemd-container systemd-homed systemd-userdbd systemd-boot wpagui
+  libengine-pkcs11-openssl
+Recommended packages:
+  ncurses-term
+The following packages will be upgraded:
+  apt apt-utils ca-certificates kpartx libapt-pkg6.0t64 liblzma5 libnetplan1
+  libnm0 libnss-systemd libnuma1 libpam-systemd libssl3t64 libsystemd-shared
+  libsystemd0 libudev1 linux-libc-dev linux-tools-common multipath-tools
+  netplan-generator netplan.io network-manager numactl openssh-client
+  openssh-server openssh-sftp-server openssl python3-distupgrade
+  python3-netplan ssh systemd systemd-dev systemd-resolved systemd-sysv
+  systemd-timesyncd ubuntu-release-upgrader-core udev wpasupplicant xz-utils
+38 upgraded, 0 newly installed, 0 to remove and 226 not upgraded.
+Need to get 23.5 MB of archives.
+After this operation, 966 kB of additional disk space will be used.
+Get:1 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 liblzma5 arm64 5.6.1+really5.4.5-1ubuntu0.4 [126 kB]
+Get:2 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 systemd-timesyncd arm64 255.4-1ubuntu8.18 [34.8 kB]
+Get:3 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libssl3t64 arm64 3.0.13-0ubuntu3.16 [1,838 kB]
+Get:4 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 systemd-resolved arm64 255.4-1ubuntu8.18 [292 kB]
+Get:5 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libnss-systemd arm64 255.4-1ubuntu8.18 [155 kB]
+Get:6 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 systemd-dev all 255.4-1ubuntu8.18 [107 kB]
+Get:7 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 systemd arm64 255.4-1ubuntu8.18 [3,408 kB]
+Get:8 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 udev arm64 255.4-1ubuntu8.18 [1,853 kB]
+Get:9 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 systemd-sysv arm64 255.4-1ubuntu8.18 [11.9 kB]
+Get:10 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libpam-systemd arm64 255.4-1ubuntu8.18 [232 kB]
+Get:11 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libsystemd-shared arm64 255.4-1ubuntu8.18 [2,022 kB]
+Get:12 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libudev1 arm64 255.4-1ubuntu8.18 [176 kB]
+Get:13 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libsystemd0 arm64 255.4-1ubuntu8.18 [428 kB]
+Get:14 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libapt-pkg6.0t64 arm64 2.8.4ubuntu0.1 [937 kB]
+Get:15 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 apt arm64 2.8.4ubuntu0.1 [1,357 kB]
+Get:16 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 apt-utils arm64 2.8.4ubuntu0.1 [304 kB]
+Get:17 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 openssh-sftp-server arm64 1:9.6p1-3ubuntu13.20 [36.8 kB]
+Get:18 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 openssh-server arm64 1:9.6p1-3ubuntu13.20 [502 kB]
+Get:19 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 openssh-client arm64 1:9.6p1-3ubuntu13.20 [891 kB]
+Get:20 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 openssl arm64 3.0.13-0ubuntu3.16 [985 kB]
+Get:21 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 ca-certificates all 20260816ubuntu0.24.04.2 [140 kB]
+Get:22 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 netplan-generator arm64 1.1.2-8ubuntu1~24.04.3 [60.7 kB]
+Get:23 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 python3-netplan arm64 1.1.2-8ubuntu1~24.04.3 [22.9 kB]
+Get:24 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 netplan.io arm64 1.1.2-8ubuntu1~24.04.3 [69.7 kB]
+Get:25 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libnetplan1 arm64 1.1.2-8ubuntu1~24.04.3 [130 kB]
+Get:26 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libnuma1 arm64 2.0.18-1ubuntu0.24.04.1 [23.7 kB]
+Get:27 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 numactl arm64 2.0.18-1ubuntu0.24.04.1 [39.5 kB]
+Get:28 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 ubuntu-release-upgrader-core all 1:24.04.29 [27.2 kB]
+Get:29 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 python3-distupgrade all 1:24.04.29 [125 kB]
+Get:30 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 xz-utils arm64 5.6.1+really5.4.5-1ubuntu0.4 [268 kB]
+Get:31 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 network-manager arm64 1.46.0-1ubuntu2.8 [2,275 kB]
+Get:32 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 libnm0 arm64 1.46.0-1ubuntu2.8 [482 kB]
+Get:33 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-libc-dev arm64 6.8.0-149.149 [1,672 kB]
+Get:34 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 linux-tools-common all 6.8.0-149.149 [538 kB]
+Get:35 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 ssh all 1:9.6p1-3ubuntu13.20 [4,664 B]
+Get:36 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 kpartx arm64 0.9.4-5ubuntu8.2 [31.6 kB]
+Get:37 https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports noble-updates/main arm64 multipath-tools arm64 0.9.4-5ubuntu8.2 [303 kB]
+Get:38 https://ppa.launchpadcontent.net/canonical-nvidia/nvidia-desktop-edge/ubuntu noble/main arm64 wpasupplicant arm64 2:2.11-0ubuntu5~24.04.1 [1,590 kB]
+Preconfiguring packages ...
+Fetched 23.5 MB in 2s (11.5 MB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../liblzma5_5.6.1+really5.4.5-1ubuntu0.4_arm64.deb ...
+Unpacking liblzma5:arm64 (5.6.1+really5.4.5-1ubuntu0.4) over (5.6.1+really5.4.5-1ubuntu0.3) ...
+Setting up liblzma5:arm64 (5.6.1+really5.4.5-1ubuntu0.4) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../systemd-timesyncd_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking systemd-timesyncd (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../libssl3t64_3.0.13-0ubuntu3.16_arm64.deb ...
+Unpacking libssl3t64:arm64 (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.15) ...
+Setting up libssl3t64:arm64 (3.0.13-0ubuntu3.16) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../0-systemd-resolved_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking systemd-resolved (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../1-libnss-systemd_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking libnss-systemd:arm64 (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../2-systemd-dev_255.4-1ubuntu8.18_all.deb ...
+Unpacking systemd-dev (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../3-systemd_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking systemd (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../4-udev_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking udev (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../5-libsystemd-shared_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking libsystemd-shared:arm64 (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Setting up libsystemd-shared:arm64 (255.4-1ubuntu8.18) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../libsystemd0_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking libsystemd0:arm64 (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Setting up libsystemd0:arm64 (255.4-1ubuntu8.18) ...
+Setting up systemd-dev (255.4-1ubuntu8.18) ...
+Setting up systemd (255.4-1ubuntu8.18) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../systemd-sysv_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking systemd-sysv (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../libpam-systemd_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking libpam-systemd:arm64 (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Preparing to unpack .../libudev1_255.4-1ubuntu8.18_arm64.deb ...
+Unpacking libudev1:arm64 (255.4-1ubuntu8.18) over (255.4-1ubuntu8.17) ...
+Setting up libudev1:arm64 (255.4-1ubuntu8.18) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../libapt-pkg6.0t64_2.8.4ubuntu0.1_arm64.deb ...
+Unpacking libapt-pkg6.0t64:arm64 (2.8.4ubuntu0.1) over (2.8.3) ...
+Setting up libapt-pkg6.0t64:arm64 (2.8.4ubuntu0.1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../apt_2.8.4ubuntu0.1_arm64.deb ...
+Unpacking apt (2.8.4ubuntu0.1) over (2.8.3) ...
+Setting up apt (2.8.4ubuntu0.1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181013 files and directories currently installed.)
+Preparing to unpack .../00-apt-utils_2.8.4ubuntu0.1_arm64.deb ...
+Unpacking apt-utils (2.8.4ubuntu0.1) over (2.8.3) ...
+Preparing to unpack .../01-openssh-sftp-server_1%3a9.6p1-3ubuntu13.20_arm64.deb ...
+Unpacking openssh-sftp-server (1:9.6p1-3ubuntu13.20) over (1:9.6p1-3ubuntu13.19) ...
+Preparing to unpack .../02-openssh-server_1%3a9.6p1-3ubuntu13.20_arm64.deb ...
+Unpacking openssh-server (1:9.6p1-3ubuntu13.20) over (1:9.6p1-3ubuntu13.19) ...
+Preparing to unpack .../03-openssh-client_1%3a9.6p1-3ubuntu13.20_arm64.deb ...
+Unpacking openssh-client (1:9.6p1-3ubuntu13.20) over (1:9.6p1-3ubuntu13.19) ...
+Preparing to unpack .../04-openssl_3.0.13-0ubuntu3.16_arm64.deb ...
+Unpacking openssl (3.0.13-0ubuntu3.16) over (3.0.13-0ubuntu3.15) ...
+Preparing to unpack .../05-ca-certificates_20260816ubuntu0.24.04.2_all.deb ...
+Unpacking ca-certificates (20260816ubuntu0.24.04.2) over (20260601~24.04.1) ...
+Preparing to unpack .../06-netplan-generator_1.1.2-8ubuntu1~24.04.3_arm64.deb ...
+Adding 'diversion of /lib/systemd/system-generators/netplan to /lib/systemd/system-generators/netplan.usr-is-merged by netplan-generator'
+Unpacking netplan-generator (1.1.2-8ubuntu1~24.04.3) over (1.1.2-2~ubuntu24.04.2) ...
+Preparing to unpack .../07-python3-netplan_1.1.2-8ubuntu1~24.04.3_arm64.deb ...
+Unpacking python3-netplan (1.1.2-8ubuntu1~24.04.3) over (1.1.2-2~ubuntu24.04.2) ...
+Preparing to unpack .../08-netplan.io_1.1.2-8ubuntu1~24.04.3_arm64.deb ...
+Unpacking netplan.io (1.1.2-8ubuntu1~24.04.3) over (1.1.2-2~ubuntu24.04.2) ...
+Preparing to unpack .../09-libnetplan1_1.1.2-8ubuntu1~24.04.3_arm64.deb ...
+Unpacking libnetplan1:arm64 (1.1.2-8ubuntu1~24.04.3) over (1.1.2-2~ubuntu24.04.2) ...
+Preparing to unpack .../10-libnuma1_2.0.18-1ubuntu0.24.04.1_arm64.deb ...
+Unpacking libnuma1:arm64 (2.0.18-1ubuntu0.24.04.1) over (2.0.18-1build1) ...
+Preparing to unpack .../11-numactl_2.0.18-1ubuntu0.24.04.1_arm64.deb ...
+Unpacking numactl (2.0.18-1ubuntu0.24.04.1) over (2.0.18-1build1) ...
+Preparing to unpack .../12-ubuntu-release-upgrader-core_1%3a24.04.29_all.deb ...
+Unpacking ubuntu-release-upgrader-core (1:24.04.29) over (1:24.04.27) ...
+Preparing to unpack .../13-python3-distupgrade_1%3a24.04.29_all.deb ...
+Unpacking python3-distupgrade (1:24.04.29) over (1:24.04.27) ...
+Preparing to unpack .../14-xz-utils_5.6.1+really5.4.5-1ubuntu0.4_arm64.deb ...
+Unpacking xz-utils (5.6.1+really5.4.5-1ubuntu0.4) over (5.6.1+really5.4.5-1ubuntu0.3) ...
+Preparing to unpack .../15-wpasupplicant_2%3a2.11-0ubuntu5~24.04.1_arm64.deb ...
+Unpacking wpasupplicant (2:2.11-0ubuntu5~24.04.1) over (2:2.10-21ubuntu0.2+bssmaxbump) ...
+Preparing to unpack .../16-network-manager_1.46.0-1ubuntu2.8_arm64.deb ...
+Unpacking network-manager (1.46.0-1ubuntu2.8) over (1.46.0-1ubuntu2.2) ...
+Preparing to unpack .../17-libnm0_1.46.0-1ubuntu2.8_arm64.deb ...
+Unpacking libnm0:arm64 (1.46.0-1ubuntu2.8) over (1.46.0-1ubuntu2.2) ...
+Preparing to unpack .../18-linux-libc-dev_6.8.0-149.149_arm64.deb ...
+Unpacking linux-libc-dev:arm64 (6.8.0-149.149) over (6.8.0-139.139) ...
+Preparing to unpack .../19-linux-tools-common_6.8.0-149.149_all.deb ...
+Unpacking linux-tools-common (6.8.0-149.149) over (6.8.0-139.139) ...
+Preparing to unpack .../20-ssh_1%3a9.6p1-3ubuntu13.20_all.deb ...
+Unpacking ssh (1:9.6p1-3ubuntu13.20) over (1:9.6p1-3ubuntu13.14) ...
+Preparing to unpack .../21-kpartx_0.9.4-5ubuntu8.2_arm64.deb ...
+Unpacking kpartx (0.9.4-5ubuntu8.2) over (0.9.4-5ubuntu8) ...
+Preparing to unpack .../22-multipath-tools_0.9.4-5ubuntu8.2_arm64.deb ...
+Unpacking multipath-tools (0.9.4-5ubuntu8.2) over (0.9.4-5ubuntu8) ...
+Setting up systemd-sysv (255.4-1ubuntu8.18) ...
+Setting up apt-utils (2.8.4ubuntu0.1) ...
+Setting up openssh-client (1:9.6p1-3ubuntu13.20) ...
+Setting up linux-libc-dev:arm64 (6.8.0-149.149) ...
+Setting up libnss-systemd:arm64 (255.4-1ubuntu8.18) ...
+Setting up libnetplan1:arm64 (1.1.2-8ubuntu1~24.04.3) ...
+Setting up python3-distupgrade (1:24.04.29) ...
+Setting up wpasupplicant (2:2.11-0ubuntu5~24.04.1) ...
+Setting up xz-utils (5.6.1+really5.4.5-1ubuntu0.4) ...
+Setting up systemd-timesyncd (255.4-1ubuntu8.18) ...
+Setting up udev (255.4-1ubuntu8.18) ...
+Setting up libnm0:arm64 (1.46.0-1ubuntu2.8) ...
+Setting up libnuma1:arm64 (2.0.18-1ubuntu0.24.04.1) ...
+Setting up kpartx (0.9.4-5ubuntu8.2) ...
+Setting up libpam-systemd:arm64 (255.4-1ubuntu8.18) ...
+Setting up python3-netplan (1.1.2-8ubuntu1~24.04.3) ...
+Setting up netplan-generator (1.1.2-8ubuntu1~24.04.3) ...
+Removing 'diversion of /lib/systemd/system-generators/netplan to /lib/systemd/system-generators/netplan.usr-is-merged by netplan-generator'
+Setting up openssl (3.0.13-0ubuntu3.16) ...
+Setting up linux-tools-common (6.8.0-149.149) ...
+Setting up systemd-resolved (255.4-1ubuntu8.18) ...
+Setting up openssh-sftp-server (1:9.6p1-3ubuntu13.20) ...
+Setting up numactl (2.0.18-1ubuntu0.24.04.1) ...
+Setting up openssh-server (1:9.6p1-3ubuntu13.20) ...
+Setting up multipath-tools (0.9.4-5ubuntu8.2) ...
+Setting up netplan.io (1.1.2-8ubuntu1~24.04.3) ...
+Setting up ca-certificates (20260816ubuntu0.24.04.2) ...
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+4 added, 5 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Setting up ubuntu-release-upgrader-core (1:24.04.29) ...
+Setting up ssh (1:9.6p1-3ubuntu13.20) ...
+Setting up network-manager (1.46.0-1ubuntu2.8) ...
+Processing triggers for dbus (1.14.10-4ubuntu4.1) ...
+Processing triggers for initramfs-tools (0.142ubuntu25.5) ...
+update-initramfs: Generating /boot/initrd.img-7.0.0-1025-nvidia
+grep: /usr/share/plymouth/themes/nvidia/nvidia.plymouth: No such file or directory
+W: plymouth module (/usr/lib/aarch64-linux-gnu/plymouth//.so) missing, skipping that theme.
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for ufw (0.36.2-6) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'snapd' is not installed, so not removed
+Package 'nvidia-prime' is not installed, so not removed
+Package 'nvidia-desktop-default-snaps' is not installed, so not removed
+Package 'nvidia-spark-run-apt-upgrade' is not installed, so not removed
+Package 'nvidia-enable-bt-profiles' is not installed, so not removed
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  dgx-spark-ota-update-meta*
+0 upgraded, 0 newly installed, 1 to remove and 225 not upgraded.
+After this operation, 10.2 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 181055 files and directories currently installed.)
+Removing dgx-spark-ota-update-meta (25.06.1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+runtime-unification-applied
+backup: spark-c:/var/backups/spark-host-runtime/20261113T012501Z

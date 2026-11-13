@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "out": "/tmp/container-binary-audit-single-stable-kernel.json",
+  "failures": []
+}
+{"ok": true, "failures": []}

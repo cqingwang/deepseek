@@ -1,0 +1,338 @@
+### exact and fallback package install
+NOTE: This is only a simulation!
+      apt-get needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists...
+Building dependency tree...
+Reading state information...
+nvidia-spark-grub-kho is already the newest version (1.0-1).
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  libevent-2.1-7t64 libevent-core-2.1-7t64
+Suggested packages:
+  snmpd
+Recommended packages:
+  ubuntu-kernel-accessories
+The following NEW packages will be installed:
+  dgx-spark-mlnx-hotplug libevent-2.1-7t64 linux-headers-7.0.0-1025-nvidia
+  linux-headers-nvidia-hwe-24.04 linux-image-nvidia-hwe-24.04
+  linux-modules-nvidia-fs-7.0.0-1025-nvidia
+  linux-nvidia-7.0-headers-7.0.0-1025 linux-nvidia-7.0-tools-7.0.0-1025
+  linux-nvidia-hwe-24.04 linux-tools-7.0.0-1025-nvidia
+  linux-tools-nvidia-hwe-24.04 lldpd nvidia-lvfs-config
+  nvidia-spark-avahi-conf nvidia-spark-baud-rate
+  nvidia-spark-default-remove-nvidia-fs-pkg nvidia-spark-fstab-config
+  nvidia-spark-grub-pci nvidia-spark-limits nvidia-spark-ota-check
+  nvidia-spark-realtek-mod-options nvidia-spark-repo
+The following packages will be upgraded:
+  dgx-release libevent-core-2.1-7t64 nv-common-apis nv-grubserial nv-iommu
+  nv-ipmi-devintf nv-limits nv-no-grubmenu nv-persistence-mode
+  nv-update-disable nvidia-dgx-telemetry nvidia-disable-aqc-nic
+  nvidia-disable-bt-profiles nvidia-grub-params nvidia-nvme-options
+  nvidia-raid-config nvidia-repo-keys nvidia-spark-initcall-bl
+  nvidia-spark-mlnx-firmware-manager nvidia-spark-wifi-fw-ppa
+20 upgraded, 22 newly installed, 0 to remove and 264 not upgraded.
+Inst libevent-2.1-7t64 (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst lldpd (1.0.18-1build3 Ubuntu:24.04/noble [arm64])
+Inst nv-common-apis [25.08-4] (26.08-2 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst dgx-release [7.2.3] (7.6.0 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-dgx-telemetry [2.1] (8.13 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst dgx-spark-mlnx-hotplug (26.01-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Inst libevent-core-2.1-7t64 [2.1.12-stable-9ubuntu2] (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-nvidia-7.0-headers-7.0.0-1025 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Inst linux-headers-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-headers-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-image-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-nvidia-7.0-tools-7.0.0-1025 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-tools-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst linux-tools-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst nv-grubserial [25.07-1] (26.03-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-iommu [25.08-2] (25.12-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-ipmi-devintf [24.12-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-limits [24.12-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-no-grubmenu [25.08-1] (26.01-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-persistence-mode [25.09-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nv-update-disable [24.12-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-disable-aqc-nic [25.06-1] (25.10-1 NVIDIA Spark Updates Repository:noble-updates [all])
+Inst nvidia-disable-bt-profiles [25.07-3] (26.03-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-grub-params [24.11-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-lvfs-config (25.09-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-nvme-options [25.03-1] (26.02-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-raid-config [25.01-1] (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-repo-keys [25.06-1] (26.07-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Inst nvidia-spark-avahi-conf (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-baud-rate (25.09-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Inst nvidia-spark-default-remove-nvidia-fs-pkg (25.09-2 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Inst nvidia-spark-fstab-config (1.0.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-grub-pci (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-initcall-bl [1.0-1] (1.0-2 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-limits (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Inst nvidia-spark-mlnx-firmware-manager [5.0.8-1] (6.0.1-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-ota-check (1.0.23-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-realtek-mod-options (1.1-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Inst nvidia-spark-repo (1.1-1 Base OS Updates Repository:repo.download.nvidia.com [arm64])
+Inst nvidia-spark-wifi-fw-ppa [1.0-1] (1.2-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf libevent-2.1-7t64 (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf lldpd (1.0.18-1build3 Ubuntu:24.04/noble [arm64])
+Conf nv-common-apis (26.08-2 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf dgx-release (7.6.0 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-dgx-telemetry (8.13 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf dgx-spark-mlnx-hotplug (26.01-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Conf libevent-core-2.1-7t64 (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-nvidia-7.0-headers-7.0.0-1025 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Conf linux-headers-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-headers-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-modules-nvidia-fs-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-image-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-nvidia-7.0-tools-7.0.0-1025 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-tools-7.0.0-1025-nvidia (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf linux-tools-nvidia-hwe-24.04 (7.0.0-1025.26~24.04.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf nv-grubserial (26.03-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-iommu (25.12-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-ipmi-devintf (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-limits (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-no-grubmenu (26.01-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-persistence-mode (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nv-update-disable (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-disable-aqc-nic (25.10-1 NVIDIA Spark Updates Repository:noble-updates [all])
+Conf nvidia-disable-bt-profiles (26.03-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-grub-params (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-lvfs-config (25.09-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-nvme-options (26.02-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-raid-config (25.10-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-repo-keys (26.07-1 Base OS Updates Repository:repo.download.nvidia.com [all])
+Conf nvidia-spark-avahi-conf (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-baud-rate (25.09-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Conf nvidia-spark-default-remove-nvidia-fs-pkg (25.09-2 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Conf nvidia-spark-fstab-config (1.0.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-grub-pci (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-initcall-bl (1.0-2 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-limits (1.0-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [all])
+Conf nvidia-spark-mlnx-firmware-manager (6.0.1-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-ota-check (1.0.23-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-realtek-mod-options (1.1-1 Base OS Updates Repository:repo.download.nvidia.com, NVIDIA Spark Updates Repository:noble-updates [arm64])
+Conf nvidia-spark-repo (1.1-1 Base OS Updates Repository:repo.download.nvidia.com [arm64])
+Conf nvidia-spark-wifi-fw-ppa (1.2-1 NVIDIA Spark Updates Repository:noble-updates [arm64])
+
+### existing core package upgrade
+NOTE: This is only a simulation!
+      apt-get needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists...
+Building dependency tree...
+Reading state information...
+base-files is already the newest version (13ubuntu10.5).
+libc6 is already the newest version (2.39-0ubuntu8.9).
+libc-bin is already the newest version (2.39-0ubuntu8.9).
+libc-dev-bin is already the newest version (2.39-0ubuntu8.9).
+libc-devtools is already the newest version (2.39-0ubuntu8.9).
+libc6-dev is already the newest version (2.39-0ubuntu8.9).
+libc6-dbg is already the newest version (2.39-0ubuntu8.9).
+locales is already the newest version (2.39-0ubuntu8.9).
+gcc-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-base is already the newest version (13.3.0-6ubuntu2~24.04.1).
+gcc-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+g++-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13 is already the newest version (13.3.0-6ubuntu2~24.04.1).
+cpp-13-aarch64-linux-gnu is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libgcc-s1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgcc-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libstdc++6 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libstdc++-13-dev is already the newest version (13.3.0-6ubuntu2~24.04.1).
+libasan8 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libatomic1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libgomp1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libhwasan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libitm1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+liblsan0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libtsan2 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libubsan1 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+libcc1-0 is already the newest version (14.2.0-4ubuntu2~24.04.1).
+binutils is already the newest version (2.42-4ubuntu2.10).
+binutils-common is already the newest version (2.42-4ubuntu2.10).
+binutils-aarch64-linux-gnu is already the newest version (2.42-4ubuntu2.10).
+libbinutils is already the newest version (2.42-4ubuntu2.10).
+libctf0 is already the newest version (2.42-4ubuntu2.10).
+libctf-nobfd0 is already the newest version (2.42-4ubuntu2.10).
+libsframe1 is already the newest version (2.42-4ubuntu2.10).
+libgprofng0 is already the newest version (2.42-4ubuntu2.10).
+dpkg is already the newest version (1.22.6ubuntu6.6).
+dpkg-dev is already the newest version (1.22.6ubuntu6.6).
+libdpkg-perl is already the newest version (1.22.6ubuntu6.6).
+util-linux is already the newest version (2.39.3-9ubuntu6.6).
+bsdutils is already the newest version (1:2.39.3-9ubuntu6.6).
+mount is already the newest version (2.39.3-9ubuntu6.6).
+libblkid1 is already the newest version (2.39.3-9ubuntu6.6).
+libfdisk1 is already the newest version (2.39.3-9ubuntu6.6).
+libsmartcols1 is already the newest version (2.39.3-9ubuntu6.6).
+libuuid1 is already the newest version (2.39.3-9ubuntu6.6).
+fdisk is already the newest version (2.39.3-9ubuntu6.6).
+eject is already the newest version (2.39.3-9ubuntu6.6).
+python3-apt is already the newest version (2.7.7ubuntu5.3).
+procps is already the newest version (2:4.0.4-4ubuntu3.3).
+libproc2-0 is already the newest version (2:4.0.4-4ubuntu3.3).
+coreutils is already the newest version (9.4-3ubuntu6.3).
+kmod is already the newest version (31+20240202-2ubuntu7.2).
+iproute2 is already the newest version (6.1.0-1ubuntu6.4).
+Skipping libevent-2.1-7t64, it is not installed and only upgrades are requested.
+nftables is already the newest version (1.0.9-1ubuntu0.1).
+nvme-cli is already the newest version (2.8-1ubuntu0.1).
+smartmontools is already the newest version (7.4-2build1).
+rsync is already the newest version (3.2.7-1ubuntu1.5).
+tar is already the newest version (1.35+dfsg-3ubuntu0.4).
+gzip is already the newest version (1.12-1ubuntu3.2).
+zstd is already the newest version (1.5.5+dfsg2-2build1.1).
+libzstd1 is already the newest version (1.5.5+dfsg2-2build1.1).
+gnupg is already the newest version (2.4.4-2ubuntu17.6).
+gnupg-utils is already the newest version (2.4.4-2ubuntu17.6).
+gpg is already the newest version (2.4.4-2ubuntu17.6).
+gpg-agent is already the newest version (2.4.4-2ubuntu17.6).
+gpgconf is already the newest version (2.4.4-2ubuntu17.6).
+gpgsm is already the newest version (2.4.4-2ubuntu17.6).
+gpgv is already the newest version (2.4.4-2ubuntu17.6).
+dirmngr is already the newest version (2.4.4-2ubuntu17.6).
+keyboxd is already the newest version (2.4.4-2ubuntu17.6).
+python3.12 is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+python3.12-venv is already the newest version (3.12.3-1ubuntu0.17).
+python3-minimal is already the newest version (3.12.3-0ubuntu2.1).
+python3 is already the newest version (3.12.3-0ubuntu2.1).
+libpython3.12t64 is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-stdlib is already the newest version (3.12.3-1ubuntu0.17).
+libpython3.12-minimal is already the newest version (3.12.3-1ubuntu0.17).
+wireless-regdb is already the newest version (2026.05.30-0ubuntu1~24.04.1).
+Skipping lldpd, it is not installed and only upgrades are requested.
+ethtool is already the newest version (1:6.7-1build1).
+rdma-core is already the newest version (50.0-2ubuntu0.2).
+ibverbs-providers is already the newest version (50.0-2ubuntu0.2).
+mstflint is already the newest version (4.26.0+1-2ubuntu3).
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  apt-utils liblzma5 libnetplan1 libnm0 libnss-systemd libnuma1 libpam-systemd
+  libudev1 linux-tools-common
+Suggested packages:
+  apt-doc aptitude | synaptic | wajig multipath-tools-boot openvswitch-switch
+  libteam-utils keychain libpam-ssh monkeysphere ssh-askpass molly-guard
+  systemd-container systemd-homed systemd-userdbd systemd-boot wpagui
+  libengine-pkcs11-openssl
+Recommended packages:
+  ncurses-term
+The following packages will be upgraded:
+  apt apt-utils ca-certificates kpartx libapt-pkg6.0t64 libevent-core-2.1-7t64
+  liblzma5 libnetplan1 libnm0 libnss-systemd libnuma1 libpam-systemd
+  libssl3t64 libsystemd-shared libsystemd0 libudev1 linux-libc-dev
+  linux-tools-common multipath-tools netplan-generator netplan.io
+  network-manager numactl openssh-client openssh-server openssh-sftp-server
+  openssl python3-distupgrade python3-netplan ssh systemd systemd-dev
+  systemd-resolved systemd-sysv systemd-timesyncd ubuntu-release-upgrader-core
+  udev wpasupplicant xz-utils
+39 upgraded, 0 newly installed, 0 to remove and 244 not upgraded.
+Inst liblzma5 [5.6.1+really5.4.5-1ubuntu0.3] (5.6.1+really5.4.5-1ubuntu0.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf liblzma5 (5.6.1+really5.4.5-1ubuntu0.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst systemd-timesyncd [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst libssl3t64 [3.0.13-0ubuntu3.15] (3.0.13-0ubuntu3.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Conf libssl3t64 (3.0.13-0ubuntu3.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst systemd-resolved [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst libnss-systemd [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst systemd-dev [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all]) []
+Inst systemd [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Inst udev [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Inst libsystemd-shared [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Conf libsystemd-shared (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Inst libsystemd0 [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Conf libsystemd0 (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Conf systemd-dev (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Conf systemd (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 systemd-sysv:arm64 ]
+Inst systemd-sysv [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [libpam-systemd:arm64 ]
+Inst libpam-systemd [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst libudev1 [255.4-1ubuntu8.17] (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf libudev1 (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst libapt-pkg6.0t64 [2.8.3] (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf libapt-pkg6.0t64 (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst apt [2.8.3] (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [apt-utils:arm64 ]
+Conf apt (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) [apt-utils:arm64 ]
+Inst apt-utils [2.8.3] (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst openssh-sftp-server [1:9.6p1-3ubuntu13.19] (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst openssh-server [1:9.6p1-3ubuntu13.19] (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64]) []
+Inst openssh-client [1:9.6p1-3ubuntu13.19] (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst openssl [3.0.13-0ubuntu3.15] (3.0.13-0ubuntu3.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst ca-certificates [20260601~24.04.1] (20260816ubuntu0.24.04.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Inst netplan-generator [1.1.2-2~ubuntu24.04.2] (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64]) []
+Inst python3-netplan [1.1.2-2~ubuntu24.04.2] (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64]) []
+Inst netplan.io [1.1.2-2~ubuntu24.04.2] (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64]) []
+Inst libnetplan1 [1.1.2-2~ubuntu24.04.2] (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64])
+Inst libnuma1 [2.0.18-1build1] (2.0.18-1ubuntu0.24.04.1 Ubuntu:24.04/noble-updates [arm64])
+Inst numactl [2.0.18-1build1] (2.0.18-1ubuntu0.24.04.1 Ubuntu:24.04/noble-updates [arm64])
+Inst ubuntu-release-upgrader-core [1:24.04.27] (1:24.04.29 Ubuntu:24.04/noble-updates [all]) []
+Inst python3-distupgrade [1:24.04.27] (1:24.04.29 Ubuntu:24.04/noble-updates [all])
+Inst xz-utils [5.6.1+really5.4.5-1ubuntu0.3] (5.6.1+really5.4.5-1ubuntu0.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst libevent-core-2.1-7t64 [2.1.12-stable-9ubuntu2] (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Inst wpasupplicant [2:2.10-21ubuntu0.2+bssmaxbump] (2:2.11-0ubuntu5~24.04.1 Nvidia Desktop Packages - Edge Pocket:24.04/noble [arm64])
+Inst network-manager [1.46.0-1ubuntu2.2] (1.46.0-1ubuntu2.8 Ubuntu:24.04/noble-updates [arm64]) []
+Inst libnm0 [1.46.0-1ubuntu2.2] (1.46.0-1ubuntu2.8 Ubuntu:24.04/noble-updates [arm64])
+Inst linux-libc-dev [6.8.0-139.139] (6.8.0-149.149 Ubuntu:24.04/noble-updates [arm64])
+Inst linux-tools-common [6.8.0-139.139] (6.8.0-149.149 Ubuntu:24.04/noble-updates [all])
+Inst ssh [1:9.6p1-3ubuntu13.14] (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Inst kpartx [0.9.4-5ubuntu8] (0.9.4-5ubuntu8.2 Ubuntu:24.04/noble-updates [arm64])
+Inst multipath-tools [0.9.4-5ubuntu8] (0.9.4-5ubuntu8.2 Ubuntu:24.04/noble-updates [arm64])
+Conf systemd-timesyncd (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf systemd-resolved (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf libnss-systemd (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf udev (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf systemd-sysv (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf libpam-systemd (255.4-1ubuntu8.18 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf apt-utils (2.8.4ubuntu0.1 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf openssh-sftp-server (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf openssh-server (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf openssh-client (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf openssl (3.0.13-0ubuntu3.16 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf ca-certificates (20260816ubuntu0.24.04.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Conf netplan-generator (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64])
+Conf python3-netplan (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64])
+Conf netplan.io (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64])
+Conf libnetplan1 (1.1.2-8ubuntu1~24.04.3 Ubuntu:24.04/noble-updates [arm64])
+Conf libnuma1 (2.0.18-1ubuntu0.24.04.1 Ubuntu:24.04/noble-updates [arm64])
+Conf numactl (2.0.18-1ubuntu0.24.04.1 Ubuntu:24.04/noble-updates [arm64])
+Conf ubuntu-release-upgrader-core (1:24.04.29 Ubuntu:24.04/noble-updates [all])
+Conf python3-distupgrade (1:24.04.29 Ubuntu:24.04/noble-updates [all])
+Conf xz-utils (5.6.1+really5.4.5-1ubuntu0.4 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf libevent-core-2.1-7t64 (2.1.12-stable-9ubuntu2.2 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [arm64])
+Conf wpasupplicant (2:2.11-0ubuntu5~24.04.1 Nvidia Desktop Packages - Edge Pocket:24.04/noble [arm64])
+Conf network-manager (1.46.0-1ubuntu2.8 Ubuntu:24.04/noble-updates [arm64])
+Conf libnm0 (1.46.0-1ubuntu2.8 Ubuntu:24.04/noble-updates [arm64])
+Conf linux-libc-dev (6.8.0-149.149 Ubuntu:24.04/noble-updates [arm64])
+Conf linux-tools-common (6.8.0-149.149 Ubuntu:24.04/noble-updates [all])
+Conf ssh (1:9.6p1-3ubuntu13.20 Ubuntu:24.04/noble-updates, Ubuntu:24.04/noble-security [all])
+Conf kpartx (0.9.4-5ubuntu8.2 Ubuntu:24.04/noble-updates [arm64])
+Conf multipath-tools (0.9.4-5ubuntu8.2 Ubuntu:24.04/noble-updates [arm64])
+
+### prohibited package purge
+NOTE: This is only a simulation!
+      apt-get needs root privileges for real execution.
+      Keep also in mind that locking is deactivated,
+      so don't depend on the relevance to the real current situation!
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'snapd' is not installed, so not removed
+Package 'nvidia-prime' is not installed, so not removed
+Package 'nvidia-desktop-default-snaps' is not installed, so not removed
+Package 'nvidia-spark-run-apt-upgrade' is not installed, so not removed
+Package 'nvidia-enable-bt-profiles' is not installed, so not removed
+The following packages were automatically installed and are no longer required:
+  libgail-common libgail18t64 libgtk2.0-0t64 libgtk2.0-bin libgtk2.0-common
+Use 'apt autoremove' to remove them.
+The following packages will be REMOVED:
+  dgx-spark-ota-update-meta*
+0 upgraded, 0 newly installed, 1 to remove and 282 not upgraded.
+Purg dgx-spark-ota-update-meta [25.06.1]
