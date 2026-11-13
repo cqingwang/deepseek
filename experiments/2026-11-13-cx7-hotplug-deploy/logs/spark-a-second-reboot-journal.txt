@@ -1,0 +1,9 @@
+Nov 13 02:44:47 spark-a systemd[1]: Starting spark-ring-mesh.service - Spark physical-ring hardware-forwarded opposite-node paths (routes, tc rules, source markers)...
+Nov 13 02:45:09 spark-a wait-fabric.sh[1365]: spark-a: fabric interfaces stable for 20s
+Nov 13 02:45:15 spark-a hairpin.sh[4556]:   spark-a enp1s0f0np0: hairpin_queue_size 1024 -> 8192, back after 4 s
+Nov 13 02:45:21 spark-a hairpin.sh[4556]:   spark-a enp1s0f1np1: hairpin_queue_size 1024 -> 8192, back after 4 s
+Nov 13 02:45:28 spark-a hairpin.sh[4556]:   spark-a enP2p1s0f0np0: hairpin_queue_size 1024 -> 8192, back after 4 s
+Nov 13 02:45:34 spark-a hairpin.sh[4556]:   spark-a enP2p1s0f1np1: hairpin_queue_size 1024 -> 8192, back after 4 s
+Nov 13 02:45:55 spark-a wait-fabric.sh[10447]: spark-a: fabric interfaces stable for 20s
+Nov 13 02:45:57 spark-a mesh-up.sh[15467]: mesh-up OK
+Nov 13 02:45:57 spark-a systemd[1]: Finished spark-ring-mesh.service - Spark physical-ring hardware-forwarded opposite-node paths (routes, tc rules, source markers).

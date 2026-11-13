@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-13",
+  "scope": "deploy and accept CX7 hotplug physical-ring recovery changes on spark-a/b/c/d",
+  "image": {
+    "tag": "spark-ds41f:x1112",
+    "id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece"
+  },
+  "sequence": [
+    "deploy.sh stop",
+    "install.py --apply",
+    "manual dispatcher refresh",
+    "spark-a reboot",
+    "fix dispatcher self-restart during activating",
+    "deploy.sh stop",
+    "install.py --apply",
+    "spark-a second reboot",
+    "deploy.sh start --target=deepseek",
+    "live acceptance and prose c1/c2/c4 two runs"
+  ],
+  "incident_found_during_first_reboot": {
+    "symptom": "hairpin driver_reinit emitted fabric link events; dispatcher restarted spark-ring-mesh while it was activating, producing repeated SIGTERM and delayed convergence",
+    "root_cause": "dispatcher did not distinguish activating service from an established one; self-induced link events were treated as external link flaps",
+    "fix": "dispatcher skips ActiveState=activating; service adds Restart=on-failure/RestartSec=8 so a post-wait race still retries",
+    "regression": "spark/tests/test_ring_hotplug_resilience.py::test_dispatcher_does_not_restart_its_own_activating_hairpin_preflight"
+  },
+  "final_host_ring": {
+    "audit": "spark/deepseek/experiments/2026-11-13-cx7-hotplug-deploy/remote/host-ring-audit-final.json",
+    "ok": true,
+    "service_enabled_active_all_nodes": true,
+    "network_manager_active_all_nodes": true,
+    "two_markers_each": true,
+    "mtu": 9000,
+    "roce_mtu": 4096,
+    "gid_index": 3,
+    "hairpin_queue_size": 8192,
+    "dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+    "second_reboot_boot_id": "590db9bc-3dc1-4e22-b7e1-3fd92516a826"
+  },
+  "target": {
+    "containers": [
+      "deepseek-r0",
+      "deepseek-r1",
+      "deepseek-r2",
+      "deepseek-r3"
+    ],
+    "running": true,
+    "oomkilled": false,
+    "restart_count": 0,
+    "live_contract_ok": true,
+    "live_contract_env_keys": 86,
+    "container_binary_audit_ok": true,
+    "health_http": 200,
+    "models_http": 200,
+    "smoke_model": "deepseek-v4.1-flash",
+    "smoke_content": "OK",
+    "rdma_all_32_port_direction_counters_positive": true
+  },
+  "performance": {
+    "protocol": "208 official prose prompts; 10s warmup + 30s + 3 windows; thinking=false; c1/c2/c4; 2 runs",
+    "image": "spark-ds41f:x1112",
+    "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+    "runs": {
+      "cx7-hotplug-deploy-20261113-r01": {
+        "c1": 72.03333333333335,
+        "c2": 107.23333333333333,
+        "c4": 144.83333333333334
+      },
+      "cx7-hotplug-deploy-20261113-r02": {
+        "c1": 72.10000000000014,
+        "c2": 106.93333333333334,
+        "c4": 146.83333333333334
+      }
+    },
+    "means": {
+      "c1": 72.06666666666675,
+      "c2": 107.08333333333334,
+      "c4": 145.83333333333334
+    },
+    "previous_host_unified_means": {
+      "c1": 71.68333333333334,
+      "c2": 107.21666666666665,
+      "c4": 146.89999999999998
+    },
+    "delta_vs_previous_pct": {
+      "c1": 0.5347593582888832,
+      "c2": -0.12435877506604687,
+      "c4": -0.726117540276805
+    },
+    "failed": 0,
+    "foreign_requests": 0,
+    "short_suite_verdict": "PASS",
+    "official_long_c1_gate": {
+      "status": "NOT_ACCEPTED",
+      "official_overall": 82.62333333333333,
+      "official_prose": 77.8,
+      "last_known_two_run_target_prose_mean": 72.65,
+      "last_known_delta_pct": -6.619537275064258,
+      "note": "\u672c\u8f6e\u53ea\u6309\u7528\u6237\u6307\u5b9a\u91cd\u8dd1\u77ed\u7a97\u53e3 c1/c2/c4\uff0c\u4e0d\u628a\u77ed\u7a97\u53e3\u5747\u503c\u5192\u5145\u5b98\u65b9 300s long-window prose gate"
+    },
+    "prefill": {
+      "status": "NOT_RERUN_THIS_WINDOW_FROZEN",
+      "previous_final_two_run_means": {
+        "32768": 8565.717039224022,
+        "131072": 8712.749731327702,
+        "262144": 8330.350372067092,
+        "524288": 7507.137770657449,
+        "1000000": 5988.556863330723
+      },
+      "official": {
+        "32768": 8508,
+        "131072": 8657,
+        "262144": 8261,
+        "524288": 7460,
+        "1000000": 6012
+      }
+    }
+  },
+  "verdict": {
+    "host_ring_recovery": "PASS",
+    "target_functional_acceptance": "PASS",
+    "short_prose_stability": "PASS",
+    "official_decode_long_window": "NOT_ACCEPTED",
+    "prefill_current_window": "NOT_RERUN_FROZEN"
+  }
+}

@@ -1,0 +1,15 @@
+--- spark-a deepseek-r0 ---
+running=true oom=false restart=0 started=2026-11-13T02:46:56.613928025Z
+(EngineCore pid=101) INFO 11-13 02:47:12 [multiproc_executor.py:292] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=192.168.2.180, mq_connect_ip=192.168.2.180 (local), world_size=4, local_world_size=1
+(Worker pid=127) INFO 11-13 02:47:21 [parallel_state.py:1953] world_size=4 rank=0 local_rank=0 distributed_init_method=tcp://192.168.2.180:9999 backend=nccl
+(Worker pid=127) INFO 11-13 02:47:32 [pynccl.py:161] vLLM is using nccl==2.30.7
+(EngineCore pid=101) INFO 11-13 02:49:09 [core.py:415] init engine (profile, create kv cache, warmup model) took 64.13 s
+--- spark-b deepseek-r1 ---
+running=true oom=false restart=0 started=2026-11-13T02:46:52.934929084Z
+(Worker pid=1) INFO 11-13 02:47:04 [parallel_state.py:1953] world_size=4 rank=1 local_rank=0 distributed_init_method=tcp://192.168.2.180:9999 backend=nccl
+--- spark-c deepseek-r2 ---
+running=true oom=false restart=0 started=2026-11-13T02:46:54.660049488Z
+(Worker pid=1) INFO 11-13 02:47:05 [parallel_state.py:1953] world_size=4 rank=2 local_rank=0 distributed_init_method=tcp://192.168.2.180:9999 backend=nccl
+--- spark-d deepseek-r3 ---
+running=true oom=false restart=0 started=2026-11-13T02:46:56.208362147Z
+(Worker pid=1) INFO 11-13 02:47:07 [parallel_state.py:1953] world_size=4 rank=3 local_rank=0 distributed_init_method=tcp://192.168.2.180:9999 backend=nccl

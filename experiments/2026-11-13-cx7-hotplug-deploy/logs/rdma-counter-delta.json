@@ -1,0 +1,49 @@
+{
+  "nodes": {
+    "spark-a": {
+      "roceP2p1s0f0:port_rcv_data": 10249174,
+      "roceP2p1s0f0:port_xmit_data": 10249551,
+      "roceP2p1s0f1:port_rcv_data": 10249220,
+      "roceP2p1s0f1:port_xmit_data": 10248953,
+      "rocep1s0f0:port_rcv_data": 10248715,
+      "rocep1s0f0:port_xmit_data": 10249355,
+      "rocep1s0f1:port_rcv_data": 10249659,
+      "rocep1s0f1:port_xmit_data": 10249128
+    },
+    "spark-a_all_counters_positive": true,
+    "spark-b": {
+      "roceP2p1s0f0:port_rcv_data": 10249551,
+      "roceP2p1s0f0:port_xmit_data": 10249174,
+      "roceP2p1s0f1:port_rcv_data": 10246490,
+      "roceP2p1s0f1:port_xmit_data": 10246991,
+      "rocep1s0f0:port_rcv_data": 10249355,
+      "rocep1s0f0:port_xmit_data": 10248716,
+      "rocep1s0f1:port_rcv_data": 10247270,
+      "rocep1s0f1:port_xmit_data": 10247770
+    },
+    "spark-b_all_counters_positive": true,
+    "spark-c": {
+      "roceP2p1s0f0:port_rcv_data": 10241764,
+      "roceP2p1s0f0:port_xmit_data": 10242419,
+      "roceP2p1s0f1:port_rcv_data": 10246991,
+      "roceP2p1s0f1:port_xmit_data": 10246490,
+      "rocep1s0f0:port_rcv_data": 10243686,
+      "rocep1s0f0:port_xmit_data": 10244510,
+      "rocep1s0f1:port_rcv_data": 10247770,
+      "rocep1s0f1:port_xmit_data": 10247270
+    },
+    "spark-c_all_counters_positive": true,
+    "spark-d": {
+      "roceP2p1s0f0:port_rcv_data": 10242419,
+      "roceP2p1s0f0:port_xmit_data": 10241764,
+      "roceP2p1s0f1:port_rcv_data": 10248952,
+      "roceP2p1s0f1:port_xmit_data": 10249221,
+      "rocep1s0f0:port_rcv_data": 10244510,
+      "rocep1s0f0:port_xmit_data": 10243686,
+      "rocep1s0f1:port_rcv_data": 10249129,
+      "rocep1s0f1:port_xmit_data": 10249659
+    },
+    "spark-d_all_counters_positive": true
+  },
+  "ok": true
+}

@@ -1,0 +1,8 @@
+roceP2p1s0f0 port_xmit_data 46159455903
+roceP2p1s0f0 port_rcv_data 46166948986
+roceP2p1s0f1 port_xmit_data 46163666430
+roceP2p1s0f1 port_rcv_data 46156224950
+rocep1s0f0 port_xmit_data 46172973402
+rocep1s0f0 port_rcv_data 46148058074
+rocep1s0f1 port_xmit_data 46150292028
+rocep1s0f1 port_rcv_data 46175283523
