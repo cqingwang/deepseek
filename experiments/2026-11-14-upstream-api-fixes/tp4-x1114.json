@@ -1,0 +1,11 @@
+{
+  "notes": "Site deployment profile for the 2026-11-14 upstream sync: candidate-55 build 9 plus the typed-image-placeholder and Responses custom-tool replay fixes. The build is x1114; runtime rank, /30 fabric, HCA/GID and the shared spark-ring-mesh remain owned by the parent site configuration.",
+  "extends": {
+    "config": "experiments/2026-10-26-spark-ds41f-candidate/candidate-55/tp4.json"
+  },
+  "set": {
+    "container": {
+      "image": "spark-ds41f:x1114"
+    }
+  }
+}

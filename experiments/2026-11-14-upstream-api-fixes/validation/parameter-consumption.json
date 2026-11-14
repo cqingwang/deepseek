@@ -1,0 +1,323 @@
+{
+  "captured_at": "2026-11-14T16:53:58.192182+00:00",
+  "ownership_policy": "config.yaml/common keys are shared business semantics. engines.<target>.num_speculative_tokens is target-native and is not derived from common.",
+  "mapping": {
+    "max_request": {
+      "business_value": 9,
+      "source": "common.max_request",
+      "native": "--max-num-seqs",
+      "live_value": 9
+    },
+    "max_token": {
+      "business_value": 1000000,
+      "source": "common.max_token",
+      "native": "--max-model-len",
+      "live_value": 1000000,
+      "api_models_value": 1000000
+    },
+    "max_tokens": {
+      "business_value": 65536,
+      "source": "common.max_tokens",
+      "native": "--override-generation-config.max_new_tokens",
+      "live_value": 65536
+    },
+    "max_num_batched_tokens": {
+      "business_value": 16384,
+      "source": "common.max_num_batched_tokens",
+      "native": "--max-num-batched-tokens",
+      "live_value": 16384,
+      "derived_long_prefill_token_threshold": 16330
+    },
+    "num_speculative_tokens": {
+      "business_value": 5,
+      "source": "engines.deepseek.num_speculative_tokens",
+      "official_value": 5,
+      "native": "--speculative-config.num_speculative_tokens",
+      "live_value": 5,
+      "mapping": "direct"
+    },
+    "default_thinking": {
+      "business_value": false,
+      "source": "common.default_thinking",
+      "native": "--default-chat-template-kwargs.enable_thinking",
+      "live_value": false
+    },
+    "reasoning_effort": {
+      "business_value": 75,
+      "source": "common.reasoning_effort",
+      "native": "--default-chat-template-kwargs.reasoning_effort",
+      "live_value": 75
+    },
+    "master_port": {
+      "business_value": 25000,
+      "source": "common.master_port",
+      "native": "--master-port",
+      "live_value": 25000
+    },
+    "api_url": {
+      "business_value": "http://0.0.0.0:8888/v1/models",
+      "source": "common.api_url",
+      "native": "--host/--port",
+      "live_value": {
+        "host": "0.0.0.0",
+        "port": 8888
+      }
+    },
+    "api_key": {
+      "business_value": "configured",
+      "source": "common.api_key",
+      "native": "--api-key",
+      "live_value_present": true
+    },
+    "model_path/default_model": {
+      "business_value": "/opt/models/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "source": "common.model_path/common.default_model",
+      "native": "container bind mount / model argument",
+      "live_model": "/models/DeepSeek-V4.1-Flash-1017"
+    },
+    "runtime_assets_root": {
+      "business_value": "/opt/runtime_assets",
+      "source": "common.runtime_assets_root",
+      "native": "container cache bind mount",
+      "live_mount": "/cache"
+    },
+    "user/spark_nodes/ring": {
+      "business_value": "configured",
+      "source": "common.user/common.spark_nodes/common.ring",
+      "native": "launcher SSH inventory and per-rank NCCL env",
+      "proof": "four ranks share image and expected HCA/GID contract"
+    }
+  },
+  "runtime": {
+    "image": "spark-ds41f:x1114",
+    "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+    "nodes": [
+      {
+        "node": "spark-a",
+        "host": "192.168.2.180",
+        "rank": 0,
+        "container": "deepseek-r0",
+        "image": "spark-ds41f:x1114",
+        "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+        "running": true,
+        "oom_killed": false,
+        "exit_code": 0,
+        "restart_count": 0,
+        "memguard": "active",
+        "api_status": 200,
+        "api_status_note": null,
+        "env_count": 119,
+        "arg_count": 88,
+        "argv": {
+          "max_model_len": 1000000,
+          "max_num_seqs": 9,
+          "max_num_batched_tokens": 16384,
+          "long_prefill_token_threshold": 16330,
+          "max_cudagraph_capture_size": 54,
+          "num_speculative_tokens": 5,
+          "max_new_tokens": 65536,
+          "default_chat_template_kwargs": {
+            "enable_thinking": false,
+            "reasoning_effort": 75
+          },
+          "api_host": "0.0.0.0",
+          "api_port": 8888,
+          "api_key_present": true,
+          "master_port": 25000
+        },
+        "business_env_leaks": []
+      },
+      {
+        "node": "spark-b",
+        "host": "192.168.2.161",
+        "rank": 1,
+        "container": "deepseek-r1",
+        "image": "spark-ds41f:x1114",
+        "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+        "running": true,
+        "oom_killed": false,
+        "exit_code": 0,
+        "restart_count": 0,
+        "memguard": "active",
+        "api_status": null,
+        "api_status_note": "API server is intentionally head-only in the four-rank engine",
+        "env_count": 119,
+        "arg_count": 89,
+        "argv": {
+          "max_model_len": 1000000,
+          "max_num_seqs": 9,
+          "max_num_batched_tokens": 16384,
+          "long_prefill_token_threshold": 16330,
+          "max_cudagraph_capture_size": 54,
+          "num_speculative_tokens": 5,
+          "max_new_tokens": 65536,
+          "default_chat_template_kwargs": {
+            "enable_thinking": false,
+            "reasoning_effort": 75
+          },
+          "api_host": "0.0.0.0",
+          "api_port": 8888,
+          "api_key_present": true,
+          "master_port": 25000
+        },
+        "business_env_leaks": []
+      },
+      {
+        "node": "spark-c",
+        "host": "192.168.2.102",
+        "rank": 2,
+        "container": "deepseek-r2",
+        "image": "spark-ds41f:x1114",
+        "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+        "running": true,
+        "oom_killed": false,
+        "exit_code": 0,
+        "restart_count": 0,
+        "memguard": "active",
+        "api_status": null,
+        "api_status_note": "API server is intentionally head-only in the four-rank engine",
+        "env_count": 119,
+        "arg_count": 89,
+        "argv": {
+          "max_model_len": 1000000,
+          "max_num_seqs": 9,
+          "max_num_batched_tokens": 16384,
+          "long_prefill_token_threshold": 16330,
+          "max_cudagraph_capture_size": 54,
+          "num_speculative_tokens": 5,
+          "max_new_tokens": 65536,
+          "default_chat_template_kwargs": {
+            "enable_thinking": false,
+            "reasoning_effort": 75
+          },
+          "api_host": "0.0.0.0",
+          "api_port": 8888,
+          "api_key_present": true,
+          "master_port": 25000
+        },
+        "business_env_leaks": []
+      },
+      {
+        "node": "spark-d",
+        "host": "192.168.2.238",
+        "rank": 3,
+        "container": "deepseek-r3",
+        "image": "spark-ds41f:x1114",
+        "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+        "running": true,
+        "oom_killed": false,
+        "exit_code": 0,
+        "restart_count": 0,
+        "memguard": "active",
+        "api_status": null,
+        "api_status_note": "API server is intentionally head-only in the four-rank engine",
+        "env_count": 119,
+        "arg_count": 89,
+        "argv": {
+          "max_model_len": 1000000,
+          "max_num_seqs": 9,
+          "max_num_batched_tokens": 16384,
+          "long_prefill_token_threshold": 16330,
+          "max_cudagraph_capture_size": 54,
+          "num_speculative_tokens": 5,
+          "max_new_tokens": 65536,
+          "default_chat_template_kwargs": {
+            "enable_thinking": false,
+            "reasoning_effort": 75
+          },
+          "api_host": "0.0.0.0",
+          "api_port": 8888,
+          "api_key_present": true,
+          "master_port": 25000
+        },
+        "business_env_leaks": []
+      }
+    ],
+    "container_env_count": 119,
+    "business_env_leaks": [],
+    "derived": {
+      "drafts": 5,
+      "decode_rows": 54,
+      "max_cudagraph_capture_size": 54,
+      "long_prefill_token_threshold": 16330,
+      "vllm_internal_note": "startup log widens scheduler token capacity to 16395 and CUDA graph capture range to 65 rows for copy drafts; this is an internal token-row budget, not max request concurrency."
+    }
+  },
+  "consumption_proof": {
+    "startup_log": "validation/vllm-consumption.log",
+    "vllm_parsed_non_default_args": {
+      "max_num_seqs": 9,
+      "max_model_len": 1000000,
+      "max_num_batched_tokens": 16384,
+      "long_prefill_token_threshold": 16330,
+      "max_cudagraph_capture_size": 54,
+      "num_speculative_tokens": 5,
+      "max_new_tokens": 65536,
+      "master_port": 25000,
+      "default_chat_template_kwargs": {
+        "enable_thinking": false,
+        "reasoning_effort": 75
+      }
+    },
+    "default_thinking_runtime": {
+      "request_without_chat_template_kwargs": "200",
+      "content": "OK",
+      "reasoning": null,
+      "reasoning_tokens": 0
+    },
+    "api_regressions": [
+      {
+        "name": "plain-message",
+        "status": 200
+      },
+      {
+        "name": "plain-message-default-thinking-off",
+        "status": 200
+      },
+      {
+        "name": "image-token-text",
+        "status": 200
+      },
+      {
+        "name": "function-call-output",
+        "status": 200
+      },
+      {
+        "name": "custom-tool-call",
+        "status": 200
+      },
+      {
+        "name": "custom-tool-call-output",
+        "status": 200
+      },
+      {
+        "name": "image-content-block",
+        "status": 200
+      }
+    ],
+    "magpie_focused_custom_tool_status": 200,
+    "performance": {
+      "c1": {
+        "runs": [
+          78.13333333333334,
+          78.39999999999999
+        ],
+        "mean": 78.26666666666667
+      },
+      "c2": {
+        "runs": [
+          111.13333333333333,
+          111.83333333333333
+        ],
+        "mean": 111.48333333333332
+      },
+      "c4": {
+        "runs": [
+          151.53333333333333,
+          151.83333333333334
+        ],
+        "mean": 151.68333333333334
+      }
+    }
+  }
+}

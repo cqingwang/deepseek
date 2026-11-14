@@ -1,0 +1,20 @@
+{
+  "direct_vllm": {
+    "plain-message": 200,
+    "image-token-text": 200,
+    "function-call-output": 200,
+    "custom-tool-call": 200,
+    "custom-tool-call-output": 200,
+    "image-content-block": 200
+  },
+  "magpie_focused": {
+    "custom_tool_call_output": 200
+  },
+  "focused_tests": {
+    "tokenizer_responses_protocol": "172 passed"
+  },
+  "red_green": {
+    "red": "red-source.txt",
+    "green": "green-source.txt"
+  }
+}

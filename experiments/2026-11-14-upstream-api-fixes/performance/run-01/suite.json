@@ -1,0 +1,104 @@
+{
+ "schema": "servebench-suite/1",
+ "suite": {
+  "name": "x1114-decode-prefill",
+  "version": 1,
+  "description": "Two-boot acceptance for the official TP4 reference metrics: c1/c8/c16 closed-loop decode with the default prompts, thinking off, 60 s warm-up and 300 s measured; then real-text cold prefill at 32K through 1M, three repeats each.",
+  "steps": [
+   {
+    "id": "c1",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 1,
+     "warmup": 60,
+     "duration": 300,
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c8",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 8,
+     "warmup": 60,
+     "duration": 300,
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c16",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 16,
+     "warmup": 60,
+     "duration": 300,
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "prefill",
+    "command": "prefill",
+    "args": {
+     "sizes": [
+      32768,
+      131072,
+      262144,
+      524288,
+      1000000
+     ],
+     "repeats": 3
+    }
+   }
+  ]
+ },
+ "suite_sha256": "9c806fb960926dd15948634bd6554acdc73ea45cc749c86625ed102d65a4ae17",
+ "label": "x1114-run-01",
+ "corpus": null,
+ "started_utc": "2026-11-14T14:55:56+00:00",
+ "steps": [
+  {
+   "id": "c1",
+   "command": "run",
+   "output": "c1.json",
+   "exit": 0,
+   "seconds": 360.2
+  },
+  {
+   "id": "c8",
+   "command": "run",
+   "output": "c8.json",
+   "exit": 0,
+   "seconds": 366.4
+  },
+  {
+   "id": "c16",
+   "command": "run",
+   "output": "c16.json",
+   "exit": 0,
+   "seconds": 367.8
+  },
+  {
+   "id": "prefill",
+   "command": "prefill",
+   "output": "prefill.json",
+   "exit": 0,
+   "seconds": 810.3
+  }
+ ],
+ "finished_utc": "2026-11-14T15:27:40+00:00"
+}

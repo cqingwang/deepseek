@@ -1,0 +1,4 @@
+The x1112 service was stopped and all target containers had been removed before
+live requests could be captured. A local draft attempt reached a stale HTTP 502
+path and is not evidence; those files were removed. Source-level RED is recorded
+in ../red-source.txt against the exact candidate-55 base tree.

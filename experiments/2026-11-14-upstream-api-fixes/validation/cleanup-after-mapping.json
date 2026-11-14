@@ -1,0 +1,66 @@
+{
+  "captured_at": "2026-11-14T16:37:44.352946+00:00",
+  "nodes": [
+    {
+      "host": "192.168.2.180",
+      "IMAGES": [
+        "spark-ds41f:x1114 44c3157b64ee 27.2GB",
+        "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e cf41fa0cc731 22.1GB"
+      ],
+      "DANGLING": [
+        "0"
+      ],
+      "CONTAINERS": [
+        "deepseek-r0 Up 3 minutes"
+      ],
+      "DISK": [
+        "/dev/nvme0n1p2  3.7T  848G  2.7T  24% /"
+      ]
+    },
+    {
+      "host": "192.168.2.161",
+      "IMAGES": [
+        "spark-ds41f:x1114 44c3157b64ee 27.2GB"
+      ],
+      "DANGLING": [
+        "0"
+      ],
+      "CONTAINERS": [
+        "deepseek-r1 Up 4 minutes"
+      ],
+      "DISK": [
+        "/dev/nvme0n1p2  3.7T  822G  2.7T  24% /"
+      ]
+    },
+    {
+      "host": "192.168.2.102",
+      "IMAGES": [
+        "spark-ds41f:x1114 44c3157b64ee 27.2GB"
+      ],
+      "DANGLING": [
+        "0"
+      ],
+      "CONTAINERS": [
+        "deepseek-r2 Up 4 minutes"
+      ],
+      "DISK": [
+        "/dev/nvme0n1p2  3.7T  814G  2.7T  23% /"
+      ]
+    },
+    {
+      "host": "192.168.2.238",
+      "IMAGES": [
+        "spark-ds41f:x1114 44c3157b64ee 27.2GB"
+      ],
+      "DANGLING": [
+        "0"
+      ],
+      "CONTAINERS": [
+        "deepseek-r3 Up 3 minutes"
+      ],
+      "DISK": [
+        "/dev/nvme0n1p2  3.7T  813G  2.7T  23% /"
+      ]
+    }
+  ]
+}

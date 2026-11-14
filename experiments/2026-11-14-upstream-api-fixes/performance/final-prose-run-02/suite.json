@@ -1,0 +1,89 @@
+{
+ "schema": "servebench-suite/1",
+ "suite": {
+  "name": "official-main-x1112-c1-c2-c4-prose-daily",
+  "version": 1,
+  "description": "Daily-load prose-only check at c1, c2 and c4.",
+  "steps": [
+   {
+    "id": "c1",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 1,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c2",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 2,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   },
+   {
+    "id": "c4",
+    "command": "run",
+    "args": {
+     "mode": "closed",
+     "concurrency": 4,
+     "warmup": 10,
+     "duration": 30,
+     "batches": 3,
+     "prompts": "experiments/2026-11-12-official-main-x1112/prose-prompts.jsonl",
+     "extra_body": {
+      "chat_template_kwargs": {
+       "thinking": false
+      }
+     }
+    }
+   }
+  ]
+ },
+ "suite_sha256": "cbe24684ec1410b6068f256ee0f694b94ab78997bb2af638b9fe58183063ef47",
+ "label": "x1114-final-prose-run-02",
+ "corpus": null,
+ "started_utc": "2026-11-14T16:00:35+00:00",
+ "steps": [
+  {
+   "id": "c1",
+   "command": "run",
+   "output": "c1.json",
+   "exit": 0,
+   "seconds": 43.1
+  },
+  {
+   "id": "c2",
+   "command": "run",
+   "output": "c2.json",
+   "exit": 0,
+   "seconds": 41.6
+  },
+  {
+   "id": "c4",
+   "command": "run",
+   "output": "c4.json",
+   "exit": 0,
+   "seconds": 45.3
+  }
+ ],
+ "finished_utc": "2026-11-14T16:02:46+00:00"
+}

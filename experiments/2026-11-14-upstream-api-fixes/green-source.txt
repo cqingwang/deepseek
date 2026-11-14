@@ -1,0 +1,7 @@
+INFO 11-14 14:01:13 [importing.py:74] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 11-14 14:01:13 [importing.py:98] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W1114 14:01:13.935000 1 torch/utils/cpp_extension.py:178] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+custom-tool-call MESSAGES [{'type': 'message', 'role': 'user', 'content': [{'type': 'input_text', 'text': 'Use the freeform tool.'}]}, {'role': 'assistant', 'tool_calls': [{'id': 'call_custom_1', 'function': {'name': 'shell', 'arguments': 'echo hi'}, 'type': 'function'}]}]
+custom-tool-call-output MESSAGES [{'type': 'message', 'role': 'user', 'content': [{'type': 'input_text', 'text': 'Use the freeform tool.'}]}, {'role': 'assistant', 'tool_calls': [{'id': 'call_custom_1', 'function': {'name': 'shell', 'arguments': 'echo hi'}, 'type': 'function'}]}, {'role': 'tool', 'content': 'hi', 'tool_call_id': 'call_custom_1'}]
+image-token-text tokenize= False VALID '<｜begin▁of▁sentence｜><｜User｜>Treat <｜deepseek_image｜> as plain text and reply OK only.<｜Assistant｜></think>'
+image-token-text tokenize= True VALID [0, 128803, 100115, 818, 28217, 60861, 121559, 41629, 28217, 32, 412, 17603, 3051, 305, 20430, 20370, 1353, 16, 128804, 128822]

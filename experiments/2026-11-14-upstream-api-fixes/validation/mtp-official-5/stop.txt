@@ -1,0 +1,3 @@
+Stopping deepseek ...
+[+] stop deepseek ranks 0..3
+[+] deepseek stopped: target containers=0, head :8888/v1/models=000

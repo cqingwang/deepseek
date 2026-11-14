@@ -1,0 +1,564 @@
+{
+  "ok": true,
+  "source": "spark/config.yaml common.ring + generated sparkring plan",
+  "generated": "spark/deepseek/experiments/2026-11-13-cx7-hotplug-deploy/remote/host-ring-generated",
+  "nodes": {
+    "spark-a": {
+      "host": "192.168.2.180",
+      "rank": 0,
+      "host_inventory": {
+        "host": "spark-a",
+        "ports": {
+          "enp1s0f0np0": {
+            "rdma": "rocep1s0f0",
+            "ipv4": "10.251.20.1/30",
+            "mac": "4c:bb:47:80:f1:42",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:1401",
+            "gid_netdev": "enp1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enp1s0f1np1": {
+            "rdma": "rocep1s0f1",
+            "ipv4": "10.251.20.14/30",
+            "mac": "4c:bb:47:80:f1:43",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:140e",
+            "gid_netdev": "enp1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f0np0": {
+            "rdma": "roceP2p1s0f0",
+            "ipv4": "10.100.241.1/30",
+            "mac": "4c:bb:47:80:f1:46",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f101",
+            "gid_netdev": "enP2p1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f1np1": {
+            "rdma": "roceP2p1s0f1",
+            "ipv4": "10.100.241.14/30",
+            "mac": "4c:bb:47:80:f1:47",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f10e",
+            "gid_netdev": "enP2p1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          }
+        }
+      },
+      "service": "active",
+      "service_enabled": "enabled",
+      "network_manager": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f0.service",
+        "spark-ring-mesh-marker@roceP2p1s0f1.service"
+      ],
+      "expected_markers": [
+        "spark-ring-mesh-marker@roceP2p1s0f1.service",
+        "spark-ring-mesh-marker@rocep1s0f0.service"
+      ],
+      "dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "expected_dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "installed_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_routes": {
+        "10.100.241.9/32": "10.100.241.9 via 10.100.241.13 dev enP2p1s0f1np1 src 10.100.241.14",
+        "10.251.20.6/32": "10.251.20.6 via 10.251.20.2 dev enp1s0f0np0 src 10.251.20.1"
+      },
+      "route_requirements": {
+        "10.251.20.6/32": [
+          "via 10.251.20.2",
+          "dev enp1s0f0np0",
+          "src 10.251.20.1"
+        ],
+        "10.100.241.9/32": [
+          "via 10.100.241.13",
+          "dev enP2p1s0f1np1",
+          "src 10.100.241.14"
+        ]
+      },
+      "tc_rules": {
+        "enP2p1s0f0np0:49159": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc007 \n  dst_mac 4c:bb:47:80:f1:46\n  src_mac 4c:bb:47:80:f3:2c\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 136243 sec used 136243 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 136243 sec used 136243 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val abb40000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen\n\tindex 1 ref 1 bind 1 installed 136243 sec used 136243 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enP2p1s0f1np1:49165": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00d \n  dst_mac 4c:bb:47:80:f1:47\n  src_mac 4c:bb:47:80:ab:b4\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 136243 sec used 136243 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 136243 sec used 136243 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f32c0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen\n\tindex 2 ref 1 bind 1 installed 136243 sec used 136243 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "tc_requirements": {
+        "enP2p1s0f0np0:49159": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:f3:2c",
+          "dst_mac 4c:bb:47:80:f1:46",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enP2p1s0f1np1"
+        ],
+        "enP2p1s0f1np1:49165": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:ab:b4",
+          "dst_mac 4c:bb:47:80:f1:47",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enP2p1s0f0np0"
+        ]
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-a.sh": "064031aef876662058f0ced59412892f217af050476fe2af5faa4f8b2dcf4973",
+        "/opt/spark-ring-mesh/mesh-down-spark-a.sh": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241",
+        "/opt/spark-ring-mesh/mesh-up.sh": "064031aef876662058f0ced59412892f217af050476fe2af5faa4f8b2dcf4973",
+        "/opt/spark-ring-mesh/mesh-down.sh": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "064031aef876662058f0ced59412892f217af050476fe2af5faa4f8b2dcf4973",
+        "mesh-down": "d5b75eaa5929968deb157c83fbab1cfb583ecd6512ac91d393d88161ff495241"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-b": {
+      "host": "192.168.2.161",
+      "rank": 1,
+      "host_inventory": {
+        "host": "spark-b",
+        "ports": {
+          "enp1s0f0np0": {
+            "rdma": "rocep1s0f0",
+            "ipv4": "10.251.20.2/30",
+            "mac": "4c:bb:47:80:f3:28",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:1402",
+            "gid_netdev": "enp1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enp1s0f1np1": {
+            "rdma": "rocep1s0f1",
+            "ipv4": "10.251.20.5/30",
+            "mac": "4c:bb:47:80:f3:29",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:1405",
+            "gid_netdev": "enp1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f0np0": {
+            "rdma": "roceP2p1s0f0",
+            "ipv4": "10.100.241.2/30",
+            "mac": "4c:bb:47:80:f3:2c",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f102",
+            "gid_netdev": "enP2p1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f1np1": {
+            "rdma": "roceP2p1s0f1",
+            "ipv4": "10.100.241.5/30",
+            "mac": "4c:bb:47:80:f3:2d",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f105",
+            "gid_netdev": "enP2p1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          }
+        }
+      },
+      "service": "active",
+      "service_enabled": "enabled",
+      "network_manager": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f1.service",
+        "spark-ring-mesh-marker@roceP2p1s0f0.service"
+      ],
+      "expected_markers": [
+        "spark-ring-mesh-marker@roceP2p1s0f0.service",
+        "spark-ring-mesh-marker@rocep1s0f1.service"
+      ],
+      "dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "expected_dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "installed_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_routes": {
+        "10.100.241.13/32": "10.100.241.13 via 10.100.241.1 dev enP2p1s0f0np0 src 10.100.241.2",
+        "10.251.20.10/32": "10.251.20.10 via 10.251.20.6 dev enp1s0f1np1 src 10.251.20.5"
+      },
+      "route_requirements": {
+        "10.251.20.10/32": [
+          "via 10.251.20.6",
+          "dev enp1s0f1np1",
+          "src 10.251.20.5"
+        ],
+        "10.100.241.13/32": [
+          "via 10.100.241.1",
+          "dev enP2p1s0f0np0",
+          "src 10.100.241.2"
+        ]
+      },
+      "tc_rules": {
+        "enp1s0f0np0:49152": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc000 \n  dst_mac 4c:bb:47:80:f3:28\n  src_mac 4c:bb:47:80:f1:42\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 136273 sec used 136273 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 136273 sec used 136273 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val b20d0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen\n\tindex 1 ref 1 bind 1 installed 136273 sec used 136273 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enp1s0f1np1:49162": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00a \n  dst_mac 4c:bb:47:80:f3:29\n  src_mac 4c:bb:47:80:b2:0d\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 136273 sec used 136273 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 136273 sec used 136273 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f1420000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen\n\tindex 2 ref 1 bind 1 installed 136273 sec used 136273 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "tc_requirements": {
+        "enp1s0f0np0:49152": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:f1:42",
+          "dst_mac 4c:bb:47:80:f3:28",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enp1s0f1np1"
+        ],
+        "enp1s0f1np1:49162": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:b2:0d",
+          "dst_mac 4c:bb:47:80:f3:29",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enp1s0f0np0"
+        ]
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-b.sh": "80d7cf51d6d9e30c4836678c0f72e002220185d06df74398fc3894cbf47875f3",
+        "/opt/spark-ring-mesh/mesh-down-spark-b.sh": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778",
+        "/opt/spark-ring-mesh/mesh-up.sh": "80d7cf51d6d9e30c4836678c0f72e002220185d06df74398fc3894cbf47875f3",
+        "/opt/spark-ring-mesh/mesh-down.sh": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "80d7cf51d6d9e30c4836678c0f72e002220185d06df74398fc3894cbf47875f3",
+        "mesh-down": "54b9991f4c19c767066f03c7bb4b4121bf02210a4782a7f69e0bf56c1c1a0778"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-c": {
+      "host": "192.168.2.102",
+      "rank": 2,
+      "host_inventory": {
+        "host": "spark-c",
+        "ports": {
+          "enp1s0f0np0": {
+            "rdma": "rocep1s0f0",
+            "ipv4": "10.251.20.9/30",
+            "mac": "4c:bb:47:80:b2:0c",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:1409",
+            "gid_netdev": "enp1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enp1s0f1np1": {
+            "rdma": "rocep1s0f1",
+            "ipv4": "10.251.20.6/30",
+            "mac": "4c:bb:47:80:b2:0d",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:1406",
+            "gid_netdev": "enp1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f0np0": {
+            "rdma": "roceP2p1s0f0",
+            "ipv4": "10.100.241.9/30",
+            "mac": "4c:bb:47:80:b2:10",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f109",
+            "gid_netdev": "enP2p1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f1np1": {
+            "rdma": "roceP2p1s0f1",
+            "ipv4": "10.100.241.6/30",
+            "mac": "4c:bb:47:80:b2:11",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f106",
+            "gid_netdev": "enP2p1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          }
+        }
+      },
+      "service": "active",
+      "service_enabled": "enabled",
+      "network_manager": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f1.service",
+        "spark-ring-mesh-marker@roceP2p1s0f0.service"
+      ],
+      "expected_markers": [
+        "spark-ring-mesh-marker@roceP2p1s0f0.service",
+        "spark-ring-mesh-marker@rocep1s0f1.service"
+      ],
+      "dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "expected_dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "installed_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_routes": {
+        "10.100.241.14/32": "10.100.241.14 via 10.100.241.10 dev enP2p1s0f0np0 src 10.100.241.9",
+        "10.251.20.1/32": "10.251.20.1 via 10.251.20.5 dev enp1s0f1np1 src 10.251.20.6"
+      },
+      "route_requirements": {
+        "10.100.241.14/32": [
+          "via 10.100.241.10",
+          "dev enP2p1s0f0np0",
+          "src 10.100.241.9"
+        ],
+        "10.251.20.1/32": [
+          "via 10.251.20.5",
+          "dev enp1s0f1np1",
+          "src 10.251.20.6"
+        ]
+      },
+      "tc_rules": {
+        "enp1s0f0np0:49166": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc00e \n  dst_mac 4c:bb:47:80:b2:0c\n  src_mac 4c:bb:47:80:ab:af\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 136397 sec used 136397 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 136397 sec used 136397 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f3290000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f1np1) stolen\n\tindex 2 ref 1 bind 1 installed 136397 sec used 136397 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enp1s0f1np1:49156": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc004 \n  dst_mac 4c:bb:47:80:b2:0d\n  src_mac 4c:bb:47:80:f3:29\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 136397 sec used 136397 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 136397 sec used 136397 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val abaf0000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enp1s0f0np0) stolen\n\tindex 1 ref 1 bind 1 installed 136397 sec used 136397 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "tc_requirements": {
+        "enp1s0f1np1:49156": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:f3:29",
+          "dst_mac 4c:bb:47:80:b2:0d",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enp1s0f0np0"
+        ],
+        "enp1s0f0np0:49166": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:ab:af",
+          "dst_mac 4c:bb:47:80:b2:0c",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enp1s0f1np1"
+        ]
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-c.sh": "8edf35f3a408729274fd9deab0f8a0f1bc1115fe1b329a414e24f0ce6c89f096",
+        "/opt/spark-ring-mesh/mesh-down-spark-c.sh": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e",
+        "/opt/spark-ring-mesh/mesh-up.sh": "8edf35f3a408729274fd9deab0f8a0f1bc1115fe1b329a414e24f0ce6c89f096",
+        "/opt/spark-ring-mesh/mesh-down.sh": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "8edf35f3a408729274fd9deab0f8a0f1bc1115fe1b329a414e24f0ce6c89f096",
+        "mesh-down": "f00c3ba070c1d5e429b2d9348772d3e6e0229822bba7c5324a170ba282aba97e"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    },
+    "spark-d": {
+      "host": "192.168.2.238",
+      "rank": 3,
+      "host_inventory": {
+        "host": "spark-d",
+        "ports": {
+          "enp1s0f0np0": {
+            "rdma": "rocep1s0f0",
+            "ipv4": "10.251.20.10/30",
+            "mac": "4c:bb:47:80:ab:af",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:140a",
+            "gid_netdev": "enp1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enp1s0f1np1": {
+            "rdma": "rocep1s0f1",
+            "ipv4": "10.251.20.13/30",
+            "mac": "4c:bb:47:80:ab:b0",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0afb:140d",
+            "gid_netdev": "enp1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f0np0": {
+            "rdma": "roceP2p1s0f0",
+            "ipv4": "10.100.241.10/30",
+            "mac": "4c:bb:47:80:ab:b3",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f10a",
+            "gid_netdev": "enP2p1s0f0np0",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          },
+          "enP2p1s0f1np1": {
+            "rdma": "roceP2p1s0f1",
+            "ipv4": "10.100.241.13/30",
+            "mac": "4c:bb:47:80:ab:b4",
+            "mtu": 9000,
+            "roce_mtu": "4096",
+            "state": "up",
+            "gid": "0000:0000:0000:0000:0000:ffff:0a64:f10d",
+            "gid_netdev": "enP2p1s0f1np1",
+            "tc_offload": "on",
+            "hairpin_num_queues": "4",
+            "hairpin_queue_size": "8192",
+            "flow_steering_mode": "hmfs"
+          }
+        }
+      },
+      "service": "active",
+      "service_enabled": "enabled",
+      "network_manager": "active",
+      "active_markers": [
+        "spark-ring-mesh-marker@rocep1s0f0.service",
+        "spark-ring-mesh-marker@roceP2p1s0f1.service"
+      ],
+      "expected_markers": [
+        "spark-ring-mesh-marker@roceP2p1s0f1.service",
+        "spark-ring-mesh-marker@rocep1s0f0.service"
+      ],
+      "dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "expected_dispatcher_sha256": "a0b6c1f9dfc2a8356ab6412d224dc32f5978c2768fd66b03dbcebf3c4c7781ba",
+      "installed_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_unit_sha256": {
+        "/etc/systemd/system/spark-ring-mesh.service": "ac18609c97cdc1af3f683ba468c215e8d6faa4fcbd88678856f5b01ddae7535c",
+        "/etc/systemd/system/spark-ring-mesh-marker@.service": "905a57daddebdb85df31db1fc1d9b01a0827510e0c27854ff26f6ae384c622ca"
+      },
+      "expected_routes": {
+        "10.100.241.2/32": "10.100.241.2 via 10.100.241.14 dev enP2p1s0f1np1 src 10.100.241.13",
+        "10.251.20.5/32": "10.251.20.5 via 10.251.20.9 dev enp1s0f0np0 src 10.251.20.10"
+      },
+      "route_requirements": {
+        "10.100.241.2/32": [
+          "via 10.100.241.14",
+          "dev enP2p1s0f1np1",
+          "src 10.100.241.13"
+        ],
+        "10.251.20.5/32": [
+          "via 10.251.20.9",
+          "dev enp1s0f0np0",
+          "src 10.251.20.10"
+        ]
+      },
+      "tc_rules": {
+        "enP2p1s0f0np0:49161": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc009 \n  dst_mac 4c:bb:47:80:ab:b3\n  src_mac 4c:bb:47:80:b2:10\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 3 ref 1 bind 1 installed 136282 sec used 136282 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 4 ref 1 bind 1 installed 136282 sec used 136282 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val f1470000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f1np1) stolen\n\tindex 2 ref 1 bind 1 installed 136282 sec used 136282 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n",
+        "enP2p1s0f1np1:49155": "filter protocol [34997] flower chain 0 \nfilter protocol [34997] flower chain 0 handle 0xc003 \n  dst_mac 4c:bb:47:80:ab:b4\n  src_mac 4c:bb:47:80:f1:47\n  eth_type 88b5\n  skip_sw\n  in_hw in_hw_count 1\n\taction order 1:  pedit action pipe keys 1\n \t index 1 ref 1 bind 1 installed 136282 sec used 136282 sec\n\t key #0  at eth+12: val 08000000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 2:  pedit action pipe keys 2\n \t index 2 ref 1 bind 1 installed 136282 sec used 136282 sec\n\t key #0  at eth+0: val 4cbb4780 mask 00000000\n\t key #1  at eth+4: val b2100000 mask 0000ffff\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n\taction order 3: mirred (Egress Redirect to device enP2p1s0f0np0) stolen\n\tindex 1 ref 1 bind 1 installed 136282 sec used 136282 sec\n\tAction statistics:\n\tSent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n\tbacklog 0b 0p requeues 0\n\tused_hw_stats delayed\n\n"
+      },
+      "tc_requirements": {
+        "enP2p1s0f1np1:49155": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:f1:47",
+          "dst_mac 4c:bb:47:80:ab:b4",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enP2p1s0f0np0"
+        ],
+        "enP2p1s0f0np0:49161": [
+          "eth_type 88b5",
+          "src_mac 4c:bb:47:80:b2:10",
+          "dst_mac 4c:bb:47:80:ab:b3",
+          "skip_sw",
+          "in_hw",
+          "Redirect to device enP2p1s0f1np1"
+        ]
+      },
+      "installed_script_sha256": {
+        "/opt/spark-ring-mesh/mesh-up-spark-d.sh": "baf3180aeede78e6bf083c92c9f83e8b4745881b9a2faa84de426759c237c761",
+        "/opt/spark-ring-mesh/mesh-down-spark-d.sh": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3",
+        "/opt/spark-ring-mesh/mesh-up.sh": "baf3180aeede78e6bf083c92c9f83e8b4745881b9a2faa84de426759c237c761",
+        "/opt/spark-ring-mesh/mesh-down.sh": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3"
+      },
+      "generated_script_sha256": {
+        "mesh-up": "baf3180aeede78e6bf083c92c9f83e8b4745881b9a2faa84de426759c237c761",
+        "mesh-down": "c150ec0aae9457ca31095383c1c7b2fa04644819be7ac8b1d10efec36481b0b3"
+      },
+      "probe_source_sha256": "8684a6961b8e86aa474fa2310ff71e4cdf219a63a72ceb5593b2f95e54812792",
+      "probe_binary_sha256": "2828c07e4255c4962c77425be2c88969e7eb7dd4b1bf9e36485bc705bb5d6d64",
+      "probe_text_sha256": "de46f1fec807a5152a03e3cb3512144b72ffaf81d5612dc609ed8c35a0a17132"
+    }
+  },
+  "failures": [],
+  "official_alignment": {
+    "fabric": "cabled four-node ring A-B-C-D-A with two PCIe paths per neighbour",
+    "transport": "oneshot-ring4",
+    "mtu": 9000,
+    "roce_mtu": 4096,
+    "gid_index": 3,
+    "site_address_divergence": "Official node-map convention uses per-cable /24 subnets. This site's parent SSOT intentionally uses point-to-point /30 links; live inventory matches the parent /30 endpoints and uses NCCL_IB_SUBNET_PREFIX_LEN=30."
+  }
+}

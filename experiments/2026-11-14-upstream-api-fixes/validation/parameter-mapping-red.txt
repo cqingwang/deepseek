@@ -1,0 +1,23 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_common_business_keys_map_to_the_vllm_native_surface ___________
+
+tmp_path = PosixPath('/private/var/folders/bw/wyppmgk52_v2nnh0w_j_0gl80000gn/T/pytest-of-chan/pytest-8/test_common_business_keys_map_0')
+
+    def test_common_business_keys_map_to_the_vllm_native_surface(tmp_path: Path) -> None:
+        config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+        env_path, managed = _merged_env(tmp_path)
+        commands = _print_commands(env_path)
+        env, serve_args, _ = _parse_docker_argv(commands[0], managed["IMAGE"])
+    
+        assert config["common"]["max_request"] == 9
+>       assert serve_args[serve_args.index("--max-num-seqs") + 1] == "9"
+E       AssertionError: assert '16' == '9'
+E         
+E         - 9
+E         + 16
+
+spark/tests/test_deepseek_env_merge_contract.py:496: AssertionError
+=========================== short test summary info ============================
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_common_business_keys_map_to_the_vllm_native_surface
+1 failed in 0.24s

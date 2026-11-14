@@ -63,7 +63,11 @@
 ### 层 1：`config.yaml`
 
 - 只登记 target 路由、镜像身份、模型、TP/rank、端口/API key、runtime asset、模型容器路径和 ring 派生开关。
-- 不登记上游固定 serving/NCCL 参数、`max_token`、`max_request`、chunk、CUDA graph、speculative 或 GLP 定值。
+- 不复制上游固定 serving/NCCL 参数；`max_token`、`max_request`、`max_tokens`、
+  `max_num_batched_tokens`、`default_thinking`、`reasoning_effort`、
+  `master_port` 作为业务语义显式映射到 vLLM 原生 CLI。
+- `engines.<target>.num_speculative_tokens` 是 target 原生 DSpark 参数，
+  不同 target 可独立设置；当前官方推荐值为 5，不得从 common 推导。
 - `common.ring` / `common.spark_nodes` 是管理地址、rank、HCA、GID、子网前缀和邻居映射的唯一来源。
 
 ### 层 2：`.env.deepseek.example`

@@ -1,0 +1,267 @@
+From e65aef5b296fbed4a2d49f75f2a3a0a3d5204d20 Mon Sep 17 00:00:00 2001
+From: Chan <chan@localhost>
+Date: Sat, 14 Nov 2026 22:00:27 +0800
+Subject: [PATCH] fix(dsv41): treat typed image placeholders as text and replay
+ custom tools
+
+The tokenizer rejected the image placeholder when it appeared in ordinary message text, even though the DeepSeek API treats a typed special-token spelling as plain text. Protect every added-token spelling in request text, including the image placeholder, before rendering; image content parts add the real placeholder afterwards and remain the only source of the image special token.
+
+The Responses API schema already accepts custom_tool_call and custom_tool_call_output items, but the conversion to chat history raised Unsupported input item type. Replay a custom call through the assistant tool-call channel, preserving its free-form input, and map its output to the matching tool message.
+
+Tests cover text and image-part tokenization and custom call/output history replay.
+---
+ .../openai/responses/test_responses_utils.py  | 40 +++++++++++
+ tests/tokenizers_/test_deepseek_v41.py        | 66 +++++++++++++------
+ vllm/entrypoints/openai/responses/utils.py    | 40 +++++++++++
+ vllm/tokenizers/deepseek_v41.py               | 33 ++--------
+ 4 files changed, 132 insertions(+), 47 deletions(-)
+
+diff --git a/tests/entrypoints/openai/responses/test_responses_utils.py b/tests/entrypoints/openai/responses/test_responses_utils.py
+index 406414a..4cf9f18 100644
+--- a/tests/entrypoints/openai/responses/test_responses_utils.py
++++ b/tests/entrypoints/openai/responses/test_responses_utils.py
+@@ -119,6 +119,46 @@ def make_function_call_output(
+ class TestResponsesUtils:
+     """Tests for Responses API utils."""
+ 
++    def test_custom_tool_call_and_output_replay_as_tool_history(self):
++        items = [
++            {
++                "type": "message",
++                "role": "user",
++                "content": [{"type": "input_text", "text": "Use the shell."}],
++            },
++            {
++                "type": "custom_tool_call",
++                "call_id": "call_custom",
++                "name": "shell",
++                "input": "echo hi",
++            },
++            {
++                "type": "custom_tool_call_output",
++                "call_id": "call_custom",
++                "output": "hi",
++            },
++            {"role": "user", "content": "Continue."},
++        ]
++
++        messages = construct_chat_messages_with_tool_call(items)
++
++        assert messages[1] == {
++            "role": "assistant",
++            "tool_calls": [
++                {
++                    "id": "call_custom",
++                    "function": {"name": "shell", "arguments": "echo hi"},
++                    "type": "function",
++                }
++            ],
++        }
++        assert messages[2] == {
++            "role": "tool",
++            "content": "hi",
++            "tool_call_id": "call_custom",
++        }
++        assert messages[3] == {"role": "user", "content": "Continue."}
++
+     def test_construct_chat_messages_with_tool_call(self):
+         """Test construction of chat messages with tool calls."""
+         reasoning_item = ResponseReasoningItem(
+diff --git a/tests/tokenizers_/test_deepseek_v41.py b/tests/tokenizers_/test_deepseek_v41.py
+index bf63aad..423d028 100644
+--- a/tests/tokenizers_/test_deepseek_v41.py
++++ b/tests/tokenizers_/test_deepseek_v41.py
+@@ -299,30 +299,54 @@ def test_reminder_does_not_enable_arbitrary_message_roles():
+ 
+ 
+ @pytest.mark.parametrize("role", ["user", "tool", "assistant"])
+-def test_image_token_in_text_is_a_request_error(role):
+-    """Image tokens come only from image parts, in string content, text parts and
+-    reasoning alike (DeepSeek's reference rejects them before merging)."""
++def test_image_token_in_text_stays_plain_text(role):
++    """A typed image placeholder is request text; only image parts make the token."""
++    tokenizer = byte_level_tokenizer()
++    image_id = tokenizer.get_added_vocab()[IMAGE_PLACEHOLDER]
+     message = {"role": role, "content": f"hi {IMAGE_PLACEHOLDER}"}
+     if role == "tool":
+         message["tool_call_id"] = "c1"
+-    with pytest.raises(ValueError, match="image special token"):
+-        render([message])
+-    with pytest.raises(ValueError, match="image placeholder"):
+-        render(
+-            [{"role": "user", "content": [{"type": "text", "text": IMAGE_PLACEHOLDER}]}]
+-        )
+-    with pytest.raises(ValueError, match="reasoning_content contains image"):
+-        render(
+-            [
+-                {"role": "user", "content": "q"},
+-                {
+-                    "role": "assistant",
+-                    "content": "a",
+-                    "reasoning_content": IMAGE_PLACEHOLDER,
+-                },
+-                {"role": "user", "content": "q2"},
+-            ]
+-        )
++    ids = tokenizer.apply_chat_template([message], thinking=False)
++    assert image_id not in ids
++    assert IMAGE_PLACEHOLDER in tokenizer.decode(ids)
++
++    ids = tokenizer.apply_chat_template(
++        [{"role": "user", "content": [{"type": "text", "text": IMAGE_PLACEHOLDER}]}],
++        thinking=False,
++    )
++    assert image_id not in ids
++    assert IMAGE_PLACEHOLDER in tokenizer.decode(ids)
++
++    ids = tokenizer.apply_chat_template(
++        [
++            {"role": "user", "content": "q"},
++            {
++                "role": "assistant",
++                "content": "a",
++                "reasoning_content": IMAGE_PLACEHOLDER,
++            },
++        ],
++        thinking=True,
++    )
++    assert image_id not in ids
++    assert IMAGE_PLACEHOLDER in tokenizer.decode(ids)
++
++
++def test_image_part_still_uses_the_image_special_token():
++    tokenizer = byte_level_tokenizer()
++    image_id = tokenizer.get_added_vocab()[IMAGE_PLACEHOLDER]
++    ids = tokenizer.apply_chat_template(
++        [
++            {
++                "role": "user",
++                "content": [
++                    {"type": "image_url", "image_url": {"url": "image.png"}}
++                ],
++            }
++        ],
++        thinking=False,
++    )
++    assert ids.count(image_id) == 1
+ 
+ 
+ def _call(name):
+diff --git a/vllm/entrypoints/openai/responses/utils.py b/vllm/entrypoints/openai/responses/utils.py
+index 82ab75f..7d9f493 100644
+--- a/vllm/entrypoints/openai/responses/utils.py
++++ b/vllm/entrypoints/openai/responses/utils.py
+@@ -322,6 +322,46 @@ def _construct_message_from_response_item(
+             content=item.get("output"),
+             tool_call_id=item.get("call_id"),
+         )
++    elif isinstance(item, dict) and item.get("type") == "custom_tool_call":
++        # A custom tool call is free-form. Replay it through the same assistant
++        # tool-call channel so the DeepSeek renderer can preserve its input.
++        tool_call = ChatCompletionMessageToolCallParam(
++            id=item.get("call_id"),
++            function=FunctionCallTool(
++                name=item.get("name"),
++                arguments=item.get("input", ""),
++            ),
++            type="function",
++        )
++        if prev_assistant_msg:
++            tool_calls = prev_assistant_msg.get("tool_calls")
++            if tool_calls is None:
++                prev_assistant_msg["tool_calls"] = [tool_call]
++                return None
++            if isinstance(tool_calls, list):
++                tool_calls.append(tool_call)
++                return None
++            if isinstance(tool_calls, Iterable) and not isinstance(
++                tool_calls, (dict, str)
++            ):
++                prev_assistant_msg["tool_calls"] = [*tool_calls, tool_call]
++                return None
++            logger.warning(
++                "Previous assistant message has unknown tool_calls format. "
++                "Custom tool call merging is skipped and a new assistant "
++                "message is created. Item %s",
++                item.get("call_id"),
++            )
++        return ChatCompletionAssistantMessageParam(
++            role="assistant",
++            tool_calls=[tool_call],
++        )
++    elif isinstance(item, dict) and item.get("type") == "custom_tool_call_output":
++        return ChatCompletionToolMessageParam(
++            role="tool",
++            content=item.get("output"),
++            tool_call_id=item.get("call_id"),
++        )
+     elif isinstance(item, dict) and item.get("role") == "assistant":
+         content = item.get("content")
+         text: str | None = None
+diff --git a/vllm/tokenizers/deepseek_v41.py b/vllm/tokenizers/deepseek_v41.py
+index 36aadd0..92b4b12 100644
+--- a/vllm/tokenizers/deepseek_v41.py
++++ b/vllm/tokenizers/deepseek_v41.py
+@@ -111,8 +111,9 @@ class _ControlSpellings:
+     encoded without the added vocabulary, with the sentinels restored. This
+     matches DeepSeek's encoder, which encodes a typed spelling as plain text.
+ 
+-    The image placeholder is left alone: `_normalize_messages` already rejects it
+-    in text, and image parts render it.
++    The image placeholder is protected in request text too. Image content parts
++    add the real placeholder after this protection pass, so only placeholders
++    produced by a structured image part become the image special token.
+     """
+ 
+     @staticmethod
+@@ -254,30 +255,12 @@ def _normalize_messages(
+         if "reasoning" in message:
+             message["reasoning_content"] = message["reasoning"]
+         content = message.get("content")
+-        # Image tokens come only from image parts, as the reference requires.
+-        if isinstance(content, str) and IMAGE_PLACEHOLDER in content:
+-            raise ValueError(
+-                f"Message content contains image special token '{IMAGE_PLACEHOLDER}'. "
+-                "Images should be provided as image content blocks."
+-            )
+-        reasoning = message.get("reasoning_content")
+-        if isinstance(reasoning, str) and IMAGE_PLACEHOLDER in reasoning:
+-            raise ValueError(
+-                f"reasoning_content contains image special token '{IMAGE_PLACEHOLDER}'"
+-            )
+         if isinstance(content, list):
+             parts = []
+             for block in content:
+                 part_type = block.get("type")
+                 if part_type in ("text", "input_text", "output_text"):
+-                    text = block.get("text", "")
+-                    if IMAGE_PLACEHOLDER in text:
+-                        raise ValueError(
+-                            "Text block contains image placeholder "
+-                            f"'{IMAGE_PLACEHOLDER}'. Images should be separate "
+-                            "content blocks."
+-                        )
+-                    parts.append(text)
++                    parts.append(block.get("text", ""))
+                 elif part_type in ("image_url", "input_image", "image_pil"):
+                     parts.append(IMAGE_PLACEHOLDER)
+                 else:
+@@ -360,12 +343,10 @@ def get_deepseek_v41_tokenizer(tokenizer: HfTokenizer) -> HfTokenizer:
+     """Wrap an HF tokenizer with the V4.1 prompt encoder."""
+     wrapped = copy.copy(tokenizer)
+     added_vocab = tokenizer.get_added_vocab()
+-    # Every added-token spelling splits the rendered prompt; all but the image
+-    # placeholder are kept out of the vocabulary when they occur in request text.
++    # Every added-token spelling splits the rendered prompt. Request text is
++    # protected first, so only controls written by the template become tokens.
+     template_controls = _compile_trie_regex(list(added_vocab))
+-    text_spellings = _ControlSpellings.compile(
+-        [s for s in added_vocab if s != IMAGE_PLACEHOLDER]
+-    )
++    text_spellings = _ControlSpellings.compile(list(added_vocab))
+     plain_encoder: list[Callable[[list[str]], list[list[int]]]] = []
+     backend_tokenizer = getattr(tokenizer, "backend_tokenizer", None)
+     can_split_segments = (
+-- 
+2.54.0 (Apple Git-157)
+

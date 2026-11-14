@@ -1,0 +1,145 @@
+{
+  "captured_at": "2026-11-14T16:53:58.192182+00:00",
+  "nodes": [
+    {
+      "node": "spark-a",
+      "host": "192.168.2.180",
+      "rank": 0,
+      "container": "deepseek-r0",
+      "image": "spark-ds41f:x1114",
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+      "running": true,
+      "oom_killed": false,
+      "exit_code": 0,
+      "restart_count": 0,
+      "memguard": "active",
+      "api_status": 200,
+      "api_status_note": null,
+      "env_count": 119,
+      "arg_count": 88,
+      "argv": {
+        "max_model_len": 1000000,
+        "max_num_seqs": 9,
+        "max_num_batched_tokens": 16384,
+        "long_prefill_token_threshold": 16330,
+        "max_cudagraph_capture_size": 54,
+        "num_speculative_tokens": 5,
+        "max_new_tokens": 65536,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false,
+          "reasoning_effort": 75
+        },
+        "api_host": "0.0.0.0",
+        "api_port": 8888,
+        "api_key_present": true,
+        "master_port": 25000
+      },
+      "business_env_leaks": []
+    },
+    {
+      "node": "spark-b",
+      "host": "192.168.2.161",
+      "rank": 1,
+      "container": "deepseek-r1",
+      "image": "spark-ds41f:x1114",
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+      "running": true,
+      "oom_killed": false,
+      "exit_code": 0,
+      "restart_count": 0,
+      "memguard": "active",
+      "api_status": null,
+      "api_status_note": "API server is intentionally head-only in the four-rank engine",
+      "env_count": 119,
+      "arg_count": 89,
+      "argv": {
+        "max_model_len": 1000000,
+        "max_num_seqs": 9,
+        "max_num_batched_tokens": 16384,
+        "long_prefill_token_threshold": 16330,
+        "max_cudagraph_capture_size": 54,
+        "num_speculative_tokens": 5,
+        "max_new_tokens": 65536,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false,
+          "reasoning_effort": 75
+        },
+        "api_host": "0.0.0.0",
+        "api_port": 8888,
+        "api_key_present": true,
+        "master_port": 25000
+      },
+      "business_env_leaks": []
+    },
+    {
+      "node": "spark-c",
+      "host": "192.168.2.102",
+      "rank": 2,
+      "container": "deepseek-r2",
+      "image": "spark-ds41f:x1114",
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+      "running": true,
+      "oom_killed": false,
+      "exit_code": 0,
+      "restart_count": 0,
+      "memguard": "active",
+      "api_status": null,
+      "api_status_note": "API server is intentionally head-only in the four-rank engine",
+      "env_count": 119,
+      "arg_count": 89,
+      "argv": {
+        "max_model_len": 1000000,
+        "max_num_seqs": 9,
+        "max_num_batched_tokens": 16384,
+        "long_prefill_token_threshold": 16330,
+        "max_cudagraph_capture_size": 54,
+        "num_speculative_tokens": 5,
+        "max_new_tokens": 65536,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false,
+          "reasoning_effort": 75
+        },
+        "api_host": "0.0.0.0",
+        "api_port": 8888,
+        "api_key_present": true,
+        "master_port": 25000
+      },
+      "business_env_leaks": []
+    },
+    {
+      "node": "spark-d",
+      "host": "192.168.2.238",
+      "rank": 3,
+      "container": "deepseek-r3",
+      "image": "spark-ds41f:x1114",
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+      "running": true,
+      "oom_killed": false,
+      "exit_code": 0,
+      "restart_count": 0,
+      "memguard": "active",
+      "api_status": null,
+      "api_status_note": "API server is intentionally head-only in the four-rank engine",
+      "env_count": 119,
+      "arg_count": 89,
+      "argv": {
+        "max_model_len": 1000000,
+        "max_num_seqs": 9,
+        "max_num_batched_tokens": 16384,
+        "long_prefill_token_threshold": 16330,
+        "max_cudagraph_capture_size": 54,
+        "num_speculative_tokens": 5,
+        "max_new_tokens": 65536,
+        "default_chat_template_kwargs": {
+          "enable_thinking": false,
+          "reasoning_effort": 75
+        },
+        "api_host": "0.0.0.0",
+        "api_port": 8888,
+        "api_key_present": true,
+        "master_port": 25000
+      },
+      "business_env_leaks": []
+    }
+  ]
+}

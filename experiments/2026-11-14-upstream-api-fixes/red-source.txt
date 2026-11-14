@@ -1,0 +1,7 @@
+INFO 11-14 14:01:08 [importing.py:74] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 11-14 14:01:08 [importing.py:98] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W1114 14:01:09.046000 1 torch/utils/cpp_extension.py:178] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+custom-tool-call INVALID VLLMValidationError Unsupported input item type: custom_tool_call (parameter=input)
+custom-tool-call-output INVALID VLLMValidationError Unsupported input item type: custom_tool_call (parameter=input)
+image-token-text tokenize= False INVALID ValueError Message content contains image special token '<｜deepseek_image｜>'. Images should be provided as image content blocks.
+image-token-text tokenize= True INVALID ValueError Message content contains image special token '<｜deepseek_image｜>'. Images should be provided as image content blocks.

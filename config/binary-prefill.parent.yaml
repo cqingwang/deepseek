@@ -141,12 +141,12 @@ common:
   max_token: 1000000
   max_tokens: 65536
   max_num_batched_tokens: 16384
-  mtp_num_tokens: 6
   default_thinking: false
   reasoning_effort: 75
   master_port: 25000
 engines:
   deepseek:
+    num_speculative_tokens: 5
     enabled: true
     engine_dir: deepseek
     env_dir: deepseek

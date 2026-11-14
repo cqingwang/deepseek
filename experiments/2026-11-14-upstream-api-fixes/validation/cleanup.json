@@ -1,0 +1,62 @@
+{
+  "removed": {
+    "images": [
+      {
+        "tag": "spark-ds41f:x1112",
+        "image_id": "sha256:cbf38e34dab0e2aafa2abea79e669469027d253c70248d4e9a54182878eb2ece",
+        "nodes": [
+          "spark-a",
+          "spark-b",
+          "spark-c",
+          "spark-d"
+        ]
+      }
+    ],
+    "build_cache_gib": 26.28,
+    "remote_temp_paths": [
+      "/tmp/vllm-fix-src-20261114",
+      "/tmp/vllm-fix-work-20261114",
+      "/tmp/0811.patch",
+      "/tmp/deepseek_v41.base.py",
+      "/tmp/utils.base.py",
+      "/opt/spark/deepseek/results/x1114-acceptance-20261114"
+    ],
+    "local_temp_paths": [
+      "/tmp/vllm-*",
+      "/tmp/vllm-patch-*",
+      "/tmp/0811.patch",
+      "/tmp/magpie_focused_test.py",
+      "/tmp/live_api_suite.py",
+      "/tmp/red_unit.py"
+    ],
+    "generated_backup": ".env.deepseek.pre-x1114"
+  },
+  "retained": {
+    "target_image": "spark-ds41f:x1114",
+    "base_image": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "base_image_node": "spark-a",
+    "evidence": "experiments/2026-11-14-upstream-api-fixes"
+  },
+  "final_docker": {
+    "spark-a": [
+      "spark-ds41f:x1114",
+      "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    ],
+    "spark-b": [
+      "spark-ds41f:x1114"
+    ],
+    "spark-c": [
+      "spark-ds41f:x1114"
+    ],
+    "spark-d": [
+      "spark-ds41f:x1114"
+    ]
+  },
+  "build_cache_after_gib": 0,
+  "service_after_cleanup": {
+    "api_200": true,
+    "all_ranks_running": true,
+    "oom": false,
+    "restart_count": 0
+  }
+}

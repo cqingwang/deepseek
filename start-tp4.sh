@@ -11,9 +11,15 @@
 # （rows=96：max_num_seqs 16 x (1+drafts 5)；capture ladder 1..96；
 # long_prefill 16288=16384-96；engram table_memory=disk）。
 # 来源：官方 latest-main config/cluster.json 的 tp4-ring 配方。
-# 站点渲染点只有四处：serve 模型路径、--host、--port、--api-key；逐 rank
-# 注入 VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
-# SPARKNET_ROCE_TOPOLOGY。其余固定键和 serve 参数不得丢失。
+# 站点渲染点：serve 模型路径、--host、--port、--api-key；逐 rank 注入
+# VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
+# SPARKNET_ROCE_TOPOLOGY。common 的业务键还必须映射到 vLLM 原生参数：
+# max_request→--max-num-seqs、max_token→--max-model-len、
+# max_tokens→--override-generation-config.max_new_tokens、
+# max_num_batched_tokens→--max-num-batched-tokens、
+# engines.<target>.num_speculative_tokens→speculative-config.num_speculative_tokens、
+# default_thinking/reasoning_effort→--default-chat-template-kwargs、
+# master_port→--master-port。业务键本身不得作为容器 env 泄漏。
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -58,7 +64,10 @@ for key in TARGET_ENGINE_ID TARGET_CONTAINER_PREFIX RUNTIME_ASSETS CACHE_DIR \
   MODEL_DIR MODEL_CONTAINER_PATH IMAGE IMAGE_ID HEAD_MANAGEMENT_IP \
   HEAD_SSH_TARGET WORKER_MANAGEMENT_IPS WORKER_SSH_TARGETS WORKER_RANKS \
   NNODES TP_SIZE NCCL_IB_SUBNET_PREFIX_LEN NCCL_IB_GID_INDEX NCCL_IB_HCA \
-  SPARKNET_ROCE_PEER_HCAS_BY_RANK API_HOST PORT; do
+  SPARKNET_ROCE_PEER_HCAS_BY_RANK API_HOST PORT DS41F_MAX_NUM_SEQS \
+  DS41F_MAX_MODEL_LEN DS41F_MAX_NEW_TOKENS DS41F_MAX_NUM_BATCHED_TOKENS \
+  DS41F_NUM_SPECULATIVE_TOKENS DS41F_DEFAULT_ENABLE_THINKING \
+  DS41F_REASONING_EFFORT DS41F_MASTER_PORT; do
   require "$key"
 done
 
@@ -179,18 +188,16 @@ DS41F_SERVE_ARGS=(
   --no-scheduler-reserve-full-isl
   --no-enable-flashinfer-autotune
   --limit-mm-per-prompt
-  '{"image":67}'
+  '{"image":16}'
   --mm-processor-cache-gb
   0
   --prefill-yield
   short
   --prefill-yield-limit-s
   10
+  --default-chat-template-kwargs
+  '{}'
 )
-
-# 上游固定面：cluster.json `distributed.master_port`（master_addr 由受管
-# HEAD_MANAGEMENT_IP 承担，与上游 read_cluster 的 head 控制面推导一致）。
-DS41F_MASTER_PORT=9999
 
 # 受管 env 文件 → 容器 -e 集。只有上游模板键与声明的站点覆盖键可进入容器；
 # 宿主键、重复键和多 token 的未引用值均 fail-closed。
@@ -336,6 +343,134 @@ for flag, value in options.items():
 PY
 }
 
+serve_arg_value() {
+  local flag="$1" index found=0
+  for index in "${!DS41F_SERVE_ARGS[@]}"; do
+    if [ "${DS41F_SERVE_ARGS[$index]}" = "$flag" ]; then
+      found=$((found + 1))
+      [ "$found" -eq 1 ] || die "基线 serve flag 重复: $flag"
+      [ $((index + 1)) -lt "${#DS41F_SERVE_ARGS[@]}" ] \
+        || die "基线 serve flag 缺少值: $flag"
+      printf '%s' "${DS41F_SERVE_ARGS[$((index + 1))]}"
+      return 0
+    fi
+  done
+  die "基线 serve flag 不存在: $flag"
+}
+
+# 把 config.yaml/common 的业务语义渲染成 vLLM 真正消费的 CLI 值。JSON
+# 基线来自上游固定 argv，只更新已确认的原生键；派生 rows 使用官方 recipe
+# 的 capture ladder，避免并发从 16 改到 9 后 long-prefill 与 CUDA graph
+# 仍停留在旧行数。
+site_common_serve_rows() {
+  python3 - "$ROOT" \
+    "$DS41F_MAX_NUM_SEQS" "$DS41F_MAX_MODEL_LEN" "$DS41F_MAX_NEW_TOKENS" \
+    "$DS41F_MAX_NUM_BATCHED_TOKENS" "$DS41F_NUM_SPECULATIVE_TOKENS" \
+    "$DS41F_DEFAULT_ENABLE_THINKING" "$DS41F_REASONING_EFFORT" \
+    "$(serve_arg_value --override-generation-config)" \
+    "$(serve_arg_value --speculative-config)" \
+    "$(serve_arg_value --compilation-config)" \
+    "$(serve_arg_value --default-chat-template-kwargs)" <<'PY'
+import json
+import pathlib
+import sys
+
+root = pathlib.Path(sys.argv[1]).resolve()
+sys.path.insert(0, str(root / "scripts"))
+import recipe
+
+
+def positive_integer(name: str, raw: str) -> int:
+    if not raw.isdigit() or int(raw) < 1:
+        raise SystemExit(f"{name} 必须为 >=1 的整数: {raw or '<empty>'}")
+    return int(raw)
+
+
+def json_object(name: str, raw: str) -> dict:
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"{name} 不是合法 JSON: {exc}") from exc
+    if not isinstance(value, dict):
+        raise SystemExit(f"{name} 必须是 JSON object")
+    return value
+
+
+max_num_seqs = positive_integer("DS41F_MAX_NUM_SEQS", sys.argv[2])
+max_model_len = positive_integer("DS41F_MAX_MODEL_LEN", sys.argv[3])
+max_new_tokens = positive_integer("DS41F_MAX_NEW_TOKENS", sys.argv[4])
+max_num_batched_tokens = positive_integer(
+    "DS41F_MAX_NUM_BATCHED_TOKENS", sys.argv[5]
+)
+num_speculative_tokens = positive_integer(
+    "DS41F_NUM_SPECULATIVE_TOKENS", sys.argv[6]
+)
+if sys.argv[7] not in {"true", "false"}:
+    raise SystemExit(f"DS41F_DEFAULT_ENABLE_THINKING 必须为 true/false: {sys.argv[7]}")
+enable_thinking = sys.argv[7] == "true"
+reasoning_effort_raw = sys.argv[8]
+if reasoning_effort_raw.isdigit() and 1 <= int(reasoning_effort_raw) <= 100:
+    reasoning_effort = int(reasoning_effort_raw)
+elif reasoning_effort_raw in {"low", "medium", "high", "max"}:
+    reasoning_effort = reasoning_effort_raw
+else:
+    raise SystemExit(
+        "DS41F_REASONING_EFFORT 必须为 1..100 的整数或 low/medium/high/max: "
+        f"{reasoning_effort_raw or '<empty>'}"
+    )
+
+override_generation = json_object(
+    "--override-generation-config", sys.argv[9]
+)
+speculative = json_object("--speculative-config", sys.argv[10])
+compilation = json_object("--compilation-config", sys.argv[11])
+default_template_kwargs = json_object(
+    "--default-chat-template-kwargs", sys.argv[12]
+)
+
+rows = max_num_seqs * (1 + num_speculative_tokens)
+long_prefill_threshold = max_num_batched_tokens - rows
+if long_prefill_threshold < 1:
+    raise SystemExit(
+        "common.max_num_batched_tokens 必须大于并发 rows: "
+        f"{max_num_batched_tokens} - {rows} = {long_prefill_threshold}"
+    )
+if max_new_tokens > max_model_len:
+    raise SystemExit(
+        f"common.max_tokens ({max_new_tokens}) 不得超过 common.max_token "
+        f"({max_model_len})"
+    )
+
+override_generation["max_new_tokens"] = max_new_tokens
+speculative["num_speculative_tokens"] = num_speculative_tokens
+compilation["cudagraph_capture_sizes"] = recipe.capture_sizes(rows)
+default_template_kwargs["enable_thinking"] = enable_thinking
+default_template_kwargs["reasoning_effort"] = reasoning_effort
+
+values = {
+    "--max-model-len": str(max_model_len),
+    "--max-num-seqs": str(max_num_seqs),
+    "--max-num-batched-tokens": str(max_num_batched_tokens),
+    "--long-prefill-token-threshold": str(long_prefill_threshold),
+    "--max-cudagraph-capture-size": str(rows),
+    "--override-generation-config": json.dumps(
+        override_generation, separators=(",", ":"), sort_keys=True
+    ),
+    "--speculative-config": json.dumps(
+        speculative, separators=(",", ":"), sort_keys=True
+    ),
+    "--compilation-config": json.dumps(
+        compilation, separators=(",", ":"), sort_keys=True
+    ),
+    "--default-chat-template-kwargs": json.dumps(
+        default_template_kwargs, separators=(",", ":"), sort_keys=True
+    ),
+}
+for flag, value in values.items():
+    print(f"{flag}\t{value}")
+PY
+}
+
 # 单个 rank 的完整 docker run argv（与上游 rendered_docker_command 同序：
 # name + docker_run_args + 排序后的 -e 集 + 卷 + 镜像 + serve + 分布式参数）。
 docker_command_for_rank() {
@@ -356,7 +491,7 @@ docker_command_for_rank() {
   command+=(-v "$DS41F_GLP_FILE:/glp/vector.gguf:ro")
   command+=("$IMAGE")
 
-  # 站点渲染点：模型路径、--host、--port、--api-key。
+  # 站点渲染点：模型路径、--host、--port、--api-key 和 common 原生映射。
   local -a serve_args=("${DS41F_SERVE_ARGS[@]}")
   serve_args[0]="$MODEL_CONTAINER_PATH"
   local index flag value found
@@ -380,6 +515,22 @@ docker_command_for_rank() {
     done
     [ "$found" -eq 1 ] || die "运行 profile serve flag 不在基线 argv 中: $flag"
   done < <(run_profile_serve_rows)
+  local common_rows
+  common_rows="$(site_common_serve_rows)" || die "common 业务键原生映射生成失败"
+  while IFS=$'\t' read -r flag value; do
+    [ -n "$flag" ] || continue
+    found=0
+    for index in "${!serve_args[@]}"; do
+      if [ "${serve_args[$index]}" = "$flag" ]; then
+        found=$((found + 1))
+        [ "$found" -eq 1 ] || die "common serve flag 重复: $flag"
+        [ $((index + 1)) -lt "${#serve_args[@]}" ] \
+          || die "common serve flag 缺少基线值: $flag"
+        serve_args[$((index + 1))]="$value"
+      fi
+    done
+    [ "$found" -eq 1 ] || die "common serve flag 不在基线 argv 中: $flag"
+  done <<< "$common_rows"
   if [ -n "${API_KEY:-}" ]; then
     serve_args+=(--api-key "$API_KEY")
   fi
@@ -581,15 +732,32 @@ preflight() {
     die "head :$PORT 已被占用，拒绝启动 deepseek"
   fi
   info "镜像身份校验: $IMAGE ($IMAGE_ID)"
-  label_rows="$(python3 - "$CONFIG_FILE" <<'PY'
+  label_rows="$(python3 - "$CONFIG_FILE" "$ROOT" <<'PY'
 import json
+from pathlib import Path
 import sys
 
-labels = json.load(open(sys.argv[1], encoding="utf-8"))["container"]["expected_labels"]
+root = Path(sys.argv[2]).resolve()
+sys.path.insert(0, str(root / "scripts"))
+import recipe
+
+
+def load_profile(path: Path, shape: str | None = None) -> dict:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if recipe.is_recipe(data):
+        return recipe.resolve(data, shape or "tp4-ring")
+    if recipe.is_overlay(data):
+        extends = data.get("extends", {})
+        base = load_profile(root / extends["config"], extends.get("shape", shape))
+        return recipe.overlay(data, base)
+    return data
+
+
+labels = load_profile(Path(sys.argv[1]))["container"]["expected_labels"]
 for key, value in sorted(labels.items()):
     print(f"{key}\t{value}")
 PY
-  )" || die "无法从 config/cluster.json 读取 expected_labels"
+  )" || die "无法从 DS41F_CONFIG_FILE 读取 expected_labels: $CONFIG_FILE"
   for rank in 0 1 2 3; do
     target="$(rank_ssh_target "$rank")"
     image_id="$(remote_docker_inspect_id "$target")"

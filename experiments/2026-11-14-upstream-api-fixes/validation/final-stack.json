@@ -1,0 +1,34 @@
+{
+  "image": "spark-ds41f:x1114",
+  "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+  "nodes": {
+    "spark-a": {
+      "management_ip": "192.168.2.180",
+      "running": true,
+      "oom_killed": false,
+      "restart_count": 0,
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc"
+    },
+    "spark-b": {
+      "management_ip": "192.168.2.161",
+      "running": true,
+      "oom_killed": false,
+      "restart_count": 0,
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc"
+    },
+    "spark-c": {
+      "management_ip": "192.168.2.102",
+      "running": true,
+      "oom_killed": false,
+      "restart_count": 0,
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc"
+    },
+    "spark-d": {
+      "management_ip": "192.168.2.238",
+      "running": true,
+      "oom_killed": false,
+      "restart_count": 0,
+      "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc"
+    }
+  }
+}

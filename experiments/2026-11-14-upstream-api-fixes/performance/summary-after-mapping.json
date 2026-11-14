@@ -1,0 +1,58 @@
+{
+  "recipe": {
+    "image": "spark-ds41f:x1114",
+    "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+    "environment": "official candidate-55 tp4-ring environment; common business keys and target-native num_speculative_tokens mapped to vLLM native CLI",
+    "gpu_clock_limit_mhz": 3003,
+    "serve": {
+      "max_request": 9,
+      "max_token": 1000000,
+      "max_tokens": 65536,
+      "max_num_batched_tokens": 16384,
+      "default_thinking": false,
+      "reasoning_effort": 75,
+      "master_port": 25000,
+      "num_speculative_tokens": 5
+    },
+    "servebench": "c1/c2/c4 prose, thinking=false, 10s warmup + 30s + 3 windows"
+  },
+  "prose_after_mapping": {
+    "c1": {
+      "runs": [
+        78.13333333333334,
+        78.39999999999999
+      ],
+      "mean": 78.26666666666667
+    },
+    "c2": {
+      "runs": [
+        111.13333333333333,
+        111.83333333333333
+      ],
+      "mean": 111.48333333333332
+    },
+    "c4": {
+      "runs": [
+        151.53333333333333,
+        151.83333333333334
+      ],
+      "mean": 151.68333333333334
+    }
+  },
+  "previous_mapping_16": {
+    "c1": 78.56666666666666,
+    "c2": 111.6,
+    "c4": 151.56666666666666
+  },
+  "official_prose_c1": 77.8,
+  "official_c1_delta_pct": 0.5998286203941827,
+  "change_vs_previous_mapping_pct": {
+    "c1": -0.38184132371658075,
+    "c2": -0.10454002389487238,
+    "c4": 0.07697382889817472
+  },
+  "evidence": {
+    "run_01": "after-mapping-run-01/suite.json",
+    "run_02": "after-mapping-run-02/suite.json"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "recipe": {
+    "image": "spark-ds41f:x1114",
+    "image_id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+    "environment": "official candidate-55 tp4-ring, no site runtime profile",
+    "gpu_clock_limit_mhz": 3003,
+    "serve": "c1/c2/c4 prose, thinking=false, 10s warmup + 30s + 3 windows"
+  },
+  "prose": {
+    "c1": {
+      "runs": [
+        78.93333333333334,
+        78.2
+      ],
+      "mean": 78.56666666666666
+    },
+    "c2": {
+      "runs": [
+        111.43333333333334,
+        111.76666666666667
+      ],
+      "mean": 111.6
+    },
+    "c4": {
+      "runs": [
+        150.70000000000002,
+        152.4333333333333
+      ],
+      "mean": 151.56666666666666
+    }
+  },
+  "previous_x1112": {
+    "c1": 69.65,
+    "c2": 104.07,
+    "c4": 142.17
+  },
+  "change_vs_x1112_pct": {
+    "c1": 12.802105766929884,
+    "c2": 7.2355145575093704,
+    "c4": 6.609458160418291
+  },
+  "official_prose_c1": 77.8,
+  "official_c1_delta_pct": 0.9854327335047097
+}

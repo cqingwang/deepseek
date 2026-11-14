@@ -1,0 +1,8 @@
+plain-message	200
+plain-message-default-thinking-off	200
+image-token-text	200
+function-call-output	200
+custom-tool-call	200
+custom-tool-call-output	200
+image-content-block	200
+magpie-focused-custom-tool	200

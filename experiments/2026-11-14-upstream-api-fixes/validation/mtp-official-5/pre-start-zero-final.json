@@ -1,0 +1,29 @@
+{
+  "captured_at": "2026-11-14T16:51:03.974026+00:00",
+  "nodes": [
+    {
+      "host": "192.168.2.180",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": []
+    },
+    {
+      "host": "192.168.2.161",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": []
+    },
+    {
+      "host": "192.168.2.102",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": []
+    },
+    {
+      "host": "192.168.2.238",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": []
+    }
+  ]
+}

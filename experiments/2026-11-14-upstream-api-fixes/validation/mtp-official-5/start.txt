@@ -1,0 +1,22 @@
+已更新 /Users/chan/Documents/project/doc/spark/deepseek/.env.deepseek 的 deepseek 受管配置块
+仅调用目标引擎 deepseek 的 stop 并删除旧容器，随后创建全新容器...
+Stopping deepseek ...
+[+] stop deepseek ranks 0..3
+[+] deepseek stopped: target containers=0, head :8888/v1/models=000
+在引擎 head spark-a（192.168.2.180）远程执行启动器
+[+] 镜像身份校验: spark-ds41f:x1114 (sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc)
+[+] 预置 rank 1 startup memguard（5 GiB / 0.25s）
+startup memguard active for deepseek-r1 (threshold 5 GiB, interval 0.25s, no warn line, mode prelaunch)
+[+] 启动 rank 1（chan@192.168.2.161）: deepseek-r1
+[+] 预置 rank 2 startup memguard（5 GiB / 0.25s）
+startup memguard active for deepseek-r2 (threshold 5 GiB, interval 0.25s, no warn line, mode prelaunch)
+[+] 启动 rank 2（chan@192.168.2.102）: deepseek-r2
+[+] 预置 rank 3 startup memguard（5 GiB / 0.25s）
+startup memguard active for deepseek-r3 (threshold 5 GiB, interval 0.25s, no warn line, mode prelaunch)
+[+] 启动 rank 3（chan@192.168.2.238）: deepseek-r3
+[+] 预置 head rank 0 startup memguard（5 GiB / 0.25s）
+startup memguard active for deepseek-r0 (threshold 5 GiB, interval 0.25s, no warn line, mode prelaunch)
+[+] 启动 head rank 0（chan@192.168.2.180）: deepseek-r0
+[+] 等待 head API 就绪: http://127.0.0.1:8888/v1/models（上限 3600s）
+[+] deepseek stack UP: http://0.0.0.0:8888/v1/models
+[+] 四机 steady memguard 已激活（3 GiB / 2s）

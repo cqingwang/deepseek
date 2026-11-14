@@ -1,0 +1,49 @@
+{
+  "captured_at": "2026-11-14T16:19:52.935773+00:00",
+  "nodes": [
+    {
+      "host": "192.168.2.180",
+      "returncode": 0,
+      "stderr": "",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": [],
+      "MEMAVAILABLE": [
+        "124804160 kB"
+      ]
+    },
+    {
+      "host": "192.168.2.161",
+      "returncode": 0,
+      "stderr": "",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": [],
+      "MEMAVAILABLE": [
+        "125422912 kB"
+      ]
+    },
+    {
+      "host": "192.168.2.102",
+      "returncode": 0,
+      "stderr": "",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": [],
+      "MEMAVAILABLE": [
+        "125339200 kB"
+      ]
+    },
+    {
+      "host": "192.168.2.238",
+      "returncode": 0,
+      "stderr": "",
+      "CONTAINERS": [],
+      "GPU_COMPUTE": [],
+      "MEMGUARD": [],
+      "MEMAVAILABLE": [
+        "125421248 kB"
+      ]
+    }
+  ]
+}
