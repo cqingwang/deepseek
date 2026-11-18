@@ -1,0 +1,37 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 668B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/spark-ds41f:x1118-raw-official
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 49.59kB done
+#4 DONE 0.0s
+
+#5 [1/4] FROM docker.io/library/spark-ds41f:x1118-raw-official
+#5 DONE 0.3s
+
+#6 [2/4] COPY vllm/vllm/entrypoints/openai/responses/utils.py      /opt/spark-ds41f/candidate/vllm/vllm/entrypoints/openai/responses/utils.py
+#6 DONE 0.0s
+
+#7 [3/4] COPY vllm/tests/entrypoints/openai/responses/test_responses_utils.py      /opt/spark-ds41f/candidate/vllm/tests/entrypoints/openai/responses/test_responses_utils.py
+#7 DONE 0.0s
+
+#8 [4/4] RUN rm -f /opt/spark-ds41f/candidate/vllm/vllm/entrypoints/openai/responses/__pycache__/utils*.pyc
+#8 DONE 0.1s
+
+#9 exporting to image
+#9 exporting layers 0.1s done
+#9 writing image sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4 done
+#9 naming to docker.io/library/spark-ds41f:x1118 done
+#9 DONE 0.1s

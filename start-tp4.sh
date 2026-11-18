@@ -152,7 +152,7 @@ DS41F_SERVE_ARGS=(
   --max-num-batched-tokens
   16384
   --kv-cache-memory-bytes
-  11274289152
+  17716740096
   --max-cudagraph-capture-size
   96
   --generation-config
@@ -190,7 +190,7 @@ DS41F_SERVE_ARGS=(
   --no-scheduler-reserve-full-isl
   --no-enable-flashinfer-autotune
   --limit-mm-per-prompt
-  '{"image":16}'
+  '{"image":67}'
   --mm-processor-cache-gb
   0
   --prefill-yield

@@ -1,0 +1,2 @@
+custom tool replay unit: PASS
+[{'type': 'message', 'role': 'user', 'content': [{'type': 'input_text', 'text': 'Use the shell.'}]}, {'role': 'assistant', 'tool_calls': [{'id': 'call_custom', 'function': {'name': 'shell', 'arguments': 'echo hi'}, 'type': 'function'}]}, {'role': 'tool', 'content': 'hi', 'tool_call_id': 'call_custom'}, {'role': 'user', 'content': 'Continue.'}]

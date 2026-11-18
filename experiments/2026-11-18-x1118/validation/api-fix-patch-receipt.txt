@@ -1,0 +1,5 @@
+1c629cb31 (HEAD -> spark/build) fix(dsv41): replay Responses custom tool calls
+ .../openai/responses/test_responses_utils.py       | 40 ++++++++++++++++++++++
+ vllm/entrypoints/openai/responses/utils.py         | 40 ++++++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+2e380bf20933b4b059f8654224e0faee378a3bcbbc4b001e471b6fda0fa6323f  /tmp/0823-fix-dsv41-replay-responses-custom-tool-calls.patch

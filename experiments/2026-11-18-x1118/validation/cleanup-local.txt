@@ -1,0 +1,17 @@
+removed:
+spark/__pycache__
+spark/tests/__pycache__
+spark/ring/mesh/__pycache__
+spark/ring/b12x/comm/roce_ring/__pycache__
+spark/deepseek/tests/__pycache__
+spark/deepseek/spark_ds41f/__pycache__
+spark/deepseek/scripts/__pycache__
+spark/deepseek/servebench/__pycache__
+spark/deepseek/scripts/release_tests/__pycache__
+spark/deepseek/experiments/2026-11-18-x1118/__pycache__
+spark/deepseek/experiments/2026-11-14-upstream-api-fixes/__pycache__
+spark/deepseek/experiments/2026-10-26-spark-ds41f-candidate/candidate-53/receipts/rework/pr-960-r1/scripts/analyze/__pycache__
+spark/.pytest_cache
+spark/deepseek/.pytest_cache
+remaining:
+

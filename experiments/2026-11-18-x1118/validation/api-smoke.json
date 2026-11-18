@@ -1,0 +1,514 @@
+{
+  "schema_version": 1,
+  "base": "http://192.168.2.180:8888/v1",
+  "rows": [
+    {
+      "name": "plain-message",
+      "path": "/chat/completions",
+      "status": 200,
+      "response_id": "chatcmpl-81ad573b4e560f51",
+      "finish_reason": "stop",
+      "reasoning_tokens": 0,
+      "response": {
+        "id": "chatcmpl-81ad573b4e560f51",
+        "object": "chat.completion",
+        "created": 1795008714,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "OK",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.29.1rc1.dev187+gaf1c01499-tp4-94b09e04",
+        "usage": {
+          "prompt_tokens": 9,
+          "total_tokens": 11,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "sink_rejection": {
+            "flagged_rows": 0,
+            "flagged_draft_zero": 0,
+            "flagged_drafter": 0,
+            "flagged_prompt": 0,
+            "draft_zero_rejections": 0,
+            "draft_cuts": 0,
+            "fallthroughs": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": {
+          "time_to_first_token_ms": 148.7727239727974,
+          "generation_time_ms": 0.0,
+          "queue_time_ms": 0.024784007109701633,
+          "mean_itl_ms": 0.0,
+          "tokens_per_second": 13.443324465617053,
+          "speculative_decoding": null
+        }
+      }
+    },
+    {
+      "name": "plain-message-default-thinking-off",
+      "path": "/chat/completions",
+      "status": 200,
+      "response_id": "chatcmpl-874f71be71a2393d",
+      "finish_reason": "stop",
+      "reasoning_tokens": 0,
+      "response": {
+        "id": "chatcmpl-874f71be71a2393d",
+        "object": "chat.completion",
+        "created": 1795008714,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "OK",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.29.1rc1.dev187+gaf1c01499-tp4-94b09e04",
+        "usage": {
+          "prompt_tokens": 9,
+          "total_tokens": 11,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "sink_rejection": {
+            "flagged_rows": 0,
+            "flagged_draft_zero": 0,
+            "flagged_drafter": 0,
+            "flagged_prompt": 0,
+            "draft_zero_rejections": 0,
+            "draft_cuts": 0,
+            "fallthroughs": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": {
+          "time_to_first_token_ms": 79.48122400557622,
+          "generation_time_ms": 0.0,
+          "queue_time_ms": 0.016208039596676826,
+          "mean_itl_ms": 0.0,
+          "tokens_per_second": 25.163175643340427,
+          "speculative_decoding": null
+        }
+      }
+    },
+    {
+      "name": "image-token-text",
+      "path": "/chat/completions",
+      "status": 200,
+      "response_id": "chatcmpl-a8bc74d574aeebc3",
+      "finish_reason": "stop",
+      "reasoning_tokens": 0,
+      "response": {
+        "id": "chatcmpl-a8bc74d574aeebc3",
+        "object": "chat.completion",
+        "created": 1795008714,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "OK",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.29.1rc1.dev187+gaf1c01499-tp4-94b09e04",
+        "usage": {
+          "prompt_tokens": 20,
+          "total_tokens": 22,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": null
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "sink_rejection": {
+            "flagged_rows": 0,
+            "flagged_draft_zero": 0,
+            "flagged_drafter": 0,
+            "flagged_prompt": 0,
+            "draft_zero_rejections": 0,
+            "draft_cuts": 0,
+            "fallthroughs": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": {
+          "time_to_first_token_ms": 105.07890401640907,
+          "generation_time_ms": 0.0,
+          "queue_time_ms": 0.028592010494321585,
+          "mean_itl_ms": 0.0,
+          "tokens_per_second": 19.033316142007735,
+          "speculative_decoding": null
+        }
+      }
+    },
+    {
+      "name": "function-call-output",
+      "path": "/responses",
+      "status": 200,
+      "response_id": "resp_bfe358e7b31879ae",
+      "finish_reason": null,
+      "reasoning_tokens": null,
+      "response": {
+        "id": "resp_bfe358e7b31879ae",
+        "created_at": 1795008714,
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "instructions": null,
+        "metadata": null,
+        "model": "deepseek-v4.1-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_9968227833d86425",
+            "content": [
+              {
+                "annotations": [],
+                "text": "I called the lookup tool with the query",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "none",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "max_output_tokens": 8,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "reasoning": null,
+        "service_tier": "auto",
+        "status": "incomplete",
+        "text": null,
+        "top_logprobs": null,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 59,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "input_tokens_per_turn": [],
+            "cached_tokens_per_turn": []
+          },
+          "output_tokens": 8,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "tool_output_tokens": 0,
+            "output_tokens_per_turn": [],
+            "tool_output_tokens_per_turn": []
+          },
+          "total_tokens": 67
+        },
+        "user": null,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "input_messages": null,
+        "output_messages": null
+      }
+    },
+    {
+      "name": "custom-tool-call",
+      "path": "/responses",
+      "status": 200,
+      "response_id": "resp_8625883e348d52ed",
+      "finish_reason": null,
+      "reasoning_tokens": null,
+      "response": {
+        "id": "resp_8625883e348d52ed",
+        "created_at": 1795008715,
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "instructions": null,
+        "metadata": null,
+        "model": "deepseek-v4.1-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_b492f8a24a91efa9",
+            "content": [
+              {
+                "annotations": [],
+                "text": "I don't have a specific task yet",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "none",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "max_output_tokens": 8,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "reasoning": null,
+        "service_tier": "auto",
+        "status": "incomplete",
+        "text": null,
+        "top_logprobs": null,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 33,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "input_tokens_per_turn": [],
+            "cached_tokens_per_turn": []
+          },
+          "output_tokens": 8,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "tool_output_tokens": 0,
+            "output_tokens_per_turn": [],
+            "tool_output_tokens_per_turn": []
+          },
+          "total_tokens": 41
+        },
+        "user": null,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "input_messages": null,
+        "output_messages": null
+      }
+    },
+    {
+      "name": "custom-tool-call-output",
+      "path": "/responses",
+      "status": 200,
+      "response_id": "resp_a9d0973795193fd4",
+      "finish_reason": null,
+      "reasoning_tokens": null,
+      "response": {
+        "id": "resp_a9d0973795193fd4",
+        "created_at": 1795008715,
+        "incomplete_details": {
+          "reason": "max_output_tokens"
+        },
+        "instructions": null,
+        "metadata": null,
+        "model": "deepseek-v4.1-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "msg_ad15019de08fdd54",
+            "content": [
+              {
+                "annotations": [],
+                "text": "I'd be happy to help! However",
+                "type": "output_text",
+                "logprobs": null
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null
+          }
+        ],
+        "parallel_tool_calls": true,
+        "temperature": 1.0,
+        "tool_choice": "none",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "max_output_tokens": 8,
+        "max_tool_calls": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "reasoning": null,
+        "service_tier": "auto",
+        "status": "incomplete",
+        "text": null,
+        "top_logprobs": null,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 43,
+          "input_tokens_details": {
+            "cached_tokens": 0,
+            "input_tokens_per_turn": [],
+            "cached_tokens_per_turn": []
+          },
+          "output_tokens": 8,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "tool_output_tokens": 0,
+            "output_tokens_per_turn": [],
+            "tool_output_tokens_per_turn": []
+          },
+          "total_tokens": 51
+        },
+        "user": null,
+        "presence_penalty": 0.0,
+        "frequency_penalty": 0.0,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "input_messages": null,
+        "output_messages": null
+      }
+    },
+    {
+      "name": "image-content-block",
+      "path": "/chat/completions",
+      "status": 200,
+      "response_id": "chatcmpl-a5966fe25eaf3af9",
+      "finish_reason": "stop",
+      "reasoning_tokens": 0,
+      "response": {
+        "id": "chatcmpl-a5966fe25eaf3af9",
+        "object": "chat.completion",
+        "created": 1795008716,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Blank",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.29.1rc1.dev187+gaf1c01499-tp4-94b09e04",
+        "usage": {
+          "prompt_tokens": 199,
+          "total_tokens": 201,
+          "completion_tokens": 2,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "created_cache_tokens": 0,
+            "multimodal_tokens": {
+              "image": 184
+            }
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "sink_rejection": {
+            "flagged_rows": 0,
+            "flagged_draft_zero": 0,
+            "flagged_drafter": 0,
+            "flagged_prompt": 0,
+            "draft_zero_rejections": 0,
+            "draft_cuts": 0,
+            "fallthroughs": 0
+          }
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": {
+          "time_to_first_token_ms": 331.9695899845101,
+          "generation_time_ms": 0.0,
+          "queue_time_ms": 0.021920015569776297,
+          "mean_itl_ms": 0.0,
+          "tokens_per_second": 6.024648221824539,
+          "speculative_decoding": null
+        }
+      }
+    }
+  ],
+  "all_200": true
+}

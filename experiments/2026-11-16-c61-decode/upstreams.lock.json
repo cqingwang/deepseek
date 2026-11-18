@@ -16,9 +16,9 @@
         "upstream": "https://github.com/vllm-project/vllm.git",
         "revision": "0f8fa53acf43a9a6a7a1f7e6b196950c78cd6d7a"
       },
-      "patch_head": "bc368af597edfb30547b3d0a1844d14c47a6b931",
-      "expected_tree": "70cdcaeb7813998d6f5f8972a4219a5e1e48f7d5",
-      "patchset_sha256": "da772bb31f1a043d64840e0e1151866d8b8f4a087591cc1e1417373abacbb839"
+      "patch_head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
+      "expected_tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
+      "patchset_sha256": "39ee1b44559780013ca903be76f27f80a4b8765c25aeb04f3a2c7f577616d6ab"
     },
     "vllm_base_image": {
       "kind": "oci",

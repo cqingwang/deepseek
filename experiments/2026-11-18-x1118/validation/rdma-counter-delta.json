@@ -1,0 +1,62 @@
+{
+  "http_status": 200,
+  "nodes": {
+    "spark-a": {
+      "positive_directions": 8,
+      "total_directions": 8,
+      "deltas": {
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_xmit_data": 38407145,
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_rcv_data": 38406377,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_xmit_data": 38418153,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_rcv_data": 38418548,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_xmit_data": 38400994,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_rcv_data": 38400498,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_xmit_data": 38414347,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_rcv_data": 38414439
+      }
+    },
+    "spark-b": {
+      "positive_directions": 8,
+      "total_directions": 8,
+      "deltas": {
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_xmit_data": 38406377,
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_rcv_data": 38407145,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_xmit_data": 38412727,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_rcv_data": 38411819,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_xmit_data": 38400498,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_rcv_data": 38400994,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_xmit_data": 38409745,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_rcv_data": 38409590
+      }
+    },
+    "spark-c": {
+      "positive_directions": 8,
+      "total_directions": 8,
+      "deltas": {
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_xmit_data": 38408241,
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_rcv_data": 38407210,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_xmit_data": 38411819,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_rcv_data": 38412727,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_xmit_data": 38407277,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_rcv_data": 38405882,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_xmit_data": 38409590,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_rcv_data": 38409745
+      }
+    },
+    "spark-d": {
+      "positive_directions": 8,
+      "total_directions": 8,
+      "deltas": {
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_xmit_data": 38407210,
+        "/sys/class/infiniband/rocep1s0f0/ports/1/counters/port_rcv_data": 38408241,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_xmit_data": 38418548,
+        "/sys/class/infiniband/rocep1s0f1/ports/1/counters/port_rcv_data": 38418152,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_xmit_data": 38405882,
+        "/sys/class/infiniband/roceP2p1s0f0/ports/1/counters/port_rcv_data": 38407277,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_xmit_data": 38414440,
+        "/sys/class/infiniband/roceP2p1s0f1/ports/1/counters/port_rcv_data": 38414346
+      }
+    }
+  },
+  "ok": true
+}

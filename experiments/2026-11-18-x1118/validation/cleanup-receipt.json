@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "authorized_scope": "Only keep spark-ds41f:x1118 and the vLLM nightly base image; remove other unused images.",
+  "protected": {
+    "service_image": {
+      "tag": "spark-ds41f:x1118",
+      "id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4"
+    },
+    "vllm_base": {
+      "tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+      "id": "sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56",
+      "digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+      "nodes": [
+        "spark-a"
+      ]
+    }
+  },
+  "removed_images": [
+    {
+      "tag": "spark-ds41f:x1114",
+      "id": "sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc",
+      "nodes": [
+        "spark-a",
+        "spark-b",
+        "spark-c",
+        "spark-d"
+      ]
+    },
+    {
+      "tag": "spark-ds41f:x1118-raw-official",
+      "id": "sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da",
+      "nodes": [
+        "spark-a",
+        "spark-b",
+        "spark-c",
+        "spark-d"
+      ]
+    }
+  ],
+  "filesystem_bytes": {
+    "spark-a": {
+      "used_before": 972649394176,
+      "used_after": 967377408000,
+      "freed": 5271986176,
+      "freed_gib": 4.91
+    },
+    "spark-b": {
+      "used_before": 940177539072,
+      "used_after": 939982991360,
+      "freed": 194547712,
+      "freed_gib": 0.181
+    },
+    "spark-c": {
+      "used_before": 931355848704,
+      "used_after": 931161300992,
+      "freed": 194547712,
+      "freed_gib": 0.181
+    },
+    "spark-d": {
+      "used_before": 930087030784,
+      "used_after": 924821192704,
+      "freed": 5265838080,
+      "freed_gib": 4.904
+    }
+  },
+  "docker_images_after": {
+    "spark-a": [
+      "spark-ds41f:x1118",
+      "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    ],
+    "spark-b": [
+      "spark-ds41f:x1118"
+    ],
+    "spark-c": [
+      "spark-ds41f:x1118"
+    ],
+    "spark-d": [
+      "spark-ds41f:x1118"
+    ]
+  },
+  "build_cache": {
+    "node": "spark-a",
+    "before_total_gib": 9.96,
+    "before_private_gib": 4.767,
+    "before_shared_gib": 5.192,
+    "after_total_gib": 0.0,
+    "note": "Build Cache shared bytes overlap image layers; root filesystem freed bytes are authoritative."
+  },
+  "containers_after": {
+    "spark-a": {
+      "image_id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    "spark-b": {
+      "image_id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    "spark-c": {
+      "image_id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    "spark-d": {
+      "image_id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0
+    }
+  },
+  "temp_cleanup": {
+    "spark-a": [
+      "/tmp/x1118-fixed-run-01",
+      "/tmp/x1118-fixed-run-02",
+      "/tmp/x1118-bench-run-01",
+      "/tmp/x1118-bench-run-02",
+      "/tmp/spark-ssh-1000",
+      "/tmp/spark-build.lock",
+      "/home/chan/spark-hold.json -> spark-hold.codex-x1118-api-fix.closed.json"
+    ],
+    "local_python_cache_directories_removed": 14
+  },
+  "api_smoke": {
+    "models_status": 200,
+    "models": [
+      "deepseek-v4.1-flash",
+      "deepseek-v4.1-flash-weightless"
+    ],
+    "chat_status": 200,
+    "chat_id": "chatcmpl-a7185e96523ee78c",
+    "content": "OK",
+    "finish_reason": "stop",
+    "per_request_metrics_visible": true,
+    "usage": {
+      "prompt_tokens": 9,
+      "total_tokens": 11,
+      "completion_tokens": 2,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "created_cache_tokens": 0,
+        "multimodal_tokens": null
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "sink_rejection": {
+        "flagged_rows": 0,
+        "flagged_draft_zero": 0,
+        "flagged_drafter": 0,
+        "flagged_prompt": 0,
+        "draft_zero_rejections": 0,
+        "draft_cuts": 0,
+        "fallthroughs": 0
+      }
+    }
+  },
+  "leftovers": {
+    "dangling_images": false,
+    "task_tmp": false,
+    "remote_python_caches": false,
+    "local_python_caches": false
+  },
+  "evidence": [
+    "validation/cleanup-before.txt",
+    "validation/cleanup-delete.txt",
+    "validation/cleanup-after.txt",
+    "validation/cleanup-local.txt",
+    "validation/api-cleanup-smoke.json"
+  ]
+}

@@ -42,6 +42,7 @@ from .config import *  # noqa: F401,F403
 from .doctor import *  # noqa: F401,F403
 from .cluster import *  # noqa: F401,F403
 from .build import *  # noqa: F401,F403
+from servebench.client import request_headers
 
 BENCH_SCHEMA = 1
 BENCH_SUITES = ("quality", "compliance", "decode", "sampled", "prefill", "prefix", "admission")
@@ -472,7 +473,10 @@ def difference(new: dict, reference: dict) -> tuple[float, float, float] | None:
 
 
 def scrape_metrics(base: str) -> dict[str, float]:
-    with urllib.request.urlopen(f"{base}/metrics", timeout=10) as response:
+    request = urllib.request.Request(
+        f"{base}/metrics", headers=request_headers(), method="GET"
+    )
+    with urllib.request.urlopen(request, timeout=10) as response:
         text = response.read().decode("utf-8", errors="replace")
     return parse_metrics(text)
 
@@ -529,7 +533,10 @@ def parse_metric_series(text: str) -> MetricSeries:
 
 
 def scrape_metric_series(base: str) -> MetricSeries:
-    with urllib.request.urlopen(f"{base}/metrics", timeout=10) as response:
+    request = urllib.request.Request(
+        f"{base}/metrics", headers=request_headers(), method="GET"
+    )
+    with urllib.request.urlopen(request, timeout=10) as response:
         return parse_metric_series(response.read().decode("utf-8", errors="replace"))
 
 
@@ -739,7 +746,7 @@ def stream_request(
     request = urllib.request.Request(
         url,
         data=json.dumps(body).encode(),
-        headers={"Content-Type": "application/json"},
+        headers=request_headers(content_type=True),
         method="POST",
     )
     started = time.perf_counter()
@@ -2058,9 +2065,12 @@ def serve_arg(cluster: dict, flag: str) -> str | None:
 
 def bench_identity(cluster: dict, nodes: dict, config_name: str, config_path: Path) -> dict:
     from servebench.client import stream_policy
-    name = cluster["container"]["name"]
+    name_pattern = cluster["container"].get("name_pattern")
     images = {}
     inspection_problems = []
+    deployment_commit = os.environ.get("SPARK_DEPLOYMENT_COMMIT", "").strip()
+    client_commit = deployment_commit or repository_revision()
+    client_dirty = False if deployment_commit else bool(repository_dirty())
     identity = {
         "cluster_config": config_name,
         "cluster_config_sha256": sha256(config_path),
@@ -2070,13 +2080,18 @@ def bench_identity(cluster: dict, nodes: dict, config_name: str, config_path: Pa
         "kernel_backend": kernel_backend.backend(cluster),
         "promoted_baseline": cluster.get("promoted_baseline"),
         "image": cluster["container"]["image"],
-        "client_commit": repository_revision(),
-        "client_dirty": bool(repository_dirty()),
+        "client_commit": client_commit,
+        "client_dirty": client_dirty,
         "client_host": socket.gethostname(),
         "client_stream_policy": stream_policy(),
         "nodes": {},
     }
     for node in nodes["nodes"]:
+        name = (
+            name_pattern.format(rank=node["rank"])
+            if name_pattern
+            else cluster["container"]["name"]
+        )
         container = run_ssh(nodes, node, "docker", "inspect", "--format", "{{.Image}} {{.State.StartedAt}}", name)
         checkout = run_ssh(nodes, node, "git", "-C", repository_path(cluster), "rev-parse", "HEAD")
         image_id, _, started_at = (container.stdout.strip() if container.returncode == 0 else "").partition(" ")

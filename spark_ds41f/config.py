@@ -355,7 +355,8 @@ def rendered_docker_command(cluster: dict, node: dict) -> list[str]:
 
 
 def ssh_target(nodes: dict, node: dict) -> str:
-    return f"{nodes['ssh_user']}@{node['name']}"
+    host = node.get("management_ip") or node["name"]
+    return f"{nodes['ssh_user']}@{host}"
 
 
 def transfer_target(nodes: dict, node: dict) -> str:

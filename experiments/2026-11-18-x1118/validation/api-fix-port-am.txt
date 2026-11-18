@@ -1,0 +1,15 @@
+Applying: fix(dsv41): treat typed image placeholders as text and replay custom tools
+Using index info to reconstruct a base tree...
+M	tests/tokenizers_/test_deepseek_v41.py
+M	vllm/tokenizers/deepseek_v41.py
+Falling back to patching base and 3-way merge...
+Auto-merging vllm/tokenizers/deepseek_v41.py
+CONFLICT (content): Merge conflict in vllm/tokenizers/deepseek_v41.py
+Auto-merging tests/tokenizers_/test_deepseek_v41.py
+CONFLICT (content): Merge conflict in tests/tokenizers_/test_deepseek_v41.py
+Patch failed at 0001 fix(dsv41): treat typed image placeholders as text and replay custom tools
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+To restore the original branch and stop patching, run "git am --abort".
+error: Failed to merge in the changes.
+hint: Use 'git am --show-current-patch=diff' to see the failed patch

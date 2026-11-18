@@ -1,0 +1,115 @@
+From 1c629cb31932520ebbad7c4b96f5ec0c3ab28ede Mon Sep 17 00:00:00 2001
+From: Chan <chan@localhost>
+Date: Sat, 14 Nov 2026 22:00:27 +0800
+Subject: [PATCH] fix(dsv41): replay Responses custom tool calls
+
+---
+ .../openai/responses/test_responses_utils.py  | 40 +++++++++++++++++++
+ vllm/entrypoints/openai/responses/utils.py    | 40 +++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+
+diff --git a/tests/entrypoints/openai/responses/test_responses_utils.py b/tests/entrypoints/openai/responses/test_responses_utils.py
+index 406414a1e..4cf9f1802 100644
+--- a/tests/entrypoints/openai/responses/test_responses_utils.py
++++ b/tests/entrypoints/openai/responses/test_responses_utils.py
+@@ -119,6 +119,46 @@ def make_function_call_output(
+ class TestResponsesUtils:
+     """Tests for Responses API utils."""
+ 
++    def test_custom_tool_call_and_output_replay_as_tool_history(self):
++        items = [
++            {
++                "type": "message",
++                "role": "user",
++                "content": [{"type": "input_text", "text": "Use the shell."}],
++            },
++            {
++                "type": "custom_tool_call",
++                "call_id": "call_custom",
++                "name": "shell",
++                "input": "echo hi",
++            },
++            {
++                "type": "custom_tool_call_output",
++                "call_id": "call_custom",
++                "output": "hi",
++            },
++            {"role": "user", "content": "Continue."},
++        ]
++
++        messages = construct_chat_messages_with_tool_call(items)
++
++        assert messages[1] == {
++            "role": "assistant",
++            "tool_calls": [
++                {
++                    "id": "call_custom",
++                    "function": {"name": "shell", "arguments": "echo hi"},
++                    "type": "function",
++                }
++            ],
++        }
++        assert messages[2] == {
++            "role": "tool",
++            "content": "hi",
++            "tool_call_id": "call_custom",
++        }
++        assert messages[3] == {"role": "user", "content": "Continue."}
++
+     def test_construct_chat_messages_with_tool_call(self):
+         """Test construction of chat messages with tool calls."""
+         reasoning_item = ResponseReasoningItem(
+diff --git a/vllm/entrypoints/openai/responses/utils.py b/vllm/entrypoints/openai/responses/utils.py
+index 82ab75f75..7d9f49334 100644
+--- a/vllm/entrypoints/openai/responses/utils.py
++++ b/vllm/entrypoints/openai/responses/utils.py
+@@ -322,6 +322,46 @@ def _construct_message_from_response_item(
+             content=item.get("output"),
+             tool_call_id=item.get("call_id"),
+         )
++    elif isinstance(item, dict) and item.get("type") == "custom_tool_call":
++        # A custom tool call is free-form. Replay it through the same assistant
++        # tool-call channel so the DeepSeek renderer can preserve its input.
++        tool_call = ChatCompletionMessageToolCallParam(
++            id=item.get("call_id"),
++            function=FunctionCallTool(
++                name=item.get("name"),
++                arguments=item.get("input", ""),
++            ),
++            type="function",
++        )
++        if prev_assistant_msg:
++            tool_calls = prev_assistant_msg.get("tool_calls")
++            if tool_calls is None:
++                prev_assistant_msg["tool_calls"] = [tool_call]
++                return None
++            if isinstance(tool_calls, list):
++                tool_calls.append(tool_call)
++                return None
++            if isinstance(tool_calls, Iterable) and not isinstance(
++                tool_calls, (dict, str)
++            ):
++                prev_assistant_msg["tool_calls"] = [*tool_calls, tool_call]
++                return None
++            logger.warning(
++                "Previous assistant message has unknown tool_calls format. "
++                "Custom tool call merging is skipped and a new assistant "
++                "message is created. Item %s",
++                item.get("call_id"),
++            )
++        return ChatCompletionAssistantMessageParam(
++            role="assistant",
++            tool_calls=[tool_call],
++        )
++    elif isinstance(item, dict) and item.get("type") == "custom_tool_call_output":
++        return ChatCompletionToolMessageParam(
++            role="tool",
++            content=item.get("output"),
++            tool_call_id=item.get("call_id"),
++        )
+     elif isinstance(item, dict) and item.get("role") == "assistant":
+         content = item.get("content")
+         text: str | None = None
+-- 
+2.43.0
+

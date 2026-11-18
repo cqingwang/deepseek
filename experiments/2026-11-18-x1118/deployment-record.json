@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "source": {
+    "official_main": "d719bd61",
+    "candidate": "candidate-61",
+    "site_patch": "0823-fix-dsv41-replay-responses-custom-tool-calls.patch",
+    "upstreams_lock": "experiments/2026-11-16-c61-decode/upstreams.lock.json",
+    "vllm_patch_head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
+    "vllm_tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
+    "patch_count": 696,
+    "site_profile": "experiments/2026-11-18-x1118/tp4-ring.json"
+  },
+  "image": {
+    "tag": "spark-ds41f:x1118",
+    "id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+    "base_image": "spark-ds41f:x1118-raw-official",
+    "base_image_id": "sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da",
+    "build_kind": "source-overlay",
+    "native_rebuild": false,
+    "reason": "Only the Responses custom_tool_call history converter and its focused test changed; all candidate-61 native build inputs and compiled layers are unchanged.",
+    "labels": {
+      "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e",
+      "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+      "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+      "ai.vllm.image.tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+      "local.spark-ds41f.cuda.version": "13.5.37",
+      "local.spark-ds41f.nccl.patch-head": "eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6",
+      "local.spark-ds41f.nccl.ref": "refs/tags/v2.30.7-1",
+      "local.spark-ds41f.nccl.revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
+      "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+      "local.spark-ds41f.nccl.upstream": "https://github.com/NVIDIA/nccl",
+      "local.spark-ds41f.sparknet.patch-head": "1fdf8dc72bf92e21ca5813ad8f0b63c52af3ad9e",
+      "local.spark-ds41f.sparknet.ref": "main",
+      "local.spark-ds41f.sparknet.revision": "1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf",
+      "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+      "local.spark-ds41f.sparknet.upstream": "https://github.com/christopherowen/dgx-spark-networking",
+      "local.spark-ds41f.tile_kernels.patch-head": "edfa64d018bc64006fcb07c95c32fa196363c0ae",
+      "local.spark-ds41f.tile_kernels.ref": "main",
+      "local.spark-ds41f.tile_kernels.revision": "66258df6175d2f630ffecb04c5ab66bff8a2ae6a",
+      "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "local.spark-ds41f.tile_kernels.upstream": "https://github.com/deepseek-ai/TileKernels",
+      "local.spark-ds41f.tilelang.patch-head": "444b0447a201e24982099abfd10f67fd8b6104df",
+      "local.spark-ds41f.tilelang.ref": "main",
+      "local.spark-ds41f.tilelang.revision": "2123e412ce2217b324c50c4ec967213906456ac5",
+      "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+      "local.spark-ds41f.tilelang.upstream": "https://github.com/tile-ai/tilelang",
+      "local.spark-ds41f.vllm.patch-head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
+      "local.spark-ds41f.vllm.ref": "integration/karmic-kraken-beta",
+      "local.spark-ds41f.vllm.revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+      "local.spark-ds41f.vllm.tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
+      "local.spark-ds41f.vllm.upstream": "https://github.com/local-inference-lab/vllm",
+      "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+      "org.opencontainers.image.base.digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+      "org.opencontainers.image.base.name": "docker.io/vllm/vllm-openai",
+      "org.opencontainers.image.ref.name": "ubuntu",
+      "org.opencontainers.image.revision": "rsync-2f5b4b72ee086fdeb94db5ccbf04ac98",
+      "org.opencontainers.image.source": "https://github.com/christopherowen/spark-ds41f",
+      "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+      "org.opencontainers.image.version": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    }
+  },
+  "distribution": {
+    "order": [
+      "spark-a",
+      "spark-b",
+      "spark-c",
+      "spark-d"
+    ],
+    "transport": "docker save | ssh <fabric-neighbour> docker load",
+    "fabric_ips": [
+      "10.251.20.2",
+      "10.251.20.6",
+      "10.251.20.10"
+    ],
+    "all_nodes_same_image": true,
+    "layers": 59
+  },
+  "deployment": {
+    "stop_before_start": true,
+    "pre_rebuild_containers": 0,
+    "pre_rebuild_gpu_compute": 0,
+    "stop_start_sequence": [
+      "stop",
+      "zero-check",
+      "build",
+      "start"
+    ],
+    "start_result": "API ready and steady memguard active on four ranks"
+  },
+  "business_config": {
+    "max_request": 5,
+    "max_token": 1000000,
+    "max_tokens": 65536,
+    "max_num_batched_tokens": 16384,
+    "max_images_per_request": 67,
+    "num_speculative_tokens": 5
+  },
+  "runtime": {
+    "max_num_seqs": 5,
+    "max_model_len": 1000000,
+    "max_new_tokens": 65536,
+    "max_num_batched_tokens": 16384,
+    "kv_cache_memory_bytes": 5374973440,
+    "long_prefill_token_threshold": 16354,
+    "max_cudagraph_capture_size": 30,
+    "limit_mm_per_prompt": {
+      "image": 67
+    },
+    "num_speculative_tokens": 5,
+    "master_port": 25000,
+    "enable_per_request_metrics": true,
+    "managed_container_env_count": 90,
+    "head_kv_cache_tokens": 4992954,
+    "head_kv_capacity_contexts": 4.99,
+    "worker_kv_cache_gib": 5.01,
+    "gpu_clock_cap_mhz": 3003,
+    "live_contract_ok": true
+  },
+  "api_smoke": {
+    "all_200": true,
+    "statuses": {
+      "plain-message": 200,
+      "plain-message-default-thinking-off": 200,
+      "image-token-text": 200,
+      "function-call-output": 200,
+      "custom-tool-call": 200,
+      "custom-tool-call-output": 200,
+      "image-content-block": 200
+    },
+    "per_request_metrics_visible": true,
+    "custom_tool_call": 200,
+    "custom_tool_call_output": 200
+  },
+  "ring": {
+    "host_ring_audit": true,
+    "shared_spark_ring_mesh": "unchanged",
+    "rdma_counter_delta_ok": true,
+    "rdma_positive_directions": {
+      "spark-a": [
+        8,
+        8
+      ],
+      "spark-b": [
+        8,
+        8
+      ],
+      "spark-c": [
+        8,
+        8
+      ],
+      "spark-d": [
+        8,
+        8
+      ]
+    }
+  },
+  "performance": {
+    "schema_version": 1,
+    "runs": [
+      "spark/deepseek/experiments/2026-11-18-x1118/performance/fixed-run-01/bench.json",
+      "spark/deepseek/experiments/2026-11-18-x1118/performance/fixed-run-02/bench.json"
+    ],
+    "allowed_loss_pct": 1.0,
+    "decode": {
+      "prose-nothink-c1": {
+        "runs": [
+          88.677,
+          89.041
+        ],
+        "mean": 88.85900000000001,
+        "official_readme": 59.1,
+        "allowed_floor": 58.509,
+        "delta_pct": 50.35363790186127,
+        "passed": true
+      },
+      "prose-nothink-c2": {
+        "runs": [
+          158.541,
+          155.856
+        ],
+        "mean": 157.1985,
+        "official_readme": 84.8,
+        "allowed_floor": 83.952,
+        "delta_pct": 85.37558962264151,
+        "passed": true
+      },
+      "prose-nothink-c4": {
+        "runs": [
+          264.145,
+          236.562
+        ],
+        "mean": 250.3535,
+        "official_readme": 124.9,
+        "allowed_floor": 123.65100000000001,
+        "delta_pct": 100.44315452361889,
+        "passed": true
+      },
+      "code-nothink-c1": {
+        "runs": [
+          134.816,
+          133.81
+        ],
+        "mean": 134.313,
+        "official_readme": 80.6,
+        "allowed_floor": 79.794,
+        "delta_pct": 66.64143920595534,
+        "passed": true
+      },
+      "code-nothink-c2": {
+        "runs": [
+          191.77,
+          191.436
+        ],
+        "mean": 191.603,
+        "official_readme": 118.2,
+        "allowed_floor": 117.018,
+        "delta_pct": 62.10067681895093,
+        "passed": true
+      },
+      "code-nothink-c4": {
+        "runs": [
+          401.568,
+          359.258
+        ],
+        "mean": 380.413,
+        "official_readme": 165.1,
+        "allowed_floor": 163.44899999999998,
+        "delta_pct": 130.4136886735312,
+        "passed": true
+      }
+    },
+    "prefill": {
+      "32768": {
+        "runs": [
+          9331.803,
+          9368.618
+        ],
+        "mean": 9350.210500000001,
+        "official_readme": 8508.0,
+        "allowed_floor": 8422.92,
+        "delta_pct": 9.899042078044197,
+        "passed": true
+      },
+      "131072": {
+        "runs": [
+          9687.344,
+          9683.657
+        ],
+        "mean": 9685.500499999998,
+        "official_readme": 8657.0,
+        "allowed_floor": 8570.43,
+        "delta_pct": 11.880564860806263,
+        "passed": true
+      },
+      "262144": {
+        "runs": [
+          9750.014,
+          9722.132
+        ],
+        "mean": 9736.073,
+        "official_readme": 8261.0,
+        "allowed_floor": 8178.39,
+        "delta_pct": 17.855864907396214,
+        "passed": true
+      },
+      "524288": {
+        "runs": [
+          9526.877,
+          9507.422
+        ],
+        "mean": 9517.1495,
+        "official_readme": 7460.0,
+        "allowed_floor": 7385.4,
+        "delta_pct": 27.575730563002665,
+        "passed": true
+      },
+      "1000000": {
+        "runs": [
+          9154.474,
+          9130.882
+        ],
+        "mean": 9142.678,
+        "official_readme": 6012.0,
+        "allowed_floor": 5951.88,
+        "delta_pct": 52.073819028609435,
+        "passed": true
+      }
+    },
+    "failures": [],
+    "ok": true
+  },
+  "artifacts": {
+    "build_log": "validation/api-fix-image-build.txt",
+    "build_prepare_partial_log": "validation/api-fix-build-prepare.txt",
+    "unit_test": "validation/api-fix-unit.txt",
+    "rsync_apply": "validation/rsync-apply.txt",
+    "live_parameters": "validation/live-parameter-consumption.json",
+    "api_smoke": "validation/api-smoke.json",
+    "bench_run_01": "performance/fixed-run-01/bench.json",
+    "bench_run_02": "performance/fixed-run-02/bench.json",
+    "summary": "performance/summary.json",
+    "ring_audit": "validation/host-ring-audit-final.json",
+    "rdma_delta": "validation/rdma-counter-delta-final.json"
+  }
+}

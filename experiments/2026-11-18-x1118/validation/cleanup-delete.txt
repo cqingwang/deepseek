@@ -1,0 +1,78 @@
+===== 192.168.2.180
+-- remove obsolete x1114
+Untagged: spark-ds41f:x1114
+Deleted: sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc
+Deleted: sha256:1eac4970792893558e88255bea642a95fed3436cc9daf5c60c7314936669a668
+Deleted: sha256:c77b725ee7b05aeec1ead384851d21d620ffaf49d58e34c61d92fb88fb5e7207
+Deleted: sha256:1ac2dcf5ed6aef1615deeaadd04e6adf74040d74c7ee04df844e88f20172aff0
+Deleted: sha256:3d44dd07b7eb0e37785bb8facfe8433345ab8be0e00a1e4ad14df6353d319345
+-- remove obsolete x1118-raw-official
+Untagged: spark-ds41f:x1118-raw-official
+Deleted: sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da
+-- remove remaining unprotected dangling images
+-- build cache prune
+-- remove regenerable python caches
+-- remove task temp files
+-- final images
+spark-ds41f:x1118	sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4	27.2GB
+vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e	sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56	22.1GB
+===== 192.168.2.161
+-- remove obsolete x1114
+Untagged: spark-ds41f:x1114
+Deleted: sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc
+Deleted: sha256:1eac4970792893558e88255bea642a95fed3436cc9daf5c60c7314936669a668
+Deleted: sha256:c77b725ee7b05aeec1ead384851d21d620ffaf49d58e34c61d92fb88fb5e7207
+Deleted: sha256:1ac2dcf5ed6aef1615deeaadd04e6adf74040d74c7ee04df844e88f20172aff0
+Deleted: sha256:3d44dd07b7eb0e37785bb8facfe8433345ab8be0e00a1e4ad14df6353d319345
+-- remove obsolete x1118-raw-official
+Deleted: sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da
+-- remove remaining unprotected dangling images
+-- build cache prune
+-- remove regenerable python caches
+-- final images
+spark-ds41f:x1118	sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4	27.2GB
+===== 192.168.2.102
+-- remove obsolete x1114
+Untagged: spark-ds41f:x1114
+Deleted: sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc
+Deleted: sha256:1eac4970792893558e88255bea642a95fed3436cc9daf5c60c7314936669a668
+Deleted: sha256:c77b725ee7b05aeec1ead384851d21d620ffaf49d58e34c61d92fb88fb5e7207
+Deleted: sha256:1ac2dcf5ed6aef1615deeaadd04e6adf74040d74c7ee04df844e88f20172aff0
+Deleted: sha256:3d44dd07b7eb0e37785bb8facfe8433345ab8be0e00a1e4ad14df6353d319345
+-- remove obsolete x1118-raw-official
+Deleted: sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da
+-- remove remaining unprotected dangling images
+-- build cache prune
+-- remove regenerable python caches
+-- final images
+spark-ds41f:x1118	sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4	27.2GB
+===== 192.168.2.238
+-- remove obsolete x1114
+Untagged: spark-ds41f:x1114
+Deleted: sha256:44c3157b64ee83aec0e15318ba33faec2f2b9b0b90738a5482c460abc79cd3cc
+Deleted: sha256:1eac4970792893558e88255bea642a95fed3436cc9daf5c60c7314936669a668
+Deleted: sha256:c77b725ee7b05aeec1ead384851d21d620ffaf49d58e34c61d92fb88fb5e7207
+Deleted: sha256:1ac2dcf5ed6aef1615deeaadd04e6adf74040d74c7ee04df844e88f20172aff0
+Deleted: sha256:3d44dd07b7eb0e37785bb8facfe8433345ab8be0e00a1e4ad14df6353d319345
+Deleted: sha256:80c17cc6a410ff218c43c729eacf468a268b6a8868c6e94353b296f134534d41
+Deleted: sha256:667595fd5bce3f5ff846b4332790efda916c86b07df40a9d04163b50120663de
+Deleted: sha256:c1e9df12bbfc2a2de02cf02ac3f8d59daf6cb3e899ff31459e66dff8bbf76fea
+Deleted: sha256:078b4965984bd1fbea6b1b71df2ab17bde15fb10b7d4470e59e2a873e5a24148
+Deleted: sha256:56552c3ca534c5fd82d22d6edab8965c93c30ff760a105580bbe663f317c3b09
+Deleted: sha256:b089fc077514694e529be454a59e812c4bbcc4a035f291bf4b0c41f86b723755
+Deleted: sha256:c3807503d56dac128141d9af1dbfba3e75fbc17f38c95b8507a6c62dca1c34db
+Deleted: sha256:8ccc02c0d666bbd17098e1e09d94e194ed900c0ff5d92a8b9dba9827c9f929e5
+Deleted: sha256:6eec6b9a085878de1e082b7b7f5a85cad91e1cbb75696cba8641185fe9931522
+Deleted: sha256:3583eb36f514326d0e2ea0d2757142fd5a4d82da1d1fbcf3c57b440a245fe970
+Deleted: sha256:5335baefc87a95d712c38b3f26fe7d99e3ca283b734022a6cf612b91734b046e
+Deleted: sha256:c3dbcd9ab587b36739ea877a0b543937212eb8fef8e2510a13d3dcef6dd917d8
+Deleted: sha256:6d06fb9ef3405f96379951d9e751d1d27c145877e5b4e2f1cc37df895687d71c
+Deleted: sha256:d65a6bfeb85e09b4916f20073d678a232892cc87b7a4e82e47e8da857d1be359
+Deleted: sha256:4e3abf4c495d1cff73a65f1df5db6c979f3ae8ef38664774f6be1dd2256f79fa
+-- remove obsolete x1118-raw-official
+Deleted: sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da
+-- remove remaining unprotected dangling images
+-- build cache prune
+-- remove regenerable python caches
+-- final images
+spark-ds41f:x1118	sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4	27.2GB

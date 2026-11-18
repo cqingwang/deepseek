@@ -1,0 +1,528 @@
+building spark-ds41f:x1118 from .work/build/vllm-19f2c20ed4d6-7f3de111: 8 compile jobs x 2 NVCC threads, 118.9 GiB available, cancel below 24 GiB
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 31.83kB done
+#1 DONE 0.0s
+
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1.7
+#2 DONE 3.2s
+
+#3 docker-image://docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+#3 resolve docker.io/docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 0.0s done
+#3 sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e 8.40kB / 8.40kB done
+#3 sha256:c8678869a83fab70232869ba24acc1c0be661f4d65135c0eeacb6a8e78420fdd 482B / 482B done
+#3 sha256:45fc0e793a06559debf1128a8e0a2aef5bd1822e7d98b7412afcc474f04cc4fe 1.26kB / 1.26kB done
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 0B / 11.24MB 0.1s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 1.05MB / 11.24MB 4.1s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 2.10MB / 11.24MB 6.3s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 3.15MB / 11.24MB 8.5s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 4.19MB / 11.24MB 10.4s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 5.24MB / 11.24MB 12.3s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 6.29MB / 11.24MB 13.9s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 7.34MB / 11.24MB 15.9s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 8.39MB / 11.24MB 17.9s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 9.44MB / 11.24MB 19.1s
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 10.49MB / 11.24MB 20.5s
+#3 extracting sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933
+#3 sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 11.24MB / 11.24MB 22.0s done
+#3 extracting sha256:6e230fe0035dc5b9d8d5e65513d1f11ae3b25d14362031fb540a4c23bf862933 0.2s done
+#3 DONE 22.3s
+
+#4 [internal] load metadata for docker.io/vllm/vllm-openai@sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf
+#4 DONE 0.0s
+
+#5 [context vllm-deletions] load .dockerignore
+#5 transferring vllm-deletions: 2B done
+#5 DONE 0.0s
+
+#6 [context cuda-toolkit-debs] load .dockerignore
+#6 transferring cuda-toolkit-debs: 2B done
+#6 DONE 0.1s
+
+#7 [context cutlass-source] load .dockerignore
+#7 transferring cutlass-source: 2B done
+#7 DONE 0.1s
+
+#8 [context vllm-source] load .dockerignore
+#8 transferring vllm-source: 707B done
+#8 DONE 0.2s
+
+#9 [context tilelang-source] load .dockerignore
+#9 transferring tilelang-source: 2B done
+#9 DONE 0.2s
+
+#10 [context tile_kernels-source] load .dockerignore
+#10 transferring tile_kernels-source: 2B done
+#10 DONE 0.2s
+
+#11 [context nccl-source] load .dockerignore
+#11 transferring nccl-source: 2B done
+#11 DONE 0.2s
+
+#12 [context sparknet-source] load .dockerignore
+#12 transferring sparknet-source: 154B done
+#12 DONE 0.2s
+
+#13 [context cutlass-dsl-wheels] load .dockerignore
+#13 transferring cutlass-dsl-wheels: 2B done
+#13 DONE 0.2s
+
+#14 [internal] load .dockerignore
+#14 transferring context: 2B done
+#14 DONE 0.0s
+
+#15 [context sparknet-source] load from client
+#15 transferring sparknet-source: 827.53kB 0.0s done
+#15 DONE 0.2s
+
+#16 [context vllm-deletions] load from client
+#16 transferring vllm-deletions: 75B done
+#16 DONE 0.2s
+
+#17 [context tile_kernels-source] load from client
+#17 transferring tile_kernels-source: 1.17MB 0.0s done
+#17 DONE 0.2s
+
+#18 [context tilelang-source] load from client
+#18 ...
+
+#19 [context nccl-source] load from client
+#19 transferring nccl-source: 13.85MB 0.3s done
+#19 DONE 0.4s
+
+#18 [context tilelang-source] load from client
+#18 ...
+
+#20 [cuda-13-5 1/2] FROM docker.io/vllm/vllm-openai@sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf
+#20 DONE 0.6s
+
+#18 [context tilelang-source] load from client
+#18 ...
+
+#21 [context cutlass-dsl-wheels] load from client
+#21 transferring cutlass-dsl-wheels: 178.83MB 0.7s done
+#21 DONE 0.8s
+
+#18 [context tilelang-source] load from client
+#18 ...
+
+#22 [context vllm-source] load from client
+#22 transferring vllm-source: 128.78MB 1.6s done
+#22 DONE 1.7s
+
+#23 [context cutlass-source] load from client
+#23 transferring cutlass-source: 168.67MB 1.6s done
+#23 DONE 1.7s
+
+#18 [context tilelang-source] load from client
+#18 ...
+
+#24 [context cuda-toolkit-debs] load from client
+#24 transferring cuda-toolkit-debs: 1.51GB 3.4s done
+#24 DONE 3.5s
+
+#18 [context tilelang-source] load from client
+#18 transferring tilelang-source: 547.60MB 3.9s done
+#18 DONE 4.1s
+
+#25 [cuda-13-5 2/2] RUN --mount=type=bind,from=cuda-toolkit-debs,target=/tmp/cuda-toolkit-debs     set -eux;     DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/cuda-toolkit-debs/*.deb;     test -z "$(dpkg --audit)";     printf '%s\n'       '#!/bin/sh'       'set -eux'       'ln -sfn /usr/local/cuda-13.5 /usr/local/cuda'       'ln -sfn /usr/local/cuda-13.5 /usr/local/cuda-13'       'ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda'       'ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda-13'       'sed -i "s|^TOP[[:space:]]*=.*|TOP = /usr/local/cuda-13.5|" /usr/local/cuda-13.5/bin/nvcc.profile'       'cu13_dir=/usr/local/lib/python3.12/dist-packages/nvidia/cu13'       'cuda_lib=/usr/local/cuda-13.5/targets/sbsa-linux/lib'       'rm -rf "${cu13_dir}/bin" "${cu13_dir}/nvvm"'       'ln -s /usr/local/cuda-13.5/bin "${cu13_dir}/bin"'       'ln -s /usr/local/cuda-13.5/nvvm "${cu13_dir}/nvvm"'       'for lib in libcublas.so.13 libcublasLt.so.13 libnvblas.so.13 libcudart.so.13 libcudart_static.a libcudadevrt.a libnvJitLink.so.13 libnvrtc.so.13 libnvrtc-builtins.so.13.5 libnvptxcompiler_static.a libcurand.so.10; do'       '  ln -sfn "${cuda_lib}/${lib}" "${cu13_dir}/lib/${lib}"'       'done'       'rm -f "${cu13_dir}/lib/libnvrtc-builtins.so.13.0" "${cu13_dir}/lib/libnvrtc-builtins.so.13.2"'       'ln -sfn /usr/local/cuda-13.5/nvvm/lib64/libnvvm.so.4.0.0 "${cu13_dir}/lib/libnvvm.so.4"'       'ldconfig'       > /usr/local/sbin/spark-wire-cuda-13-5;     chmod 0755 /usr/local/sbin/spark-wire-cuda-13-5;     /usr/local/sbin/spark-wire-cuda-13-5
+#25 0.060 + DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/cuda-toolkit-debs/cccl-13-5_13.3.5.0.6-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-compat-13-5_620.70.06-1ubuntu1_arm64.deb /tmp/cuda-toolkit-debs/cuda-crt-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-cudart-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-cudart-dev-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-culibos-dev-13-5_13.5.25-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-cuobjdump-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-driver-dev-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-nvcc-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-nvdisasm-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-nvrtc-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-nvrtc-dev-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/cuda-toolkit-13-5-config-common_13.5.37-1_all.deb /tmp/cuda-toolkit-debs/cuda-toolkit-13-config-common_13.5.37-1_all.deb /tmp/cuda-toolkit-debs/cuda-toolkit-config-common_13.5.37-1_all.deb /tmp/cuda-toolkit-debs/libcublas-13-5_13.10.0.20-1_arm64.deb /tmp/cuda-toolkit-debs/libcublas-dev-13-5_13.10.0.20-1_arm64.deb /tmp/cuda-toolkit-debs/libcurand-13-5_10.4.5.25-1_arm64.deb /tmp/cuda-toolkit-debs/libcurand-dev-13-5_10.4.5.25-1_arm64.deb /tmp/cuda-toolkit-debs/libnvjitlink-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/libnvjitlink-dev-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/libnvptxcompiler-13-5_13.5.37-1_arm64.deb /tmp/cuda-toolkit-debs/libnvvm-13-5_13.5.37-1_arm64.deb
+#25 0.082 Selecting previously unselected package cccl-13-5.
+#25 0.133 (Reading database ... 21242 files and directories currently installed.)
+#25 0.134 Preparing to unpack .../cccl-13-5_13.3.5.0.6-1_arm64.deb ...
+#25 0.141 Unpacking cccl-13-5 (13.3.5.0.6-1) ...
+#25 0.347 Selecting previously unselected package cuda-compat-13-5.
+#25 0.349 Preparing to unpack .../cuda-compat-13-5_620.70.06-1ubuntu1_arm64.deb ...
+#25 0.360 Unpacking cuda-compat-13-5 (620.70.06-1ubuntu1) ...
+#25 1.310 Selecting previously unselected package cuda-crt-13-5.
+#25 1.311 Preparing to unpack .../cuda-crt-13-5_13.5.37-1_arm64.deb ...
+#25 1.317 Unpacking cuda-crt-13-5 (13.5.37-1) ...
+#25 1.357 Selecting previously unselected package cuda-cudart-13-5.
+#25 1.359 Preparing to unpack .../cuda-cudart-13-5_13.5.37-1_arm64.deb ...
+#25 1.365 Unpacking cuda-cudart-13-5 (13.5.37-1) ...
+#25 1.407 Selecting previously unselected package cuda-cudart-dev-13-5.
+#25 1.408 Preparing to unpack .../cuda-cudart-dev-13-5_13.5.37-1_arm64.deb ...
+#25 1.414 Unpacking cuda-cudart-dev-13-5 (13.5.37-1) ...
+#25 1.499 Selecting previously unselected package cuda-culibos-dev-13-5.
+#25 1.500 Preparing to unpack .../cuda-culibos-dev-13-5_13.5.25-1_arm64.deb ...
+#25 1.507 Unpacking cuda-culibos-dev-13-5 (13.5.25-1) ...
+#25 1.542 Selecting previously unselected package cuda-cuobjdump-13-5.
+#25 1.543 Preparing to unpack .../cuda-cuobjdump-13-5_13.5.37-1_arm64.deb ...
+#25 1.549 Unpacking cuda-cuobjdump-13-5 (13.5.37-1) ...
+#25 1.596 Selecting previously unselected package cuda-driver-dev-13-5.
+#25 1.597 Preparing to unpack .../cuda-driver-dev-13-5_13.5.37-1_arm64.deb ...
+#25 1.603 Unpacking cuda-driver-dev-13-5 (13.5.37-1) ...
+#25 1.638 Selecting previously unselected package cuda-nvcc-13-5.
+#25 1.639 Preparing to unpack .../cuda-nvcc-13-5_13.5.37-1_arm64.deb ...
+#25 1.645 Unpacking cuda-nvcc-13-5 (13.5.37-1) ...
+#25 2.068 Selecting previously unselected package cuda-nvdisasm-13-5.
+#25 2.068 Preparing to unpack .../cuda-nvdisasm-13-5_13.5.37-1_arm64.deb ...
+#25 2.073 Unpacking cuda-nvdisasm-13-5 (13.5.37-1) ...
+#25 2.131 Selecting previously unselected package cuda-nvrtc-13-5.
+#25 2.131 Preparing to unpack .../cuda-nvrtc-13-5_13.5.37-1_arm64.deb ...
+#25 2.137 Unpacking cuda-nvrtc-13-5 (13.5.37-1) ...
+#25 2.559 Selecting previously unselected package cuda-nvrtc-dev-13-5.
+#25 2.559 Preparing to unpack .../cuda-nvrtc-dev-13-5_13.5.37-1_arm64.deb ...
+#25 2.565 Unpacking cuda-nvrtc-dev-13-5 (13.5.37-1) ...
+#25 3.068 Selecting previously unselected package cuda-toolkit-13-5-config-common.
+#25 3.069 Preparing to unpack .../cuda-toolkit-13-5-config-common_13.5.37-1_all.deb ...
+#25 3.075 Unpacking cuda-toolkit-13-5-config-common (13.5.37-1) ...
+#25 3.119 Preparing to unpack .../cuda-toolkit-13-config-common_13.5.37-1_all.deb ...
+#25 3.137 Unpacking cuda-toolkit-13-config-common (13.5.37-1) over (13.0.96-1) ...
+#25 3.188 Preparing to unpack .../cuda-toolkit-config-common_13.5.37-1_all.deb ...
+#25 3.203 Unpacking cuda-toolkit-config-common (13.5.37-1) over (13.0.96-1) ...
+#25 3.248 Selecting previously unselected package libcublas-13-5.
+#25 3.249 Preparing to unpack .../libcublas-13-5_13.10.0.20-1_arm64.deb ...
+#25 3.255 Unpacking libcublas-13-5 (13.10.0.20-1) ...
+#25 4.825 Selecting previously unselected package libcublas-dev-13-5.
+#25 4.826 Preparing to unpack .../libcublas-dev-13-5_13.10.0.20-1_arm64.deb ...
+#25 4.831 Unpacking libcublas-dev-13-5 (13.10.0.20-1) ...
+#25 7.126 Selecting previously unselected package libcurand-13-5.
+#25 7.127 Preparing to unpack .../libcurand-13-5_10.4.5.25-1_arm64.deb ...
+#25 7.132 Unpacking libcurand-13-5 (10.4.5.25-1) ...
+#25 7.453 Selecting previously unselected package libcurand-dev-13-5.
+#25 7.454 Preparing to unpack .../libcurand-dev-13-5_10.4.5.25-1_arm64.deb ...
+#25 7.459 Unpacking libcurand-dev-13-5 (10.4.5.25-1) ...
+#25 7.834 Selecting previously unselected package libnvjitlink-13-5.
+#25 7.835 Preparing to unpack .../libnvjitlink-13-5_13.5.37-1_arm64.deb ...
+#25 7.840 Unpacking libnvjitlink-13-5 (13.5.37-1) ...
+#25 8.224 Selecting previously unselected package libnvjitlink-dev-13-5.
+#25 8.225 Preparing to unpack .../libnvjitlink-dev-13-5_13.5.37-1_arm64.deb ...
+#25 8.230 Unpacking libnvjitlink-dev-13-5 (13.5.37-1) ...
+#25 8.682 Selecting previously unselected package libnvptxcompiler-13-5.
+#25 8.683 Preparing to unpack .../libnvptxcompiler-13-5_13.5.37-1_arm64.deb ...
+#25 8.689 Unpacking libnvptxcompiler-13-5 (13.5.37-1) ...
+#25 8.720 Selecting previously unselected package libnvvm-13-5.
+#25 8.721 Preparing to unpack .../libnvvm-13-5_13.5.37-1_arm64.deb ...
+#25 8.726 Unpacking libnvvm-13-5 (13.5.37-1) ...
+#25 9.277 Setting up cccl-13-5 (13.3.5.0.6-1) ...
+#25 9.294 Setting up cuda-compat-13-5 (620.70.06-1ubuntu1) ...
+#25 9.317 Setting up cuda-culibos-dev-13-5 (13.5.25-1) ...
+#25 9.338 Setting up cuda-cuobjdump-13-5 (13.5.37-1) ...
+#25 9.360 Setting up cuda-driver-dev-13-5 (13.5.37-1) ...
+#25 9.382 Setting up cuda-nvdisasm-13-5 (13.5.37-1) ...
+#25 9.402 Setting up cuda-nvrtc-13-5 (13.5.37-1) ...
+#25 9.423 Setting up cuda-nvrtc-dev-13-5 (13.5.37-1) ...
+#25 9.444 Setting up cuda-toolkit-13-5-config-common (13.5.37-1) ...
+#25 9.460 Setting alternatives
+#25 9.466 update-alternatives: using /usr/local/cuda-13.5 to provide /usr/local/cuda (cuda) in auto mode
+#25 9.469 update-alternatives: using /usr/local/cuda-13.5 to provide /usr/local/cuda-13 (cuda-13) in auto mode
+#25 9.484 Setting up cuda-toolkit-13-config-common (13.5.37-1) ...
+#25 9.513 Setting up cuda-toolkit-config-common (13.5.37-1) ...
+#25 9.541 Setting up libcublas-13-5 (13.10.0.20-1) ...
+#25 9.557 Setting up libcurand-13-5 (10.4.5.25-1) ...
+#25 9.577 Setting up libcurand-dev-13-5 (10.4.5.25-1) ...
+#25 9.600 Setting up libnvjitlink-13-5 (13.5.37-1) ...
+#25 9.616 Setting up libnvjitlink-dev-13-5 (13.5.37-1) ...
+#25 9.633 Setting up libnvptxcompiler-13-5 (13.5.37-1) ...
+#25 9.650 Setting up libnvvm-13-5 (13.5.37-1) ...
+#25 9.667 Setting up cuda-cudart-13-5 (13.5.37-1) ...
+#25 9.684 Setting up cuda-cudart-dev-13-5 (13.5.37-1) ...
+#25 9.701 Setting up cuda-crt-13-5 (13.5.37-1) ...
+#25 9.718 Setting up cuda-nvcc-13-5 (13.5.37-1) ...
+#25 9.736 Setting up libcublas-dev-13-5 (13.10.0.20-1) ...
+#25 9.753 Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+#25 9.802 + dpkg --audit
+#25 9.811 + test -z 
+#25 9.811 + printf %s\n #!/bin/sh set -eux ln -sfn /usr/local/cuda-13.5 /usr/local/cuda ln -sfn /usr/local/cuda-13.5 /usr/local/cuda-13 ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda-13 sed -i "s|^TOP[[:space:]]*=.*|TOP = /usr/local/cuda-13.5|" /usr/local/cuda-13.5/bin/nvcc.profile cu13_dir=/usr/local/lib/python3.12/dist-packages/nvidia/cu13 cuda_lib=/usr/local/cuda-13.5/targets/sbsa-linux/lib rm -rf "${cu13_dir}/bin" "${cu13_dir}/nvvm" ln -s /usr/local/cuda-13.5/bin "${cu13_dir}/bin" ln -s /usr/local/cuda-13.5/nvvm "${cu13_dir}/nvvm" for lib in libcublas.so.13 libcublasLt.so.13 libnvblas.so.13 libcudart.so.13 libcudart_static.a libcudadevrt.a libnvJitLink.so.13 libnvrtc.so.13 libnvrtc-builtins.so.13.5 libnvptxcompiler_static.a libcurand.so.10; do   ln -sfn "${cuda_lib}/${lib}" "${cu13_dir}/lib/${lib}" done rm -f "${cu13_dir}/lib/libnvrtc-builtins.so.13.0" "${cu13_dir}/lib/libnvrtc-builtins.so.13.2" ln -sfn /usr/local/cuda-13.5/nvvm/lib64/libnvvm.so.4.0.0 "${cu13_dir}/lib/libnvvm.so.4" ldconfig
+#25 9.811 + chmod 0755 /usr/local/sbin/spark-wire-cuda-13-5
+#25 9.812 + /usr/local/sbin/spark-wire-cuda-13-5
+#25 9.812 + ln -sfn /usr/local/cuda-13.5 /usr/local/cuda
+#25 9.814 + ln -sfn /usr/local/cuda-13.5 /usr/local/cuda-13
+#25 9.815 + ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda
+#25 9.816 + ln -sfn /usr/local/cuda-13.5 /etc/alternatives/cuda-13
+#25 9.816 + sed -i s|^TOP[[:space:]]*=.*|TOP = /usr/local/cuda-13.5| /usr/local/cuda-13.5/bin/nvcc.profile
+#25 9.817 + cu13_dir=/usr/local/lib/python3.12/dist-packages/nvidia/cu13
+#25 9.817 + cuda_lib=/usr/local/cuda-13.5/targets/sbsa-linux/lib
+#25 9.817 + rm -rf /usr/local/lib/python3.12/dist-packages/nvidia/cu13/bin /usr/local/lib/python3.12/dist-packages/nvidia/cu13/nvvm
+#25 9.818 + ln -s /usr/local/cuda-13.5/bin /usr/local/lib/python3.12/dist-packages/nvidia/cu13/bin
+#25 9.819 + ln -s /usr/local/cuda-13.5/nvvm /usr/local/lib/python3.12/dist-packages/nvidia/cu13/nvvm
+#25 9.819 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcublas.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcublas.so.13
+#25 9.820 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcublasLt.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcublasLt.so.13
+#25 9.820 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libnvblas.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvblas.so.13
+#25 9.820 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcudart.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcudart.so.13
+#25 9.821 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcudart_static.a /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcudart_static.a
+#25 9.821 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcudadevrt.a /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcudadevrt.a
+#25 9.821 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libnvJitLink.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvJitLink.so.13
+#25 9.822 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libnvrtc.so.13 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvrtc.so.13
+#25 9.822 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libnvrtc-builtins.so.13.5 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.5
+#25 9.823 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libnvptxcompiler_static.a /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvptxcompiler_static.a
+#25 9.823 + ln -sfn /usr/local/cuda-13.5/targets/sbsa-linux/lib/libcurand.so.10 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libcurand.so.10
+#25 9.823 + rm -f /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.0 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvrtc-builtins.so.13.2
+#25 9.824 + ln -sfn /usr/local/cuda-13.5/nvvm/lib64/libnvvm.so.4.0.0 /usr/local/lib/python3.12/dist-packages/nvidia/cu13/lib/libnvvm.so.4
+#25 9.824 + ldconfig
+#25 DONE 10.4s
+
+#26 [sparknet-builder 1/2] COPY --from=sparknet-source . /workspace/sparknet/
+#26 DONE 0.1s
+
+#27 [tilelang-builder 1/3] COPY --from=tilelang-source . /workspace/tilelang/
+#27 ...
+
+#28 [nccl-builder 1/2] COPY --from=nccl-source . /workspace/nccl/
+#28 DONE 0.2s
+
+#29 [nccl-builder 2/2] RUN set -eux;     make -C /workspace/nccl -j4 src.build       CUDA_HOME=/usr/local/cuda       NVCC_GENCODE="-gencode=arch=compute_121,code=sm_121";     mkdir -p /opt/nccl;     cp -L /workspace/nccl/build/lib/libnccl.so.2 /opt/nccl/libnccl.so.2;     sha256sum /opt/nccl/libnccl.so.2 | cut -d" " -f1 > /opt/nccl/libnccl.so.2.sha256
+#29 0.062 + make -C /workspace/nccl -j4 src.build CUDA_HOME=/usr/local/cuda NVCC_GENCODE=-gencode=arch=compute_121,code=sm_121
+#29 0.064 make: Entering directory '/workspace/nccl'
+#29 0.064 make -C src build BUILDDIR=/workspace/nccl/build
+#29 0.064 make[1]: Entering directory '/workspace/nccl/src'
+#29 0.070 NVCC_GENCODE is -gencode=arch=compute_121,code=sm_121
+#29 0.111 Grabbing   include/nccl_device.h               > /workspace/nccl/build/include/nccl_device.h
+#29 0.111 Generating nccl.h.in                           > /workspace/nccl/build/include/nccl.h
+#29 0.114 Grabbing   include/nccl_device/barrier.h       > /workspace/nccl/build/include/nccl_device/barrier.h
+#29 0.117 Grabbing   include/nccl_device/comm.h          > /workspace/nccl/build/include/nccl_device/comm.h
+#29 0.119 Grabbing   include/nccl_device/coop.h          > /workspace/nccl/build/include/nccl_device/coop.h
+#29 0.122 Grabbing   include/nccl_device/core.h          > /workspace/nccl/build/include/nccl_device/core.h
+#29 0.125 Grabbing   include/nccl_device/gin.h           > /workspace/nccl/build/include/nccl_device/gin.h
+#29 0.128 Grabbing   include/nccl_device/gin_barrier.h   > /workspace/nccl/build/include/nccl_device/gin_barrier.h
+#29 0.133 Grabbing   include/nccl_device/gin_win_stub.h  > /workspace/nccl/build/include/nccl_device/gin_win_stub.h
+#29 0.134 Grabbing   include/nccl_device/ll_a2a.h        > /workspace/nccl/build/include/nccl_device/ll_a2a.h
+#29 0.137 Grabbing   include/nccl_device/lsa_barrier.h   > /workspace/nccl/build/include/nccl_device/lsa_barrier.h
+#29 0.140 Grabbing   include/nccl_device/net_device.h    > /workspace/nccl/build/include/nccl_device/net_device.h
+#29 0.143 Grabbing   include/nccl_device/ptr.h           > /workspace/nccl/build/include/nccl_device/ptr.h
+#29 0.146 Grabbing   include/nccl_device/reduce_copy.h   > /workspace/nccl/build/include/nccl_device/reduce_copy.h
+#29 0.149 Grabbing   include/nccl_device/utility.h       > /workspace/nccl/build/include/nccl_device/utility.h
+#29 0.155 Grabbing   include/nccl_device/gin/gin_device_api.h > /workspace/nccl/build/include/nccl_device/gin/gin_device_api.h
+#29 0.158 Grabbing   include/nccl_device/gin/gin_device_common.h > /workspace/nccl/build/include/nccl_device/gin/gin_device_common.h
+#29 0.161 Grabbing   include/nccl_device/gin/gin_device_host_common.h > /workspace/nccl/build/include/nccl_device/gin/gin_device_host_common.h
+#29 0.164 Grabbing   include/nccl_device/impl/barrier__funcs.h > /workspace/nccl/build/include/nccl_device/impl/barrier__funcs.h
+#29 0.167 Grabbing   include/nccl_device/impl/barrier__types.h > /workspace/nccl/build/include/nccl_device/impl/barrier__types.h
+#29 0.170 Grabbing   include/nccl_device/impl/comm__funcs.h > /workspace/nccl/build/include/nccl_device/impl/comm__funcs.h
+#29 0.173 Grabbing   include/nccl_device/impl/comm__types.h > /workspace/nccl/build/include/nccl_device/impl/comm__types.h
+#29 0.179 Grabbing   include/nccl_device/impl/core__funcs.h > /workspace/nccl/build/include/nccl_device/impl/core__funcs.h
+#29 0.182 Grabbing   include/nccl_device/impl/core__types.h > /workspace/nccl/build/include/nccl_device/impl/core__types.h
+#29 0.186 Grabbing   include/nccl_device/impl/gin__funcs.h > /workspace/nccl/build/include/nccl_device/impl/gin__funcs.h
+#29 0.189 Grabbing   include/nccl_device/impl/gin__types.h > /workspace/nccl/build/include/nccl_device/impl/gin__types.h
+#29 0.192 Grabbing   include/nccl_device/impl/gin_barrier__funcs.h > /workspace/nccl/build/include/nccl_device/impl/gin_barrier__funcs.h
+#29 0.194 Grabbing   include/nccl_device/impl/gin_barrier__types.h > /workspace/nccl/build/include/nccl_device/impl/gin_barrier__types.h
+#29 0.198 Grabbing   include/nccl_device/impl/ll_a2a__funcs.h > /workspace/nccl/build/include/nccl_device/impl/ll_a2a__funcs.h
+#29 0.201 Grabbing   include/nccl_device/impl/ll_a2a__types.h > /workspace/nccl/build/include/nccl_device/impl/ll_a2a__types.h
+#29 0.203 Grabbing   include/nccl_device/impl/lsa_barrier__funcs.h > /workspace/nccl/build/include/nccl_device/impl/lsa_barrier__funcs.h
+#29 0.206 Grabbing   include/nccl_device/impl/lsa_barrier__types.h > /workspace/nccl/build/include/nccl_device/impl/lsa_barrier__types.h
+#29 0.209 Grabbing   include/nccl_device/impl/multimem__funcs.h > /workspace/nccl/build/include/nccl_device/impl/multimem__funcs.h
+#29 0.211 Grabbing   include/nccl_device/impl/ptr__funcs.h > /workspace/nccl/build/include/nccl_device/impl/ptr__funcs.h
+#29 0.214 Grabbing   include/nccl_device/impl/ptr__types.h > /workspace/nccl/build/include/nccl_device/impl/ptr__types.h
+#29 0.217 Grabbing   include/nccl_device/impl/reduce_copy__funcs.h > /workspace/nccl/build/include/nccl_device/impl/reduce_copy__funcs.h
+#29 0.219 Grabbing   include/nccl_device/impl/reduce_copy__impl.h > /workspace/nccl/build/include/nccl_device/impl/reduce_copy__impl.h
+#29 0.224 Grabbing   include/nccl_device/impl/reduce_copy__types.h > /workspace/nccl/build/include/nccl_device/impl/reduce_copy__types.h
+#29 0.227 Grabbing   include/nccl_device/impl/vector__funcs.h > /workspace/nccl/build/include/nccl_device/impl/vector__funcs.h
+#29 0.229 Grabbing   include/nccl_device/impl/vector__types.h > /workspace/nccl/build/include/nccl_device/impl/vector__types.h
+#29 0.232 Grabbing   include/nccl_device/gin/gdaki/gin_gdaki.h > /workspace/nccl/build/include/nccl_device/gin/gdaki/gin_gdaki.h
+#29 0.235 Grabbing   include/nccl_device/gin/gdaki/gin_gdaki_device_host_common.h > /workspace/nccl/build/include/nccl_device/gin/gdaki/gin_gdaki_device_host_common.h
+#29 0.238 Grabbing   include/nccl_device/gin/gpi/gin_gpi.h > /workspace/nccl/build/include/nccl_device/gin/gpi/gin_gpi.h
+#29 0.241 Grabbing   include/nccl_device/gin/gpi/gin_gpi_device_host_common.h > /workspace/nccl/build/include/nccl_device/gin/gpi/gin_gpi_device_host_common.h
+#29 0.247 Grabbing   include/nccl_device/gin/proxy/gin_proxy.h > /workspace/nccl/build/include/nccl_device/gin/proxy/gin_proxy.h
+#29 0.250 Grabbing   include/nccl_device/gin/proxy/gin_proxy_device_host_common.h > /workspace/nccl/build/include/nccl_device/gin/proxy/gin_proxy_device_host_common.h
+#29 0.253 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/doca_gpunetio_device.h > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/doca_gpunetio_device.h
+#29 0.256 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/common/doca_gpunetio_verbs_def.h > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/common/doca_gpunetio_verbs_def.h
+#29 0.258 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/common/doca_gpunetio_verbs_dev.h > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/common/doca_gpunetio_verbs_dev.h
+#29 0.262 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/device/doca_gpunetio_dev_verbs_common.cuh > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/device/doca_gpunetio_dev_verbs_common.cuh
+#29 0.265 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/device/doca_gpunetio_dev_verbs_counter.cuh > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/device/doca_gpunetio_dev_verbs_counter.cuh
+#29 0.272 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/device/doca_gpunetio_dev_verbs_cq.cuh > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/device/doca_gpunetio_dev_verbs_cq.cuh
+#29 0.275 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/device/doca_gpunetio_dev_verbs_onesided.cuh > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/device/doca_gpunetio_dev_verbs_onesided.cuh
+#29 0.278 Grabbing   transport/net_ib/gdaki/doca-gpunetio/include/device/doca_gpunetio_dev_verbs_qp.cuh > /workspace/nccl/build/include/nccl_device/gin/gdaki/doca_gpunetio/device/doca_gpunetio_dev_verbs_qp.cuh
+#29 0.292 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_qp.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_qp.o
+#29 0.295 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_cq.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_cq.o
+#29 0.301 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_device_attr.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_device_attr.o
+#29 0.314 Updated  /workspace/nccl/build/obj/include/nccl_git_version.h
+#29 0.320 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_umem.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_umem.o
+#29 ...
+
+#30 [runtime-core  1/12] COPY --from=vllm-source . /opt/spark-ds41f/candidate/vllm/
+#30 DONE 0.7s
+
+#31 [vllm-native-builder 1/4] COPY --from=vllm-source . /workspace/vllm/
+#31 DONE 0.7s
+
+#29 [nccl-builder 2/2] RUN set -eux;     make -C /workspace/nccl -j4 src.build       CUDA_HOME=/usr/local/cuda       NVCC_GENCODE="-gencode=arch=compute_121,code=sm_121";     mkdir -p /opt/nccl;     cp -L /workspace/nccl/build/lib/libnccl.so.2 /opt/nccl/libnccl.so.2;     sha256sum /opt/nccl/libnccl.so.2 | cut -d" " -f1 > /opt/nccl/libnccl.so.2.sha256
+#29 0.543 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_srq.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_srq.o
+#29 0.549 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_uar.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_uar.o
+#29 0.575 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_gpunetio.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_gpunetio.o
+#29 0.770 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_gpunetio_log.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_gpunetio_log.o
+#29 0.836 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_gpunetio_high_level.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_gpunetio_high_level.o
+#29 0.844 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_cuda_wrapper.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_cuda_wrapper.o
+#29 0.869 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_mlx5dv_wrapper.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_mlx5dv_wrapper.o
+#29 0.941 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_verbs_ibv_wrapper.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_verbs_ibv_wrapper.o
+#29 1.007 Compiling  transport/net_ib/gdaki/doca-gpunetio/src/doca_gpunetio_gdrcopy.cpp > /workspace/nccl/build/obj/transport/net_ib/gdaki/doca-gpunetio/doca_gpunetio_gdrcopy.o
+#29 1.082 make[2]: Entering directory '/workspace/nccl/src/device'
+#29 ...
+
+#32 [vllm-native-builder 2/4] COPY --from=cutlass-source . /workspace/cutlass/
+#32 DONE 0.7s
+
+#29 [nccl-builder 2/2] RUN set -eux;     make -C /workspace/nccl -j4 src.build       CUDA_HOME=/usr/local/cuda       NVCC_GENCODE="-gencode=arch=compute_121,code=sm_121";     mkdir -p /opt/nccl;     cp -L /workspace/nccl/build/lib/libnccl.so.2 /opt/nccl/libnccl.so.2;     sha256sum /opt/nccl/libnccl.so.2 | cut -d" " -f1 > /opt/nccl/libnccl.so.2.sha256
+#29 1.088 NVCC_GENCODE is -gencode=arch=compute_121,code=sm_121
+#29 1.101 Generating nccl.pc.in                          > /workspace/nccl/build/lib/pkgconfig/nccl.pc
+#29 1.101 Compiling  ras/client.cc                       > /workspace/nccl/build/obj/ras/client.o
+#29 1.105 Compiling  param/ncclparam.cc                  > /workspace/nccl/build/obj/param/ncclparam.o
+#29 1.207 NVCC_GENCODE is -gencode=arch=compute_121,code=sm_121
+#29 1.225 Compiling  bootstrap.cc                        > /workspace/nccl/build/obj/bootstrap.o
+#29 1.243 Dependencies    src/device/common.cu
+#29 1.254 Compiling  channel.cc                          > /workspace/nccl/build/obj/channel.o
+#29 1.426 Compiling  collectives.cc                      > /workspace/nccl/build/obj/collectives.o
+#29 ...
+
+#27 [tilelang-builder 1/3] COPY --from=tilelang-source . /workspace/tilelang/
+#27 DONE 2.0s
+
+#33 [tilelang-builder 2/3] COPY --from=tile_kernels-source . /workspace/tile_kernels/
+#33 DONE 0.0s
+
+#34 [tilelang-builder 3/3] RUN set -eux;     z3=$(python3 -c 'import importlib.metadata as m; print(m.version("z3-solver"))');     printf 'z3-solver==%s\n' "$z3" > /tmp/tilelang-build-constraints.txt;     export PIP_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     export PIP_BUILD_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     CMAKE_BUILD_PARALLEL_LEVEL=8     CMAKE_ARGS="-DUSE_CUDA=ON -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"     NO_VERSION_LABEL=1       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tilelang;     SETUPTOOLS_SCM_PRETEND_VERSION_FOR_TILE_KERNELS=2.0.0       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tile_kernels;     ls /opt/tilelang/tilelang-*.whl /opt/tilelang/tile_kernels-*.whl
+#34 0.058 + python3 -c import importlib.metadata as m; print(m.version("z3-solver"))
+#34 0.105 + z3=4.15.4.0
+#34 0.105 + printf z3-solver==%s\n 4.15.4.0
+#34 0.105 + export PIP_CONSTRAINT=/tmp/tilelang-build-constraints.txt
+#34 0.105 + export PIP_BUILD_CONSTRAINT=/tmp/tilelang-build-constraints.txt
+#34 0.105 + CMAKE_BUILD_PARALLEL_LEVEL=8 CMAKE_ARGS=-DUSE_CUDA=ON -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc NO_VERSION_LABEL=1 python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang /workspace/tilelang
+#34 1.036 Processing /workspace/tilelang
+#34 1.039   Installing build dependencies: started
+#34 ...
+
+#35 [sparknet-builder 2/2] RUN python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/sparknet /workspace/sparknet &&     ls /opt/sparknet/dgx_spark_networking-*.whl
+#35 1.399 Processing /workspace/sparknet
+#35 1.400   Installing build dependencies: started
+#35 4.503   Installing build dependencies: finished with status 'done'
+#35 4.504   Getting requirements to build wheel: started
+#35 4.760   Getting requirements to build wheel: finished with status 'done'
+#35 4.761   Preparing metadata (pyproject.toml): started
+#35 4.857   Preparing metadata (pyproject.toml): finished with status 'done'
+#35 4.858 Building wheels for collected packages: dgx-spark-networking
+#35 4.859   Building wheel for dgx-spark-networking (pyproject.toml): started
+#35 4.980   Building wheel for dgx-spark-networking (pyproject.toml): finished with status 'done'
+#35 4.981   Created wheel for dgx-spark-networking: filename=dgx_spark_networking-0.5.0-py3-none-any.whl size=155339 sha256=9ef5abeb4cba1aee8d9756da0fdaa51da51d92f96de69c354c43564b8005c236
+#35 4.981   Stored in directory: /tmp/pip-ephem-wheel-cache-ew73ohhl/wheels/f3/02/4e/aec3b88928ab7bdc324491300961b864f05eec208e91356335
+#35 4.982 Successfully built dgx-spark-networking
+#35 4.983 
+#35 4.983 [notice] A new release of pip is available: 26.2.1 -> 26.3
+#35 4.983 [notice] To update, run: python3 -m pip install --upgrade pip
+#35 5.017 /opt/sparknet/dgx_spark_networking-0.5.0-py3-none-any.whl
+#35 DONE 5.0s
+
+#29 [nccl-builder 2/2] RUN set -eux;     make -C /workspace/nccl -j4 src.build       CUDA_HOME=/usr/local/cuda       NVCC_GENCODE="-gencode=arch=compute_121,code=sm_121";     mkdir -p /opt/nccl;     cp -L /workspace/nccl/build/lib/libnccl.so.2 /opt/nccl/libnccl.so.2;     sha256sum /opt/nccl/libnccl.so.2 | cut -d" " -f1 > /opt/nccl/libnccl.so.2.sha256
+#29 2.140 Dependencies    src/device/onerank.cu
+#29 2.550 Compiling  debug.cc                            > /workspace/nccl/build/obj/debug.o
+#29 2.709 Dependencies    build/obj/device/gensrc/all_gather.cu
+#29 2.925 Compiling  enqueue.cc                          > /workspace/nccl/build/obj/enqueue.o
+#29 2.997 Compiling  group.cc                            > /workspace/nccl/build/obj/group.o
+#29 3.182 Dependencies    build/obj/device/gensrc/all_gather_v.cu
+#29 3.686 Dependencies    build/obj/device/gensrc/all_reduce.cu
+#29 4.181 Dependencies    build/obj/device/gensrc/broadcast.cu
+#29 4.323 Compiling  init.cc                             > /workspace/nccl/build/obj/init.o
+#29 4.506 Compiling  proxy.cc                            > /workspace/nccl/build/obj/proxy.o
+#29 4.670 Dependencies    build/obj/device/gensrc/reduce.cu
+#29 5.158 Dependencies    build/obj/device/gensrc/reduce_scatter.cu
+#29 5.306 Compiling  transport.cc                        > /workspace/nccl/build/obj/transport.o
+#29 5.657 Compiling       build/obj/device/gensrc/reduce_sum_bf16.cu
+#29 6.384 Compiling  mnnvl.cc                            > /workspace/nccl/build/obj/mnnvl.o
+#29 6.651 Compiling  allocator.cc                        > /workspace/nccl/build/obj/allocator.o
+#29 7.490 Compiling  dev_runtime.cc                      > /workspace/nccl/build/obj/dev_runtime.o
+#29 7.678 Compiling  dev_runtime_segments.cc             > /workspace/nccl/build/obj/dev_runtime_segments.o
+#29 7.732 Compiling       build/obj/device/gensrc/reduce_sum_f16.cu
+#29 7.898 Compiling  sym_kernels.cc                      > /workspace/nccl/build/obj/sym_kernels.o
+#29 8.841 Compiling  ce_coll.cc                          > /workspace/nccl/build/obj/ce_coll.o
+#29 9.142 Compiling  mem_manager.cc                      > /workspace/nccl/build/obj/mem_manager.o
+#29 9.198 Compiling  graph/connect.cc                    > /workspace/nccl/build/obj/graph/connect.o
+#29 9.759 Compiling       build/obj/device/gensrc/reduce_sum_f32.cu
+#29 10.52 Compiling  graph/paths.cc                      > /workspace/nccl/build/obj/graph/paths.o
+#29 10.52 Compiling       build/obj/device/gensrc/reduce_sum_f64.cu
+#29 10.55 Compiling  graph/rings.cc                      > /workspace/nccl/build/obj/graph/rings.o
+#29 ...
+
+#34 [tilelang-builder 3/3] RUN set -eux;     z3=$(python3 -c 'import importlib.metadata as m; print(m.version("z3-solver"))');     printf 'z3-solver==%s\n' "$z3" > /tmp/tilelang-build-constraints.txt;     export PIP_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     export PIP_BUILD_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     CMAKE_BUILD_PARALLEL_LEVEL=8     CMAKE_ARGS="-DUSE_CUDA=ON -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"     NO_VERSION_LABEL=1       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tilelang;     SETUPTOOLS_SCM_PRETEND_VERSION_FOR_TILE_KERNELS=2.0.0       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tile_kernels;     ls /opt/tilelang/tilelang-*.whl /opt/tilelang/tile_kernels-*.whl
+#34 8.903   Installing build dependencies: finished with status 'done'
+#34 8.903   Getting requirements to build wheel: started
+#34 9.019   Getting requirements to build wheel: finished with status 'done'
+#34 9.020   Installing backend dependencies: started
+#34 ...
+
+#36 [vllm-native-builder 3/4] RUN apt-get update     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       cmake       git     && rm -rf /var/lib/apt/lists/*
+#36 0.695 Get:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa  InRelease [1576 B]
+#36 1.265 Get:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa  Packages [1924 kB]
+#36 1.498 Get:3 https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble InRelease [17.8 kB]
+#36 1.785 Err:4 http://ports.ubuntu.com/ubuntu-ports noble InRelease
+#36 1.785   502  Bad Gateway [IP: 192.168.2.3 7890]
+#36 1.942 Get:5 https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu noble/main arm64 Packages [60.9 kB]
+#36 2.481 Get:6 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+#36 3.597 Get:7 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+#36 5.406 Err:8 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease
+#36 5.406   502  Bad Gateway [IP: 192.168.2.3 7890]
+#36 6.180 Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/multiverse arm64 Packages [110 kB]
+#36 7.797 Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 Packages [1865 kB]
+#36 9.740 Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted arm64 Packages [3420 kB]
+#36 ...
+
+#29 [nccl-builder 2/2] RUN set -eux;     make -C /workspace/nccl -j4 src.build       CUDA_HOME=/usr/local/cuda       NVCC_GENCODE="-gencode=arch=compute_121,code=sm_121";     mkdir -p /opt/nccl;     cp -L /workspace/nccl/build/lib/libnccl.so.2 /opt/nccl/libnccl.so.2;     sha256sum /opt/nccl/libnccl.so.2 | cut -d" " -f1 > /opt/nccl/libnccl.so.2.sha256
+#29 11.48 Compiling  graph/search.cc                     > /workspace/nccl/build/obj/graph/search.o
+#29 11.77 Compiling       build/obj/device/gensrc/reduce_sum_f8e4m3.cu
+#29 12.11 Compiling  graph/topo.cc                       > /workspace/nccl/build/obj/graph/topo.o
+#29 12.44 Compiling       build/obj/device/gensrc/reduce_sum_f8e5m2.cu
+#29 13.21 Compiling  graph/trees.cc                      > /workspace/nccl/build/obj/graph/trees.o
+#29 13.35 Compiling  graph/tuning.cc                     > /workspace/nccl/build/obj/graph/tuning.o
+#29 14.00 Compiling       build/obj/device/gensrc/reduce_sum_u32.cu
+#29 14.36 Compiling  graph/xml.cc                        > /workspace/nccl/build/obj/graph/xml.o
+#29 14.61 Compiling       build/obj/device/gensrc/reduce_sum_u64.cu
+#29 14.83 Compiling  misc/argcheck.cc                    > /workspace/nccl/build/obj/misc/argcheck.o
+#29 15.90 Compiling  misc/cudawrap.cc                    > /workspace/nccl/build/obj/misc/cudawrap.o
+#29 16.02 Compiling       build/obj/device/gensrc/reduce_sum_u8.cu
+#29 16.04 Compiling  misc/gdrwrap.cc                     > /workspace/nccl/build/obj/misc/gdrwrap.o
+#29 16.48 Compiling       build/obj/device/gensrc/reduce_sumpostdiv_u32.cu
+#29 16.87 Compiling  misc/git_version.cc                 > /workspace/nccl/build/obj/misc/git_version.o
+#29 16.89 Compiling  misc/ibvsymbols.cc                  > /workspace/nccl/build/obj/misc/ibvsymbols.o
+#29 16.98 Compiling  misc/ibvwrap.cc                     > /workspace/nccl/build/obj/misc/ibvwrap.o
+#29 17.75 Compiling  misc/mlx5dvsymbols.cc               > /workspace/nccl/build/obj/misc/mlx5dvsymbols.o
+#29 17.98 Compiling  misc/mlx5dvwrap.cc                  > /workspace/nccl/build/obj/misc/mlx5dvwrap.o
+#29 18.01 Compiling  misc/nvmlwrap.cc                    > /workspace/nccl/build/obj/misc/nvmlwrap.o
+#29 18.37 Compiling  misc/param.cc                       > /workspace/nccl/build/obj/misc/param.o
+#29 18.50 Compiling       build/obj/device/gensrc/reduce_sumpostdiv_u64.cu
+#29 18.73 Compiling  misc/shmutils.cc                    > /workspace/nccl/build/obj/misc/shmutils.o
+#29 18.74 Compiling  misc/socket.cc                      > /workspace/nccl/build/obj/misc/socket.o
+#29 18.97 Compiling  misc/strongstream.cc                > /workspace/nccl/build/obj/misc/strongstream.o
+#29 19.32 Compiling  misc/utils.cc                       > /workspace/nccl/build/obj/misc/utils.o
+#29 19.86 Compiling  transport/coll_net.cc               > /workspace/nccl/build/obj/transport/coll_net.o
+#29 20.01 Compiling  transport/generic.cc                > /workspace/nccl/build/obj/transport/generic.o
+#29 20.46 Compiling  transport/net.cc                    > /workspace/nccl/build/obj/transport/net.o
+#29 20.62 Compiling       build/obj/device/gensrc/reduce_sumpostdiv_u8.cu
+#29 21.41 Compiling  transport/net_socket.cc             > /workspace/nccl/build/obj/transport/net_socket.o
+#29 21.77 Compiling  transport/nvls.cc                   > /workspace/nccl/build/obj/transport/nvls.o
+#29 22.58 Compiling  transport/p2p.cc                    > /workspace/nccl/build/obj/transport/p2p.o
+#29 CANCELED
+
+#36 [vllm-native-builder 3/4] RUN apt-get update     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       cmake       git     && rm -rf /var/lib/apt/lists/*
+#36 12.00 Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 Packages [2245 kB]
+#36 13.91 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-backports/universe arm64 Packages [36.3 kB]
+#36 14.99 Get:14 http://ports.ubuntu.com/ubuntu-ports noble-backports/multiverse arm64 Packages [669 B]
+#36 19.99 Ign:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages
+#36 20.81 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages [49.0 kB]
+#36 21.20 Reading package lists...
+#36 21.38 W: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+#36 21.38 E: Failed to fetch http://ports.ubuntu.com/ubuntu-ports/dists/noble/InRelease  502  Bad Gateway [IP: 192.168.2.3 7890]
+#36 21.38 E: The repository 'http://ports.ubuntu.com/ubuntu-ports noble InRelease' is not signed.
+#36 21.38 E: Failed to fetch http://ports.ubuntu.com/ubuntu-ports/dists/noble-security/InRelease  502  Bad Gateway [IP: 192.168.2.3 7890]
+#36 21.38 E: The repository 'http://ports.ubuntu.com/ubuntu-ports noble-security InRelease' is not signed.
+#36 ERROR: process "/bin/sh -c apt-get update     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       cmake       git     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+
+#34 [tilelang-builder 3/3] RUN set -eux;     z3=$(python3 -c 'import importlib.metadata as m; print(m.version("z3-solver"))');     printf 'z3-solver==%s\n' "$z3" > /tmp/tilelang-build-constraints.txt;     export PIP_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     export PIP_BUILD_CONSTRAINT=/tmp/tilelang-build-constraints.txt;     CMAKE_BUILD_PARALLEL_LEVEL=8     CMAKE_ARGS="-DUSE_CUDA=ON -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"     NO_VERSION_LABEL=1       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tilelang;     SETUPTOOLS_SCM_PRETEND_VERSION_FOR_TILE_KERNELS=2.0.0       python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /opt/tilelang         /workspace/tile_kernels;     ls /opt/tilelang/tilelang-*.whl /opt/tilelang/tile_kernels-*.whl
+#34 14.27   Installing backend dependencies: finished with status 'done'
+#34 14.27   Preparing metadata (pyproject.toml): started
+#34 14.46   Preparing metadata (pyproject.toml): finished with status 'done'
+#34 14.46 Building wheels for collected packages: tilelang
+#34 14.46   Building wheel for tilelang (pyproject.toml): started
+#34 CANCELED
+------
+ > [vllm-native-builder 3/4] RUN apt-get update     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       cmake       git     && rm -rf /var/lib/apt/lists/*:
+13.91 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-backports/universe arm64 Packages [36.3 kB]
+14.99 Get:14 http://ports.ubuntu.com/ubuntu-ports noble-backports/multiverse arm64 Packages [669 B]
+19.99 Ign:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages
+20.81 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages [49.0 kB]
+21.20 Reading package lists...
+21.38 W: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+21.38 E: Failed to fetch http://ports.ubuntu.com/ubuntu-ports/dists/noble/InRelease  502  Bad Gateway [IP: 192.168.2.3 7890]
+21.38 E: The repository 'http://ports.ubuntu.com/ubuntu-ports noble InRelease' is not signed.
+21.38 E: Failed to fetch http://ports.ubuntu.com/ubuntu-ports/dists/noble-security/InRelease  502  Bad Gateway [IP: 192.168.2.3 7890]
+21.38 E: The repository 'http://ports.ubuntu.com/ubuntu-ports noble-security InRelease' is not signed.
+------
+ERROR: failed to build: failed to solve: process "/bin/sh -c apt-get update     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends       cmake       git     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+docker buildx failed with exit status 1

@@ -1,0 +1,41 @@
+F
+=================================== FAILURES ===================================
+___________ test_fixed_template_is_the_resolved_upstream_environment ___________
+
+    def test_fixed_template_is_the_resolved_upstream_environment() -> None:
+>       resolved = _resolved_recipe()
+                   ^^^^^^^^^^^^^^^^^^
+
+spark/tests/test_deepseek_env_merge_contract.py:434: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+spark/tests/test_deepseek_env_merge_contract.py:112: in _resolved_recipe
+    return load(DEPLOY_PROFILE)
+           ^^^^^^^^^^^^^^^^^^^^
+spark/tests/test_deepseek_env_merge_contract.py:103: in load
+    value = json.loads((TARGET_DIR / relative).read_text(encoding="utf-8"))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../miniforge3/lib/python3.14/pathlib/__init__.py:787: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-18-x1118/tp4-ring.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-18-x1118/tp4-ring.json'
+
+../../../miniforge3/lib/python3.14/pathlib/__init__.py:771: FileNotFoundError
+=========================== short test summary info ============================
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_fixed_template_is_the_resolved_upstream_environment
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 0.02s

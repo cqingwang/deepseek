@@ -3,6 +3,7 @@
 import contextlib
 import copy
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -112,6 +113,15 @@ class RunningImageTest(unittest.TestCase):
         self.assertEqual(first["image_content_sha256"], second["image_content_sha256"])
         self.assertEqual(first["image_layers"], self.images["dgx1"]["RootFS"]["Layers"])
         self.assertEqual(first["image_labels"], self.labels)
+
+    def test_rsync_deployment_commit_replaces_git_identity(self):
+        with mock.patch.dict(
+            os.environ,
+            {"SPARK_DEPLOYMENT_COMMIT": "rsync-0123456789abcdef"},
+        ):
+            identity = self.bench()
+        self.assertEqual(identity["client_commit"], "rsync-0123456789abcdef")
+        self.assertFalse(identity["client_dirty"])
 
     def test_moved_tag_cannot_hide_wrong_running_source(self):
         self.images["dgx2"]["Config"]["Labels"] = {"local.spark-ds41f.vllm.tree": "b" * 40}

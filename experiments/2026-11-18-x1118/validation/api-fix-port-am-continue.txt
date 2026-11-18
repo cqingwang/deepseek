@@ -1,0 +1,2 @@
+Updated 2 paths from the index
+Applying: fix(dsv41): treat typed image placeholders as text and replay custom tools

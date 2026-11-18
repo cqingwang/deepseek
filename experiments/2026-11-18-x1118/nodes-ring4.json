@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "ssh_user": "chan",
+  "nodes": [
+    {
+      "name": "spark-a",
+      "rank": 0,
+      "management_ip": "192.168.2.180",
+      "head": true,
+      "roce_peer_hcas": {
+        "1": ["rocep1s0f0", "roceP2p1s0f0"],
+        "3": ["rocep1s0f1", "roceP2p1s0f1"]
+      },
+      "roce_subnets": {
+        "rocep1s0f0": "10.251.20.0/30",
+        "roceP2p1s0f0": "10.100.241.0/30",
+        "rocep1s0f1": "10.251.20.12/30",
+        "roceP2p1s0f1": "10.100.241.12/30"
+      }
+    },
+    {
+      "name": "spark-b",
+      "rank": 1,
+      "management_ip": "192.168.2.161",
+      "head": false,
+      "roce_peer_hcas": {
+        "0": ["rocep1s0f0", "roceP2p1s0f0"],
+        "2": ["rocep1s0f1", "roceP2p1s0f1"]
+      },
+      "roce_subnets": {
+        "rocep1s0f0": "10.251.20.0/30",
+        "roceP2p1s0f0": "10.100.241.0/30",
+        "rocep1s0f1": "10.251.20.4/30",
+        "roceP2p1s0f1": "10.100.241.4/30"
+      }
+    },
+    {
+      "name": "spark-c",
+      "rank": 2,
+      "management_ip": "192.168.2.102",
+      "head": false,
+      "roce_peer_hcas": {
+        "1": ["rocep1s0f1", "roceP2p1s0f1"],
+        "3": ["rocep1s0f0", "roceP2p1s0f0"]
+      },
+      "roce_subnets": {
+        "rocep1s0f0": "10.251.20.8/30",
+        "roceP2p1s0f0": "10.100.241.8/30",
+        "rocep1s0f1": "10.251.20.4/30",
+        "roceP2p1s0f1": "10.100.241.4/30"
+      }
+    },
+    {
+      "name": "spark-d",
+      "rank": 3,
+      "management_ip": "192.168.2.238",
+      "head": false,
+      "roce_peer_hcas": {
+        "2": ["rocep1s0f1", "roceP2p1s0f1"],
+        "0": ["rocep1s0f0", "roceP2p1s0f0"]
+      },
+      "roce_subnets": {
+        "rocep1s0f0": "10.251.20.8/30",
+        "roceP2p1s0f0": "10.100.241.8/30",
+        "rocep1s0f1": "10.251.20.12/30",
+        "roceP2p1s0f1": "10.100.241.12/30"
+      }
+    }
+  ]
+}

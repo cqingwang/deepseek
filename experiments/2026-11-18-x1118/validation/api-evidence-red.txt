@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________________ test_x1118_live_api_cases_all_pass ______________________
+
+    def test_x1118_live_api_cases_all_pass() -> None:
+        evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
+        statuses = {row["name"]: row["status"] for row in evidence["rows"]}
+    
+>       assert evidence["all_200"] is True
+E       assert False is True
+
+spark/tests/test_deepseek_x1118_api.py:21: AssertionError
+=========================== short test summary info ============================
+FAILED spark/tests/test_deepseek_x1118_api.py::test_x1118_live_api_cases_all_pass
+1 failed in 0.01s

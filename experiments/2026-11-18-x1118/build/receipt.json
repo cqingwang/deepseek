@@ -1,0 +1,13 @@
+{
+  "tag": "spark-ds41f:x1118",
+  "image_id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+  "base_image": "spark-ds41f:x1118-raw-official",
+  "base_image_id": "sha256:4f50c09aeb8d2bbc722e72c174ab3a7ed6591b4412a8a38ebfa8a27a9ebbb7da",
+  "build_kind": "source-overlay",
+  "native_rebuild": false,
+  "reason": "Only the Responses custom_tool_call history converter and its focused test changed; all candidate-61 native build inputs and compiled layers are unchanged.",
+  "vllm_patch_head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
+  "vllm_tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
+  "patch_count": 696,
+  "built_utc": "2026-11-18T13:22:00Z"
+}
