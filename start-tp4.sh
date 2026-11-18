@@ -66,7 +66,8 @@ for key in TARGET_ENGINE_ID TARGET_CONTAINER_PREFIX RUNTIME_ASSETS CACHE_DIR \
   NNODES TP_SIZE NCCL_IB_SUBNET_PREFIX_LEN NCCL_IB_GID_INDEX NCCL_IB_HCA \
   SPARKNET_ROCE_PEER_HCAS_BY_RANK API_HOST PORT DS41F_MAX_NUM_SEQS \
   DS41F_MAX_MODEL_LEN DS41F_MAX_NEW_TOKENS DS41F_MAX_NUM_BATCHED_TOKENS \
-  DS41F_NUM_SPECULATIVE_TOKENS DS41F_DEFAULT_ENABLE_THINKING \
+  DS41F_NUM_SPECULATIVE_TOKENS DS41F_MAX_IMAGES_PER_REQUEST \
+  DS41F_DEFAULT_ENABLE_THINKING \
   DS41F_REASONING_EFFORT DS41F_MASTER_PORT; do
   require "$key"
 done
@@ -373,7 +374,8 @@ site_common_serve_rows() {
     "$(serve_arg_value --compilation-config)" \
     "$(serve_arg_value --default-chat-template-kwargs)" \
     "$(serve_arg_value --kv-cache-memory-bytes)" \
-    "$(serve_arg_value --block-size)" <<'PY'
+    "$(serve_arg_value --block-size)" \
+    "$DS41F_MAX_IMAGES_PER_REQUEST" <<'PY'
 import json
 import pathlib
 import sys
@@ -409,6 +411,13 @@ max_num_batched_tokens = positive_integer(
 num_speculative_tokens = positive_integer(
     "DS41F_NUM_SPECULATIVE_TOKENS", sys.argv[6]
 )
+max_images_per_request = positive_integer(
+    "DS41F_MAX_IMAGES_PER_REQUEST", sys.argv[15]
+)
+if max_images_per_request > 999:
+    raise SystemExit(
+        f"DS41F_MAX_IMAGES_PER_REQUEST 不得超过 999: {max_images_per_request}"
+    )
 if sys.argv[7] not in {"true", "false"}:
     raise SystemExit(f"DS41F_DEFAULT_ENABLE_THINKING 必须为 true/false: {sys.argv[7]}")
 enable_thinking = sys.argv[7] == "true"
@@ -483,6 +492,9 @@ values = {
     "--max-num-seqs": str(max_num_seqs),
     "--max-num-batched-tokens": str(max_num_batched_tokens),
     "--kv-cache-memory-bytes": str(kv_cache_memory_bytes),
+    "--limit-mm-per-prompt": json.dumps(
+        {"image": max_images_per_request}, separators=(",", ":")
+    ),
     "--long-prefill-token-threshold": str(long_prefill_threshold),
     "--max-cudagraph-capture-size": str(rows),
     "--override-generation-config": json.dumps(
