@@ -138,6 +138,7 @@ DS41F_SERVE_ARGS=(
   256
   --enable-prefix-caching
   --enable-prompt-tokens-details
+  --enable-per-request-metrics
   --enable-chunked-prefill
   --max-model-len
   1048576
