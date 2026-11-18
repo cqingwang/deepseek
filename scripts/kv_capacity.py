@@ -150,6 +150,24 @@ def capacity(geo: Geometry, sizing: dict, drafts: int) -> dict:
     }
 
 
+def required_kv_cache_bytes(
+    geo: Geometry, sizing: dict, drafts: int, maximum_bytes: int
+) -> int:
+    """The smallest block-aligned pool for the configured request limits.
+
+    The pool must hold every admitted request at ``max_model_len`` together
+    with the two chunks of the one prompt being prefilled and vLLM's null
+    block. The upstream recipe's pool remains the hard capacity ceiling.
+    """
+    demanded = capacity(geo, {**sizing, "kv_cache_memory_bytes": maximum_bytes}, drafts)
+    blocks = (
+        int(sizing["max_num_seqs"]) * int(demanded["resident_blocks"])
+        + int(demanded["prompt_blocks_in_flight"])
+        + 1
+    )
+    return min(blocks * geo.pool_block_bytes, int(maximum_bytes))
+
+
 def shapes(cluster: dict, names: list[str], budget: int | None) -> dict[str, dict]:
     """Each named shape's sizing (all shapes when none are named)."""
     out = {}

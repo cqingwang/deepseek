@@ -370,7 +370,9 @@ site_common_serve_rows() {
     "$(serve_arg_value --override-generation-config)" \
     "$(serve_arg_value --speculative-config)" \
     "$(serve_arg_value --compilation-config)" \
-    "$(serve_arg_value --default-chat-template-kwargs)" <<'PY'
+    "$(serve_arg_value --default-chat-template-kwargs)" \
+    "$(serve_arg_value --kv-cache-memory-bytes)" \
+    "$(serve_arg_value --block-size)" <<'PY'
 import json
 import pathlib
 import sys
@@ -378,6 +380,7 @@ import sys
 root = pathlib.Path(sys.argv[1]).resolve()
 sys.path.insert(0, str(root / "scripts"))
 import recipe
+import kv_capacity
 
 
 def positive_integer(name: str, raw: str) -> int:
@@ -441,6 +444,33 @@ if max_new_tokens > max_model_len:
         f"({max_model_len})"
     )
 
+maximum_kv_cache_bytes = positive_integer(
+    "upstream --kv-cache-memory-bytes", sys.argv[13]
+)
+block_size = positive_integer("upstream --block-size", sys.argv[14])
+model_config_path = root / "state/config.json"
+try:
+    model_config = json.loads(model_config_path.read_text(encoding="utf-8"))
+except FileNotFoundError as exc:
+    raise SystemExit(f"缺少模型几何配置: {model_config_path}") from exc
+except json.JSONDecodeError as exc:
+    raise SystemExit(f"模型几何配置不是合法 JSON: {model_config_path}: {exc}") from exc
+text_config = model_config.get("text_config", model_config)
+if not isinstance(text_config, dict):
+    raise SystemExit(f"模型几何配置 text_config 必须是对象: {model_config_path}")
+geometry = kv_capacity.geometry(text_config, block_size, num_speculative_tokens)
+kv_cache_memory_bytes = kv_capacity.required_kv_cache_bytes(
+    geometry,
+    {
+        "max_model_len": max_model_len,
+        "max_num_batched_tokens": max_num_batched_tokens,
+        "max_num_seqs": max_num_seqs,
+        "kv_cache_memory_bytes": maximum_kv_cache_bytes,
+    },
+    num_speculative_tokens,
+    maximum_kv_cache_bytes,
+)
+
 override_generation["max_new_tokens"] = max_new_tokens
 speculative["num_speculative_tokens"] = num_speculative_tokens
 compilation["cudagraph_capture_sizes"] = recipe.capture_sizes(rows)
@@ -451,6 +481,7 @@ values = {
     "--max-model-len": str(max_model_len),
     "--max-num-seqs": str(max_num_seqs),
     "--max-num-batched-tokens": str(max_num_batched_tokens),
+    "--kv-cache-memory-bytes": str(kv_cache_memory_bytes),
     "--long-prefill-token-threshold": str(long_prefill_threshold),
     "--max-cudagraph-capture-size": str(rows),
     "--override-generation-config": json.dumps(

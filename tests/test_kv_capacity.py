@@ -58,6 +58,47 @@ class ReportedTest(unittest.TestCase):
 
 
 class CapacityTest(unittest.TestCase):
+    def test_site_pool_is_sized_from_configured_request_limits(self):
+        geo = kv_capacity.geometry(MODEL, block_size=256, drafts=5)
+        for max_num_seqs, expected_bytes in (
+            (5, 5_374_973_440),
+            (9, 8_977_579_520),
+        ):
+            with self.subTest(max_num_seqs=max_num_seqs):
+                sizing = {
+                    "max_model_len": 1_000_000,
+                    "max_num_batched_tokens": 16_384,
+                    "max_num_seqs": max_num_seqs,
+                    "kv_cache_memory_bytes": 11_274_289_152,
+                }
+
+                pool_bytes = kv_capacity.required_kv_cache_bytes(
+                    geo, sizing, drafts=5, maximum_bytes=11_274_289_152
+                )
+
+                self.assertEqual(pool_bytes, expected_bytes)
+                sized = kv_capacity.capacity(
+                    geo, {**sizing, "kv_cache_memory_bytes": pool_bytes}, drafts=5
+                )
+                self.assertGreaterEqual(sized["contexts"], max_num_seqs)
+                self.assertEqual(sized["every_sequence_tokens"], 1_000_000)
+
+    def test_site_pool_never_exceeds_the_upstream_capacity(self):
+        geo = kv_capacity.geometry(MODEL, block_size=256, drafts=5)
+        sizing = {
+            "max_model_len": 1_000_000,
+            "max_num_batched_tokens": 16_384,
+            "max_num_seqs": 12,
+            "kv_cache_memory_bytes": 11_274_289_152,
+        }
+
+        self.assertEqual(
+            kv_capacity.required_kv_cache_bytes(
+                geo, sizing, drafts=5, maximum_bytes=11_274_289_152
+            ),
+            11_274_289_152,
+        )
+
     def test_ring_holds_eleven_at_either_budget(self):
         for budget, transient, each in ((8192, 1890, 749_568), (16384, 3810, 718_848)):
             with self.subTest(budget=budget):
