@@ -178,7 +178,8 @@
     }
   },
   "warnings": [
-    "Host doctor reports kernel package patch drift and missing fan-control DKMS.",
+    "Held kernel packages are installed at the pinned versions; the host readiness parser accepts 'hold ok installed'.",
+    "Fan-floor control is disabled by the x1119 profile because v0.1.4 is incompatible with EC 0x03000d07; serving does not require it.",
     "The benchmark completed with thermal slowdown 0 ms and GPU maxima below limits.",
     "nvidia-smi --query-xid-errors is unsupported on this driver; dmesg had no OOM/Xid matches."
   ],

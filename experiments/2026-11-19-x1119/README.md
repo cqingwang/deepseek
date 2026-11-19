@@ -87,6 +87,9 @@
 
 ### 已知告警
 
-- host doctor 报告 kernel patch package 漂移和 fan-control DKMS 缺失；
-  本次没有修改 host runtime。
+- 五条持有内核包的实际版本与 pin 完全一致；`dpkg` 状态是
+  `hold ok installed`，旧解析器误报为包漂移，现已修复并四机 PASS。
+- fan-floor 控制属于 bench-only 能力，`v0.1.4` 与当前 EC
+  `0x03000d07` 不兼容。x1119 显式设置 `host.fan_control=false`，
+  serving 不受影响，benchmark 自动跳过不可用的 fan curve。
 - 性能测试中 thermal slowdown 均为 0 ms，GPU 最高温度低于限制。
