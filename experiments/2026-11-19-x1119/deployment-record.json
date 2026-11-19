@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "source": {
+    "official_main": "83fb21de4df3413848968dc878a41b01dcb4d544",
+    "merge_base": "d719bd61f9bfaa2557300ca919f0801ee2bc06b7",
+    "site_patches": [
+      "0823-fix-dsv41-replay-responses-custom-tool-calls.patch",
+      "0824-fix-structured-output-copy-draft-bitmask-capacity.patch"
+    ],
+    "site_commit_for_build": "eb7ef60b",
+    "build_deployment_commit": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+    "vllm_patch_head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+    "vllm_tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+    "vllm_patch_count": 697,
+    "vllm_patchset_sha256": "3be9c8f7ce1e53a4531e665f3a9b09d8a8d832ff3f9a10f0eb75d401bed35a74"
+  },
+  "image": {
+    "tag": "spark-ds41f:x1119",
+    "id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "created_utc": "2026-11-19T10:41:36.201256078Z",
+    "built_utc": "2026-11-19T10:41:54Z",
+    "elapsed_seconds": 644,
+    "minimum_memavailable_gib": 81.8,
+    "compile_jobs": 8,
+    "nccl_compile_jobs": 4,
+    "labels": {
+      "local.spark-ds41f.cuda.version": "13.5.37",
+      "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+      "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+      "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+      "local.spark-ds41f.vllm.patch-head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+      "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5"
+    }
+  },
+  "distribution": {
+    "order": [
+      "spark-a",
+      "spark-b",
+      "spark-c",
+      "spark-d"
+    ],
+    "transport": "docker save | ssh <fabric-neighbour> docker load",
+    "hops": [
+      "A -> B 10.251.20.2",
+      "B -> C 10.251.20.6",
+      "C -> D 10.251.20.10"
+    ],
+    "all_nodes_same_image": true,
+    "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b"
+  },
+  "deployment": {
+    "profile": "experiments/2026-11-19-x1119/tp4-ring.json",
+    "stop_before_start": true,
+    "pre_start_containers": 0,
+    "start_result": "four ranks running; API ready; steady memguard active",
+    "managed_container_env_count": 90,
+    "runtime": {
+      "max_num_seqs": 5,
+      "max_model_len": 1000000,
+      "max_new_tokens": 65536,
+      "max_num_batched_tokens": 16384,
+      "kv_cache_memory_bytes": 5374973440,
+      "long_prefill_token_threshold": 16354,
+      "max_cudagraph_capture_size": 30,
+      "limit_mm_per_prompt": {
+        "image": 67
+      },
+      "num_speculative_tokens": 5,
+      "master_port": 25000,
+      "enable_per_request_metrics": true
+    }
+  },
+  "validation": {
+    "live_contract": {
+      "ok": true,
+      "artifact": "validation/live-parameter-consumption.json"
+    },
+    "api_smoke": {
+      "all_200": true,
+      "cases": 7,
+      "artifact": "validation/api-smoke.json"
+    },
+    "concurrent_structured_output": {
+      "ok": true,
+      "requests": 24,
+      "concurrency": 3,
+      "waves": 8,
+      "elapsed_seconds": 96.4,
+      "artifact": "validation/concurrent-structured-smoke.json"
+    },
+    "regression": {
+      "old_image_red": "bitmask index 30 is outside 30 rows",
+      "new_image_green": true,
+      "artifacts": [
+        "../2026-11-19-copy-drafts-structured-output-bitmask/validation/bitmask-regression-red.txt",
+        "validation/image-regression-green.txt"
+      ]
+    },
+    "health": {
+      "four_containers_running": true,
+      "oom_killed": false,
+      "restart_count": 0,
+      "steady_memguard_active": true,
+      "fatal_log_matches": 0,
+      "minimum_memavailable_gib": {
+        "spark-a": 29.24,
+        "spark-b": 32.19,
+        "spark-c": 32.34,
+        "spark-d": 32.1
+      },
+      "artifact": "validation/final-health.txt"
+    }
+  },
+  "performance": {
+    "summary": "performance/summary.json",
+    "allowed_loss_pct": 1.0,
+    "ok": true,
+    "decode_aggregate_tok_s": {
+      "prose-nothink-c1": {
+        "runs": [89.995, 89.661],
+        "mean": 89.828,
+        "official_readme": 59.1
+      },
+      "prose-nothink-c2": {
+        "runs": [159.537, 157.229],
+        "mean": 158.383,
+        "official_readme": 84.8
+      },
+      "prose-nothink-c4": {
+        "runs": [281.499, 288.471],
+        "mean": 284.985,
+        "official_readme": 124.9
+      },
+      "code-nothink-c1": {
+        "runs": [134.596, 136.347],
+        "mean": 135.4715,
+        "official_readme": 80.6
+      },
+      "code-nothink-c2": {
+        "runs": [190.747, 188.567],
+        "mean": 189.657,
+        "official_readme": 118.2
+      },
+      "code-nothink-c4": {
+        "runs": [361.79, 382.677],
+        "mean": 372.2335,
+        "official_readme": 165.1
+      }
+    },
+    "prefill_tok_s": {
+      "32768": {
+        "runs": [9305.273, 9460.683],
+        "mean": 9382.978,
+        "official_readme": 8508.0
+      },
+      "131072": {
+        "runs": [9829.209, 9772.57],
+        "mean": 9800.8895,
+        "official_readme": 8657.0
+      },
+      "262144": {
+        "runs": [9819.413, 9770.339],
+        "mean": 9794.876,
+        "official_readme": 8261.0
+      },
+      "524288": {
+        "runs": [9591.727, 9567.113],
+        "mean": 9579.42,
+        "official_readme": 7460.0
+      },
+      "1000000": {
+        "runs": [9212.963, 9165.609],
+        "mean": 9189.286,
+        "official_readme": 6012.0
+      }
+    }
+  },
+  "warnings": [
+    "Host doctor reports kernel package patch drift and missing fan-control DKMS.",
+    "The benchmark completed with thermal slowdown 0 ms and GPU maxima below limits.",
+    "nvidia-smi --query-xid-errors is unsupported on this driver; dmesg had no OOM/Xid matches."
+  ],
+  "artifacts": {
+    "build_prepare": "validation/build-prepare.txt",
+    "build_image": "validation/build-image-retry1.txt",
+    "distribution": [
+      "validation/distribute-a-b.txt",
+      "validation/distribute-b-c.txt",
+      "validation/distribute-c-d.txt"
+    ],
+    "deployment": [
+      "validation/stop.txt",
+      "validation/start.txt"
+    ],
+    "bench_runs": [
+      "validation/bench-run-01.txt",
+      "validation/bench-run-02.txt"
+    ]
+  }
+}

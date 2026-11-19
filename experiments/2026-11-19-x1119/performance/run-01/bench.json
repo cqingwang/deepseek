@@ -1,0 +1,2922 @@
+{
+ "schema": 1,
+ "started_utc": "20261119T105707Z",
+ "identity": {
+  "cluster_config": "experiments/2026-11-19-x1119/tp4-ring.json",
+  "cluster_config_sha256": "40a03036ac36a9b02395369689255fc4a9abde05d8d835c538adf24957b30934",
+  "nodes_config": "experiments/2026-11-18-x1118/nodes-ring4.json",
+  "topology": {
+   "schema_version": 1,
+   "ssh_user": "chan",
+   "nodes": [
+    {
+     "name": "spark-a",
+     "rank": 0,
+     "management_ip": "192.168.2.180",
+     "head": true,
+     "roce_peer_hcas": {
+      "1": [
+       "rocep1s0f0",
+       "roceP2p1s0f0"
+      ],
+      "3": [
+       "rocep1s0f1",
+       "roceP2p1s0f1"
+      ]
+     },
+     "roce_subnets": {
+      "rocep1s0f0": "10.251.20.0/30",
+      "roceP2p1s0f0": "10.100.241.0/30",
+      "rocep1s0f1": "10.251.20.12/30",
+      "roceP2p1s0f1": "10.100.241.12/30"
+     }
+    },
+    {
+     "name": "spark-b",
+     "rank": 1,
+     "management_ip": "192.168.2.161",
+     "head": false,
+     "roce_peer_hcas": {
+      "0": [
+       "rocep1s0f0",
+       "roceP2p1s0f0"
+      ],
+      "2": [
+       "rocep1s0f1",
+       "roceP2p1s0f1"
+      ]
+     },
+     "roce_subnets": {
+      "rocep1s0f0": "10.251.20.0/30",
+      "roceP2p1s0f0": "10.100.241.0/30",
+      "rocep1s0f1": "10.251.20.4/30",
+      "roceP2p1s0f1": "10.100.241.4/30"
+     }
+    },
+    {
+     "name": "spark-c",
+     "rank": 2,
+     "management_ip": "192.168.2.102",
+     "head": false,
+     "roce_peer_hcas": {
+      "1": [
+       "rocep1s0f1",
+       "roceP2p1s0f1"
+      ],
+      "3": [
+       "rocep1s0f0",
+       "roceP2p1s0f0"
+      ]
+     },
+     "roce_subnets": {
+      "rocep1s0f0": "10.251.20.8/30",
+      "roceP2p1s0f0": "10.100.241.8/30",
+      "rocep1s0f1": "10.251.20.4/30",
+      "roceP2p1s0f1": "10.100.241.4/30"
+     }
+    },
+    {
+     "name": "spark-d",
+     "rank": 3,
+     "management_ip": "192.168.2.238",
+     "head": false,
+     "roce_peer_hcas": {
+      "2": [
+       "rocep1s0f1",
+       "roceP2p1s0f1"
+      ],
+      "0": [
+       "rocep1s0f0",
+       "roceP2p1s0f0"
+      ]
+     },
+     "roce_subnets": {
+      "rocep1s0f0": "10.251.20.8/30",
+      "roceP2p1s0f0": "10.100.241.8/30",
+      "rocep1s0f1": "10.251.20.12/30",
+      "roceP2p1s0f1": "10.100.241.12/30"
+     }
+    }
+   ]
+  },
+  "transport": "oneshot-ring4",
+  "kernel_backend": "tilelang",
+  "promoted_baseline": "2026-11-07-spark-ds41f-1107",
+  "image": "spark-ds41f:x1119",
+  "client_commit": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+  "client_dirty": false,
+  "client_host": "spark-a",
+  "client_stream_policy": "current",
+  "nodes": {
+   "spark-a": {
+    "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "container_started_at": "2026-11-19T10:52:08.594266685Z",
+    "checkout": null,
+    "image_layers": [
+     "sha256:ab34259f9ca5d315bec1b17d9f1ca272e84dedd964a8988695daf0ec3e0bbc2e",
+     "sha256:45ec5cf5eb719732dd8022c3e1499cb58dd20b47224aad19db1c2a7ba9aaaca7",
+     "sha256:1e07ba147d8b447007f54b570c25513c71b81b33e3849115838dded2ad222090",
+     "sha256:468a19d3be08446875045cd9e133ef47589431cb016896768394fe0e77766f2d",
+     "sha256:b7ec8fd7c485bbedbe64cbc5a7a810ceabb9156e95c83ba60596ddb9b4955d48",
+     "sha256:bfe608f3975233ac457109ce94397486c2a392a0ec479ab5144699c612a755d5",
+     "sha256:08f8a56a3684ba2920cbfe0df268554dca7b91ce306209801b55832db96ea856",
+     "sha256:98083b24dbfc92310c79257a836268e78fa0343b772ee3feca16cc06af4e0b72",
+     "sha256:51748d308a673274df24166a3eedc0b0ba57e9d55afff93e6bbd0dcabf708676",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:d04145f9d5910fb09b09198a6b361477bbb1dab033b479bdf091c972ae690f61",
+     "sha256:eb587827c26d923badb5d36f81216ad0b1773f4adbaae6ad47e0ae4b8957b300",
+     "sha256:cc60eee473ec051f92221bbc092647aa5bd97c7d5eab8ff9272cfd7bd5aeb4d6",
+     "sha256:55efdd6cc0d501a5e155ea32231a4c032d1f5b24c89b7b54dab18874e37f1c72",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:cbc3ebb985a3455912f30ca2bfc51798cd4da13bd0a777409320713a4dc217ad",
+     "sha256:fa600184d63979fd7f055f0727d283ff670652148b0267af2e5bcec7d8bd5562",
+     "sha256:63bd473e69201e7b13a7bdb9014c2c36178256ea182d0b3462708a684879debd",
+     "sha256:fb68a37f2e1913e74b00ad19e966aab38ed524733cf58d1d9b0901f9c5d5d588",
+     "sha256:3a2c24300eb825c0fe438bde16c1d7277f869d20f2d25fa1788a8a9bcc765d77",
+     "sha256:8a59003ee58c3f79aec7f83745e3079cecd765c84d05400b7220b95e419ff711",
+     "sha256:4f009b745babd53fef03943cd910055df90234d156412e9a3cb458e9f75a9452",
+     "sha256:730f725328f63aa21ccfb3e4a9a92ed17fc88cf2884c3ec5a33e955fc6d3ee6c",
+     "sha256:2767b1b91ff4e5e3c1c42d180300605ab34cf212bc03b2a66849a60626663baa",
+     "sha256:9adb6e0196b246dbdfba82f524a8294ff99159cecc55e3451a7415f5fc323b45",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:aa9ec4a46a475b82658167b8f885fdc17d73143ffe9b63026baf8d983ce3b5bb",
+     "sha256:d32aa8e4c5b2000ee44b5c1e0853a1370234645885b3670628b435519f0bae6e",
+     "sha256:ffb3c994ca85491935c3cdc6c2ebef78d3c97ac7d2a9868b336c41f9f75116e6",
+     "sha256:79182e9540a195872f83411d54d956c80a212735ddd19faf77513b09a08702da",
+     "sha256:f6c126f9c8fcb01c1bb1022285281302fd952af3df732b8ecd8255d063a88f0a",
+     "sha256:b6eb487aef9062154532d378c5eaa3fdd50e80e5eb35a0821725f3aab5f9b6de",
+     "sha256:4e3cbc5d2c076a73b1e40feecb767b3e700381cc3986951c4089c51f6383915f",
+     "sha256:64bffb1c54395ac7310ee9fe2e7e137d8aad56b6222e7d93b64a31b92f9f1ddf",
+     "sha256:77c9ccddfd8b745f83de4f6b0dac829ac0aa1c4ffe9aa5c99f7059583abd8530",
+     "sha256:905261645db650888ab71fc74898c23b052d872da6c422629eaab03c3881c5f4",
+     "sha256:4f30857be58a0246fd5bda20b60e79d000de8fe14b3be5ffc2cb94d783d421c6",
+     "sha256:83ea17ce6045203d4938207acfe55d2e2aa7897a939cf9e88c6f545d2a4a6010",
+     "sha256:027284c3e479d0dd5028527b3d6dc9ed749c9153675fa7ff7fd1a66688310d5e",
+     "sha256:74faa924bb8222095528a3de113456ed38efcac83a4e949630543fa355eef5ed",
+     "sha256:ecc3d237bec5a72bd1ad80edabd772cc8673f4dffff8dde7e83c2e41b5d89a2f",
+     "sha256:f08b003c4625ddfe5a35d042101af540ff2c7d7a159a8f1f40b7bacdcd4c8a65",
+     "sha256:1348c1414fb49b9bdabc7267f45e61b75bc185e70a5aaac571ae254f6b9c9684",
+     "sha256:572592986335de418e248e0c874255cab8b135f68c2502840c7681d01d18db5d",
+     "sha256:ecaf7138705be03e0a7a516ab19355ec309864b3e03fdcca1812d88ab53d3d10",
+     "sha256:d6196e2a07163d7b80804ebde9bf307926ed12e10f0f35ced7f0c8eced2b5318",
+     "sha256:cd76e2f10a43ac0e7e6422b251fa562e07fa4c65ff3f1a7e7b0f571fe2a9f92a",
+     "sha256:d9136024604e5a23a7f08d86de4be1b0aab3b71bc17dfd9f73c23d8bea001d0e",
+     "sha256:3bd9f7d2dce726733304eb67e266aaecf36cb4435c88b731fa9f7394b0c7ac0d",
+     "sha256:84769698e7074c1edcc5a87ed7dfbd8aff215f2a9b408cf004e279e1742c38f6",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:cd1787aa903cc3c61ac12d4ae7797465d9eefab52a368a31e9c3007e7a61183a",
+     "sha256:229ac774daac5a7b1556625935448ea46bf6bfd67af5de2c6a93fd49d6fe2bff",
+     "sha256:125f4d3b106e5b9b932a30bad131e4a98111baf8f4f35c9c1c2d7e0f5173394d",
+     "sha256:d850fd4cf8fedc545a8e80150982536c1914a622e8630291558271a009b4076b"
+    ],
+    "image_content_sha256": "85288c9a8d38edc3c0dcbe24be7514c9d2f0a0723b842adf3b09e5bd64fa12f3",
+    "image_labels": {
+     "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e",
+     "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+     "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "ai.vllm.image.tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+     "local.spark-ds41f.cuda.version": "13.5.37",
+     "local.spark-ds41f.nccl.patch-head": "eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6",
+     "local.spark-ds41f.nccl.ref": "refs/tags/v2.30.7-1",
+     "local.spark-ds41f.nccl.revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
+     "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+     "local.spark-ds41f.nccl.upstream": "https://github.com/NVIDIA/nccl",
+     "local.spark-ds41f.sparknet.patch-head": "1fdf8dc72bf92e21ca5813ad8f0b63c52af3ad9e",
+     "local.spark-ds41f.sparknet.ref": "main",
+     "local.spark-ds41f.sparknet.revision": "1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf",
+     "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+     "local.spark-ds41f.sparknet.upstream": "https://github.com/christopherowen/dgx-spark-networking",
+     "local.spark-ds41f.tile_kernels.patch-head": "edfa64d018bc64006fcb07c95c32fa196363c0ae",
+     "local.spark-ds41f.tile_kernels.ref": "main",
+     "local.spark-ds41f.tile_kernels.revision": "66258df6175d2f630ffecb04c5ab66bff8a2ae6a",
+     "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+     "local.spark-ds41f.tile_kernels.upstream": "https://github.com/deepseek-ai/TileKernels",
+     "local.spark-ds41f.tilelang.patch-head": "444b0447a201e24982099abfd10f67fd8b6104df",
+     "local.spark-ds41f.tilelang.ref": "main",
+     "local.spark-ds41f.tilelang.revision": "2123e412ce2217b324c50c4ec967213906456ac5",
+     "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+     "local.spark-ds41f.tilelang.upstream": "https://github.com/tile-ai/tilelang",
+     "local.spark-ds41f.vllm.patch-head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+     "local.spark-ds41f.vllm.ref": "integration/karmic-kraken-beta",
+     "local.spark-ds41f.vllm.revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+     "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+     "local.spark-ds41f.vllm.upstream": "https://github.com/local-inference-lab/vllm",
+     "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+     "org.opencontainers.image.base.digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+     "org.opencontainers.image.base.name": "docker.io/vllm/vllm-openai",
+     "org.opencontainers.image.ref.name": "ubuntu",
+     "org.opencontainers.image.revision": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+     "org.opencontainers.image.source": "https://github.com/christopherowen/spark-ds41f",
+     "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "org.opencontainers.image.version": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    }
+   },
+   "spark-b": {
+    "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "container_started_at": "2026-11-19T10:52:04.869642883Z",
+    "checkout": null,
+    "image_layers": [
+     "sha256:ab34259f9ca5d315bec1b17d9f1ca272e84dedd964a8988695daf0ec3e0bbc2e",
+     "sha256:45ec5cf5eb719732dd8022c3e1499cb58dd20b47224aad19db1c2a7ba9aaaca7",
+     "sha256:1e07ba147d8b447007f54b570c25513c71b81b33e3849115838dded2ad222090",
+     "sha256:468a19d3be08446875045cd9e133ef47589431cb016896768394fe0e77766f2d",
+     "sha256:b7ec8fd7c485bbedbe64cbc5a7a810ceabb9156e95c83ba60596ddb9b4955d48",
+     "sha256:bfe608f3975233ac457109ce94397486c2a392a0ec479ab5144699c612a755d5",
+     "sha256:08f8a56a3684ba2920cbfe0df268554dca7b91ce306209801b55832db96ea856",
+     "sha256:98083b24dbfc92310c79257a836268e78fa0343b772ee3feca16cc06af4e0b72",
+     "sha256:51748d308a673274df24166a3eedc0b0ba57e9d55afff93e6bbd0dcabf708676",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:d04145f9d5910fb09b09198a6b361477bbb1dab033b479bdf091c972ae690f61",
+     "sha256:eb587827c26d923badb5d36f81216ad0b1773f4adbaae6ad47e0ae4b8957b300",
+     "sha256:cc60eee473ec051f92221bbc092647aa5bd97c7d5eab8ff9272cfd7bd5aeb4d6",
+     "sha256:55efdd6cc0d501a5e155ea32231a4c032d1f5b24c89b7b54dab18874e37f1c72",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:cbc3ebb985a3455912f30ca2bfc51798cd4da13bd0a777409320713a4dc217ad",
+     "sha256:fa600184d63979fd7f055f0727d283ff670652148b0267af2e5bcec7d8bd5562",
+     "sha256:63bd473e69201e7b13a7bdb9014c2c36178256ea182d0b3462708a684879debd",
+     "sha256:fb68a37f2e1913e74b00ad19e966aab38ed524733cf58d1d9b0901f9c5d5d588",
+     "sha256:3a2c24300eb825c0fe438bde16c1d7277f869d20f2d25fa1788a8a9bcc765d77",
+     "sha256:8a59003ee58c3f79aec7f83745e3079cecd765c84d05400b7220b95e419ff711",
+     "sha256:4f009b745babd53fef03943cd910055df90234d156412e9a3cb458e9f75a9452",
+     "sha256:730f725328f63aa21ccfb3e4a9a92ed17fc88cf2884c3ec5a33e955fc6d3ee6c",
+     "sha256:2767b1b91ff4e5e3c1c42d180300605ab34cf212bc03b2a66849a60626663baa",
+     "sha256:9adb6e0196b246dbdfba82f524a8294ff99159cecc55e3451a7415f5fc323b45",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:aa9ec4a46a475b82658167b8f885fdc17d73143ffe9b63026baf8d983ce3b5bb",
+     "sha256:d32aa8e4c5b2000ee44b5c1e0853a1370234645885b3670628b435519f0bae6e",
+     "sha256:ffb3c994ca85491935c3cdc6c2ebef78d3c97ac7d2a9868b336c41f9f75116e6",
+     "sha256:79182e9540a195872f83411d54d956c80a212735ddd19faf77513b09a08702da",
+     "sha256:f6c126f9c8fcb01c1bb1022285281302fd952af3df732b8ecd8255d063a88f0a",
+     "sha256:b6eb487aef9062154532d378c5eaa3fdd50e80e5eb35a0821725f3aab5f9b6de",
+     "sha256:4e3cbc5d2c076a73b1e40feecb767b3e700381cc3986951c4089c51f6383915f",
+     "sha256:64bffb1c54395ac7310ee9fe2e7e137d8aad56b6222e7d93b64a31b92f9f1ddf",
+     "sha256:77c9ccddfd8b745f83de4f6b0dac829ac0aa1c4ffe9aa5c99f7059583abd8530",
+     "sha256:905261645db650888ab71fc74898c23b052d872da6c422629eaab03c3881c5f4",
+     "sha256:4f30857be58a0246fd5bda20b60e79d000de8fe14b3be5ffc2cb94d783d421c6",
+     "sha256:83ea17ce6045203d4938207acfe55d2e2aa7897a939cf9e88c6f545d2a4a6010",
+     "sha256:027284c3e479d0dd5028527b3d6dc9ed749c9153675fa7ff7fd1a66688310d5e",
+     "sha256:74faa924bb8222095528a3de113456ed38efcac83a4e949630543fa355eef5ed",
+     "sha256:ecc3d237bec5a72bd1ad80edabd772cc8673f4dffff8dde7e83c2e41b5d89a2f",
+     "sha256:f08b003c4625ddfe5a35d042101af540ff2c7d7a159a8f1f40b7bacdcd4c8a65",
+     "sha256:1348c1414fb49b9bdabc7267f45e61b75bc185e70a5aaac571ae254f6b9c9684",
+     "sha256:572592986335de418e248e0c874255cab8b135f68c2502840c7681d01d18db5d",
+     "sha256:ecaf7138705be03e0a7a516ab19355ec309864b3e03fdcca1812d88ab53d3d10",
+     "sha256:d6196e2a07163d7b80804ebde9bf307926ed12e10f0f35ced7f0c8eced2b5318",
+     "sha256:cd76e2f10a43ac0e7e6422b251fa562e07fa4c65ff3f1a7e7b0f571fe2a9f92a",
+     "sha256:d9136024604e5a23a7f08d86de4be1b0aab3b71bc17dfd9f73c23d8bea001d0e",
+     "sha256:3bd9f7d2dce726733304eb67e266aaecf36cb4435c88b731fa9f7394b0c7ac0d",
+     "sha256:84769698e7074c1edcc5a87ed7dfbd8aff215f2a9b408cf004e279e1742c38f6",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:cd1787aa903cc3c61ac12d4ae7797465d9eefab52a368a31e9c3007e7a61183a",
+     "sha256:229ac774daac5a7b1556625935448ea46bf6bfd67af5de2c6a93fd49d6fe2bff",
+     "sha256:125f4d3b106e5b9b932a30bad131e4a98111baf8f4f35c9c1c2d7e0f5173394d",
+     "sha256:d850fd4cf8fedc545a8e80150982536c1914a622e8630291558271a009b4076b"
+    ],
+    "image_content_sha256": "85288c9a8d38edc3c0dcbe24be7514c9d2f0a0723b842adf3b09e5bd64fa12f3",
+    "image_labels": {
+     "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e",
+     "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+     "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "ai.vllm.image.tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+     "local.spark-ds41f.cuda.version": "13.5.37",
+     "local.spark-ds41f.nccl.patch-head": "eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6",
+     "local.spark-ds41f.nccl.ref": "refs/tags/v2.30.7-1",
+     "local.spark-ds41f.nccl.revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
+     "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+     "local.spark-ds41f.nccl.upstream": "https://github.com/NVIDIA/nccl",
+     "local.spark-ds41f.sparknet.patch-head": "1fdf8dc72bf92e21ca5813ad8f0b63c52af3ad9e",
+     "local.spark-ds41f.sparknet.ref": "main",
+     "local.spark-ds41f.sparknet.revision": "1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf",
+     "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+     "local.spark-ds41f.sparknet.upstream": "https://github.com/christopherowen/dgx-spark-networking",
+     "local.spark-ds41f.tile_kernels.patch-head": "edfa64d018bc64006fcb07c95c32fa196363c0ae",
+     "local.spark-ds41f.tile_kernels.ref": "main",
+     "local.spark-ds41f.tile_kernels.revision": "66258df6175d2f630ffecb04c5ab66bff8a2ae6a",
+     "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+     "local.spark-ds41f.tile_kernels.upstream": "https://github.com/deepseek-ai/TileKernels",
+     "local.spark-ds41f.tilelang.patch-head": "444b0447a201e24982099abfd10f67fd8b6104df",
+     "local.spark-ds41f.tilelang.ref": "main",
+     "local.spark-ds41f.tilelang.revision": "2123e412ce2217b324c50c4ec967213906456ac5",
+     "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+     "local.spark-ds41f.tilelang.upstream": "https://github.com/tile-ai/tilelang",
+     "local.spark-ds41f.vllm.patch-head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+     "local.spark-ds41f.vllm.ref": "integration/karmic-kraken-beta",
+     "local.spark-ds41f.vllm.revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+     "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+     "local.spark-ds41f.vllm.upstream": "https://github.com/local-inference-lab/vllm",
+     "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+     "org.opencontainers.image.base.digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+     "org.opencontainers.image.base.name": "docker.io/vllm/vllm-openai",
+     "org.opencontainers.image.ref.name": "ubuntu",
+     "org.opencontainers.image.revision": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+     "org.opencontainers.image.source": "https://github.com/christopherowen/spark-ds41f",
+     "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "org.opencontainers.image.version": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    }
+   },
+   "spark-c": {
+    "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "container_started_at": "2026-11-19T10:52:06.511778387Z",
+    "checkout": null,
+    "image_layers": [
+     "sha256:ab34259f9ca5d315bec1b17d9f1ca272e84dedd964a8988695daf0ec3e0bbc2e",
+     "sha256:45ec5cf5eb719732dd8022c3e1499cb58dd20b47224aad19db1c2a7ba9aaaca7",
+     "sha256:1e07ba147d8b447007f54b570c25513c71b81b33e3849115838dded2ad222090",
+     "sha256:468a19d3be08446875045cd9e133ef47589431cb016896768394fe0e77766f2d",
+     "sha256:b7ec8fd7c485bbedbe64cbc5a7a810ceabb9156e95c83ba60596ddb9b4955d48",
+     "sha256:bfe608f3975233ac457109ce94397486c2a392a0ec479ab5144699c612a755d5",
+     "sha256:08f8a56a3684ba2920cbfe0df268554dca7b91ce306209801b55832db96ea856",
+     "sha256:98083b24dbfc92310c79257a836268e78fa0343b772ee3feca16cc06af4e0b72",
+     "sha256:51748d308a673274df24166a3eedc0b0ba57e9d55afff93e6bbd0dcabf708676",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:d04145f9d5910fb09b09198a6b361477bbb1dab033b479bdf091c972ae690f61",
+     "sha256:eb587827c26d923badb5d36f81216ad0b1773f4adbaae6ad47e0ae4b8957b300",
+     "sha256:cc60eee473ec051f92221bbc092647aa5bd97c7d5eab8ff9272cfd7bd5aeb4d6",
+     "sha256:55efdd6cc0d501a5e155ea32231a4c032d1f5b24c89b7b54dab18874e37f1c72",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:cbc3ebb985a3455912f30ca2bfc51798cd4da13bd0a777409320713a4dc217ad",
+     "sha256:fa600184d63979fd7f055f0727d283ff670652148b0267af2e5bcec7d8bd5562",
+     "sha256:63bd473e69201e7b13a7bdb9014c2c36178256ea182d0b3462708a684879debd",
+     "sha256:fb68a37f2e1913e74b00ad19e966aab38ed524733cf58d1d9b0901f9c5d5d588",
+     "sha256:3a2c24300eb825c0fe438bde16c1d7277f869d20f2d25fa1788a8a9bcc765d77",
+     "sha256:8a59003ee58c3f79aec7f83745e3079cecd765c84d05400b7220b95e419ff711",
+     "sha256:4f009b745babd53fef03943cd910055df90234d156412e9a3cb458e9f75a9452",
+     "sha256:730f725328f63aa21ccfb3e4a9a92ed17fc88cf2884c3ec5a33e955fc6d3ee6c",
+     "sha256:2767b1b91ff4e5e3c1c42d180300605ab34cf212bc03b2a66849a60626663baa",
+     "sha256:9adb6e0196b246dbdfba82f524a8294ff99159cecc55e3451a7415f5fc323b45",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:aa9ec4a46a475b82658167b8f885fdc17d73143ffe9b63026baf8d983ce3b5bb",
+     "sha256:d32aa8e4c5b2000ee44b5c1e0853a1370234645885b3670628b435519f0bae6e",
+     "sha256:ffb3c994ca85491935c3cdc6c2ebef78d3c97ac7d2a9868b336c41f9f75116e6",
+     "sha256:79182e9540a195872f83411d54d956c80a212735ddd19faf77513b09a08702da",
+     "sha256:f6c126f9c8fcb01c1bb1022285281302fd952af3df732b8ecd8255d063a88f0a",
+     "sha256:b6eb487aef9062154532d378c5eaa3fdd50e80e5eb35a0821725f3aab5f9b6de",
+     "sha256:4e3cbc5d2c076a73b1e40feecb767b3e700381cc3986951c4089c51f6383915f",
+     "sha256:64bffb1c54395ac7310ee9fe2e7e137d8aad56b6222e7d93b64a31b92f9f1ddf",
+     "sha256:77c9ccddfd8b745f83de4f6b0dac829ac0aa1c4ffe9aa5c99f7059583abd8530",
+     "sha256:905261645db650888ab71fc74898c23b052d872da6c422629eaab03c3881c5f4",
+     "sha256:4f30857be58a0246fd5bda20b60e79d000de8fe14b3be5ffc2cb94d783d421c6",
+     "sha256:83ea17ce6045203d4938207acfe55d2e2aa7897a939cf9e88c6f545d2a4a6010",
+     "sha256:027284c3e479d0dd5028527b3d6dc9ed749c9153675fa7ff7fd1a66688310d5e",
+     "sha256:74faa924bb8222095528a3de113456ed38efcac83a4e949630543fa355eef5ed",
+     "sha256:ecc3d237bec5a72bd1ad80edabd772cc8673f4dffff8dde7e83c2e41b5d89a2f",
+     "sha256:f08b003c4625ddfe5a35d042101af540ff2c7d7a159a8f1f40b7bacdcd4c8a65",
+     "sha256:1348c1414fb49b9bdabc7267f45e61b75bc185e70a5aaac571ae254f6b9c9684",
+     "sha256:572592986335de418e248e0c874255cab8b135f68c2502840c7681d01d18db5d",
+     "sha256:ecaf7138705be03e0a7a516ab19355ec309864b3e03fdcca1812d88ab53d3d10",
+     "sha256:d6196e2a07163d7b80804ebde9bf307926ed12e10f0f35ced7f0c8eced2b5318",
+     "sha256:cd76e2f10a43ac0e7e6422b251fa562e07fa4c65ff3f1a7e7b0f571fe2a9f92a",
+     "sha256:d9136024604e5a23a7f08d86de4be1b0aab3b71bc17dfd9f73c23d8bea001d0e",
+     "sha256:3bd9f7d2dce726733304eb67e266aaecf36cb4435c88b731fa9f7394b0c7ac0d",
+     "sha256:84769698e7074c1edcc5a87ed7dfbd8aff215f2a9b408cf004e279e1742c38f6",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:cd1787aa903cc3c61ac12d4ae7797465d9eefab52a368a31e9c3007e7a61183a",
+     "sha256:229ac774daac5a7b1556625935448ea46bf6bfd67af5de2c6a93fd49d6fe2bff",
+     "sha256:125f4d3b106e5b9b932a30bad131e4a98111baf8f4f35c9c1c2d7e0f5173394d",
+     "sha256:d850fd4cf8fedc545a8e80150982536c1914a622e8630291558271a009b4076b"
+    ],
+    "image_content_sha256": "85288c9a8d38edc3c0dcbe24be7514c9d2f0a0723b842adf3b09e5bd64fa12f3",
+    "image_labels": {
+     "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e",
+     "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+     "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "ai.vllm.image.tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+     "local.spark-ds41f.cuda.version": "13.5.37",
+     "local.spark-ds41f.nccl.patch-head": "eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6",
+     "local.spark-ds41f.nccl.ref": "refs/tags/v2.30.7-1",
+     "local.spark-ds41f.nccl.revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
+     "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+     "local.spark-ds41f.nccl.upstream": "https://github.com/NVIDIA/nccl",
+     "local.spark-ds41f.sparknet.patch-head": "1fdf8dc72bf92e21ca5813ad8f0b63c52af3ad9e",
+     "local.spark-ds41f.sparknet.ref": "main",
+     "local.spark-ds41f.sparknet.revision": "1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf",
+     "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+     "local.spark-ds41f.sparknet.upstream": "https://github.com/christopherowen/dgx-spark-networking",
+     "local.spark-ds41f.tile_kernels.patch-head": "edfa64d018bc64006fcb07c95c32fa196363c0ae",
+     "local.spark-ds41f.tile_kernels.ref": "main",
+     "local.spark-ds41f.tile_kernels.revision": "66258df6175d2f630ffecb04c5ab66bff8a2ae6a",
+     "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+     "local.spark-ds41f.tile_kernels.upstream": "https://github.com/deepseek-ai/TileKernels",
+     "local.spark-ds41f.tilelang.patch-head": "444b0447a201e24982099abfd10f67fd8b6104df",
+     "local.spark-ds41f.tilelang.ref": "main",
+     "local.spark-ds41f.tilelang.revision": "2123e412ce2217b324c50c4ec967213906456ac5",
+     "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+     "local.spark-ds41f.tilelang.upstream": "https://github.com/tile-ai/tilelang",
+     "local.spark-ds41f.vllm.patch-head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+     "local.spark-ds41f.vllm.ref": "integration/karmic-kraken-beta",
+     "local.spark-ds41f.vllm.revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+     "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+     "local.spark-ds41f.vllm.upstream": "https://github.com/local-inference-lab/vllm",
+     "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+     "org.opencontainers.image.base.digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+     "org.opencontainers.image.base.name": "docker.io/vllm/vllm-openai",
+     "org.opencontainers.image.ref.name": "ubuntu",
+     "org.opencontainers.image.revision": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+     "org.opencontainers.image.source": "https://github.com/christopherowen/spark-ds41f",
+     "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "org.opencontainers.image.version": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    }
+   },
+   "spark-d": {
+    "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "container_started_at": "2026-11-19T10:52:08.135343228Z",
+    "checkout": null,
+    "image_layers": [
+     "sha256:ab34259f9ca5d315bec1b17d9f1ca272e84dedd964a8988695daf0ec3e0bbc2e",
+     "sha256:45ec5cf5eb719732dd8022c3e1499cb58dd20b47224aad19db1c2a7ba9aaaca7",
+     "sha256:1e07ba147d8b447007f54b570c25513c71b81b33e3849115838dded2ad222090",
+     "sha256:468a19d3be08446875045cd9e133ef47589431cb016896768394fe0e77766f2d",
+     "sha256:b7ec8fd7c485bbedbe64cbc5a7a810ceabb9156e95c83ba60596ddb9b4955d48",
+     "sha256:bfe608f3975233ac457109ce94397486c2a392a0ec479ab5144699c612a755d5",
+     "sha256:08f8a56a3684ba2920cbfe0df268554dca7b91ce306209801b55832db96ea856",
+     "sha256:98083b24dbfc92310c79257a836268e78fa0343b772ee3feca16cc06af4e0b72",
+     "sha256:51748d308a673274df24166a3eedc0b0ba57e9d55afff93e6bbd0dcabf708676",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:d04145f9d5910fb09b09198a6b361477bbb1dab033b479bdf091c972ae690f61",
+     "sha256:eb587827c26d923badb5d36f81216ad0b1773f4adbaae6ad47e0ae4b8957b300",
+     "sha256:cc60eee473ec051f92221bbc092647aa5bd97c7d5eab8ff9272cfd7bd5aeb4d6",
+     "sha256:55efdd6cc0d501a5e155ea32231a4c032d1f5b24c89b7b54dab18874e37f1c72",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:941e003f58e665068f2bdb426cb16ea8ea1a19133d4b3be9352db989af65a87b",
+     "sha256:cbc3ebb985a3455912f30ca2bfc51798cd4da13bd0a777409320713a4dc217ad",
+     "sha256:fa600184d63979fd7f055f0727d283ff670652148b0267af2e5bcec7d8bd5562",
+     "sha256:63bd473e69201e7b13a7bdb9014c2c36178256ea182d0b3462708a684879debd",
+     "sha256:fb68a37f2e1913e74b00ad19e966aab38ed524733cf58d1d9b0901f9c5d5d588",
+     "sha256:3a2c24300eb825c0fe438bde16c1d7277f869d20f2d25fa1788a8a9bcc765d77",
+     "sha256:8a59003ee58c3f79aec7f83745e3079cecd765c84d05400b7220b95e419ff711",
+     "sha256:4f009b745babd53fef03943cd910055df90234d156412e9a3cb458e9f75a9452",
+     "sha256:730f725328f63aa21ccfb3e4a9a92ed17fc88cf2884c3ec5a33e955fc6d3ee6c",
+     "sha256:2767b1b91ff4e5e3c1c42d180300605ab34cf212bc03b2a66849a60626663baa",
+     "sha256:9adb6e0196b246dbdfba82f524a8294ff99159cecc55e3451a7415f5fc323b45",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:aa9ec4a46a475b82658167b8f885fdc17d73143ffe9b63026baf8d983ce3b5bb",
+     "sha256:d32aa8e4c5b2000ee44b5c1e0853a1370234645885b3670628b435519f0bae6e",
+     "sha256:ffb3c994ca85491935c3cdc6c2ebef78d3c97ac7d2a9868b336c41f9f75116e6",
+     "sha256:79182e9540a195872f83411d54d956c80a212735ddd19faf77513b09a08702da",
+     "sha256:f6c126f9c8fcb01c1bb1022285281302fd952af3df732b8ecd8255d063a88f0a",
+     "sha256:b6eb487aef9062154532d378c5eaa3fdd50e80e5eb35a0821725f3aab5f9b6de",
+     "sha256:4e3cbc5d2c076a73b1e40feecb767b3e700381cc3986951c4089c51f6383915f",
+     "sha256:64bffb1c54395ac7310ee9fe2e7e137d8aad56b6222e7d93b64a31b92f9f1ddf",
+     "sha256:77c9ccddfd8b745f83de4f6b0dac829ac0aa1c4ffe9aa5c99f7059583abd8530",
+     "sha256:905261645db650888ab71fc74898c23b052d872da6c422629eaab03c3881c5f4",
+     "sha256:4f30857be58a0246fd5bda20b60e79d000de8fe14b3be5ffc2cb94d783d421c6",
+     "sha256:83ea17ce6045203d4938207acfe55d2e2aa7897a939cf9e88c6f545d2a4a6010",
+     "sha256:027284c3e479d0dd5028527b3d6dc9ed749c9153675fa7ff7fd1a66688310d5e",
+     "sha256:74faa924bb8222095528a3de113456ed38efcac83a4e949630543fa355eef5ed",
+     "sha256:ecc3d237bec5a72bd1ad80edabd772cc8673f4dffff8dde7e83c2e41b5d89a2f",
+     "sha256:f08b003c4625ddfe5a35d042101af540ff2c7d7a159a8f1f40b7bacdcd4c8a65",
+     "sha256:1348c1414fb49b9bdabc7267f45e61b75bc185e70a5aaac571ae254f6b9c9684",
+     "sha256:572592986335de418e248e0c874255cab8b135f68c2502840c7681d01d18db5d",
+     "sha256:ecaf7138705be03e0a7a516ab19355ec309864b3e03fdcca1812d88ab53d3d10",
+     "sha256:d6196e2a07163d7b80804ebde9bf307926ed12e10f0f35ced7f0c8eced2b5318",
+     "sha256:cd76e2f10a43ac0e7e6422b251fa562e07fa4c65ff3f1a7e7b0f571fe2a9f92a",
+     "sha256:d9136024604e5a23a7f08d86de4be1b0aab3b71bc17dfd9f73c23d8bea001d0e",
+     "sha256:3bd9f7d2dce726733304eb67e266aaecf36cb4435c88b731fa9f7394b0c7ac0d",
+     "sha256:84769698e7074c1edcc5a87ed7dfbd8aff215f2a9b408cf004e279e1742c38f6",
+     "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+     "sha256:cd1787aa903cc3c61ac12d4ae7797465d9eefab52a368a31e9c3007e7a61183a",
+     "sha256:229ac774daac5a7b1556625935448ea46bf6bfd67af5de2c6a93fd49d6fe2bff",
+     "sha256:125f4d3b106e5b9b932a30bad131e4a98111baf8f4f35c9c1c2d7e0f5173394d",
+     "sha256:d850fd4cf8fedc545a8e80150982536c1914a622e8630291558271a009b4076b"
+    ],
+    "image_content_sha256": "85288c9a8d38edc3c0dcbe24be7514c9d2f0a0723b842adf3b09e5bd64fa12f3",
+    "image_labels": {
+     "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e",
+     "ai.vllm.build.pipeline": "019d130e-464e-4ff7-b84b-492992c0c06b",
+     "ai.vllm.build.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "ai.vllm.image.tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+     "local.spark-ds41f.cuda.version": "13.5.37",
+     "local.spark-ds41f.nccl.patch-head": "eeacf1c6343f0499e4e7ab20ec7eecfb6f62eda6",
+     "local.spark-ds41f.nccl.ref": "refs/tags/v2.30.7-1",
+     "local.spark-ds41f.nccl.revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
+     "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+     "local.spark-ds41f.nccl.upstream": "https://github.com/NVIDIA/nccl",
+     "local.spark-ds41f.sparknet.patch-head": "1fdf8dc72bf92e21ca5813ad8f0b63c52af3ad9e",
+     "local.spark-ds41f.sparknet.ref": "main",
+     "local.spark-ds41f.sparknet.revision": "1fd6a1fbd8dc4884057046d1ebd93d585c9e4bcf",
+     "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+     "local.spark-ds41f.sparknet.upstream": "https://github.com/christopherowen/dgx-spark-networking",
+     "local.spark-ds41f.tile_kernels.patch-head": "edfa64d018bc64006fcb07c95c32fa196363c0ae",
+     "local.spark-ds41f.tile_kernels.ref": "main",
+     "local.spark-ds41f.tile_kernels.revision": "66258df6175d2f630ffecb04c5ab66bff8a2ae6a",
+     "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+     "local.spark-ds41f.tile_kernels.upstream": "https://github.com/deepseek-ai/TileKernels",
+     "local.spark-ds41f.tilelang.patch-head": "444b0447a201e24982099abfd10f67fd8b6104df",
+     "local.spark-ds41f.tilelang.ref": "main",
+     "local.spark-ds41f.tilelang.revision": "2123e412ce2217b324c50c4ec967213906456ac5",
+     "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+     "local.spark-ds41f.tilelang.upstream": "https://github.com/tile-ai/tilelang",
+     "local.spark-ds41f.vllm.patch-head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+     "local.spark-ds41f.vllm.ref": "integration/karmic-kraken-beta",
+     "local.spark-ds41f.vllm.revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+     "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+     "local.spark-ds41f.vllm.upstream": "https://github.com/local-inference-lab/vllm",
+     "maintainer": "NVIDIA CORPORATION <cudatools@nvidia.com>",
+     "org.opencontainers.image.base.digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+     "org.opencontainers.image.base.name": "docker.io/vllm/vllm-openai",
+     "org.opencontainers.image.ref.name": "ubuntu",
+     "org.opencontainers.image.revision": "rsync-08f1f810cbbd73ea0073c414c4a13b7d",
+     "org.opencontainers.image.source": "https://github.com/christopherowen/spark-ds41f",
+     "org.opencontainers.image.url": "https://buildkite.com/vllm/release-v2/builds/6692",
+     "org.opencontainers.image.version": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    }
+   }
+  },
+  "live_problems": [],
+  "live_warnings": [
+   "spark-a: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k",
+   "spark-a: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k",
+   "spark-a: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k",
+   "spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002",
+   "spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless",
+   "spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)",
+   "spark-a: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k",
+   "spark-a: serving container spark-ds41f is not running",
+   "spark-b: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k",
+   "spark-b: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k",
+   "spark-b: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k",
+   "spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001",
+   "spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless",
+   "spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)",
+   "spark-b: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k",
+   "spark-b: serving container spark-ds41f is not running",
+   "spark-c: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k",
+   "spark-c: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k",
+   "spark-c: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k",
+   "spark-c: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)",
+   "spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless",
+   "spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)",
+   "spark-c: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k",
+   "spark-c: serving container spark-ds41f is not running",
+   "spark-d: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k",
+   "spark-d: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k",
+   "spark-d: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k",
+   "spark-d: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)",
+   "spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless",
+   "spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)",
+   "spark-d: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k",
+   "spark-d: serving container spark-ds41f is not running",
+   "Kernel corrections (not executed):\n  spark-a: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k\n  spark-a: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k\n  spark-b: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k\n  spark-b: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k\n  spark-c: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k\n  spark-c: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k\n  spark-d: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k\n  spark-d: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k"
+  ]
+ },
+ "workload": {
+  "url": "http://192.168.2.180:8888",
+  "suites": [
+   "quality",
+   "decode",
+   "prefill"
+  ],
+  "seed": 0,
+  "precision_pct": 2.0,
+  "min_samples": 3,
+  "max_samples": 3,
+  "concurrency": [
+   1,
+   2,
+   4
+  ],
+  "decode_cases": [
+   "prose-nothink",
+   "code-nothink"
+  ],
+  "converge_on": null,
+  "prefill_text": "source",
+  "sampled_requests": 32,
+  "prefill_sizes": [
+   32768,
+   131072,
+   262144,
+   524288,
+   1000000
+  ],
+  "prefill_repeats": 2,
+  "prefix_tokens": 32768,
+  "admission_tokens": 65536,
+  "admission_output_tokens": 256,
+  "admission_force_length": false,
+  "memory_floor_gib": 4.0,
+  "prompts_sha256": "cc7f29400eff69775f0d9fb016be00924f46a81be7b42dc5c15a4eb9d82da779",
+  "precision_prompts_sha256": "a8703e4bf1f55b2360c351c335f00249653557d34ceb79d4e2e749570a2c91bb"
+ },
+ "reference": null,
+ "suites": {
+  "quality": {
+   "passed": 5,
+   "runs": [
+    {
+     "verdict": "pass",
+     "content": "```python\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n```\n\nBoth `get` and `put` run in **O(1)** average time, since `OrderedDict` provides constant-time lookups, insertions, and `move_to_end`/`popitem` operations."
+    },
+    {
+     "verdict": "pass",
+     "content": "```python\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n```\n\nBoth `get` and `put` run in **O(1)** average time, since `OrderedDict` provides constant-time lookups, insertions, and `move_to_end`/`popitem` operations."
+    },
+    {
+     "verdict": "pass",
+     "content": "```python\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n```\n\nBoth `get` and `put` run in **O(1)** average time, since `OrderedDict` provides constant-time lookups, insertions, and `move_to_end`/`popitem` operations."
+    },
+    {
+     "verdict": "pass",
+     "content": "```python\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n```\n\nBoth `get` and `put` run in **O(1)** average time, since `OrderedDict` provides constant-time lookups, insertions, and `move_to_end`/`popitem` operations."
+    },
+    {
+     "verdict": "pass",
+     "content": "```python\nfrom collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n\n    def get(self, key):\n        if key not in self.cache:\n            return -1\n        self.cache.move_to_end(key)\n        return self.cache[key]\n\n    def put(self, key, value):\n        if key in self.cache:\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        if len(self.cache) > self.capacity:\n            self.cache.popitem(last=False)\n```\n\nBoth `get` and `put` run in **O(1)** average time, since `OrderedDict` provides constant-time lookups, insertions, and `move_to_end`/`popitem` operations."
+    }
+   ],
+   "ok": true
+  },
+  "decode": {
+   "points": {
+    "prose-nothink-c1": {
+     "step_ms": {
+      "n": 3,
+      "mean": 27.608,
+      "median": 27.535,
+      "min": 27.466,
+      "max": 27.822,
+      "sd": 0.189,
+      "ci95": 0.469,
+      "ci95_pct": 1.7
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.575,
+      "median": 0.573,
+      "min": 0.572,
+      "max": 0.58,
+      "sd": 0.004,
+      "ci95": 0.011,
+      "ci95_pct": 1.87
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 2.634,
+      "median": 2.619,
+      "min": 2.608,
+      "max": 2.674,
+      "sd": 0.035,
+      "ci95": 0.087,
+      "ci95_pct": 3.32
+     },
+     "tps": {
+      "n": 3,
+      "mean": 89.995,
+      "median": 90.314,
+      "min": 88.27,
+      "max": 91.402,
+      "sd": 1.59,
+      "ci95": 3.95,
+      "ci95_pct": 4.39
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 95.392,
+      "median": 95.107,
+      "min": 94.961,
+      "max": 96.107,
+      "sd": 0.624,
+      "ci95": 1.55,
+      "ci95_pct": 1.62
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 95.387,
+      "median": 95.101,
+      "min": 94.961,
+      "max": 96.1,
+      "sd": 0.621,
+      "ci95": 1.543,
+      "ci95_pct": 1.62
+     },
+     "per_stream_decode_tps": {
+      "n": 3,
+      "mean": 95.387,
+      "median": 95.1,
+      "min": 94.96,
+      "max": 96.1,
+      "sd": 0.622,
+      "ci95": 1.545,
+      "ci95_pct": 1.62
+     },
+     "ttft_s": {
+      "n": 3,
+      "mean": 0.171,
+      "median": 0.148,
+      "min": 0.147,
+      "max": 0.218,
+      "sd": 0.041,
+      "ci95": 0.101,
+      "ci95_pct": 59.18
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 1.633,
+      "median": 1.619,
+      "min": 1.608,
+      "max": 1.674,
+      "sd": 0.035,
+      "ci95": 0.087,
+      "ci95_pct": 5.35
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 2.841,
+      "median": 2.825,
+      "min": 2.773,
+      "max": 2.926,
+      "sd": 0.078,
+      "ci95": 0.194,
+      "ci95_pct": 6.81
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 3,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    },
+    "prose-nothink-c2": {
+     "step_ms": {
+      "n": 3,
+      "mean": 28.699,
+      "median": 28.703,
+      "min": 28.478,
+      "max": 28.916,
+      "sd": 0.219,
+      "ci95": 0.544,
+      "ci95_pct": 1.9
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.547,
+      "median": 0.547,
+      "min": 0.545,
+      "max": 0.549,
+      "sd": 0.002,
+      "ci95": 0.006,
+      "ci95_pct": 1.07
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 2.457,
+      "median": 2.44,
+      "min": 2.417,
+      "max": 2.512,
+      "sd": 0.05,
+      "ci95": 0.123,
+      "ci95_pct": 5.02
+     },
+     "tps": {
+      "n": 3,
+      "mean": 159.537,
+      "median": 159.92,
+      "min": 158.029,
+      "max": 160.661,
+      "sd": 1.357,
+      "ci95": 3.372,
+      "ci95_pct": 2.11
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 171.188,
+      "median": 171.377,
+      "min": 168.422,
+      "max": 173.765,
+      "sd": 2.677,
+      "ci95": 6.649,
+      "ci95_pct": 3.88
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 171.187,
+      "median": 171.374,
+      "min": 168.421,
+      "max": 173.765,
+      "sd": 2.677,
+      "ci95": 6.65,
+      "ci95_pct": 3.88
+     },
+     "per_stream_decode_tps": {
+      "n": 6,
+      "mean": 86.153,
+      "median": 86.25,
+      "min": 84.22,
+      "max": 88.03,
+      "sd": 1.355,
+      "ci95": 1.422,
+      "ci95_pct": 1.65
+     },
+     "ttft_s": {
+      "n": 6,
+      "mean": 0.248,
+      "median": 0.249,
+      "min": 0.21,
+      "max": 0.304,
+      "sd": 0.035,
+      "ci95": 0.037,
+      "ci95_pct": 14.9
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 1.457,
+      "median": 1.44,
+      "min": 1.417,
+      "max": 1.512,
+      "sd": 0.05,
+      "ci95": 0.123,
+      "ci95_pct": 8.47
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 2.662,
+      "median": 2.622,
+      "min": 2.602,
+      "max": 2.764,
+      "sd": 0.088,
+      "ci95": 0.219,
+      "ci95_pct": 8.22
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 6,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    },
+    "prose-nothink-c4": {
+     "step_ms": {
+      "n": 3,
+      "mean": 31.571,
+      "median": 31.577,
+      "min": 31.518,
+      "max": 31.618,
+      "sd": 0.05,
+      "ci95": 0.125,
+      "ci95_pct": 0.4
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.529,
+      "median": 0.524,
+      "min": 0.523,
+      "max": 0.539,
+      "sd": 0.009,
+      "ci95": 0.023,
+      "ci95_pct": 4.3
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 2.428,
+      "median": 2.43,
+      "min": 2.426,
+      "max": 2.43,
+      "sd": 0.002,
+      "ci95": 0.005,
+      "ci95_pct": 0.2
+     },
+     "tps": {
+      "n": 3,
+      "mean": 281.499,
+      "median": 280.259,
+      "min": 277.575,
+      "max": 286.663,
+      "sd": 4.669,
+      "ci95": 11.6,
+      "ci95_pct": 4.12
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 307.683,
+      "median": 307.767,
+      "min": 307.368,
+      "max": 307.915,
+      "sd": 0.283,
+      "ci95": 0.703,
+      "ci95_pct": 0.23
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 307.683,
+      "median": 307.768,
+      "min": 307.369,
+      "max": 307.913,
+      "sd": 0.282,
+      "ci95": 0.7,
+      "ci95_pct": 0.23
+     },
+     "per_stream_decode_tps": {
+      "n": 12,
+      "mean": 77.688,
+      "median": 77.925,
+      "min": 76.83,
+      "max": 77.98,
+      "sd": 0.467,
+      "ci95": 0.3,
+      "ci95_pct": 0.39
+     },
+     "ttft_s": {
+      "n": 12,
+      "mean": 0.355,
+      "median": 0.379,
+      "min": 0.252,
+      "max": 0.416,
+      "sd": 0.055,
+      "ci95": 0.036,
+      "ci95_pct": 10.02
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 1.428,
+      "median": 1.43,
+      "min": 1.426,
+      "max": 1.43,
+      "sd": 0.002,
+      "ci95": 0.005,
+      "ci95_pct": 0.34
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 2.703,
+      "median": 2.728,
+      "min": 2.652,
+      "max": 2.729,
+      "sd": 0.044,
+      "ci95": 0.11,
+      "ci95_pct": 4.07
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 12,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    },
+    "code-nothink-c1": {
+     "step_ms": {
+      "n": 3,
+      "mean": 31.388,
+      "median": 31.449,
+      "min": 31.086,
+      "max": 31.628,
+      "sd": 0.276,
+      "ci95": 0.686,
+      "ci95_pct": 2.19
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.84,
+      "median": 0.841,
+      "min": 0.838,
+      "max": 0.841,
+      "sd": 0.002,
+      "ci95": 0.004,
+      "ci95_pct": 0.48
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 4.661,
+      "median": 4.654,
+      "min": 4.654,
+      "max": 4.673,
+      "sd": 0.011,
+      "ci95": 0.026,
+      "ci95_pct": 0.56
+     },
+     "tps": {
+      "n": 3,
+      "mean": 134.596,
+      "median": 135.94,
+      "min": 131.152,
+      "max": 136.695,
+      "sd": 3.006,
+      "ci95": 7.468,
+      "ci95_pct": 5.55
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 148.503,
+      "median": 148.015,
+      "min": 147.749,
+      "max": 149.745,
+      "sd": 1.084,
+      "ci95": 2.693,
+      "ci95_pct": 1.81
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 148.49,
+      "median": 148.002,
+      "min": 147.739,
+      "max": 149.73,
+      "sd": 1.082,
+      "ci95": 2.687,
+      "ci95_pct": 1.81
+     },
+     "per_stream_decode_tps": {
+      "n": 3,
+      "mean": 148.49,
+      "median": 148.0,
+      "min": 147.74,
+      "max": 149.73,
+      "sd": 1.082,
+      "ci95": 2.687,
+      "ci95_pct": 1.81
+     },
+     "ttft_s": {
+      "n": 3,
+      "mean": 0.184,
+      "median": 0.156,
+      "min": 0.149,
+      "max": 0.248,
+      "sd": 0.055,
+      "ci95": 0.137,
+      "ci95_pct": 74.29
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 3.661,
+      "median": 3.655,
+      "min": 3.655,
+      "max": 3.673,
+      "sd": 0.011,
+      "ci95": 0.026,
+      "ci95_pct": 0.71
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 4.358,
+      "median": 4.346,
+      "min": 4.346,
+      "max": 4.382,
+      "sd": 0.021,
+      "ci95": 0.052,
+      "ci95_pct": 1.19
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 3,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    },
+    "code-nothink-c2": {
+     "step_ms": {
+      "n": 3,
+      "mean": 43.169,
+      "median": 43.294,
+      "min": 42.911,
+      "max": 43.302,
+      "sd": 0.223,
+      "ci95": 0.555,
+      "ci95_pct": 1.29
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.84,
+      "median": 0.842,
+      "min": 0.837,
+      "max": 0.842,
+      "sd": 0.003,
+      "ci95": 0.008,
+      "ci95_pct": 0.9
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 4.519,
+      "median": 4.509,
+      "min": 4.509,
+      "max": 4.54,
+      "sd": 0.018,
+      "ci95": 0.044,
+      "ci95_pct": 0.98
+     },
+     "tps": {
+      "n": 3,
+      "mean": 190.747,
+      "median": 191.421,
+      "min": 187.832,
+      "max": 192.989,
+      "sd": 2.644,
+      "ci95": 6.568,
+      "ci95_pct": 3.44
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 209.371,
+      "median": 209.721,
+      "min": 208.248,
+      "max": 210.145,
+      "sd": 0.996,
+      "ci95": 2.474,
+      "ci95_pct": 1.18
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 209.372,
+      "median": 209.72,
+      "min": 208.249,
+      "max": 210.147,
+      "sd": 0.996,
+      "ci95": 2.474,
+      "ci95_pct": 1.18
+     },
+     "per_stream_decode_tps": {
+      "n": 6,
+      "mean": 107.813,
+      "median": 107.745,
+      "min": 105.85,
+      "max": 109.76,
+      "sd": 1.538,
+      "ci95": 1.614,
+      "ci95_pct": 1.5
+     },
+     "ttft_s": {
+      "n": 6,
+      "mean": 0.268,
+      "median": 0.265,
+      "min": 0.225,
+      "max": 0.336,
+      "sd": 0.042,
+      "ci95": 0.044,
+      "ci95_pct": 16.54
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 3.519,
+      "median": 3.509,
+      "min": 3.509,
+      "max": 3.54,
+      "sd": 0.018,
+      "ci95": 0.044,
+      "ci95_pct": 1.26
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 4.188,
+      "median": 4.167,
+      "min": 4.167,
+      "max": 4.23,
+      "sd": 0.037,
+      "ci95": 0.091,
+      "ci95_pct": 2.17
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 6,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    },
+    "code-nothink-c4": {
+     "step_ms": {
+      "n": 3,
+      "mean": 44.989,
+      "median": 47.118,
+      "min": 40.359,
+      "max": 47.49,
+      "sd": 4.014,
+      "ci95": 9.972,
+      "ci95_pct": 22.17
+     },
+     "accepted_per_verified": {
+      "n": 3,
+      "mean": 0.833,
+      "median": 0.828,
+      "min": 0.826,
+      "max": 0.845,
+      "sd": 0.01,
+      "ci95": 0.026,
+      "ci95_pct": 3.08
+     },
+     "tokens_per_step": {
+      "n": 3,
+      "mean": 4.511,
+      "median": 4.504,
+      "min": 4.504,
+      "max": 4.524,
+      "sd": 0.011,
+      "ci95": 0.028,
+      "ci95_pct": 0.62
+     },
+     "tps": {
+      "n": 3,
+      "mean": 361.79,
+      "median": 344.743,
+      "min": 340.795,
+      "max": 399.831,
+      "sd": 33.004,
+      "ci95": 81.993,
+      "ci95_pct": 22.66
+     },
+     "decode_window_tps": {
+      "n": 3,
+      "mean": 403.387,
+      "median": 382.395,
+      "min": 379.394,
+      "max": 448.371,
+      "sd": 38.986,
+      "ci95": 96.856,
+      "ci95_pct": 24.01
+     },
+     "derived_tps": {
+      "n": 3,
+      "mean": 403.389,
+      "median": 382.393,
+      "min": 379.398,
+      "max": 448.376,
+      "sd": 38.989,
+      "ci95": 96.861,
+      "ci95_pct": 24.01
+     },
+     "per_stream_decode_tps": {
+      "n": 12,
+      "mean": 103.412,
+      "median": 99.325,
+      "min": 96.23,
+      "max": 114.09,
+      "sd": 7.61,
+      "ci95": 4.895,
+      "ci95_pct": 4.73
+     },
+     "ttft_s": {
+      "n": 12,
+      "mean": 0.33,
+      "median": 0.324,
+      "min": 0.281,
+      "max": 0.376,
+      "sd": 0.032,
+      "ci95": 0.02,
+      "ci95_pct": 6.21
+     },
+     "accepted_per_draft": {
+      "n": 3,
+      "mean": 3.511,
+      "median": 3.504,
+      "min": 3.504,
+      "max": 3.524,
+      "sd": 0.011,
+      "ci95": 0.028,
+      "ci95_pct": 0.8
+     },
+     "verified_per_draft": {
+      "n": 3,
+      "mean": 4.215,
+      "median": 4.232,
+      "min": 4.17,
+      "max": 4.241,
+      "sd": 0.039,
+      "ci95": 0.096,
+      "ci95_pct": 2.28
+     },
+     "converge_on": "tps",
+     "max_tokens": 256,
+     "full_length_outputs": 12,
+     "failed_requests": 0,
+     "distinct_outputs": 1,
+     "reasoning_share": 0.0
+    }
+   },
+   "samples": {
+    "prose-nothink-c1": [
+     {
+      "tps": 91.402,
+      "decode_window_tps": 96.107,
+      "accepted_per_draft": 1.6737,
+      "verified_per_draft": 2.9263,
+      "accepted_per_verified": 0.5719,
+      "tokens_per_step": 2.6737,
+      "step_ms": 27.822,
+      "derived_tps": 96.1,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.1468,
+        "first_s": 0.1473,
+        "last_s": 2.8006,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 96.1,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 90.314,
+      "decode_window_tps": 94.961,
+      "accepted_per_draft": 1.6082,
+      "verified_per_draft": 2.7732,
+      "accepted_per_verified": 0.5799,
+      "tokens_per_step": 2.6082,
+      "step_ms": 27.466,
+      "derived_tps": 94.961,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.1484,
+        "first_s": 0.1488,
+        "last_s": 2.8341,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 94.96,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 88.27,
+      "decode_window_tps": 95.107,
+      "accepted_per_draft": 1.6186,
+      "verified_per_draft": 2.8247,
+      "accepted_per_verified": 0.573,
+      "tokens_per_step": 2.6186,
+      "step_ms": 27.535,
+      "derived_tps": 95.101,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2182,
+        "first_s": 0.2185,
+        "last_s": 2.8997,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 95.1,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ],
+    "prose-nothink-c2": [
+     {
+      "tps": 159.92,
+      "decode_window_tps": 173.765,
+      "accepted_per_draft": 1.5123,
+      "verified_per_draft": 2.7635,
+      "accepted_per_verified": 0.5472,
+      "tokens_per_step": 2.5123,
+      "step_ms": 28.916,
+      "derived_tps": 173.765,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2655,
+        "first_s": 0.266,
+        "last_s": 3.2009,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 86.88,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3036,
+        "first_s": 0.3044,
+        "last_s": 3.201,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 88.03,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 158.029,
+      "decode_window_tps": 168.422,
+      "accepted_per_draft": 1.4171,
+      "verified_per_draft": 2.6019,
+      "accepted_per_verified": 0.5446,
+      "tokens_per_step": 2.4171,
+      "step_ms": 28.703,
+      "derived_tps": 168.421,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2496,
+        "first_s": 0.2498,
+        "last_s": 3.2394,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 85.29,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.211,
+        "first_s": 0.2113,
+        "last_s": 3.239,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 84.22,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 160.661,
+      "decode_window_tps": 171.377,
+      "accepted_per_draft": 1.4402,
+      "verified_per_draft": 2.622,
+      "accepted_per_verified": 0.5493,
+      "tokens_per_step": 2.4402,
+      "step_ms": 28.478,
+      "derived_tps": 171.374,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2102,
+        "first_s": 0.2104,
+        "last_s": 3.1859,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 85.69,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.2487,
+        "first_s": 0.2491,
+        "last_s": 3.1863,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 86.81,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ],
+    "prose-nothink-c4": [
+     {
+      "tps": 280.259,
+      "decode_window_tps": 307.767,
+      "accepted_per_draft": 1.4296,
+      "verified_per_draft": 2.7279,
+      "accepted_per_verified": 0.5241,
+      "tokens_per_step": 2.4296,
+      "step_ms": 31.577,
+      "derived_tps": 307.768,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.3388,
+        "first_s": 0.339,
+        "last_s": 3.653,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 76.94,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3826,
+        "first_s": 0.3834,
+        "last_s": 3.6531,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.98,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3822,
+        "first_s": 0.3832,
+        "last_s": 3.6528,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.98,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3821,
+        "first_s": 0.3833,
+        "last_s": 3.6532,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.98,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 277.575,
+      "decode_window_tps": 307.915,
+      "accepted_per_draft": 1.4262,
+      "verified_per_draft": 2.7286,
+      "accepted_per_verified": 0.5227,
+      "tokens_per_step": 2.4262,
+      "step_ms": 31.518,
+      "derived_tps": 307.913,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.4157,
+        "first_s": 0.416,
+        "last_s": 3.6884,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.92,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3752,
+        "first_s": 0.3759,
+        "last_s": 3.6882,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 76.98,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.4149,
+        "first_s": 0.4162,
+        "last_s": 3.6883,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.92,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.4141,
+        "first_s": 0.4159,
+        "last_s": 3.6885,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.91,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 286.663,
+      "decode_window_tps": 307.368,
+      "accepted_per_draft": 1.4296,
+      "verified_per_draft": 2.6516,
+      "accepted_per_verified": 0.5392,
+      "tokens_per_step": 2.4296,
+      "step_ms": 31.618,
+      "derived_tps": 307.369,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2997,
+        "first_s": 0.2999,
+        "last_s": 3.5711,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.94,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.2997,
+        "first_s": 0.3001,
+        "last_s": 3.5713,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.94,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.2988,
+        "first_s": 0.2996,
+        "last_s": 3.5712,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 77.93,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.2519,
+        "first_s": 0.2529,
+        "last_s": 3.5714,
+        "prompt_tokens": 42,
+        "completion_tokens": 256,
+        "decode_tps": 76.83,
+        "output_sha256": "12852d5cf6ffab35",
+        "reasoning_chars": 0,
+        "content_chars": 1163,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ],
+    "code-nothink-c1": [
+     {
+      "tps": 135.94,
+      "decode_window_tps": 147.749,
+      "accepted_per_draft": 3.6727,
+      "verified_per_draft": 4.3818,
+      "accepted_per_verified": 0.8382,
+      "tokens_per_step": 4.6727,
+      "step_ms": 31.628,
+      "derived_tps": 147.739,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.1563,
+        "first_s": 0.1567,
+        "last_s": 1.8826,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 147.74,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 131.152,
+      "decode_window_tps": 149.745,
+      "accepted_per_draft": 3.6545,
+      "verified_per_draft": 4.3455,
+      "accepted_per_verified": 0.841,
+      "tokens_per_step": 4.6545,
+      "step_ms": 31.086,
+      "derived_tps": 149.73,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2476,
+        "first_s": 0.2484,
+        "last_s": 1.9513,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 149.73,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 136.695,
+      "decode_window_tps": 148.015,
+      "accepted_per_draft": 3.6545,
+      "verified_per_draft": 4.3455,
+      "accepted_per_verified": 0.841,
+      "tokens_per_step": 4.6545,
+      "step_ms": 31.449,
+      "derived_tps": 148.002,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.1486,
+        "first_s": 0.1493,
+        "last_s": 1.8721,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 148.0,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ],
+    "code-nothink-c2": [
+     {
+      "tps": 191.421,
+      "decode_window_tps": 208.248,
+      "accepted_per_draft": 3.5088,
+      "verified_per_draft": 4.1667,
+      "accepted_per_verified": 0.8421,
+      "tokens_per_step": 4.5088,
+      "step_ms": 43.302,
+      "derived_tps": 208.249,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2246,
+        "first_s": 0.2251,
+        "last_s": 2.5722,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 108.64,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.264,
+        "first_s": 0.2651,
+        "last_s": 2.6741,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 105.85,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 192.989,
+      "decode_window_tps": 210.145,
+      "accepted_per_draft": 3.5088,
+      "verified_per_draft": 4.1667,
+      "accepted_per_verified": 0.8421,
+      "tokens_per_step": 4.5088,
+      "step_ms": 42.911,
+      "derived_tps": 210.147,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2257,
+        "first_s": 0.2258,
+        "last_s": 2.5488,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 109.76,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.2659,
+        "first_s": 0.2662,
+        "last_s": 2.6527,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 106.85,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 187.832,
+      "decode_window_tps": 209.721,
+      "accepted_per_draft": 3.5398,
+      "verified_per_draft": 4.2301,
+      "accepted_per_verified": 0.8368,
+      "tokens_per_step": 4.5398,
+      "step_ms": 43.294,
+      "derived_tps": 209.72,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2929,
+        "first_s": 0.2934,
+        "last_s": 2.6324,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 109.02,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3359,
+        "first_s": 0.3367,
+        "last_s": 2.7252,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 106.76,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ],
+    "code-nothink-c4": [
+     {
+      "tps": 340.795,
+      "decode_window_tps": 382.395,
+      "accepted_per_draft": 3.5044,
+      "verified_per_draft": 4.2325,
+      "accepted_per_verified": 0.828,
+      "tokens_per_step": 4.5044,
+      "step_ms": 47.118,
+      "derived_tps": 382.393,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.336,
+        "first_s": 0.3362,
+        "last_s": 2.8831,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 100.11,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3764,
+        "first_s": 0.3772,
+        "last_s": 2.9648,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 98.54,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3755,
+        "first_s": 0.3769,
+        "last_s": 3.0036,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 97.08,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.375,
+        "first_s": 0.3767,
+        "last_s": 2.9645,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 98.53,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 344.743,
+      "decode_window_tps": 379.394,
+      "accepted_per_draft": 3.5044,
+      "verified_per_draft": 4.2412,
+      "accepted_per_verified": 0.8263,
+      "tokens_per_step": 4.5044,
+      "step_ms": 47.49,
+      "derived_tps": 379.398,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.2811,
+        "first_s": 0.2813,
+        "last_s": 2.8274,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 100.15,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3194,
+        "first_s": 0.3199,
+        "last_s": 2.9225,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 97.97,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3193,
+        "first_s": 0.3201,
+        "last_s": 2.9698,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 96.23,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3194,
+        "first_s": 0.3203,
+        "last_s": 2.9226,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 97.98,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     },
+     {
+      "tps": 399.831,
+      "decode_window_tps": 448.371,
+      "accepted_per_draft": 3.524,
+      "verified_per_draft": 4.1703,
+      "accepted_per_verified": 0.845,
+      "tokens_per_step": 4.524,
+      "step_ms": 40.359,
+      "derived_tps": 448.376,
+      "requests": [
+       {
+        "ok": true,
+        "ttft_s": 0.285,
+        "first_s": 0.2855,
+        "last_s": 2.5603,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 112.09,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3239,
+        "first_s": 0.3251,
+        "last_s": 2.56,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 114.09,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3236,
+        "first_s": 0.325,
+        "last_s": 2.5599,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 114.09,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       },
+       {
+        "ok": true,
+        "ttft_s": 0.3237,
+        "first_s": 0.3253,
+        "last_s": 2.5604,
+        "prompt_tokens": 49,
+        "completion_tokens": 256,
+        "decode_tps": 114.08,
+        "output_sha256": "c4d10238a3f27f08",
+        "reasoning_chars": 0,
+        "content_chars": 1035,
+        "error": null,
+        "finish_reason": "length"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "prefill": {
+   "points": {
+    "32768": {
+     "prefill_tps": {
+      "n": 2,
+      "mean": 9305.273,
+      "median": 9305.273,
+      "min": 9283.957,
+      "max": 9326.589,
+      "sd": 30.145,
+      "ci95": 270.839,
+      "ci95_pct": 2.91
+     },
+     "ttft_s": {
+      "n": 2,
+      "mean": 3.287,
+      "median": 3.287,
+      "min": 3.282,
+      "max": 3.293,
+      "sd": 0.008,
+      "ci95": 0.072,
+      "ci95_pct": 2.18
+     },
+     "prompt_tokens": 30608,
+     "failed_requests": 0
+    },
+    "131072": {
+     "prefill_tps": {
+      "n": 2,
+      "mean": 9829.209,
+      "median": 9829.209,
+      "min": 9783.872,
+      "max": 9874.546,
+      "sd": 64.116,
+      "ci95": 576.053,
+      "ci95_pct": 5.86
+     },
+     "ttft_s": {
+      "n": 2,
+      "mean": 11.908,
+      "median": 11.908,
+      "min": 11.837,
+      "max": 11.979,
+      "sd": 0.1,
+      "ci95": 0.902,
+      "ci95_pct": 7.58
+     },
+     "prompt_tokens": 116885,
+     "failed_requests": 0
+    },
+    "262144": {
+     "prefill_tps": {
+      "n": 2,
+      "mean": 9819.413,
+      "median": 9819.413,
+      "min": 9783.024,
+      "max": 9855.802,
+      "sd": 51.462,
+      "ci95": 462.361,
+      "ci95_pct": 4.71
+     },
+     "ttft_s": {
+      "n": 2,
+      "mean": 24.082,
+      "median": 24.082,
+      "min": 23.925,
+      "max": 24.238,
+      "sd": 0.221,
+      "ci95": 1.983,
+      "ci95_pct": 8.24
+     },
+     "prompt_tokens": 235805,
+     "failed_requests": 0
+    },
+    "524288": {
+     "prefill_tps": {
+      "n": 2,
+      "mean": 9591.727,
+      "median": 9591.727,
+      "min": 9567.511,
+      "max": 9615.944,
+      "sd": 34.247,
+      "ci95": 307.694,
+      "ci95_pct": 3.21
+     },
+     "ttft_s": {
+      "n": 2,
+      "mean": 49.802,
+      "median": 49.802,
+      "min": 49.31,
+      "max": 50.293,
+      "sd": 0.694,
+      "ci95": 6.239,
+      "ci95_pct": 12.53
+     },
+     "prompt_tokens": 474167,
+     "failed_requests": 0
+    },
+    "1000000": {
+     "prefill_tps": {
+      "n": 2,
+      "mean": 9212.963,
+      "median": 9212.963,
+      "min": 9192.663,
+      "max": 9233.264,
+      "sd": 28.709,
+      "ci95": 257.937,
+      "ci95_pct": 2.8
+     },
+     "ttft_s": {
+      "n": 2,
+      "mean": 98.337,
+      "median": 98.337,
+      "min": 97.632,
+      "max": 99.042,
+      "sd": 0.997,
+      "ci95": 8.956,
+      "ci95_pct": 9.11
+     },
+     "prompt_tokens": 914480,
+     "failed_requests": 0
+    }
+   },
+   "samples": {
+    "32768": [
+     {
+      "ok": true,
+      "ttft_s": 3.2818,
+      "first_s": 3.2823,
+      "last_s": null,
+      "prompt_tokens": 30608,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     },
+     {
+      "ok": true,
+      "ttft_s": 3.2931,
+      "first_s": 3.2935,
+      "last_s": null,
+      "prompt_tokens": 30573,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     }
+    ],
+    "131072": [
+     {
+      "ok": true,
+      "ttft_s": 11.837,
+      "first_s": 11.8378,
+      "last_s": 11.8378,
+      "prompt_tokens": 116885,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "36a9e7f1c95b82ff",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "length"
+     },
+     {
+      "ok": true,
+      "ttft_s": 11.979,
+      "first_s": 11.9806,
+      "last_s": null,
+      "prompt_tokens": 117201,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     }
+    ],
+    "262144": [
+     {
+      "ok": true,
+      "ttft_s": 23.9255,
+      "first_s": 23.9285,
+      "last_s": null,
+      "prompt_tokens": 235805,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     },
+     {
+      "ok": true,
+      "ttft_s": 24.2377,
+      "first_s": 24.2397,
+      "last_s": null,
+      "prompt_tokens": 237118,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     }
+    ],
+    "524288": [
+     {
+      "ok": true,
+      "ttft_s": 49.3105,
+      "first_s": 49.3164,
+      "last_s": null,
+      "prompt_tokens": 474167,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     },
+     {
+      "ok": true,
+      "ttft_s": 50.2926,
+      "first_s": 50.296,
+      "last_s": null,
+      "prompt_tokens": 481175,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     }
+    ],
+    "1000000": [
+     {
+      "ok": true,
+      "ttft_s": 99.0419,
+      "first_s": 99.0484,
+      "last_s": null,
+      "prompt_tokens": 914480,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     },
+     {
+      "ok": true,
+      "ttft_s": 97.6321,
+      "first_s": 97.6388,
+      "last_s": null,
+      "prompt_tokens": 897499,
+      "completion_tokens": 1,
+      "decode_tps": null,
+      "output_sha256": "e3b0c44298fc1c14",
+      "reasoning_chars": 0,
+      "content_chars": 0,
+      "error": null,
+      "finish_reason": "stop"
+     }
+    ]
+   }
+  }
+ },
+ "cooling": [
+  {
+   "node": "spark-a",
+   "start_c": 40.2,
+   "cooled": false,
+   "seconds": 0.0,
+   "final_c": 40.2
+  },
+  {
+   "node": "spark-b",
+   "start_c": 39.8,
+   "cooled": false,
+   "seconds": 0.0,
+   "final_c": 39.8
+  },
+  {
+   "node": "spark-c",
+   "start_c": 39.8,
+   "cooled": false,
+   "seconds": 0.0,
+   "final_c": 39.8
+  },
+  {
+   "node": "spark-d",
+   "start_c": 40.2,
+   "cooled": false,
+   "seconds": 0.0,
+   "final_c": 40.2
+  }
+ ],
+ "fan_curve": [
+  {
+   "node": "spark-a",
+   "service": "absent",
+   "started": false
+  },
+  {
+   "node": "spark-b",
+   "service": "absent",
+   "started": false
+  },
+  {
+   "node": "spark-c",
+   "service": "absent",
+   "started": false
+  },
+  {
+   "node": "spark-d",
+   "service": "absent",
+   "started": false
+  }
+ ],
+ "between_cooling": [
+  {
+   "phase": "suite:decode",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 48.1,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 48.1
+    },
+    {
+     "node": "spark-b",
+     "start_c": 44.1,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 44.1
+    },
+    {
+     "node": "spark-c",
+     "start_c": 45.2,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 45.2
+    },
+    {
+     "node": "spark-d",
+     "start_c": 46.9,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 46.9
+    }
+   ]
+  },
+  {
+   "phase": "prefill:32768:r1",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 54.3,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 54.3
+    },
+    {
+     "node": "spark-b",
+     "start_c": 49.9,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 49.9
+    },
+    {
+     "node": "spark-c",
+     "start_c": 51.1,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 51.1
+    },
+    {
+     "node": "spark-d",
+     "start_c": 52.9,
+     "cooled": false,
+     "seconds": 0.0,
+     "final_c": 52.9
+    }
+   ]
+  },
+  {
+   "phase": "prefill:262144:r1",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 55.6,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 45.9,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 54.9,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 44.9,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 54.4,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 44.9,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 56.0,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 45.0,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:131072:r1",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 61.2,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 49.4,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 60.3,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 48.5,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 59.4,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 48.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 62.1,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 49.0,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:1000000:r1",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 61.3,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 49.8,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 60.0,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 48.6,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 59.8,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 48.3,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 61.2,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 49.0,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:524288:r1",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 69.8,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 54.1,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 67.9,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 52.5,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 67.7,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 52.3,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 69.9,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 53.2,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:1000000:r2",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 69.3,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 54.0,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 67.8,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 52.3,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 67.3,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 52.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 68.4,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 53.1,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:262144:r2",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 70.3,
+     "cooled": true,
+     "seconds": 15.1,
+     "final_c": 52.8,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 69.9,
+     "cooled": true,
+     "seconds": 15.1,
+     "final_c": 52.5,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 69.4,
+     "cooled": true,
+     "seconds": 15.1,
+     "final_c": 52.4,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 69.8,
+     "cooled": true,
+     "seconds": 15.1,
+     "final_c": 51.7,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:32768:r2",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 66.3,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 54.4,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 66.5,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 54.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 66.1,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 54.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 65.9,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 53.3,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:524288:r2",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 62.2,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 52.4,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 62.5,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 52.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 62.0,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 52.1,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 63.0,
+     "cooled": true,
+     "seconds": 5.0,
+     "final_c": 51.1,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  },
+  {
+   "phase": "prefill:131072:r2",
+   "records": [
+    {
+     "node": "spark-a",
+     "start_c": 68.6,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 53.2,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-b",
+     "start_c": 68.9,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 53.3,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-c",
+     "start_c": 69.2,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 53.5,
+     "fan_floor": null,
+     "restored": null
+    },
+    {
+     "node": "spark-d",
+     "start_c": 67.7,
+     "cooled": true,
+     "seconds": 10.0,
+     "final_c": 52.0,
+     "fan_floor": null,
+     "restored": null
+    }
+   ]
+  }
+ ],
+ "thermal": {
+  "spark-a": {
+   "max_gpu_c": 72.0,
+   "min_headroom_c": 11.0,
+   "max_system_c": 79.2,
+   "max_power_w": 72.64,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-b": {
+   "max_gpu_c": 72.0,
+   "min_headroom_c": 12.0,
+   "max_system_c": 76.8,
+   "max_power_w": 70.47,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-c": {
+   "max_gpu_c": 68.0,
+   "min_headroom_c": 19.0,
+   "max_system_c": 77.8,
+   "max_power_w": 72.37,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-d": {
+   "max_gpu_c": 73.0,
+   "min_headroom_c": 16.0,
+   "max_system_c": 80.4,
+   "max_power_w": 72.99,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  }
+ },
+ "memory": {
+  "spark-a": {
+   "min_available_gib": 29.54,
+   "swap_growth_gib": 0.0
+  },
+  "spark-b": {
+   "min_available_gib": 32.46,
+   "swap_growth_gib": 0.0
+  },
+  "spark-c": {
+   "min_available_gib": 32.32,
+   "swap_growth_gib": 0.0
+  },
+  "spark-d": {
+   "min_available_gib": 32.18,
+   "swap_growth_gib": 0.0
+  }
+ },
+ "discarded_samples": [],
+ "finished_utc": "20261119T110615Z"
+}

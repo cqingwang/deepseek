@@ -1,0 +1,124 @@
+WARN: spark-a: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+WARN: spark-a: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k
+WARN: spark-a: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k
+WARN: spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002
+WARN: spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-a: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+WARN: spark-a: serving container spark-ds41f is not running
+WARN: spark-b: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+WARN: spark-b: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k
+WARN: spark-b: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k
+WARN: spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001
+WARN: spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-b: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+WARN: spark-b: serving container spark-ds41f is not running
+WARN: spark-c: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+WARN: spark-c: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k
+WARN: spark-c: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k
+WARN: spark-c: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-c: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+WARN: spark-c: serving container spark-ds41f is not running
+WARN: spark-d: stable 64 KiB package versions differ: linux-tools-7.0.0-1019-nvidia-64k, linux-image-7.0.0-1019-nvidia-64k, linux-modules-7.0.0-1019-nvidia-64k, linux-headers-7.0.0-1019-nvidia-64k, linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+WARN: spark-d: dgx_ec_fan_control is not prepared for 7.0.0-1019-nvidia-64k
+WARN: spark-d: fan-control DKMS is not installed for 7.0.0-1019-nvidia-64k
+WARN: spark-d: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-d: DKMS dgx-spark-fan-control is not installed for 7.0.0-1019-nvidia-64k; serving does not need it, bench does; run sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+WARN: spark-d: serving container spark-ds41f is not running
+WARN: Kernel corrections (not executed):
+  spark-a: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+  spark-a: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+  spark-b: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+  spark-b: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+  spark-c: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+  spark-c: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+  spark-d: sudo apt-get install linux-tools-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-image-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-headers-7.0.0-1019-nvidia-64k=7.0.0-1019.19~24.04.2 linux-modules-nvidia-580-open-7.0.0-1019-nvidia-64k
+  spark-d: sudo dkms autoinstall -k 7.0.0-1019-nvidia-64k
+benchmarking http://192.168.2.180:8888 (experiments/2026-11-19-x1119/tp4-ring.json); writing /tmp/x1119-bench-run-01/bench.json
+fan curve: spark-a not installed, spark-b not installed, spark-c not installed, spark-d not installed
+WARN: spark-a: dgx-fan-control.service is not installed (see doctor --live)
+WARN: spark-b: dgx-fan-control.service is not installed (see doctor --live)
+WARN: spark-c: dgx-fan-control.service is not installed (see doctor --live)
+WARN: spark-d: dgx-fan-control.service is not installed (see doctor --live)
+quality:
+  quality 1/5: pass
+  quality 2/5: pass
+  quality 3/5: pass
+  quality 4/5: pass
+  quality 5/5: pass
+decode:
+  warmup: one discarded sample per point
+  round 1: code-nothink-c1 tps ±-%, code-nothink-c2 tps ±-%, code-nothink-c4 tps ±-%, prose-nothink-c1 tps ±-%, prose-nothink-c2 tps ±-%, prose-nothink-c4 tps ±-%
+  round 2: code-nothink-c1 tps ±22.78%, code-nothink-c2 tps ±5.18%, code-nothink-c4 tps ±7.32%, prose-nothink-c1 tps ±7.61%, prose-nothink-c2 tps ±7.56%, prose-nothink-c4 tps ±6.11%
+  round 3: all points converged
+prefill:
+  prefill 32768: 9327 tok/s
+cooling: spark-a 55.6 C, spark-d 56.0 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 45.9 C, spark-b 44.9 C, spark-c 44.9 C, spark-d 45.0 C after 5 s; fans restored
+  prefill 262144: 9856 tok/s
+cooling: spark-a 61.2 C, spark-b 60.3 C, spark-c 59.4 C, spark-d 62.1 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 49.4 C, spark-b 48.5 C, spark-c 48.2 C, spark-d 49.0 C after 5 s; fans restored
+  prefill 131072: 9875 tok/s
+cooling: spark-a 61.3 C, spark-b 60.0 C, spark-c 59.8 C, spark-d 61.2 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 49.8 C, spark-b 48.6 C, spark-c 48.3 C, spark-d 49.0 C after 5 s; fans restored
+  prefill 1000000: 9233 tok/s
+cooling: spark-a 69.8 C, spark-b 67.9 C, spark-c 67.7 C, spark-d 69.9 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 54.1 C, spark-b 52.5 C, spark-c 52.3 C, spark-d 53.2 C after 10 s; fans restored
+  prefill 524288: 9616 tok/s
+cooling: spark-a 69.3 C, spark-b 67.8 C, spark-c 67.3 C, spark-d 68.4 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 54.0 C, spark-b 52.3 C, spark-c 52.2 C, spark-d 53.1 C after 10 s; fans restored
+  prefill 1000000: 9193 tok/s
+cooling: spark-a 70.3 C, spark-b 69.9 C, spark-c 69.4 C, spark-d 69.8 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 52.8 C, spark-b 52.5 C, spark-c 52.4 C, spark-d 51.7 C after 15.1 s; fans restored
+  prefill 262144: 9783 tok/s
+cooling: spark-a 66.3 C, spark-b 66.5 C, spark-c 66.1 C, spark-d 65.9 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 54.4 C, spark-b 54.2 C, spark-c 54.2 C, spark-d 53.3 C after 5 s; fans restored
+  prefill 32768: 9284 tok/s
+cooling: spark-a 62.2 C, spark-b 62.5 C, spark-c 62.0 C, spark-d 63.0 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 52.4 C, spark-b 52.2 C, spark-c 52.1 C, spark-d 51.1 C after 5 s; fans restored
+  prefill 524288: 9568 tok/s
+cooling: spark-a 68.6 C, spark-b 68.9 C, spark-c 69.2 C, spark-d 67.7 C; every node at fan floor 12 until all are below 55 C
+cooling: spark-a 53.2 C, spark-b 53.3 C, spark-c 53.5 C, spark-d 52.0 C after 10 s; fans restored
+  prefill 131072: 9784 tok/s
+quality: LRU 5/5
+decode (aggregate tok/s, 95% CI):
+  prose-nothink-c1        90.0 ± 4.4% n=3  
+  prose-nothink-c2       159.5 ± 2.1% n=3  
+  prose-nothink-c4       281.5 ± 4.1% n=3  
+  code-nothink-c1        134.6 ± 5.5% n=3  
+  code-nothink-c2        190.7 ± 3.4% n=3  
+  code-nothink-c4        361.8 ±22.7% n=3  
+decode primaries (mean ±95% CI): step ms | accepted/verified | tokens/step || tok/s measured aggregate / decode window | derived
+  prose-nothink-c1       27.61 ±1.7% |    0.575 ±1.9% |    2.634 ±3.3% ||     90.0 ±4.4% /     95.4 ±1.6% |     95.4 ±1.6%
+  prose-nothink-c2       28.70 ±1.9% |    0.547 ±1.1% |    2.457 ±5.0% ||    159.5 ±2.1% /    171.2 ±3.9% |    171.2 ±3.9%
+  prose-nothink-c4       31.57 ±0.4% |    0.529 ±4.3% |    2.428 ±0.2% ||    281.5 ±4.1% /    307.7 ±0.2% |    307.7 ±0.2%
+  code-nothink-c1        31.39 ±2.2% |    0.840 ±0.5% |    4.661 ±0.6% ||    134.6 ±5.5% /    148.5 ±1.8% |    148.5 ±1.8%
+  code-nothink-c2        43.17 ±1.3% |    0.840 ±0.9% |    4.519 ±1.0% ||    190.7 ±3.4% /    209.4 ±1.2% |    209.4 ±1.2%
+  code-nothink-c4       44.99 ±22.2% |    0.833 ±3.1% |    4.511 ±0.6% ||   361.8 ±22.7% /   403.4 ±24.0% |   403.4 ±24.0%
+step time (ms, lower is better; independent of acceptance; concurrent points are decode-window estimates):
+  prose-nothink-c1       27.61 ± 1.7% n=3  
+  prose-nothink-c2       28.70 ± 1.9% n=3  
+  prose-nothink-c4       31.57 ± 0.4% n=3  
+  code-nothink-c1        31.39 ± 2.2% n=3  
+  code-nothink-c2        43.17 ± 1.3% n=3  
+  code-nothink-c4        44.99 ±22.2% n=3  
+prefill (tok/s):
+  32768 tokens          9305.3 ± 2.9% n=2  
+  131072 tokens         9829.2 ± 5.9% n=2  
+  262144 tokens         9819.4 ± 4.7% n=2  
+  524288 tokens         9591.7 ± 3.2% n=2  
+  1000000 tokens        9213.0 ± 2.8% n=2  
+spark-a: min MemAvailable 29.54 GiB, swap growth 0.0 GiB
+spark-b: min MemAvailable 32.46 GiB, swap growth 0.0 GiB
+spark-c: min MemAvailable 32.32 GiB, swap growth 0.0 GiB
+spark-d: min MemAvailable 32.18 GiB, swap growth 0.0 GiB
+spark-a: GPU max 72.0 C (11.0 C below its limit at the closest), board max 79.2 C, power max 72.64 W, thermal slowdown 0.0 ms
+spark-b: GPU max 72.0 C (12.0 C below its limit at the closest), board max 76.8 C, power max 70.47 W, thermal slowdown 0.0 ms
+spark-c: GPU max 68.0 C (19.0 C below its limit at the closest), board max 77.8 C, power max 72.37 W, thermal slowdown 0.0 ms
+spark-d: GPU max 73.0 C (16.0 C below its limit at the closest), board max 80.4 C, power max 72.99 W, thermal slowdown 0.0 ms
+report: /tmp/x1119-bench-run-01/bench.json

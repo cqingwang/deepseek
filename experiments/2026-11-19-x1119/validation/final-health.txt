@@ -1,0 +1,26 @@
+date=2026-11-19T11:16:23Z
+-- spark-a rank0
+running=true status=running exit=0 oom=false restarts=0 image=sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b
+active
+MemAvailable_kib=31285376
+ERROR: Option --query-xid-errors is not recognized. Please run 'nvidia-smi -h'.
+
+-- spark-b rank1
+running=true status=running exit=0 oom=false restarts=0 image=sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b
+active
+MemAvailable_kib=33801792
+ERROR: Option --query-xid-errors is not recognized. Please run 'nvidia-smi -h'.
+
+-- spark-c rank2
+running=true status=running exit=0 oom=false restarts=0 image=sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b
+active
+MemAvailable_kib=33940288
+ERROR: Option --query-xid-errors is not recognized. Please run 'nvidia-smi -h'.
+
+-- spark-d rank3
+running=true status=running exit=0 oom=false restarts=0 image=sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b
+active
+MemAvailable_kib=33845248
+ERROR: Option --query-xid-errors is not recognized. Please run 'nvidia-smi -h'.
+
+-- fatal log scan --

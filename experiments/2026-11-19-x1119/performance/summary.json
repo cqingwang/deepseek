@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "runs": [
+    "spark/deepseek/experiments/2026-11-19-x1119/performance/run-01/bench.json",
+    "spark/deepseek/experiments/2026-11-19-x1119/performance/run-02/bench.json"
+  ],
+  "allowed_loss_pct": 1.0,
+  "decode": {
+    "prose-nothink-c1": {
+      "runs": [
+        89.995,
+        89.661
+      ],
+      "mean": 89.828,
+      "official_readme": 59.1,
+      "allowed_floor": 58.509,
+      "delta_pct": 51.99323181049069,
+      "passed": true
+    },
+    "prose-nothink-c2": {
+      "runs": [
+        159.537,
+        157.229
+      ],
+      "mean": 158.383,
+      "official_readme": 84.8,
+      "allowed_floor": 83.952,
+      "delta_pct": 86.77240566037739,
+      "passed": true
+    },
+    "prose-nothink-c4": {
+      "runs": [
+        281.499,
+        288.471
+      ],
+      "mean": 284.985,
+      "official_readme": 124.9,
+      "allowed_floor": 123.65100000000001,
+      "delta_pct": 128.1705364291433,
+      "passed": true
+    },
+    "code-nothink-c1": {
+      "runs": [
+        134.596,
+        136.347
+      ],
+      "mean": 135.4715,
+      "official_readme": 80.6,
+      "allowed_floor": 79.794,
+      "delta_pct": 68.0787841191067,
+      "passed": true
+    },
+    "code-nothink-c2": {
+      "runs": [
+        190.747,
+        188.567
+      ],
+      "mean": 189.657,
+      "official_readme": 118.2,
+      "allowed_floor": 117.018,
+      "delta_pct": 60.4543147208122,
+      "passed": true
+    },
+    "code-nothink-c4": {
+      "runs": [
+        361.79,
+        382.677
+      ],
+      "mean": 372.23350000000005,
+      "official_readme": 165.1,
+      "allowed_floor": 163.44899999999998,
+      "delta_pct": 125.45941853422171,
+      "passed": true
+    }
+  },
+  "prefill": {
+    "32768": {
+      "runs": [
+        9305.273,
+        9460.683
+      ],
+      "mean": 9382.978,
+      "official_readme": 8508.0,
+      "allowed_floor": 8422.92,
+      "delta_pct": 10.284179595674647,
+      "passed": true
+    },
+    "131072": {
+      "runs": [
+        9829.209,
+        9772.57
+      ],
+      "mean": 9800.889500000001,
+      "official_readme": 8657.0,
+      "allowed_floor": 8570.43,
+      "delta_pct": 13.213463093450395,
+      "passed": true
+    },
+    "262144": {
+      "runs": [
+        9819.413,
+        9770.339
+      ],
+      "mean": 9794.876,
+      "official_readme": 8261.0,
+      "allowed_floor": 8178.39,
+      "delta_pct": 18.567679457692776,
+      "passed": true
+    },
+    "524288": {
+      "runs": [
+        9591.727,
+        9567.113
+      ],
+      "mean": 9579.42,
+      "official_readme": 7460.0,
+      "allowed_floor": 7385.4,
+      "delta_pct": 28.41045576407506,
+      "passed": true
+    },
+    "1000000": {
+      "runs": [
+        9212.963,
+        9165.609
+      ],
+      "mean": 9189.286,
+      "official_readme": 6012.0,
+      "allowed_floor": 5951.88,
+      "delta_pct": 52.84906852960744,
+      "passed": true
+    }
+  },
+  "failures": [],
+  "ok": true
+}
