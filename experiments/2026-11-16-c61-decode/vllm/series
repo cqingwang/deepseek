@@ -697,3 +697,4 @@
 0821-perf-worker-move-display-scanout-carve-out-to-RM-nvi.patch
 0822-feat-dsv41-add-zero-copy-io_uring-expert-slot-cache-.patch
 0823-fix-dsv41-replay-responses-custom-tool-calls.patch
+0824-fix-structured-output-copy-draft-bitmask-capacity.patch

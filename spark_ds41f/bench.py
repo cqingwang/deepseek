@@ -26,7 +26,7 @@ import time
 import urllib.request
 import uuid
 from pathlib import Path
-from typing import NamedTuple
+from typing import Callable, NamedTuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,6 +123,44 @@ DECODE_CASES = {
     ),
 }
 DECODE_CASES.update((case, DecodeCase(prompt)) for case, prompt in DECODE_PROMPTS.items())
+DISTINCT_PROSE_PROMPTS: tuple[str, ...] = (
+    "Explain, in precise technical prose, how speculative decoding increases language-model serving throughput while preserving the target output distribution. Cover acceptance rate, verification cost, batching, and latency.",
+    "Explain, in precise technical prose, how continuous iteration-level batching interacts with paged KV-cache management in large transformer servers. Discuss memory fragmentation, preemption, and tail latency.",
+    "Explain, in precise technical prose, how rotary positional embeddings scale to million-token contexts. Cover base frequency adjustment, YaRN interpolation, attention entropy, and extrapolation limits.",
+    "Explain, in precise technical prose, how Multi-Head Latent Attention reduces KV-cache footprint during long-context inference. Discuss low-rank key-value compression, matrix absorption, and arithmetic intensity.",
+    "Explain, in precise technical prose, how tensor parallelism partitions linear layers and self-attention across GPUs. Discuss Megatron column-row sharding, all-reduce synchronization, and communication hiding.",
+    "Explain, in precise technical prose, why unified-memory GPU architectures behave differently from discrete-VRAM servers during small-batch decode. Cover L2 cache pollution, DMA prefetching, and memory bandwidth saturation.",
+    "Explain, in precise technical prose, how Sparse Mixture-of-Experts routing affects decoding efficiency across nodes. Discuss top-k gating, expert load balance, irregular GEMM shapes, and all-to-all traffic.",
+    "Explain, in precise technical prose, how block-wise FP8 weight and activation quantization preserves accuracy while accelerating GEMMs. Cover per-block scaling exponents, accumulator precision, and outlier handling.",
+    "Explain, in precise technical prose, how CUDA Graphs reduce host launch overhead for latency-sensitive decode loops. Cover graph capture invariants, static buffer aliasing, shape bucketing, and replay dispatch.",
+    "Explain, in precise technical prose, how sliding-window attention and recurrent state layers bound per-token state growth. Discuss fixed-size ring buffers, eviction semantics, and hybrid full-attention interleaved layers.",
+    "Explain, in precise technical prose, how prefix caching reuses computed key-value blocks across multi-turn prompts. Cover block content hashing, reference counting, copy-on-write, and LRU eviction.",
+    "Explain, in precise technical prose, how disaggregated prefill and decode workers avoid compute-versus-memory interference. Discuss KV-cache transfer over RDMA, time-to-first-token isolation, and queue scheduling.",
+    "Explain, in precise technical prose, why vocabulary projection dominates single-stream speculative verification cost on wide vocabularies. Cover logit all-gather volume, top-k screening, and BF16 versus INT8 fidelity.",
+    "Explain, in precise technical prose, how adaptive speculative verification budgets draft tokens dynamically under concurrency. Cover marginal step cost, token survival probability, and Tensor Core tile knees.",
+    "Explain, in precise technical prose, how RDMA GPUDirect over convergent RoCE fabrics cuts collective latency on multi-node clusters. Cover queue-pair posting, inline headers, zero-copy registration, and ring versus direct topologies.",
+    "Explain, in precise technical prose, how thermal throttling silently distorts long-context prefill benchmarks. Cover clock-frequency droop, inter-run cooling floors, sample variance, and sustained power limits.",
+)
+DISTINCT_CODE_PROMPTS: tuple[str, ...] = (
+    "Write a complete Python implementation of an LRU cache using only the standard library. Include type hints, O(1) get and put methods, capacity validation, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a fixed-capacity ring buffer queue using only the standard library. Include type hints, push, pop, peek, overwrite-oldest handling, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a prefix trie supporting insert, search, starts_with, and delete using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of an LFU cache using only the standard library. Include type hints, O(1) get and put methods, capacity validation, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a disjoint-set (Union-Find) structure with path compression and union by rank using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a token-bucket rate limiter using only the standard library. Include type hints, monotonic clock refills, thread safety, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a segment tree supporting range sum queries and point updates using only the standard library. Include type hints, bounds checking, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a consistent hashing ring with virtual nodes using only the standard library. Include type hints, node add/remove, key lookup, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of an indexed binary min-heap supporting decrease_key and remove_key in O(log n) using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a directed graph topological sort with cycle detection (Kahn's algorithm) using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of an interval tree or sorted disjoint-interval merger supporting insert and overlap queries using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a Fenwick (Binary Indexed) tree supporting prefix sums and point updates using only the standard library. Include type hints, validation, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a thread-safe bounded blocking queue using only the standard library. Include type hints, optional timeouts on put and get, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of an adaptive Huffman or streaming run-length codec using only the standard library. Include type hints, round-trip checks, and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a skip-list ordered map supporting get, put, and delete using only the standard library. Include type hints and a short executable example. Explain the complexity after the code.",
+    "Write a complete Python implementation of a deterministic Bloom filter with configurable bit size and hash count using only the standard library. Include type hints, validation, and a short executable example. Explain the complexity after the code.",
+)
+DECODE_CASES["prose-distinct"] = DecodeCase(DISTINCT_PROSE_PROMPTS, per_stream=True)
+DECODE_CASES["code-distinct"] = DecodeCase(DISTINCT_CODE_PROMPTS, per_stream=True)
 # Portable cases follow the protocol public DGX Spark benchmarks use, so
 # figures line up with theirs: reasoning off, exactly 256 tokens, a distinct
 # prompt per stream, and workloads from highly predictable (a count) to
@@ -191,7 +229,10 @@ DECODE_CASES["chat-sampled"] = DecodeCase(
     temperature=0.7, top_p=0.95,
 )
 # Names --decode-cases expands.
-DECODE_CASE_GROUPS = {"portable": [*PORTABLE_CASES, "chat-sampled"]}
+DECODE_CASE_GROUPS = {
+    "portable": [*PORTABLE_CASES, "chat-sampled"],
+    "distinct": ["prose-distinct", "code-distinct"],
+}
 # The internal precision set resolves small differences between arms. It keeps
 # the portable protocol's settings (reasoning off, temperature 0) but gives
 # every sample four times the decode steps, uses prompts whose natural answer
@@ -1269,7 +1310,13 @@ def stop_fan_curve(nodes: dict, targets: list[dict], records: list[dict]) -> lis
 
 
 class Bench:
-    def __init__(self, base: str, nodes: dict, floor_gib: float) -> None:
+    def __init__(
+        self,
+        base: str,
+        nodes: dict,
+        floor_gib: float,
+        cool: Callable[[str], list[dict]] | None = None,
+    ) -> None:
         self.base = base
         self.stop = threading.Event()
         self.reason: str | None = None
@@ -1278,11 +1325,18 @@ class Bench:
         self.start_total: float | None = None
         self.discarded: list[dict] = []
         self.memory = MemoryWatch(nodes, floor_gib, self.halt)
+        self.cool = cool
 
     def halt(self, reason: str) -> None:
         if not self.stop.is_set():
             self.reason = reason
             self.stop.set()
+
+    def cool_phase(self, phase: str) -> list[dict]:
+        """Cool cluster nodes before a benchmark phase when a hook is configured."""
+        if self.cool is None:
+            return []
+        return self.cool(phase)
 
     def wait_idle(self, timeout: float = 300) -> dict:
         deadline = time.monotonic() + timeout
@@ -1946,10 +2000,15 @@ def suite_sampled(bench: Bench, options: argparse.Namespace, rng: random.Random)
 def suite_prefill(bench: Bench, options: argparse.Namespace, rng: random.Random) -> dict:
     """Cold prefill: unique uncached prompts, one output token."""
     prefill_text = {"filler": filler, "novel": novel_text, "source": source_text}[options.prefill_text]
-    sizes = [size for size in options.prefill_sizes if size < options.max_model_len - 64]
+    sizes = [size for size in options.prefill_sizes if int(size * 0.97) < options.max_model_len - 64]
     samples: dict[str, list[dict]] = {str(size): [] for size in sizes}
-    for _ in range(options.prefill_repeats):
+    cool_fn = getattr(bench, "cool_phase", None)
+    for repeat in range(options.prefill_repeats):
         for size in rng.sample(sizes, len(sizes)):
+            if cool_fn is not None:
+                if hasattr(bench, "wait_idle"):
+                    bench.wait_idle()
+                cool_fn(f"prefill:{size}:r{repeat + 1}")
             payload = {
                 "model": options.model,
                 "prompt": prefill_text(int(size * 0.97), rng.randrange(1 << 30)) + "\n\nReply with the word ok.",
@@ -2462,8 +2521,17 @@ def bench_suite(args: argparse.Namespace, cluster: dict, nodes: dict, config_nam
             argv += ["--corpus", args.corpus]
         print(f"benchmarking {base} ({config_name}) with suite {definition['name']} {digest[:12]}; writing {output}",
               flush=True)
+        suite_env = os.environ.copy()
+        if args.cool_below > 0:
+            suite_env["SPARK_BENCH_COOL"] = json.dumps({
+                "cluster_config": config_name,
+                "cool_below": args.cool_below,
+                "cool_timeout": args.cool_timeout,
+            })
+        else:
+            suite_env.pop("SPARK_BENCH_COOL", None)
         try:
-            child["process"] = subprocess.Popen(argv, cwd=ROOT)
+            child["process"] = subprocess.Popen(argv, cwd=ROOT, env=suite_env)
             try:
                 returncode = child["process"].wait()
             except KeyboardInterrupt:
@@ -2638,7 +2706,20 @@ def command_bench(args: argparse.Namespace) -> int:
 
     print(f"benchmarking {base} ({config_name}); writing {report_path}", flush=True)
     rng = random.Random(args.seed)
-    bench = Bench(base, nodes, floor_gib)
+
+    def cool_phase(phase: str) -> list[dict]:
+        try:
+            records = cool_nodes(
+                nodes, nodes["nodes"], args.cool_below, args.cool_timeout,
+                fan_control=fan_control_enabled(cluster),
+            )
+        except RuntimeError as error:
+            raise BenchAbort(f"cooling failed ({phase}): {error}") from error
+        report.setdefault("between_cooling", []).append({"phase": phase, "records": records})
+        save()
+        return records
+
+    bench = Bench(base, nodes, floor_gib, cool=cool_phase)
     fan_failures: list[str] = []
     try:
         try:
@@ -2656,14 +2737,19 @@ def command_bench(args: argparse.Namespace) -> int:
             for problem in missing_curve:
                 print(f"WARN: {problem}", flush=True)
         bench.memory.wait_ready()
+        ran_suite = False
         for suite in BENCH_SUITES:
             if suite not in suites:
                 continue
+            if ran_suite and suite != "prefill":
+                bench.wait_idle()
+                bench.cool_phase(f"suite:{suite}")
             print(f"{suite}:", flush=True)
             report["suites"][suite] = BENCH_SUITE_FUNCTIONS[suite](bench, args, rng)
             save()
             if suite == "quality" and not report["suites"][suite]["ok"]:
                 raise BenchAbort("the quality gate failed; performance numbers would be meaningless")
+            ran_suite = True
     except BenchAbort as abort:
         report["aborted"] = str(abort)
     except OSError as error:

@@ -1,0 +1,17 @@
+INFO 11-19 10:16:36 [importing.py:74] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 11-19 10:16:36 [importing.py:98] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W1119 10:16:36.824000 1 usr/local/lib/python3.12/dist-packages/torch/utils/cpp_extension.py:178] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+Traceback (most recent call last):
+  File "/test.py", line 81, in <module>
+    test_copy_draft_bitmask_capacity_uses_full_decode_envelope()
+  File "/test.py", line 67, in test_copy_draft_bitmask_capacity_uses_full_decode_envelope
+    bitmask = manager.grammar_bitmask(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/spark-ds41f/candidate/vllm/vllm/v1/structured_output/__init__.py", line 425, in grammar_bitmask
+    self._fill_bitmasks(
+  File "/opt/spark-ds41f/candidate/vllm/vllm/v1/structured_output/__init__.py", line 208, in _fill_bitmasks
+    grammar.fill_bitmask(self._grammar_bitmask, index)
+  File "/test.py", line 26, in fill_bitmask
+    raise RuntimeError(
+RuntimeError: bitmask index 30 is outside 30 rows
+exit=1

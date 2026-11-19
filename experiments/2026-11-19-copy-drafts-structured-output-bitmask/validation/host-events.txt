@@ -1,0 +1,10 @@
+2026-11-19T10:04:02+00:00
+running=false status=exited exit=1 oom=false restarts=0 started=2026-11-18T13:28:55.208989405Z finished=2026-11-19T09:47:00.681679568Z
+2026-11-19T09:47:01+00:00 spark-a systemd[1]: deepseek-r0-memguard.service: Deactivated successfully.
+2026-11-19T09:47:01+00:00 spark-a systemd[1]: deepseek-r0-memguard.service: Consumed 9min 35.697s CPU time.
+2026-11-19T10:01:28+00:00 spark-a sudo[276685]:     chan : PWD=/home/chan ; USER=root ; COMMAND=/usr/bin/find /var/log/spark-memguard -maxdepth 2 -type f -printf '%TY-%Tm-%Td %TH:%TM:%TS %p %s bytes\\n'
+2026-11-19T10:02:26+00:00 spark-a dockerd[1761]: time="2026-11-19T10:02:26.980803502Z" level=error msg="Error setting up exec command in container deepseek-r0: container 31d5603344a5fe4742b60fc1fb5d3df798e16413ea9bf9f488a5ac2bdf1e9b6a is not running"
+2026-11-19T10:02:26+00:00 spark-a dockerd[1761]: time="2026-11-19T10:02:26.990125760Z" level=error msg="Error setting up exec command in container deepseek-r0: container 31d5603344a5fe4742b60fc1fb5d3df798e16413ea9bf9f488a5ac2bdf1e9b6a is not running"
+2026-11-19T10:02:26+00:00 spark-a dockerd[1761]: time="2026-11-19T10:02:26.996111777Z" level=error msg="Error setting up exec command in container deepseek-r0: container 31d5603344a5fe4742b60fc1fb5d3df798e16413ea9bf9f488a5ac2bdf1e9b6a is not running"
+2026-11-19T10:02:27+00:00 spark-a dockerd[1761]: time="2026-11-19T10:02:27.003945327Z" level=error msg="Error setting up exec command in container deepseek-r0: container 31d5603344a5fe4742b60fc1fb5d3df798e16413ea9bf9f488a5ac2bdf1e9b6a is not running"
+2026-11-13T02:44:48,585992+00:00 NVRM: loading NVIDIA UNIX Open Kernel Module for aarch64  580.178.04  Release Build  (dvs-builder@U22-I3-G08-04-4)  Tue Jul  7 13:36:23 UTC 2026

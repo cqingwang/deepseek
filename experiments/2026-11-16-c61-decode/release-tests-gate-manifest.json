@@ -33,6 +33,9 @@
   "tests/entrypoints/cli/test_serve.py": [
    "the serve CLI running a single-rank headless worker inline (changed by the series)"
   ],
+  "tests/entrypoints/openai/responses/test_responses_utils.py": [
+   "Responses API custom tool-call history replay as chat tool messages (site patch 0823)"
+  ],
   "tests/entrypoints/openai/test_reasoning_enable_thinking.py": [
    "reasoning_effort and the DeepSeek API's top-level thinking switch mapped into the chat template"
   ],
@@ -381,6 +384,9 @@
   "tests/v1/spec_decode/test_tilelang_rejection.py": [
    "block verification in TileLang against Triton"
   ],
+  "tests/v1/structured_output/test_copy_draft_bitmask_capacity.py": [
+   "the structured-output grammar bitmask covers the scheduler's full copy-draft decode row envelope (site patch 0824)"
+  ],
   "tests/v1/test_outputs.py": [
    "LogprobsTensors non-blocking CPU span transfer and concatenation"
   ],
@@ -511,6 +517,6 @@
    "workspace lanes and reservations; the TileLang attention scratch reserved in its model's lane, so the drafter's lane does not take the target's (changed by the series)"
   ]
  },
- "head": "bc368af597edfb30547b3d0a1844d14c47a6b931",
- "repo": ".work/build/vllm-19f2c20ed4d6-7f3de111/src/vllm"
+ "head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+ "repo": ".work/build/vllm-19f2c20ed4d6-80e35f36/src/vllm"
 }

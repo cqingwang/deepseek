@@ -139,10 +139,10 @@
       "tp2-io-uring-expert-slot-cache",
       "moe-down-pdl-preload"
     ],
-    "patch_head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
-    "expected_tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
-    "patchset_sha256": "39ee1b44559780013ca903be76f27f80a4b8765c25aeb04f3a2c7f577616d6ab",
-    "patch_count": 696
+    "patch_head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
+    "expected_tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
+    "patchset_sha256": "3be9c8f7ce1e53a4531e665f3a9b09d8a8d832ff3f9a10f0eb75d401bed35a74",
+    "patch_count": 697
   },
   "nccl": {
     "base_revision": "73cf112295c33aee2b895f329f592f2a9b4b0f97",
