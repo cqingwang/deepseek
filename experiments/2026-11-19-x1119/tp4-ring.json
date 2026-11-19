@@ -1,0 +1,14 @@
+{
+  "notes": "Site x1119 deployment profile: official 83fb21de candidate-61-r2 stack plus site patches 0823 and 0824, vLLM tree 259cf7edee89, built 2026-11-19.",
+  "extends": {
+    "config": "experiments/2026-11-18-x1118/tp4-ring.json"
+  },
+  "set": {
+    "container": {
+      "image": "spark-ds41f:x1119",
+      "expected_labels": {
+        "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5"
+      }
+    }
+  }
+}
