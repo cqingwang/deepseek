@@ -183,6 +183,26 @@
     "The benchmark completed with thermal slowdown 0 ms and GPU maxima below limits.",
     "nvidia-smi --query-xid-errors is unsupported on this driver; dmesg had no OOM/Xid matches."
   ],
+  "cleanup": {
+    "date": "2026-11-19",
+    "receipt": "validation/cleanup-receipt.json",
+    "removed_images": [
+      "spark-ds41f:x1118"
+    ],
+    "retained_images": {
+      "service": "spark-ds41f:x1119",
+      "base": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    },
+    "build_cache_before_gib": 9.96,
+    "build_cache_after_gib": 0.0,
+    "root_filesystem_freed_gib": {
+      "spark-a": 6.092,
+      "spark-b": 0.001,
+      "spark-c": 0.001,
+      "spark-d": 4.906
+    },
+    "service_state_ok": true
+  },
   "artifacts": {
     "build_prepare": "validation/build-prepare.txt",
     "build_image": "validation/build-image-retry1.txt",

@@ -1,0 +1,231 @@
+# x1119 cleanup inventory: 2026-11-19T14:20:24Z
+===== spark-a (192.168.2.180) =====
+spark-a
+/dev/nvme0n1p2 4031871553536 979227979776 2847802839040  26% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          3         1         32.44GB   27.25GB (83%)
+Containers      1         1         34.72MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     88        0         9.96GB    4.767GB
+REPOSITORY         TAG                                                DIGEST                                                                    IMAGE ID                                                                  CREATED        SIZE
+spark-ds41f        x1119                                              <none>                                                                    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago    27.2GB
+spark-ds41f        x1118                                              <none>                                                                    sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4   25 hours ago   27.2GB
+vllm/vllm-openai   nightly-af1c01499b289be555c475669ba50a88e96d846e   sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf   sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56   2 months ago   22.1GB
+deepseek-r0	spark-ds41f:x1119	Up 3 hours	d84bc5d159fa
+/deepseek-r0\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- task tmp --
+/tmp/0823-fix-dsv41-replay-responses-custom-tool-calls.patch
+/tmp/0824-fix-structured-output-copy-draft-bitmask-capacity.patch
+/tmp/c61-gate-0824-final.json
+/tmp/c61-gate-0824.json
+/tmp/spark-build.lock
+/tmp/spark-merge-check.uoUlct
+/tmp/spark-ssh-1000
+/tmp/test_copy_draft_bitmask_capacity.py
+/tmp/tmp.e67QfPLH0j
+/tmp/tmp.e67QfPLH0j/probe
+/tmp/tmp.e67QfPLH0j/text
+/tmp/tmp.kNVXJ5EugV
+/tmp/tmp.kNVXJ5EugV/probe
+/tmp/tmp.kNVXJ5EugV/text
+/tmp/tmp.pKLvtifxe9
+/tmp/tmp.pKLvtifxe9/probe
+/tmp/tmp.pKLvtifxe9/text
+/tmp/tmp.TMnyezrPct
+/tmp/tmp.TMnyezrPct/probe
+/tmp/tmp.TMnyezrPct/text
+/tmp/tmp.TS8XhBm0IP
+/tmp/tmp.TS8XhBm0IP/probe
+/tmp/tmp.TS8XhBm0IP/text
+/tmp/tmp.WUOIWO4DoV
+/tmp/tmp.WUOIWO4DoV/probe
+/tmp/tmp.WUOIWO4DoV/text
+/tmp/tmp.YgRHbQnYVf
+/tmp/tmp.YgRHbQnYVf/probe
+/tmp/tmp.YgRHbQnYVf/text
+/tmp/x1119-bench-run-01
+/tmp/x1119-bench-run-02
+/tmp/x1119-fabric-known-hosts
+/tmp/x1119-test-bench.txt
+/tmp/x1119-test-doctor.txt
+/var/tmp/dsf-bench
+/var/tmp/dsv41-image-ship-20261026.log
+/var/tmp/nvidia-holds-spark-a.txt
+/var/tmp/retained-holds-spark-a.txt
+/var/tmp/spark-a-docker-layerdb-9af94f6ca440-20261106T201654Z
+/var/tmp/spark-a-docker-restart-20261106T203001Z
+/var/tmp/spark-cleanup-20261028-140630
+===== spark-b (192.168.2.161) =====
+spark-b
+/dev/nvme0n1p2 4031871553536 945343385600 2881687433216  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          2         1         32.44GB   27.25GB (83%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED        SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago    27.2GB
+spark-ds41f   x1118     <none>    sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4   25 hours ago   27.2GB
+deepseek-r1	spark-ds41f:x1119	Up 3 hours	c35da3c880c1
+/deepseek-r1\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- task tmp --
+/tmp/tmp.5Tm2qyrWMm
+/tmp/tmp.5Tm2qyrWMm/probe
+/tmp/tmp.5Tm2qyrWMm/text
+/tmp/tmp.6zleGDQXGK
+/tmp/tmp.6zleGDQXGK/probe
+/tmp/tmp.6zleGDQXGK/text
+/tmp/tmp.BVWLBfd467
+/tmp/tmp.BVWLBfd467/probe
+/tmp/tmp.BVWLBfd467/text
+/tmp/tmp.Dp5YzDS2LQ
+/tmp/tmp.Dp5YzDS2LQ/probe
+/tmp/tmp.Dp5YzDS2LQ/text
+/tmp/tmp.opl4bIE0Dv
+/tmp/tmp.opl4bIE0Dv/probe
+/tmp/tmp.opl4bIE0Dv/text
+/tmp/tmp.pncEdPNG5A
+/tmp/tmp.pncEdPNG5A/probe
+/tmp/tmp.pncEdPNG5A/text
+/tmp/tmp.QsQSNNwXGa
+/tmp/tmp.QsQSNNwXGa/probe
+/tmp/tmp.QsQSNNwXGa/text
+/tmp/tmp.TDRmh6JY9m
+/tmp/tmp.TDRmh6JY9m/probe
+/tmp/tmp.TDRmh6JY9m/text
+/tmp/tmp.TFTvYY58qN
+/tmp/tmp.TFTvYY58qN/probe
+/tmp/tmp.TFTvYY58qN/text
+/tmp/tmp.u4CgNo2mMN
+/tmp/tmp.u4CgNo2mMN/probe
+/tmp/tmp.u4CgNo2mMN/text
+/tmp/tmp.Z1Ib4rUKkp
+/tmp/tmp.Z1Ib4rUKkp/probe
+/tmp/tmp.Z1Ib4rUKkp/text
+/tmp/tmp.zu8Tu2iFPx
+/tmp/tmp.zu8Tu2iFPx/probe
+/tmp/tmp.zu8Tu2iFPx/text
+/tmp/x1119-fabric-known-hosts
+/var/tmp/nvidia-holds-spark-b.txt
+/var/tmp/retained-holds-spark-b.txt
+/var/tmp/spark-cleanup-20261028-140636
+===== spark-c (192.168.2.102) =====
+spark-c
+/dev/nvme0n1p2 4031871553536 936463015936 2890567688192  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          2         1         32.44GB   27.25GB (83%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED        SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago    27.2GB
+spark-ds41f   x1118     <none>    sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4   25 hours ago   27.2GB
+deepseek-r2	spark-ds41f:x1119	Up 3 hours	ff809202dd3d
+/deepseek-r2\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- task tmp --
+/tmp/tmp.9Ou2VTo1Hy
+/tmp/tmp.9Ou2VTo1Hy/probe
+/tmp/tmp.9Ou2VTo1Hy/text
+/tmp/tmp.caxbv81xoN
+/tmp/tmp.caxbv81xoN/probe
+/tmp/tmp.caxbv81xoN/text
+/tmp/tmp.cC2pA1kISa
+/tmp/tmp.cC2pA1kISa/probe
+/tmp/tmp.cC2pA1kISa/text
+/tmp/tmp.hPeAdaLX9B
+/tmp/tmp.hPeAdaLX9B/probe
+/tmp/tmp.hPeAdaLX9B/text
+/tmp/tmp.ihBFrJHezS
+/tmp/tmp.ihBFrJHezS/probe
+/tmp/tmp.ihBFrJHezS/text
+/tmp/tmp.LfQ3n2Ynd0
+/tmp/tmp.LfQ3n2Ynd0/probe
+/tmp/tmp.LfQ3n2Ynd0/text
+/tmp/tmp.LYhnm8pDTS
+/tmp/tmp.LYhnm8pDTS/probe
+/tmp/tmp.LYhnm8pDTS/text
+/tmp/tmp.MATYQfLZQg
+/tmp/tmp.MATYQfLZQg/probe
+/tmp/tmp.MATYQfLZQg/text
+/tmp/tmp.MiehHzj90c
+/tmp/tmp.MiehHzj90c/probe
+/tmp/tmp.MiehHzj90c/text
+/tmp/tmp.neYhZofOj1
+/tmp/tmp.neYhZofOj1/probe
+/tmp/tmp.neYhZofOj1/text
+/tmp/tmp.QkUOvCBjBl
+/tmp/tmp.QkUOvCBjBl/probe
+/tmp/tmp.QkUOvCBjBl/text
+/tmp/tmp.s9DITvdUd6
+/tmp/tmp.s9DITvdUd6/probe
+/tmp/tmp.s9DITvdUd6/text
+/tmp/x1119-c-to-d.sh
+/tmp/x1119-fabric-known-hosts
+/var/tmp/nvidia-holds-spark-c.txt
+/var/tmp/retained-holds-spark-c.txt
+/var/tmp/spark-cleanup-20261028-220643
+===== spark-d (192.168.2.238) =====
+spark-d
+/dev/nvme0n1p2 4031871553536 930185261056 2896845443072  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          2         1         32.44GB   27.25GB (83%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED        SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago    27.2GB
+spark-ds41f   x1118     <none>    sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4   25 hours ago   27.2GB
+deepseek-r3	spark-ds41f:x1119	Up 3 hours	7f80f40cdde9
+/deepseek-r3\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- task tmp --
+/tmp/tmp.0XtkVZB4nd
+/tmp/tmp.0XtkVZB4nd/probe
+/tmp/tmp.0XtkVZB4nd/text
+/tmp/tmp.5wJe6ZbyRE
+/tmp/tmp.5wJe6ZbyRE/probe
+/tmp/tmp.5wJe6ZbyRE/text
+/tmp/tmp.fl5BBI4H0J
+/tmp/tmp.fl5BBI4H0J/probe
+/tmp/tmp.fl5BBI4H0J/text
+/tmp/tmp.g2oKSo93vW
+/tmp/tmp.g2oKSo93vW/probe
+/tmp/tmp.g2oKSo93vW/text
+/tmp/tmp.j0hjC9SFhP
+/tmp/tmp.j0hjC9SFhP/probe
+/tmp/tmp.j0hjC9SFhP/text
+/tmp/tmp.k6cZIUU2lO
+/tmp/tmp.k6cZIUU2lO/probe
+/tmp/tmp.k6cZIUU2lO/text
+/tmp/tmp.NGzcghpQub
+/tmp/tmp.NGzcghpQub/probe
+/tmp/tmp.NGzcghpQub/text
+/tmp/tmp.oBdr9s4HeL
+/tmp/tmp.oBdr9s4HeL/probe
+/tmp/tmp.oBdr9s4HeL/text
+/tmp/tmp.pGpaXKkBjK
+/tmp/tmp.pGpaXKkBjK/probe
+/tmp/tmp.pGpaXKkBjK/text
+/tmp/tmp.UmPE2jKxeB
+/tmp/tmp.UmPE2jKxeB/probe
+/tmp/tmp.UmPE2jKxeB/text
+/tmp/tmp.XKH1j6O0q7
+/tmp/tmp.XKH1j6O0q7/probe
+/tmp/tmp.XKH1j6O0q7/text
+/tmp/tmp.Z69LLfdboA
+/tmp/tmp.Z69LLfdboA/probe
+/tmp/tmp.Z69LLfdboA/text
+/var/tmp/nvidia-holds-spark-d.txt
+/var/tmp/retained-holds-spark-d.txt
+/var/tmp/spark-cleanup-20261028-220649

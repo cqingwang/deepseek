@@ -93,3 +93,21 @@
   `0x03000d07` 不兼容。x1119 显式设置 `host.fan_control=false`，
   serving 不受影响，benchmark 自动跳过不可用的 fan curve。
 - 性能测试中 thermal slowdown 均为 0 ms，GPU 最高温度低于限制。
+
+### 清理收尾
+
+- 四机删除已无容器引用的 `spark-ds41f:x1118`；当前只保留服务镜像
+  `spark-ds41f:x1119`，spark-a 另保留唯一 vLLM 构建基座。
+- spark-a Docker Build Cache 从 `9.96 GiB` 清理到 `0`；根分区实际释放
+  `6.092 GiB`，spark-b/c/d 分别释放约 `1 MiB`、`1 MiB`、`4.906 GiB`。
+- 删除 spark-a 的 `1.4 GiB` 合并检查临时树、x1119 bench/test 中间目录、
+  一次性补丁和 gate 文件、失效 build lock，以及四机旧临时探针和
+  `/var/tmp` 快照。
+- 本地删除 5 份大体积 sync transcript、已失败的 `build-image.txt` 和
+  一次性分发脚本；性能、API、host 检查、构建重试与回归证据全部保留。
+- 清理后四容器仍为 `running`、`OOMKilled=false`、`RestartCount=0`，
+  GPU 上四个 `VLLM::Worker_TP0..3` 正常；`/v1/models` 与 chat completion
+  均为 200，per-request metrics 可见。
+- 证据与删除清单：`validation/cleanup-receipt.json`、
+  `validation/cleanup-before.txt`、`validation/cleanup-delete.txt`、
+  `validation/cleanup-after.txt`、`validation/cleanup-local.txt`。

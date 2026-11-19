@@ -1,0 +1,32 @@
+# local cleanup: 2026-11-19T14:21:05Z
+-- removed files --
+2231176 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-apply.txt
+5236f8aab4d56781f259c7465ca859c13ed9b1e72f2a3624db110e8170aff4d9  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-apply.txt
+17302042 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-config.txt
+f0942aaf463f5e4d3f285b4b054324a03b471a3ee46e53754ee8280655f74fe0  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-config.txt
+2492396 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-dry-run.txt
+992d0704566e87e541716881b598eea19936013e3a0d79f9455cb8051101a18d  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-dry-run.txt
+2210810 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-final.txt
+3e5d0660da16c3644cf4d40ee3d7f2b6bed30e70e6009a4369e7f02019ebd4ae  spark/deepseek/experiments/2026-11-19-x1119/validation/sync-final.txt
+2202116 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/host-fix-sync.txt
+c9c0f25025da8fdf5893b5f53630d96c9316f222c1c19102cf2a7c5f790eb261  spark/deepseek/experiments/2026-11-19-x1119/validation/host-fix-sync.txt
+287 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/distribute-c-to-d.sh
+78ef9827d605d4a9b01f0a476d318aeab233abd183e141e4baef8744877de95d  spark/deepseek/experiments/2026-11-19-x1119/validation/distribute-c-to-d.sh
+49709 bytes  spark/deepseek/experiments/2026-11-19-x1119/validation/build-image.txt
+454cd3a66eb57b5706390075f6934054c3cfbe63fbd90c584b7756f16ed0f4d3  spark/deepseek/experiments/2026-11-19-x1119/validation/build-image.txt
+-- removed macOS metadata --
+spark/.DS_Store
+spark/tests/.DS_Store
+spark/dash/.DS_Store
+-- preserved --
+spark/deepseek/experiments/2026-11-19-x1119/deployment-record.json
+spark/deepseek/experiments/2026-11-19-x1119/README.md
+spark/deepseek/experiments/2026-11-19-x1119/performance/summary.json
+spark/deepseek/experiments/2026-11-19-x1119/validation/build-image-retry1.txt
+spark/deepseek/experiments/2026-11-19-x1119/validation/host-check.txt
+spark/deepseek/experiments/2026-11-19-x1119/validation/final-health.txt
+spark/deepseek/experiments/2026-11-19-x1119/validation/live-parameter-consumption.json
+spark/deepseek/experiments/2026-11-19-x1119/validation/api-smoke.json
+spark/deepseek/experiments/2026-11-19-x1119/validation/concurrent-structured-smoke.json
+spark/deepseek/experiments/2026-11-19-copy-drafts-structured-output-bitmask/validation/crash-r0-context.log
+spark/deepseek/experiments/2026-11-19-copy-drafts-structured-output-bitmask/validation/crash-r0-tail.log

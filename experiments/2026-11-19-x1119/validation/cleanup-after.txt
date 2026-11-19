@@ -1,0 +1,88 @@
+# x1119 cleanup verification: 2026-11-19T14:21:14Z
+===== spark-a (192.168.2.180) =====
+spark-a
+/dev/nvme0n1p2 4031871553536 972686528512 2854344290304  26% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          2         1         27.25GB   27.25GB (100%)
+Containers      1         1         34.72MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY         TAG                                                DIGEST                                                                    IMAGE ID                                                                  CREATED        SIZE
+spark-ds41f        x1119                                              <none>                                                                    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago    27.2GB
+vllm/vllm-openai   nightly-af1c01499b289be555c475669ba50a88e96d846e   sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf   sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56   2 months ago   22.1GB
+deepseek-r0	spark-ds41f:x1119	Up 3 hours	d84bc5d159fa
+/deepseek-r0\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- remaining task tmp --
+-- active hold --
+===== spark-b (192.168.2.161) =====
+spark-b
+/dev/nvme0n1p2 4031871553536 945342271488 2881688547328  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          1         1         27.25GB   27.25GB (100%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED       SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago   27.2GB
+deepseek-r1	spark-ds41f:x1119	Up 3 hours	c35da3c880c1
+/deepseek-r1\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- remaining task tmp --
+-- active hold --
+===== spark-c (192.168.2.102) =====
+spark-c
+/dev/nvme0n1p2 4031871553536 936461893632 2890568810496  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          1         1         27.25GB   27.25GB (100%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED       SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago   27.2GB
+deepseek-r2	spark-ds41f:x1119	Up 3 hours	ff809202dd3d
+/deepseek-r2\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- remaining task tmp --
+-- active hold --
+===== spark-d (192.168.2.238) =====
+spark-d
+/dev/nvme0n1p2 4031871553536 924917366784 2902113337344  25% /
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          1         1         27.25GB   27.25GB (100%)
+Containers      1         1         31.83MB   0B (0%)
+Local Volumes   0         0         0B        0B
+Build Cache     0         0         0B        0B
+REPOSITORY    TAG       DIGEST    IMAGE ID                                                                  CREATED       SIZE
+spark-ds41f   x1119     <none>    sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b   4 hours ago   27.2GB
+deepseek-r3	spark-ds41f:x1119	Up 3 hours	7f80f40cdde9
+/deepseek-r3\tsha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b\trunning\tfalse\t0
+-- dangling images --
+-- stopped containers --
+-- volumes --
+-- remaining task tmp --
+-- active hold --
+===== remote repository and image recheck: 2026-11-19T14:23:58Z =====
+spark-a	experiment_size=1.5M
+images=spark-ds41f:x1119,vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e
+redundant_validation_files=0
+build_cache=Total:		0B
+spark-b	experiment_size=1.5M
+images=spark-ds41f:x1119
+redundant_validation_files=0
+build_cache=Total:		0B
+spark-c	experiment_size=1.5M
+images=spark-ds41f:x1119
+redundant_validation_files=0
+build_cache=Total:		0B
+spark-d	experiment_size=1.5M
+images=spark-ds41f:x1119
+redundant_validation_files=0
+build_cache=Total:		0B
+local_docs_sha256: b152fc8b0932919ff0d3ad493e14ac857536f871c5ab61d732be77a48c9c31d8

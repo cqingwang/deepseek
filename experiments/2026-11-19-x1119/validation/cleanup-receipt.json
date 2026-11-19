@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "authorized_scope": "Keep the vLLM base image and the current service image, then remove unused images, intermediate files, build-cache fragments and obsolete temporary files without interrupting serving.",
+  "protected": {
+    "service_image": {
+      "tag": "spark-ds41f:x1119",
+      "id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+      "nodes": [
+        "spark-a",
+        "spark-b",
+        "spark-c",
+        "spark-d"
+      ]
+    },
+    "vllm_base": {
+      "tag": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+      "id": "sha256:cf41fa0cc731193cd646cac16294a403951fd802b4da3030ad9a34207849ff56",
+      "digest": "sha256:3cf14c52765a0f0c2f09035e05fa79e1e4b2f9788b64afa90fa41c1ff12d29cf",
+      "nodes": [
+        "spark-a"
+      ]
+    },
+    "active_containers": [
+      "deepseek-r0",
+      "deepseek-r1",
+      "deepseek-r2",
+      "deepseek-r3"
+    ]
+  },
+  "removed_images": [
+    {
+      "tag": "spark-ds41f:x1118",
+      "id": "sha256:ec6a5e51a0020358e1d1795ab1d4d5eb736d92e3dec30d07de2444a3e84c63c4",
+      "nodes": [
+        "spark-a",
+        "spark-b",
+        "spark-c",
+        "spark-d"
+      ],
+      "reason": "No running or stopped container referenced x1118 after the x1119 cutover."
+    }
+  ],
+  "build_cache": {
+    "node": "spark-a",
+    "before_total_gib": 9.96,
+    "before_private_gib": 4.767,
+    "before_shared_gib": 5.192,
+    "after_total_gib": 0.0,
+    "note": "Build Cache shared bytes overlap image layers; root filesystem freed bytes are authoritative."
+  },
+  "filesystem_bytes": {
+    "spark-a": {
+      "used_before": 979227979776,
+      "used_after": 972686528512,
+      "freed": 6541451264,
+      "freed_gib": 6.092
+    },
+    "spark-b": {
+      "used_before": 945343356928,
+      "used_after": 945342271488,
+      "freed": 1085440,
+      "freed_gib": 0.001
+    },
+    "spark-c": {
+      "used_before": 936463007744,
+      "used_after": 936461893632,
+      "freed": 1114112,
+      "freed_gib": 0.001
+    },
+    "spark-d": {
+      "used_before": 930185236480,
+      "used_after": 924917366784,
+      "freed": 5267869696,
+      "freed_gib": 4.906
+    }
+  },
+  "temp_cleanup": {
+    "spark-a": [
+      "/tmp/spark-merge-check.uoUlct",
+      "/tmp/x1119-bench-run-01",
+      "/tmp/x1119-bench-run-02",
+      "/tmp/x1119-fabric-known-hosts",
+      "/tmp/x1119-test-bench.txt",
+      "/tmp/x1119-test-doctor.txt",
+      "/tmp/spark-ssh-1000",
+      "/tmp/spark-build.lock",
+      "/tmp/test_copy_draft_bitmask_capacity.py",
+      "/tmp/0823-fix-dsv41-replay-responses-custom-tool-calls.patch",
+      "/tmp/0824-fix-structured-output-copy-draft-bitmask-capacity.patch",
+      "/tmp/c61-gate-0824.json",
+      "/tmp/c61-gate-0824-final.json",
+      "/var/tmp/nvidia-holds-spark-a.txt",
+      "/var/tmp/retained-holds-spark-a.txt",
+      "/var/tmp/dsv41-image-ship-20261026.log",
+      "/var/tmp/dsf-bench",
+      "/var/tmp/spark-a-docker-layerdb-9af94f6ca440-20261106T201654Z",
+      "/var/tmp/spark-a-docker-restart-20261106T203001Z",
+      "/var/tmp/spark-cleanup-20261028-140630"
+    ],
+    "spark-b": [
+      "/tmp/x1119-fabric-known-hosts",
+      "/var/tmp/nvidia-holds-spark-b.txt",
+      "/var/tmp/retained-holds-spark-b.txt",
+      "/var/tmp/spark-cleanup-20261028-140636"
+    ],
+    "spark-c": [
+      "/tmp/x1119-fabric-known-hosts",
+      "/tmp/x1119-c-to-d.sh",
+      "/var/tmp/nvidia-holds-spark-c.txt",
+      "/var/tmp/retained-holds-spark-c.txt",
+      "/var/tmp/spark-cleanup-20261028-220643"
+    ],
+    "spark-d": [
+      "/tmp/x1119-fabric-known-hosts",
+      "/var/tmp/nvidia-holds-spark-d.txt",
+      "/var/tmp/retained-holds-spark-d.txt",
+      "/var/tmp/spark-cleanup-20261028-220649"
+    ],
+    "stale_mktemp_probe_directories_removed": 43,
+    "notes": [
+      "The mktemp directories contained only duplicate probe/text test artifacts.",
+      "Closed spark-hold records were preserved as small historical coordination evidence.",
+      "No active spark-hold, spark-request or spark3-request file remained on any node."
+    ]
+  },
+  "local_cleanup": {
+    "removed_validation_transcripts": [
+      "validation/sync-apply.txt",
+      "validation/sync-config.txt",
+      "validation/sync-dry-run.txt",
+      "validation/sync-final.txt",
+      "validation/host-fix-sync.txt"
+    ],
+    "removed_intermediate_scripts_and_failures": [
+      "validation/distribute-c-to-d.sh",
+      "validation/build-image.txt"
+    ],
+    "removed_macos_metadata": 3,
+    "remote_validation_mirrors_removed": [
+      "validation/sync-apply.txt",
+      "validation/sync-config.txt",
+      "validation/sync-dry-run.txt",
+      "validation/sync-final.txt",
+      "validation/host-fix-sync.txt",
+      "validation/distribute-c-to-d.sh",
+      "validation/build-image.txt"
+    ],
+    "preserved": [
+      "deployment-record.json",
+      "README.md",
+      "performance/run-01/bench.json",
+      "performance/run-02/bench.json",
+      "performance/summary.json",
+      "validation/build-image-retry1.txt",
+      "validation/host-check.txt",
+      "validation/final-health.txt",
+      "validation/live-parameter-consumption.json",
+      "validation/api-smoke.json",
+      "validation/concurrent-structured-smoke.json"
+    ]
+  },
+  "docker_images_after": {
+    "spark-a": [
+      "spark-ds41f:x1119",
+      "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e"
+    ],
+    "spark-b": [
+      "spark-ds41f:x1119"
+    ],
+    "spark-c": [
+      "spark-ds41f:x1119"
+    ],
+    "spark-d": [
+      "spark-ds41f:x1119"
+    ]
+  },
+  "containers_after": {
+    "spark-a": {
+      "name": "deepseek-r0",
+      "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "gpu_compute": "VLLM::Worker_TP0"
+    },
+    "spark-b": {
+      "name": "deepseek-r1",
+      "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "gpu_compute": "VLLM::Worker_TP1"
+    },
+    "spark-c": {
+      "name": "deepseek-r2",
+      "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "gpu_compute": "VLLM::Worker_TP2"
+    },
+    "spark-d": {
+      "name": "deepseek-r3",
+      "image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "gpu_compute": "VLLM::Worker_TP3"
+    }
+  },
+  "service_validation": {
+    "models_status": 200,
+    "models": [
+      "deepseek-v4.1-flash",
+      "deepseek-v4.1-flash-weightless"
+    ],
+    "chat_status": 200,
+    "chat_id": "chatcmpl-b23c7bf3b59c1610",
+    "content": "OK",
+    "finish_reason": "stop",
+    "per_request_metrics_visible": true,
+    "memguard_processes_active": 4,
+    "fatal_log_matches": 0
+  },
+  "leftovers": {
+    "dangling_images": false,
+    "stopped_containers": false,
+    "anonymous_volumes": false,
+    "build_cache": false,
+    "task_tmp": false,
+    "active_hold": false
+  },
+  "evidence": [
+    "validation/cleanup-before.txt",
+    "validation/cleanup-delete.txt",
+    "validation/cleanup-after.txt",
+    "validation/cleanup-local.txt",
+    "validation/api-cleanup-smoke.json"
+  ]
+}
