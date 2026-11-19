@@ -1,0 +1,4 @@
+INFO 11-19 10:50:29 [importing.py:74] Triton is installed but 0 active driver(s) found (expected 1). Disabling Triton to prevent runtime errors.
+INFO 11-19 10:50:29 [importing.py:98] Triton not installed or not compatible; certain GPU-related functions will not be available.
+W1119 10:50:29.443000 1 torch/utils/cpp_extension.py:178] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+exit=0
