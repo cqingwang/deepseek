@@ -54,6 +54,12 @@ def key_enrolled(returncode, output):
     return returncode in (0, 1) and output.strip().endswith(" is already enrolled")
 
 
+def installed_dpkg_version(value: str) -> str:
+    """The version of an installed dpkg package, including held packages."""
+    status, separator, version = value.partition("|")
+    return version if separator and status.endswith(" installed") else ""
+
+
 def collect(policy):
     target = policy["stable"]
     data = {"kernel": os.uname().release, "page_size": os.sysconf("SC_PAGE_SIZE"),
@@ -86,7 +92,7 @@ def collect(policy):
     data["uvm_leaf_packing"] = packing.read_text().strip() if packing.exists() else "stock"
     for name in policy["packages"]:
         value = probe("dpkg-query", "-W", "-f=${Status}|${Version}", name)
-        data["packages"][name] = value.removeprefix("install ok installed|") if value.startswith("install ok installed|") else ""
+        data["packages"][name] = installed_dpkg_version(value)
     for kind in ("vmlinuz", "initrd.img", "config"):
         path = f"/boot/{kind}-{target}"
         data["files"][path] = Path(path).is_file() and Path(path).stat().st_size > 0
@@ -210,16 +216,24 @@ def findings(name, data, policy):
     if data.get("governors") != ["performance"]:
         issues.append(f"{name}: CPU governors differ from performance: {data.get('governors')!r}")
         fixes.append(f"{name}: after installing matching linux-tools, sudo systemctl restart nv-cpu-governor.service")
-    for module in ("nvidia", "nvidia_uvm", "nvidia_drm", "mlx5_core", "mlx5_ib", "dgx_ec_fan_control"):
+    fan_control_enabled = policy.get("fan_control", {}).get("enabled", True) is not False
+    modules = ("nvidia", "nvidia_uvm", "nvidia_drm", "mlx5_core", "mlx5_ib")
+    if fan_control_enabled:
+        modules += ("dgx_ec_fan_control",)
+    for module in modules:
         info = data.get("modules", {}).get(module, {})
         if info.get("vermagic", "").split()[:1] != [target]:
             issues.append(f"{name}: {module} is not prepared for {target}")
         if module.startswith("nvidia") and info.get("version") != policy["driver"]:
             issues.append(f"{name}: stable {module} driver version differs from {policy['driver']}")
-    if "installed" not in data.get("fan_dkms", ""):
+    if fan_control_enabled and "installed" not in data.get("fan_dkms", ""):
         issues.append(f"{name}: fan-control DKMS is not installed for {target}")
         fixes.append(f"{name}: sudo dkms autoinstall -k {target}")
-    if data.get("secure_boot") == "SecureBoot enabled" and (not data.get("fan_signer") or not data.get("fan_key_enrolled")):
+    if (
+        fan_control_enabled
+        and data.get("secure_boot") == "SecureBoot enabled"
+        and (not data.get("fan_signer") or not data.get("fan_key_enrolled"))
+    ):
         issues.append(f"{name}: Secure Boot is enabled but the stable fan signature/enrolled key is unverified")
     grub = data.get("grub", {})
     if target not in grub.get("entries", {}).values():

@@ -50,6 +50,17 @@ def ready(uuid="node-a"):
 
 
 class ReadinessTest(unittest.TestCase):
+    def test_dpkg_parser_accepts_held_installed_status(self):
+        self.assertEqual(
+            kernel.installed_dpkg_version("install ok installed|1.2.3"), "1.2.3"
+        )
+        self.assertEqual(
+            kernel.installed_dpkg_version("hold ok installed|4.5.6"), "4.5.6"
+        )
+        self.assertEqual(
+            kernel.installed_dpkg_version("deinstall ok config-files|7.8.9"), ""
+        )
+
     def test_single_stable_kernel_is_success(self):
         self.assertEqual(kernel.findings("dgx1", ready(), POLICY), ([], []))
 
@@ -83,9 +94,19 @@ class ReadinessTest(unittest.TestCase):
         data = ready()
         data["fan_dkms"] = "built"
         data["files"][f"/boot/initrd.img-{STABLE}"] = False
-        issues, fixes = kernel.findings("dgx1", data, POLICY)
+        fan_policy = {**POLICY, "fan_control": {"enabled": True}}
+        issues, fixes = kernel.findings("dgx1", data, fan_policy)
         self.assertTrue(any("initrd" in x for x in issues))
         self.assertTrue(any("dkms autoinstall" in x for x in fixes))
+
+    def test_disabled_fan_control_skips_the_bench_only_layer(self):
+        data = ready()
+        data["fan_dkms"] = ""
+        data["modules"]["dgx_ec_fan_control"] = {"vermagic": "", "version": ""}
+        policy = {**POLICY, "fan_control": {"enabled": False}}
+        issues, fixes = kernel.findings("dgx1", data, policy)
+        self.assertFalse(any("fan-control" in x for x in issues))
+        self.assertFalse(any("dkms autoinstall" in x for x in fixes))
 
     def test_numeric_default_is_not_a_safe_pin(self):
         data = ready()
@@ -141,7 +162,13 @@ class ReadinessTest(unittest.TestCase):
     def test_unsigned_fan_is_not_ready_under_secure_boot(self):
         data = ready()
         data["fan_signer"] = ""
-        self.assertTrue(any("stable fan signature" in x for x in kernel.findings("dgx1", data, POLICY)[0]))
+        fan_policy = {**POLICY, "fan_control": {"enabled": True}}
+        self.assertTrue(
+            any(
+                "stable fan signature" in x
+                for x in kernel.findings("dgx1", data, fan_policy)[0]
+            )
+        )
 
     def test_mokutil_enrollment_exit_status_is_not_shell_success(self):
         self.assertTrue(kernel.key_enrolled(1, "/root/key.der is already enrolled\n"))

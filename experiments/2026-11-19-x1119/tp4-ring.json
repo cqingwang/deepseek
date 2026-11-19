@@ -9,6 +9,9 @@
       "expected_labels": {
         "local.spark-ds41f.vllm.tree": "259cf7edee8961f40e89b48002ae7394ebca49e5"
       }
+    },
+    "host": {
+      "fan_control": false
     }
   }
 }
