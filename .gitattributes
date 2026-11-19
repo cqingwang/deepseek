@@ -9,4 +9,5 @@ experiments/**/runs*/** -whitespace
 experiments/**/receipts/** -whitespace
 experiments/**/results/** -whitespace
 experiments/**/overlay/** -whitespace
+experiments/**/validation/** -whitespace
 *.csv -whitespace
