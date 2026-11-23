@@ -1,0 +1,128 @@
+=== spark-a build cache ===
+ID						RECLAIMABLE	SIZE		LAST ACCESSED
+6zej1cxsazcgl0i3o8dvwnawp*              	true 		128.2MB   	3 hours ago
+r6f9ni6tctb6793ggsaw807vc*              	true 	178.4MB   	3 hours ago
+j3pb47t8ga48007aeyz8xhzxy               	true 	0B        	3 hours ago
+dz5ts9u9g86npdg75fsfvn5a8*              	true 	13.76MB   	3 hours ago
+7ireg07ijmmezx7ss2zjlleb6*              	true 	0B        	3 hours ago
+4aamoju73ie4hxahg2u52r0oa*              	true 	0B        	3 hours ago
+no6fajyqmh270j435pipjc20a*              	true 	543.9MB   	3 hours ago
+s206uduw8lcpocq6qgk6r8x0d*              	true 	167.9MB   	3 hours ago
+paccp9w3wakrdexjc96wu1ir8*              	true 	178.4MB   	15 hours ago
+ouyl1b5253ad1b7vbr0vj9qhd*              	true 	665B      	3 hours ago
+zlhef3a2btc1ueoqwab00l7ew*              	true 	0B        	3 hours ago
+l3tfbx6dxwr9wvb798ksp47ef*              	true 	0B        	3 hours ago
+ocwndfykvr9zv4pv5xwc62k8f*              	true 	31.79kB   	3 hours ago
+h0fspevct84o4wt1w3a6hgien*              	true 	1.156MB   	3 hours ago
+wdi8ixch5p9ooapmepklxfdjy*              	true 	37B       	3 hours ago
+y4386elmhkeahoko5qbe7ui59*              	true 	0B        	3 hours ago
+ru8d43ghihfgr9tqxotnlvh30*              	true 	367.5MB   	3 hours ago
+qdnp30zecqmigazz58idgo9kc*              	true 	178.8MB   	3 hours ago
+etyh8xb8w3odet61r8q8m9elv*              	true 	1.511GB   	3 hours ago
+m2yq9vesss6i0jdsyetjb5ubb*              	true 	0B        	3 hours ago
+99u1y2rtvwy11y06fpnfcyvcw*              	true 	0B        	3 hours ago
+p0e2bqsrmws2103b75gchwon6*              	true 	114B      	3 hours ago
+p3ovsh0o48dxlj1bv8071npnl               	true 	63.26MB   	Less than a second ago
+rfhgcvbpo0cvtr7nmfu71pngy               	true 	73.66kB   	15 hours ago
+6i25zho8gydctmjradl23gkv3*              	true 	755.4MB   	3 hours ago
+186zssz3k57tdbuslmokg0lat               	true 	73.66kB   	3 hours ago
+qvhfilnes0adsuiv86ykgc1od*              	true 	819.9kB   	3 hours ago
+l979tnkpzto59w76ima2ncbgz               	true 	63.26MB   	1 second ago
+zjs9lg5ctjkr54cvutoskeh4j               	true 	13.76MB   	Less than a second ago
+qvm5gvssry6ewgv7uo1kstno0*              	true 	0B        	3 hours ago
+yee80shvoeh7fyiemqr7oidfe               	true 	954.6kB   	Less than a second ago
+u64vqmhjdlzaccnm2ud8mfmk0*              	true 	1.897MB   	3 hours ago
+ym5bborrfx2lvq2g86ow4a3wd               	true 	1.156MB   	Less than a second ago
+u09mo4agffdevzwpnpssv1asq               	true 	954.6kB   	Less than a second ago
+9o0eibnplhw7bk0jm2j7apag2               	true 	167.9MB   	Less than a second ago
+kg2qdqnghjy2cn5m3bmxav1w3               	true 	167.9MB   	Less than a second ago
+57byq8ryswmf779p40b8e4w8d               	true 	543.9MB   	1 second ago
+qjodb0atk32z1287kmz3zn2uo               	true 	0B        	1 second ago
+qa8endpaqiq7hq0txmxjmi6fa               	true 	128.4MB   	1 second ago
+5zuyhr33120w10bxoo4418fna               	true 	0B        	1 second ago
+sxs8g758gxy64k1wpyop8a5ma               	true 	128.2MB   	1 second ago
+44iainrokvtiq1q5py4yhclb5               	true 	819.9kB   	1 second ago
+w0gv5rpiu6lncyo1pczi6ttxe               	true 	177.8MB   	Less than a second ago
+0zk2y9u5qne9alads96qd0gbd               	true 	177.8MB   	Less than a second ago
+q5ms06j6ry4e0bxo68etviqhr               	true 	0B        	Less than a second ago
+q98ebn8la8okadtyeqe2ifzed               	true 	0B        	Less than a second ago
+j28jp9zdsdh8izhnujve52w94               	true 	51.14kB   	Less than a second ago
+x18g9zmf4etshvg4toc5t0a9t               	true 	51.14kB   	Less than a second ago
+yldgxt07iwrs2futbusg81pt5               	true 	38.94MB   	Less than a second ago
+ltp6nrkfhhdog1b6ux828smel               	true 	38.92MB   	Less than a second ago
+635qfnunod2jk2wj581pcpfda               	true 	216.7kB   	Less than a second ago
+nqxdg566ffbcy3zx14pd11zr7               	true 	216.7kB   	Less than a second ago
+wtea8y42077swat73dg16g3m2               	true 	455.6MB   	Less than a second ago
+iw22lfbwt70v3ktciqwvrq1bf               	true 	455.6MB   	Less than a second ago
+nsnvbs2vii9fxw5j3y61oxpej               	true 	654.3MB   	Less than a second ago
+pew372h3tmt4kgkcvlbe8lex0               	true 	654.3MB   	Less than a second ago
+7dnd6xnrqire7ptji79vts4i0               	true 	37B       	Less than a second ago
+u38jj83zc7d0qmry0var20agq               	true 	37B       	Less than a second ago
+adrazsk8gk3r1pxevig2iwda3               	true 	2.993MB   	Less than a second ago
+lccwm37mfnbjb3bemby9kcoq0               	true 	2.993MB   	Less than a second ago
+ii4v1jcj37ra3861x0uwob9g0               	true 	64.65MB   	Less than a second ago
+m9egg55kq8kpssq8szbvqlw69               	true 	64.65MB   	Less than a second ago
+9huxfw4rd01pcjvlkwwfgwbe3               	true 	64.65MB   	Less than a second ago
+tb27rn4dfd15p7sghyidr1izd               	true 	64.65MB   	Less than a second ago
+zdi2w68ckg9sx0xy8yocpw1kp               	true 	178.8MB   	Less than a second ago
+epy6j2g0ntxyux24hhjhnfqmt               	true 	178.8MB   	Less than a second ago
+ftsmuuzstlpzpm50d2hg5xqt3               	true 	15.17MB   	Less than a second ago
+p5cw6gxvgkd1tkgzh0dsbwz1k               	true 	15.17MB   	Less than a second ago
+a8hebzdr3ud93zuz50rlot3jw               	true 	29.08MB   	Less than a second ago
+69nebtjuni4m8b5fng55rh87x               	true 	29.08MB   	Less than a second ago
+xgj6nkkwtr1ujukz6o6ijwwda               	true 	128.2MB   	Less than a second ago
+16p5l1e9y573bdyuevu2y9hxb               	true 	128.4MB   	Less than a second ago
+s1br82o3rc60xrmx0sbfmqmxh               	true 	3.381GB   	Less than a second ago
+qn0bonvbgtc49jb18p9raynb3               	true 	0B        	Less than a second ago
+g3v6jg0yliqufnmjejl73zv6f               	true 	0B        	Less than a second ago
+k74j9usr27ocysu9x5w80lszf               	true 	0B        	Less than a second ago
+jewfy7vz3yja8jjka8cf7n96s               	true 	0B        	Less than a second ago
+k5fvef6sk90r3ay9ruqa7oomb               	true 	0B        	Less than a second ago
+ln607608xd9zcdvdqkgs4qu3e               	true 	0B        	Less than a second ago
+lvjkro2rfbie59snlh4i6tmt4               	true 	0B        	Less than a second ago
+idex1fl0zb80de1v6onh23f07               	true 	0B        	Less than a second ago
+nospq3d8l1xz6a4jdpgzfs65s               	true 	0B        	Less than a second ago
+3ufry1n39ysh3rbms4dnoznaq               	true 	0B        	Less than a second ago
+nup1r3k31ojpm8wuw2jwafsmd               	true 	0B        	Less than a second ago
+pnqo3q9yp5qs1tslnqj4g21np               	true 	0B        	Less than a second ago
+703hgnfull3zbh86hs6kt41n8               	true 	0B        	Less than a second ago
+vwvrmnaqppf89uuu297fnzjwr               	true 	0B        	Less than a second ago
+uwnn4bz6lbxxs6d4x7gqyjn03               	true 	0B        	Less than a second ago
+0538t043npc3d7s8ncxtkml8g               	true 	0B        	Less than a second ago
+wze6m3h6o90qc8h6e6wn4rynp               	true 	0B        	Less than a second ago
+qgf3s88tii2b1avgh7p1g52vf               	true 	0B        	Less than a second ago
+9ud1h6mlemg6h7e60okwnyq49               	true 	0B        	Less than a second ago
+fyx3wo4ysxefi8z7nudp3pad9               	true 	0B        	Less than a second ago
+v8h19szghmtxexmoojd82s0z9               	true 	0B        	Less than a second ago
+hdun9tcvmq08086viw56cwqsm               	true 	0B        	Less than a second ago
+tu58w1o6nfwfskfqj2rlniqfz               	true 	0B        	Less than a second ago
+rptgwcdkopfp7134utikat8z1               	true 	0B        	Less than a second ago
+n6c5pfh3ui8ccqk3ghp9l39kp               	true 	0B        	Less than a second ago
+ti5yyongtwo2uaokmjj4fhkvi               	true 	0B        	Less than a second ago
+bur3uf7xahkvazyub887ci4fq               	true 	0B        	Less than a second ago
+woo2dm9ko4b2hzpb24swqruwe               	true 	0B        	Less than a second ago
+6bjs878zjfch7pfzdmx3eul94               	true 	0B        	Less than a second ago
+aaggfq1hkitanijmn3u4hxuwg               	true 	0B        	Less than a second ago
+z0dykd69v2e2p68sk06vtm6fy               	true 	0B        	Less than a second ago
+24khbe5l1mv2myeswg3z488ll               	true 	0B        	Less than a second ago
+rfn4mo4nr18lkord4irnw78fx               	true 	0B        	Less than a second ago
+2qksv2xl28df461rxawaq15k2               	true 	0B        	Less than a second ago
+g1abd26h4b0u78kxrfeg2d51y               	true 	0B        	Less than a second ago
+lnv8r3gyy7z61m64r6uqrqurp               	true 	0B        	Less than a second ago
+46gvdx8rhv7ou122cgm0x40u9               	true 	0B        	Less than a second ago
+Total:	12.31GB
+=== spark-a temp and runtime results ===
+rm: cannot remove '/tmp/spark-ssh-1000': Is a directory
+=== clock-cap backups ===
+--- 192.168.2.180 ---
+removed
+--- 192.168.2.161 ---
+removed
+--- 192.168.2.102 ---
+removed
+--- 192.168.2.238 ---
+removed
+tmp_x1123=0
+spark_ssh_dir=absent
+runtime_results=4.0K
+build_cache=Build Cache 0B

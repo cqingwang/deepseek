@@ -18,6 +18,7 @@ bin/spark --shape tp3-triangle doctor  # the recipe at another shape
 | --- | --- | --- | --- |
 | `bin/spark doctor` | any checkout (CI runs it) | nothing outside the repository | [configuration](#configuration-checks) |
 | `bin/spark doctor --live` | the head node | SSH to every node as `ssh_user`, passwordless `sudo -n` there | configuration first; if it is clean, every [live check](#live-checks) on every node, then [checkpoint fragmentation](#checkpoint-fragmentation) |
+| `bin/spark doctor --live --stream-rate` | the head node | as `--live`, the profile's image on every node, and GPUs you may use | every live check, then the [memory read rate](#memory) of every node whose GPU is idle |
 | `bin/spark doctor --fragmentation-commands` | the head node | SSH | prints `e4defrag` commands for fragmented checkpoint shards; never runs them |
 
 Output is one line per finding, then a summary:
@@ -81,9 +82,9 @@ revert it.
 | Boot target is `multi-user.target` | warn | the desktop's processes and GPU buffers come out of the model's unified memory | `sudo systemctl set-default multi-user.target` |
 | Display manager is not running | error | same | `sudo systemctl disable --now display-manager.service` |
 | Installed OS is first in the UEFI boot order | warn | a network (PXE) entry first adds about a minute of DHCP timeouts to every boot | the printed `sudo efibootmgr --bootorder …` |
-| `nvidia-drm` kernel mode setting (`modeset=Y`) | error when `SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS` is on; warn when off or unreadable | the display carve-out that holds the embedding and output head needs it (the worker refuses to start without it), and a display attached after boot stays dark | `sudo apt purge nvidia-drm-options-modeset0`, then reboot with the service stopped |
+| `nvidia-drm` kernel mode setting (`modeset=Y`) | error for legacy `/dev/dri/card0` carve-out profiles; warn on `1120+` (RM `/dev/nvidiactl`) or when off/unreadable | a display attached after boot stays dark without it; legacy pre-1120 DRM carve-out profiles also refuse to start without it | `sudo apt purge nvidia-drm-options-modeset0`, then reboot with the service stopped |
 | `nvidia-drm` framebuffer console (`fbdev=Y`) | error (unreadable: warn) | an attached display gets no text console | remove the `fbdev=0` option from `/etc/modprobe.d`, `sudo update-initramfs -u`, reboot |
-| A DRM card belongs to the nvidia driver | error | the display carve-out allocates through it | check that `nvidia-drm` loaded with `modeset=Y` (`ls -l /dev/dri/by-path`) |
+| A DRM card belongs to the nvidia driver | error for legacy `/dev/dri/card0` carve-out profiles; warn on `1120+` (RM `/dev/nvidiactl`) | an attached display stays dark without it; legacy pre-1120 DRM carve-out profiles allocate through it | check that `nvidia-drm` loaded with `modeset=Y` (`ls -l /dev/dri/by-path`) |
 | No process holds DRM master | error (unreadable: warn) | the text console stops drawing while one does | stop or restart that process |
 | Active console is in text mode | warn | an attached display shows nothing | `scripts/host-recovery apply` |
 | Kernel command line has no `splash` | warn | Plymouth leaves the console in graphics mode after boot | `scripts/host-recovery apply`, then reboot with the service stopped |
@@ -176,6 +177,45 @@ every node's running container must use exactly that set (Docker's
 `cpu_capacity` is above the midpoint of the smallest and largest, GB10's ten Cortex-X925
 (5-9 and 15-19). A pin to slow cores, or a container started without the pin, is an
 error. Profiles without a pin are not checked.
+
+### Memory
+
+How fast a GB10 reads memory depends on the state of the node's free memory, not only on the
+hardware. dgx4 read 253 GB/s seventeen minutes after a boot and 230 to 236 GB/s after ten days
+of engine boots, with the same kernel, driver, image and benchmark; a reboot restored it, and
+two hours and an image build later it read 238 to 245
+([experiments/2026-11-17-c1-floor-now](../experiments/2026-11-17-c1-floor-now/README.md)).
+After the boot almost all of the free memory sat in the largest blocks (512 MiB on the 64 KiB
+kernel); ten days later none of it did.
+
+That is the rate of memory taken as it comes, which is what a kernel-lab bundle gets. The
+engine is mostly spared: its loader soaks the small free fragments before it places the
+weights, so they sit in blocks of 2 MiB or more on an old node and a fresh one alike. In a
+traced boot the rank on a rebooted node was 2% faster in two kernels, at most 0.6% of a
+single-stream step. So these checks say whether a timing taken on a node can be compared with
+one taken on a fresh node. They are not a reason to reboot a serving node.
+
+| Check | Severity | Why |
+| --- | --- | --- |
+| On a node whose GPU no process holds, at least half of the free memory is in the largest block size (`/proc/buddyinfo`). Not judged below 32 GiB free | warn | kernel-lab timings on the nodes without large free blocks read memory 7 to 9% slower. `cluster start` drops caches and compacts before a launch, which does not rebuild blocks that kernel allocations have split; a reboot does |
+| With `--stream-rate`: the node reads cold 220 MiB buffers at 245 GB/s or more | warn | a freshly booted GB10 reads 249 to 254 GB/s, the slow state 229 to 237 |
+
+The first check costs nothing: it reads one file. A node whose GPU a process holds is not
+judged, since its free memory is what the engine left. The half is a line between the two
+states that were measured (96% and 0%), not a measured threshold, and the share does not
+predict the rate: dgx4 two hours after its reboot still had most of its free memory in 512 MiB
+blocks and read 238 to 245 GB/s. `--stream-rate` is the measurement; the block share is the hint to
+take it.
+
+`--stream-rate` prints one line a node (`dgx4: memory reads at 253.6 GB/s`). It starts one
+container of the profile's image on each node for about a second of GPU time (ten seconds
+with the container's start), so it is only run when asked. It skips a node whose GPU a
+process holds or whose kernel-lab GPU lock is taken (`memory read not measured (...)`): the
+read would disturb the engine and be slowed by it. Inside someone else's window it is a GPU
+job like any other: the hold file's rule applies.
+
+The probe measures memory taken now, without the loader's placement. A running engine's
+weights were placed when it started.
 
 ### Checkpoint fragmentation
 

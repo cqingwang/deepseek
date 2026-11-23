@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "status": "superseded-invalid-baseline",
+  "reason": "The first x1123 acceptance compared 64 KiB/1120 deployment runs against the historical 4 KiB r5l README numbers. Those numbers are not the current 64 KiB/1120 or 1122 reference.",
+  "historical_gate_used": {
+    "decode": {
+      "prose-c1": 59.1,
+      "prose-c2": 84.8,
+      "prose-c4": 124.9,
+      "code-c1": 80.6,
+      "code-c2": 118.2,
+      "code-c4": 165.1
+    },
+    "prefill": {
+      "32768": 8508.0,
+      "131072": 8657.0,
+      "262144": 8261.0,
+      "524288": 7460.0,
+      "1000000": 6012.0
+    }
+  },
+  "local_x1123_means": {
+    "decode": {
+      "prose-c1": 89.777,
+      "prose-c2": 158.32,
+      "prose-c4": 283.1815,
+      "code-c1": 134.2995,
+      "code-c2": 191.2945,
+      "code-c4": 365.0815
+    },
+    "prefill": {
+      "32768": 8877.101,
+      "131072": 9246.873,
+      "262144": 9214.6015,
+      "524288": 9032.528,
+      "1000000": 8669.1085
+    }
+  },
+  "official_current_references": {
+    "spark-ds41f-1120": {
+      "manifest": "manifests/benchmarks/2026-11-20-spark-ds41f-1120-tp4.json",
+      "decode_window_tps": {
+        "prose-c1": 89.692,
+        "prose-c2": 163.229,
+        "prose-c4": 289.919,
+        "code-c1": 112.966,
+        "code-c2": 207.23,
+        "code-c4": 367.407
+      },
+      "prefill_tps": {
+        "32768": 9762.935,
+        "131072": 10097.085,
+        "262144": 10068.091,
+        "524288": 9874.123,
+        "1000000": 9457.618
+      }
+    },
+    "spark-ds41f-1122": {
+      "manifest": "manifests/benchmarks/2026-11-22-spark-ds41f-1122-tp4.json",
+      "decode_window_tps": {
+        "prose-c1": 89.028,
+        "prose-c2": 160.559,
+        "prose-c4": 302.337,
+        "code-c1": 111.916,
+        "code-c2": 175.973,
+        "code-c4": 352.858
+      },
+      "prefill_tps": {
+        "32768": 10185.722,
+        "131072": 10542.978,
+        "262144": 10483.304,
+        "524288": 10274.57,
+        "1000000": 9877.32
+      }
+    }
+  },
+  "local_vs_1120_pct": {
+    "decode": {
+      "prose-c1": 0.095,
+      "prose-c2": -3.007,
+      "prose-c4": -2.324,
+      "code-c1": 18.885,
+      "code-c2": -7.69,
+      "code-c4": -0.633
+    },
+    "prefill": {
+      "32768": -9.073,
+      "131072": -8.42,
+      "262144": -8.477,
+      "524288": -8.523,
+      "1000000": -8.337
+    }
+  },
+  "local_vs_1122_pct": {
+    "decode": {
+      "prose-c1": 0.841,
+      "prose-c2": -1.395,
+      "prose-c4": -6.336,
+      "code-c1": 20.0,
+      "code-c2": 8.707,
+      "code-c4": 3.464
+    },
+    "prefill": {
+      "32768": -12.848,
+      "131072": -12.294,
+      "262144": -12.102,
+      "524288": -12.089,
+      "1000000": -12.232
+    }
+  },
+  "conclusion": "The old x1123 deployment is not accepted against the current official performance. Its implementation and live parameter consumption evidence remain valid, but the performance verdict is superseded by the 1122 rebuild and the current-reference acceptance run."
+}

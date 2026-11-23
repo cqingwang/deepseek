@@ -1,0 +1,3 @@
+# x1118 site overlay: candidate-61-r2 plus the Responses custom-tool history replay fix.
+include ../../2026-11-16-c61-decode/vllm/series
+0823-fix-dsv41-replay-responses-custom-tool-calls.patch

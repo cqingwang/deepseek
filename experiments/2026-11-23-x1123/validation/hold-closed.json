@@ -1,0 +1,10 @@
+{
+  "holder": "codex-x1123",
+  "since": "2026-11-22T23:08:04.736093+00:00",
+  "expected_end": "2026-11-23T02:08:04.736093+00:00",
+  "heartbeat": "2026-11-22T23:08:04.736093+00:00",
+  "rule": "x1123 build/deploy/acceptance; no other GPU experiments or serving changes",
+  "status": "accepted",
+  "closed_at": "2026-11-23T00:19:34.779722+00:00",
+  "result": "x1123 deployed and accepted; production left running"
+}

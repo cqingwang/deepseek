@@ -26,7 +26,7 @@
         "--cpuset-cpus=5-9,15-19"
       ]
     },
-    "upstreams_config": "experiments/2026-11-16-c61-decode/upstreams.lock.json",
+    "upstreams_config": "experiments/2026-11-19-x1119/upstreams.lock.json",
     "engram_on_disk": false
   },
   "serve_options": {

@@ -1,0 +1,100 @@
+{
+  "image": "spark-ds41f:x1123",
+  "nodes": [
+    {
+      "container": "deepseek-r0",
+      "exit_code": 0,
+      "fatal_matches": [],
+      "gpu_temperature_c": 37,
+      "gpu_utilization_pct": 0,
+      "image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+      "ip": "192.168.2.180",
+      "memavailable_kib": 30352832,
+      "memguard": "active",
+      "name": "spark-a",
+      "oom_killed": false,
+      "rank": 0,
+      "restart_count": 0,
+      "ring_log_evidence": {
+        "mesh_up_ok": true,
+        "nccl_2_30_7": true,
+        "world_size_4": true
+      },
+      "ring_markers": 2,
+      "ring_service": "active",
+      "running": true
+    },
+    {
+      "container": "deepseek-r1",
+      "exit_code": 0,
+      "fatal_matches": [],
+      "gpu_temperature_c": 37,
+      "gpu_utilization_pct": 0,
+      "image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+      "ip": "192.168.2.161",
+      "memavailable_kib": 32756864,
+      "memguard": "active",
+      "name": "spark-b",
+      "oom_killed": false,
+      "rank": 1,
+      "restart_count": 0,
+      "ring_log_evidence": {
+        "mesh_up_ok": true,
+        "nccl_2_30_7": false,
+        "world_size_4": true
+      },
+      "ring_markers": 2,
+      "ring_service": "active",
+      "running": true
+    },
+    {
+      "container": "deepseek-r2",
+      "exit_code": 0,
+      "fatal_matches": [],
+      "gpu_temperature_c": 37,
+      "gpu_utilization_pct": 0,
+      "image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+      "ip": "192.168.2.102",
+      "memavailable_kib": 32708928,
+      "memguard": "active",
+      "name": "spark-c",
+      "oom_killed": false,
+      "rank": 2,
+      "restart_count": 0,
+      "ring_log_evidence": {
+        "mesh_up_ok": true,
+        "nccl_2_30_7": false,
+        "world_size_4": true
+      },
+      "ring_markers": 2,
+      "ring_service": "active",
+      "running": true
+    },
+    {
+      "container": "deepseek-r3",
+      "exit_code": 0,
+      "fatal_matches": [],
+      "gpu_temperature_c": 37,
+      "gpu_utilization_pct": 0,
+      "image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+      "ip": "192.168.2.238",
+      "memavailable_kib": 32738304,
+      "memguard": "active",
+      "name": "spark-d",
+      "oom_killed": false,
+      "rank": 3,
+      "restart_count": 0,
+      "ring_log_evidence": {
+        "mesh_up_ok": true,
+        "nccl_2_30_7": false,
+        "world_size_4": true
+      },
+      "ring_markers": 2,
+      "ring_service": "active",
+      "running": true
+    }
+  ],
+  "ok": true,
+  "problems": [],
+  "schema_version": 1
+}

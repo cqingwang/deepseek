@@ -30,7 +30,7 @@
         "--cpuset-cpus=5-9,15-19"
       ]
     },
-    "upstreams_config": "experiments/2026-11-16-c61-decode/upstreams.lock.json",
+    "upstreams_config": "experiments/2026-11-19-x1119/upstreams.lock.json",
     "environment": {
       "VLLM_DS41_EXPERT_SLOTS": "240",
       "VLLM_DS41_EXPERT_DYNAMIC_SLOTS": "64",

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-11-23",
+  "official_main": "945d95d03c37712c65e70d3863619674e79ae5a4",
+  "official_release": "spark-ds41f-1122",
+  "upstreams_lock": "upstreams.lock.json",
+  "vllm": {
+    "base_revision": "19f2c20ed4d64ae22bd009ceacadd85e2a81e354",
+    "patch_series": "experiments/2026-10-26-spark-ds41f-candidate/candidate-69/vllm/series",
+    "patch_count": 730,
+    "patch_head": "eccd5c1065a8b73d20ce537e57899062719c8818",
+    "expected_tree": "8e0683a9276389957e49b7a26bd2bd062d788558",
+    "patchset_sha256": "ca6f4cc345b19256bfde8540371df800a9556959af5c581a6f0b78271b8749ac"
+  },
+  "nccl_tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+  "tilelang_tree": "741806c7357102130a149cdcae2a5f22678eab67",
+  "tile_kernels_tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+  "sparknet_tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+  "cuda_version": "13.5.37",
+  "image": {
+    "tag": "spark-ds41f:x1123",
+    "id": "sha256:5c50e8419ae6a6746ce7f78249ddd7c675c90a11a99f37003c1aba5f32228e33",
+    "build_seconds": 559,
+    "compile_jobs": 8
+  },
+  "site_profile": "experiments/2026-11-23-x1123-official-1122/tp4-ring.json",
+  "site_patches": [
+    "Bearer API key handling for Sonar",
+    "container.name_pattern identity",
+    "SPARK_DEPLOYMENT_COMMIT without a remote Git checkout",
+    "management SSH address derivation"
+  ],
+  "forward_ported_from": "experiments/2026-11-23-x1123",
+  "forward_port_note": "The previous x1123 image was built from official 1120; this record keeps that image as spark-ds41f:x1123-1120 and reuses tag x1123 for the final official-1122 build."
+}

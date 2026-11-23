@@ -28,6 +28,7 @@ from spark_ds41f import lab
 # Never read or write the real hold and request files, even when the suite runs on dgx1.
 _STATE = tempfile.TemporaryDirectory()
 lab.HOLD = Path(_STATE.name) / "spark-hold.json"
+lab.HOLD_LOCK = Path(_STATE.name) / "spark-hold.lock"
 lab.LEGACY_HOLD = Path(_STATE.name) / "spark3-hold.json"
 lab.REQUEST = Path(_STATE.name) / "spark-request.json"
 lab.LEGACY_REQUEST = Path(_STATE.name) / "spark3-request.json"
@@ -353,7 +354,8 @@ class ProductionProfileTest(unittest.TestCase):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         self.state = Path(directory.name)
-        for name, file in (("HOLD", "spark-hold.json"), ("LEGACY_HOLD", "spark3-hold.json"),
+        for name, file in (("HOLD", "spark-hold.json"), ("HOLD_LOCK", "spark-hold.lock"),
+                           ("LEGACY_HOLD", "spark3-hold.json"),
                            ("REQUEST", "spark-request.json"), ("LEGACY_REQUEST", "spark3-request.json")):
             patcher = mock.patch.object(lab, name, self.state / file)
             patcher.start()
@@ -677,20 +679,20 @@ class PlanProblemsTest(unittest.TestCase):
             {"kind": "measure", "bench": False, "extras": extras,
              "arms": [{"config": "experiments/2026-10-14-servebench/engine-r6k.json", "label": "a"}]}]}
 
-    def test_good_servebench_arguments_pass(self) -> None:
-        spec = self.measure([["scripts/servebench_run.py", ["--mode", "closed", "--concurrency", "16"], "c16"],
-                             ["scripts/servebench_engine.py", ["--replays", "100"], "grid"]])
+    def test_good_sonar_arguments_pass(self) -> None:
+        spec = self.measure([["scripts/sonar_run.py", ["--mode", "closed", "--concurrency", "16"], "c16"],
+                             ["scripts/sonar_engine.py", ["--replays", "100"], "grid"]])
         self.assertEqual(lab.plan_problems(lab.plan(spec)), [])
 
     def test_extras_name_each_arm(self) -> None:
-        spec = self.measure([["scripts/servebench_engine.py", ["--label", "{label}", "--output", "out/{run}-{label}.json"], "g"]])
+        spec = self.measure([["scripts/sonar_engine.py", ["--label", "{label}", "--output", "out/{run}-{label}.json"], "g"]])
         spec["jobs"][0]["arms"].append({"config": "experiments/2026-10-14-servebench/engine-r6h.json", "label": "b"})
         with mock.patch.object(lab, "head_url", return_value="http://h:8000"):
             outputs = [s["argv"][-1] for s in lab.plan(spec) if s["kind"] == "script"]
         self.assertEqual(outputs, ["out/r-a.json", "out/r-b.json"])
 
     def test_telemetry_switch(self) -> None:
-        spec = self.measure([["scripts/servebench_run.py", ["--mode", "closed"], "c"]])
+        spec = self.measure([["scripts/sonar_run.py", ["--mode", "closed"], "c"]])
         with mock.patch.object(lab, "head_url", return_value="http://h:8000"):
             on = [s for s in lab.plan(spec) if s["kind"] == "script"]
             spec["jobs"][0]["telemetry"] = False
@@ -713,7 +715,7 @@ class PlanProblemsTest(unittest.TestCase):
                           "--label", "cand"])
         self.assertEqual(benches[1]["argv"][-2:], ["--corpus", "results/private/suites/s/cand/model.json.gz"])
         self.assertEqual(benches[0]["telemetry_out"], "results/private/determinism/s/suite-cand")
-        self.assertEqual(steps[-1]["argv"], ["scripts/servebench_suite_table.py", "s", "cand", "base"])
+        self.assertEqual(steps[-1]["argv"], ["scripts/sonar_table.py", "s", "cand", "base"])
         self.assertTrue(all("fail_on_suite_error" not in step for step in benches))
         spec["jobs"][0]["fail_on_suite_error"] = True
         required = [step for step in lab.plan(spec) if step["kind"] == "cli"]
@@ -800,17 +802,18 @@ class PlanProblemsTest(unittest.TestCase):
         self.assertIn("cannot resolve", why)
 
     def test_bad_arguments_missing_files_and_configs(self) -> None:
-        spec = self.measure([["scripts/servebench_run.py", ["--mode", "sideways"], "c16"],
+        spec = self.measure([["scripts/sonar_run.py", ["--mode", "sideways"], "c16"],
                              ["no_such_script.py", [], "x"]])
         spec["jobs"][0]["arms"].append({"config": "missing.json", "label": "b"})
         problems = lab.plan_problems(lab.plan(spec))
-        self.assertTrue(any("servebench_run.py" in p and "invalid choice" in p for p in problems), problems)
+        self.assertTrue(any("sonar_run.py" in p and "invalid choice" in p for p in problems), problems)
+
         self.assertTrue(any("no_such_script.py does not exist" in p for p in problems), problems)
         self.assertTrue(any("missing.json does not exist" in p for p in problems), problems)
 
     def test_queue_rejects_without_a_sync_and_warns_with_one(self) -> None:
         with tempfile.TemporaryDirectory() as directory, mock.patch.object(lab, "QUEUE", Path(directory) / "q"):
-            bad = self.measure([["scripts/servebench_run.py", ["--mode", "sideways"], "c16"]])
+            bad = self.measure([["scripts/sonar_run.py", ["--mode", "sideways"], "c16"]])
             path = Path(directory) / "bad.json"
             path.write_text(json.dumps(bad))
             with self.assertRaises(SystemExit), contextlib.redirect_stderr(io.StringIO()):
@@ -1211,17 +1214,19 @@ class KernelLabTest(unittest.TestCase):
         self.assertIn("B12X_AUTOTUNE=0", command)
         self.assertEqual(command[-3:], ["img:tag", "/r/replay.py", "/cap"])
 
-    def test_display_carveout_bundles_get_the_serving_drm_access(self) -> None:
+    def test_display_carveout_bundles_do_not_mount_drm_card(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             bundle = Path(directory)
             plain = lab.bundle_command(bundle, self.CANDIDATE, bundle / "out")
             carveout = lab.bundle_command(bundle, dict(self.CANDIDATE, display_carveout=True), bundle / "out")
-        self.assertFalse([arg for arg in plain if "dri" in arg or "226" in arg])
-        serving = lab.spark.read_cluster("config/cluster.json", "tp3-triangle")["container"]["docker_run_args"]
-        for arg in ("--mount=type=bind,source=/dev/dri/by-path/pci-000f:01:00.0-card,target=/dev/dri/card0",
-                    "--device-cgroup-rule=c 226:* rw"):
-            self.assertIn(arg, carveout)
-            self.assertIn(arg, serving)
+        # 1120 allocates display carve-out weights via RM /dev/nvidiactl (--gpus all), not /dev/dri/card0.
+        for command in (plain, carveout):
+            self.assertIn("--gpus", command)
+            self.assertFalse([arg for arg in command if "dri" in arg or "226" in arg])
+        serving_1120 = lab.spark.read_cluster("config/cluster.json", "tp3-triangle")
+        self.assertEqual(serving_1120["environment"].get("SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS"), "1")
+        self.assertIn("--gpus=all", serving_1120["container"]["docker_run_args"])
+        self.assertFalse([arg for arg in serving_1120["container"]["docker_run_args"] if "dri" in arg or "226" in arg])
 
     def test_io_uring_bundles_get_the_serving_io_uring_allowance(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -1815,6 +1820,186 @@ class SourceRootTest(unittest.TestCase):
                 module.bundle(str(manifest), "img:tag", str(Path(directory) / "b"), "x")
             candidate = json.loads((Path(directory) / "b" / "candidate.json").read_text())
         self.assertEqual(candidate["workdir"], "vllm")
+
+
+class WindowCloseConcurrencyTest(unittest.TestCase):
+    """window_close(), beat(), execute() and watchdog() serialize around the hold file (#1224)."""
+
+    def setUp(self) -> None:
+        patcher = mock.patch.object(lab, "PRODUCTION_CONFIG", lab.spark.DEFAULT_CLUSTER_CONFIG)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        self.state = Path(directory.name)
+        for name, file in (
+            ("HOLD", "spark-hold.json"),
+            ("HOLD_LOCK", "spark-hold.lock"),
+            ("LEGACY_HOLD", "spark3-hold.json"),
+            ("REQUEST", "spark-request.json"),
+            ("LEGACY_REQUEST", "spark3-request.json"),
+        ):
+            p = mock.patch.object(lab, name, self.state / file)
+            p.start()
+            self.addCleanup(p.stop)
+
+    def _write_hold(self, window: str = "w1", heartbeat_at: float = 1_000_000.0) -> dict:
+        hold = lab.new_hold(0, "test", at=heartbeat_at)
+        hold["window"] = window
+        lab.write_json_atomic(lab.HOLD, hold)
+        return hold
+
+    def test_slow_window_close_refreshes_heartbeat_and_blocks_concurrent_watchdog(self) -> None:
+        hold = self._write_hold(window="dgx1-1000", heartbeat_at=1_000_000.0)
+        initial_beat = hold["heartbeat"]
+        restores: list[str] = []
+        watchdog_thread: list[threading.Thread] = []
+
+        def slow_restore(dry: bool = False) -> bool:
+            restores.append("close")
+            deadline = time.monotonic() + 2.0
+            while time.monotonic() < deadline:
+                current = lab.read_hold()
+                if current and current.get("heartbeat") != initial_beat:
+                    break
+                time.sleep(0.01)
+            else:
+                raise AssertionError("window_close did not refresh heartbeat during restore")
+            # Simulate a watchdog that already read the pre-close stale timestamp and now
+            # tries to close the same window while restore_production is still in flight.
+            orig_close = lab.window_close
+            with mock.patch.object(
+                lab,
+                "window_close",
+                side_effect=lambda reason, dry=False, **kw: orig_close(reason, dry=dry, **kw),
+            ):
+                t = threading.Thread(
+                    target=lambda: lab.window_close(
+                        "watchdog: stale heartbeat",
+                        expected_window=hold["window"],
+                        stale_heartbeat=initial_beat,
+                    )
+                )
+                watchdog_thread.append(t)
+                t.start()
+                time.sleep(0.05)
+            return True
+
+        with mock.patch.object(lab, "restore_production", side_effect=slow_restore), \
+                mock.patch.object(lab, "log"):
+            self.assertTrue(lab.window_close("run complete", beat_interval=0.02))
+        watchdog_thread[0].join(timeout=5.0)
+        self.assertFalse(watchdog_thread[0].is_alive())
+        self.assertEqual(restores, ["close"])
+        self.assertFalse(lab.HOLD.exists())
+
+    def test_watchdog_skips_when_heartbeat_was_refreshed_before_close(self) -> None:
+        self._write_hold(window="dgx1-1000", heartbeat_at=1_000_000.0)
+        restored: list[bool] = []
+
+        def age_then_refresh(hold: dict) -> float:
+            # A runner refreshes the hold right after the watchdog sees a stale beat.
+            lab.beat("still running", expected_window="dgx1-1000")
+            return lab.HEARTBEAT_MAX_AGE + 10
+
+        with mock.patch.object(lab, "heartbeat_age", side_effect=age_then_refresh), \
+                mock.patch.object(lab, "restore_production", side_effect=lambda **kw: restored.append(True) or True), \
+                mock.patch.object(lab, "log"):
+            lab.watchdog(lab.HEARTBEAT_MAX_AGE, once=True)
+
+        self.assertEqual(restored, [])
+        self.assertTrue(lab.HOLD.exists())
+
+    def test_inflight_beat_blocked_on_lock_cannot_recreate_removed_hold(self) -> None:
+        self._write_hold(window="dgx1-1000", heartbeat_at=1_000_000.0)
+        orig_hold_lock = lab.hold_lock
+        beater_waiting = threading.Event()
+        errors: list[BaseException] = []
+
+        @contextlib.contextmanager
+        def instrumented_lock():
+            if threading.current_thread().name == "beater":
+                beater_waiting.set()
+            with orig_hold_lock():
+                yield
+
+        def run_beat() -> None:
+            try:
+                lab.beat("late tick", expected_window="dgx1-1000")
+            except BaseException as exc:  # noqa: BLE001 - captured for assertion
+                errors.append(exc)
+
+        t = threading.Thread(target=run_beat, name="beater")
+
+        def restore_and_wait_for_beater(dry: bool = False) -> bool:
+            t.start()
+            self.assertTrue(beater_waiting.wait(timeout=2.0))
+            time.sleep(0.05)
+            return True
+
+        with mock.patch.object(lab, "hold_lock", instrumented_lock), \
+                mock.patch.object(lab, "restore_production", side_effect=restore_and_wait_for_beater), \
+                mock.patch.object(lab, "log"):
+            self.assertTrue(lab.window_close("run complete"))
+
+        t.join(timeout=2.0)
+        self.assertFalse(t.is_alive())
+        self.assertEqual(len(errors), 1)
+        self.assertIsInstance(errors[0], SystemExit)
+        self.assertFalse(lab.HOLD.exists())
+
+    def test_execute_joins_heartbeat_thread_before_window_close(self) -> None:
+        self._write_hold(window="dgx1-1000", heartbeat_at=1_000_000.0)
+        wait_calls: list[str] = []
+        beating_started = threading.Event()
+        beat_finished = threading.Event()
+        real_event = threading.Event
+        real_thread = threading.Thread
+        spawned: list[threading.Thread] = []
+        observed: dict[str, object] = {}
+
+        class FastFirstBeatEvent(real_event):
+            def wait(self, timeout=None):
+                if timeout == 60 and not wait_calls:
+                    wait_calls.append("wait")
+                    return False
+                return super().wait(timeout)
+
+        def capture_thread(*args, **kwargs):
+            thread = real_thread(*args, **kwargs)
+            spawned.append(thread)
+            return thread
+
+        def fake_beat(note=None, *, expected_window=None):
+            if threading.current_thread() is not threading.main_thread():
+                beating_started.set()
+                time.sleep(0.05)
+                beat_finished.set()
+
+        def check_close(reason: str, dry: bool = False) -> bool:
+            observed["finished"] = beat_finished.is_set()
+            observed["alive"] = spawned[0].is_alive()
+            return True
+
+        step = {"kind": "stop", "remove": False}
+        with mock.patch.object(lab, "plan", return_value=[step]), \
+                mock.patch.object(lab, "window_should_close", return_value=None), \
+                mock.patch.object(lab, "plan_problems", return_value=[]), \
+                mock.patch.object(
+                    lab, "container_running", side_effect=lambda: not beating_started.wait(timeout=2.0)
+                ), \
+                mock.patch.object(lab, "stop_cluster", return_value=True), \
+                mock.patch.object(lab, "beat", side_effect=fake_beat), \
+                mock.patch.object(lab, "window_close", side_effect=check_close), \
+                mock.patch.object(lab, "log"), \
+                mock.patch.object(lab.threading, "Event", FastFirstBeatEvent), \
+                mock.patch.object(lab.threading, "Thread", side_effect=capture_thread):
+            code = lab.execute({"run": "r", "jobs": []}, dry=False, keep_open=False)
+
+        self.assertEqual(code, 0)
+        self.assertTrue(beating_started.is_set())
+        self.assertTrue(observed.get("finished"))
+        self.assertFalse(observed.get("alive"))
 
 
 if __name__ == "__main__":

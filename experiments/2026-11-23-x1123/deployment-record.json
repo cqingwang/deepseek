@@ -1,0 +1,340 @@
+{
+  "build": {
+    "check": "build/check.txt",
+    "image_inspect": "build/image-inspect.json",
+    "image_log": "build/image.txt",
+    "labels": "build/labels.json",
+    "memory_monitor": "build/memory-monitor.log",
+    "pip_index_url": "https://pypi.org/simple",
+    "prepare": "build/prepare.txt",
+    "proxy": "local Mac 127.0.0.1:7890 via SSH reverse 127.0.0.1:17890 on spark-a"
+  },
+  "business_parameters_unchanged": {
+    "default_thinking": false,
+    "master_port": 25000,
+    "max_images_per_request": 67,
+    "max_num_batched_tokens": 16384,
+    "max_token": 1000000,
+    "max_tokens": 65536,
+    "num_speculative_tokens": 5,
+    "reasoning_effort": 75
+  },
+  "capacity": {
+    "derived": {
+      "kv_cache_memory_bytes": 8076928000,
+      "long_prefill_token_threshold": 16336,
+      "max_cudagraph_capture_size": 48,
+      "max_model_len": 1000000,
+      "max_num_seqs": 8
+    },
+    "full_contexts_held": 8,
+    "pool_block_bytes": 227840,
+    "pool_blocks": 35450,
+    "released_to_system_bytes": 9639812096,
+    "required_pool_bytes": 8076928000,
+    "resident_blocks_per_full_request": 3953,
+    "runtime_startup": {
+      "copy_draft_cudagraph_rows": 59,
+      "effective_batched_token_envelope": 16395,
+      "full_context_concurrency": 7.99,
+      "kv_cache_gib": 7.52,
+      "kv_cache_tokens": 7991241
+    },
+    "source": "official-1120-ds41-kv-geometry",
+    "upstream_pool_bytes": 17716740096
+  },
+  "config_changes": [
+    {
+      "after": 8,
+      "before": 5,
+      "effect": "--max-num-seqs, CUDA-graph rows and fixed KV sizing",
+      "key": "common.max_request"
+    },
+    {
+      "after": "spark-ds41f:x1123",
+      "before": "spark-ds41f:x1119",
+      "effect": "image contains official candidate-62 / 1120 vLLM tree",
+      "key": "deepseek.image"
+    }
+  ],
+  "date": "2026-11-23",
+  "deployment": {
+    "container_name_pattern": "deepseek-r{rank}",
+    "image_rebuilt_between_boots": false,
+    "live_runtime": {
+      "--enable-per-request-metrics": 1,
+      "--kv-cache-memory-bytes": "8076928000",
+      "--limit-mm-per-prompt": "{\"image\":67}",
+      "--long-prefill-token-threshold": "16336",
+      "--master-port": "25000",
+      "--max-cudagraph-capture-size": "48",
+      "--max-model-len": "1000000",
+      "--max-num-batched-tokens": "16384",
+      "--max-num-seqs": "8",
+      "max_new_tokens": 65536,
+      "num_speculative_tokens": 5
+    },
+    "managed_container_env_count": 90,
+    "minimum_live_memavailable_gib": 27.68,
+    "runtime_parameter_only_second_boot": true,
+    "startup": {
+      "enable_per_request_metrics": true,
+      "kv_cache_memory_bytes": 8076928000,
+      "limit_mm_per_prompt": {
+        "image": 67
+      },
+      "long_prefill_token_threshold": 16336,
+      "max_cudagraph_capture_size": 48,
+      "max_model_len": 1000000,
+      "max_num_batched_tokens": 16384,
+      "max_num_seqs": 8,
+      "num_speculative_tokens": 5
+    },
+    "stop_before_each_start": true,
+    "successful_boots": 2,
+    "swap_growth_gib": 0.0
+  },
+  "distribution": {
+    "all_nodes_same_image": true,
+    "artifacts": [
+      "validation/distribute-a-b.txt",
+      "validation/distribute-b-c.txt",
+      "validation/distribute-c-d.txt"
+    ],
+    "hops": [
+      "A -> B 10.251.20.2",
+      "B -> C 10.251.20.6",
+      "C -> D 10.251.20.10"
+    ],
+    "image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+    "order": [
+      "spark-a",
+      "spark-b",
+      "spark-c",
+      "spark-d"
+    ],
+    "transport": "docker save | ssh <fabric-neighbour> docker load"
+  },
+  "image": {
+    "builder_reported_elapsed_seconds": 685,
+    "builder_reported_min_memavailable_gib": 81.7,
+    "compile_jobs": 8,
+    "created_utc": "2026-11-22T23:30:18.525993651Z",
+    "id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+    "labels": {
+      "local.spark-ds41f.cuda.version": "13.5.37",
+      "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+      "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+      "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+      "local.spark-ds41f.vllm.patch-head": "9b251a1860e7e9e123aaf718d15f499a2beb6738",
+      "local.spark-ds41f.vllm.tree": "8fc99ca7546c5c538f0fe64e7c82954f1d2d7ae0"
+    },
+    "nccl_compile_jobs": 4,
+    "sampled_min_memavailable_gib": 81.155,
+    "tag": "spark-ds41f:x1123"
+  },
+  "performance": {
+    "allowed_loss_pct": 1.0,
+    "acceptance_baseline": "historical-4kib-r5l",
+    "acceptance_correction": "ACCEPTANCE-CORRECTION.json",
+    "decode": {
+      "code-c1": {
+        "allowed_floor": 79.794,
+        "delta_pct": 66.62468982630274,
+        "mean": 134.2995,
+        "official_readme": 80.6,
+        "passed": true,
+        "runs": [
+          134.696,
+          133.903
+        ]
+      },
+      "code-c2": {
+        "allowed_floor": 117.018,
+        "delta_pct": 61.8396785109983,
+        "mean": 191.2945,
+        "official_readme": 118.2,
+        "passed": true,
+        "runs": [
+          190.202,
+          192.387
+        ]
+      },
+      "code-c4": {
+        "allowed_floor": 163.44899999999998,
+        "delta_pct": 121.12749848576621,
+        "mean": 365.0815,
+        "official_readme": 165.1,
+        "passed": true,
+        "runs": [
+          371.936,
+          358.227
+        ]
+      },
+      "prose-c1": {
+        "allowed_floor": 58.509,
+        "delta_pct": 51.90693739424703,
+        "mean": 89.777,
+        "official_readme": 59.1,
+        "passed": true,
+        "runs": [
+          89.233,
+          90.321
+        ]
+      },
+      "prose-c2": {
+        "allowed_floor": 83.952,
+        "delta_pct": 86.69811320754717,
+        "mean": 158.32,
+        "official_readme": 84.8,
+        "passed": true,
+        "runs": [
+          157.671,
+          158.969
+        ]
+      },
+      "prose-c4": {
+        "allowed_floor": 123.65100000000001,
+        "delta_pct": 126.72658126501202,
+        "mean": 283.1815,
+        "official_readme": 124.9,
+        "passed": true,
+        "runs": [
+          282.366,
+          283.997
+        ]
+      }
+    },
+    "failures": [],
+    "ok": false,
+    "verdict": "superseded-invalid-baseline",
+    "prefill": {
+      "1000000": {
+        "allowed_floor": 5951.88,
+        "delta_pct": 44.19674817032602,
+        "mean": 8669.1085,
+        "official_readme": 6012.0,
+        "passed": true,
+        "runs": [
+          8677.627,
+          8660.59
+        ]
+      },
+      "131072": {
+        "allowed_floor": 8570.43,
+        "delta_pct": 6.813826960840941,
+        "mean": 9246.873,
+        "official_readme": 8657.0,
+        "passed": true,
+        "runs": [
+          9234.571,
+          9259.175
+        ]
+      },
+      "262144": {
+        "allowed_floor": 8178.39,
+        "delta_pct": 11.543414840818311,
+        "mean": 9214.6015,
+        "official_readme": 8261.0,
+        "passed": true,
+        "runs": [
+          9227.545,
+          9201.658
+        ]
+      },
+      "32768": {
+        "allowed_floor": 8422.92,
+        "delta_pct": 4.338281617301343,
+        "mean": 8877.100999999999,
+        "official_readme": 8508.0,
+        "passed": true,
+        "runs": [
+          8844.492,
+          8909.71
+        ]
+      },
+      "524288": {
+        "allowed_floor": 7385.4,
+        "delta_pct": 21.079463806970523,
+        "mean": 9032.528,
+        "official_readme": 7460.0,
+        "passed": true,
+        "runs": [
+          9042.079,
+          9022.977
+        ]
+      }
+    },
+    "quality": "5/5 in both boots",
+    "runs": [
+      "performance/run-01/bench.json",
+      "performance/run-02/bench.json"
+    ],
+    "summary": "performance/summary.json"
+  },
+  "rollback": {
+    "id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
+    "profile": "experiments/2026-11-19-x1119/tp4-ring.json",
+    "requires_rebuild": false,
+    "tag": "spark-ds41f:x1119"
+  },
+  "schema_version": 1,
+  "source": {
+    "image_profile": "experiments/2026-11-23-x1123/tp4-ring.json",
+    "kind": "local-rsync",
+    "official_main": "1b4b54f2f0dc9d0e6834cf3c0a1c6c27e22c6003",
+    "official_patch_priority": true,
+    "path": "/Users/chan/Documents/project/doc/spark",
+    "promotion_main": "6d826c5b1f13176c7660cd5cb30a160829b4030a",
+    "site_x1119_equivalent_patches_duplicated": false,
+    "upstreams_lock": "upstreams.lock.json",
+    "vllm_patch_count": 702,
+    "vllm_patch_head": "9b251a1860e7e9e123aaf718d15f499a2beb6738",
+    "vllm_tree": "8fc99ca7546c5c538f0fe64e7c82954f1d2d7ae0"
+  },
+  "status": "superseded-invalid-baseline",
+  "validation": {
+    "api_smoke": {
+      "all_200": true,
+      "artifact": "validation/api-smoke.json",
+      "cases": 7
+    },
+    "concurrent_structured_output": {
+      "artifact": "validation/concurrent-structured-smoke.json",
+      "concurrency": 3,
+      "elapsed_seconds": 97.023,
+      "ok": true,
+      "requests": 24,
+      "waves": 8
+    },
+    "contract": {
+      "acceptance_tests": "5 passed",
+      "final_target_tests": "validation/final-target-tests.txt",
+      "final_tests": "validation/final-tests.txt",
+      "green": "validation/contract-green.txt",
+      "parent_tests": "17 passed",
+      "red": "validation/contract-red.txt",
+      "target_tests": "60 tests OK"
+    },
+    "final_health": {
+      "artifact": "validation/final-health.json",
+      "log": "validation/final-health.txt",
+      "ok": true,
+      "problems": [],
+      "ring_markers_at_least_one_per_node": true,
+      "ring_service": "active on all four nodes"
+    },
+    "image_tests": {
+      "obsolete_site_test_red": "validation/site-obsolete-test-red.txt",
+      "official_candidate_62_surface": "76 passed, 36 skipped in 87.90s",
+      "replacement": "tests/v1/structured_output/test_copy_draft_bitmask_rows.py"
+    },
+    "live_contract": {
+      "artifact": "validation/live-parameter-consumption.json",
+      "ok": true,
+      "problems": []
+    },
+    "source_hashes": "validation/source-hashes.txt"
+  }
+}

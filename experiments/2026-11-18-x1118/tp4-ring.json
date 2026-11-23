@@ -34,6 +34,6 @@
       ]
     },
     "nodes_config": "experiments/2026-11-18-x1118/nodes-ring4.json",
-    "upstreams_config": "experiments/2026-11-16-c61-decode/upstreams.lock.json"
+    "upstreams_config": "experiments/2026-11-18-x1118/upstreams.lock.json"
   }
 }

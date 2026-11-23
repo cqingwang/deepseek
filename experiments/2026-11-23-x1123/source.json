@@ -1,0 +1,29 @@
+{
+  "build_deployment_commit": "rsync-60cb74a7cff7dc31169653c052b7293b",
+  "captured_at": "2026-11-23",
+  "image_labels": {
+    "local.spark-ds41f.cuda.version": "13.5.37",
+    "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+    "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
+    "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+    "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+    "local.spark-ds41f.vllm.patch-head": "9b251a1860e7e9e123aaf718d15f499a2beb6738",
+    "local.spark-ds41f.vllm.tree": "8fc99ca7546c5c538f0fe64e7c82954f1d2d7ae0"
+  },
+  "image_profile": "experiments/2026-11-23-x1123/tp4-ring.json",
+  "local_source": "/Users/chan/Documents/project/doc/spark",
+  "obsolete_site_test_removed": "tests/v1/structured_output/test_copy_draft_bitmask_capacity.py",
+  "obsolete_site_test_replacement": "tests/v1/structured_output/test_copy_draft_bitmask_rows.py",
+  "official_fixes_supersede_site_patches": {
+    "0823-fix-dsv41-size-the-structured-output-bitmask-for-cop.patch": "site x1119 bitmask capacity fix",
+    "0826-feat-responses-support-CustomTool-and-OpenResponses-.patch": "site x1119 Responses custom-tool replay"
+  },
+  "official_main": "1b4b54f2f0dc9d0e6834cf3c0a1c6c27e22c6003",
+  "promotion_main": "6d826c5b1f13176c7660cd5cb30a160829b4030a",
+  "schema_version": 1,
+  "upstreams_lock": "upstreams.lock.json",
+  "vllm_patch_count": 702,
+  "vllm_patch_head": "9b251a1860e7e9e123aaf718d15f499a2beb6738",
+  "vllm_patchset_sha256": "800e726dc8e772596e3e4cce20e264e92921510264cf628c7bdc4bd4fcb8d906",
+  "vllm_tree": "8fc99ca7546c5c538f0fe64e7c82954f1d2d7ae0"
+}

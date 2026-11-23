@@ -1,0 +1,12 @@
+=== 192.168.2.180 ===
+dashboard=inactive
+clockcap=disabled/inactive
+=== 192.168.2.161 ===
+dashboard=inactive
+clockcap=disabled/inactive
+=== 192.168.2.102 ===
+dashboard=inactive
+clockcap=disabled/inactive
+=== 192.168.2.238 ===
+dashboard=inactive
+clockcap=disabled/inactive

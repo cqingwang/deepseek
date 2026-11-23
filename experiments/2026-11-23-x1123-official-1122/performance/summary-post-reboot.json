@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "reference": "current-64kib-1120-readme+manifest",
+  "decode_reference_note": "prose-c1 is the current README value; c2/c4 and code are the same-release 1120 manifest tps values because the current README does not publish those cells",
+  "prefill_reference_note": "current README source-text prefill; the historical 4 KiB r5l table is not used",
+  "runs": [
+    "spark/deepseek/experiments/2026-11-23-x1123-official-1122/performance/run-01-post-reboot-bench.json",
+    "spark/deepseek/experiments/2026-11-23-x1123-official-1122/performance/run-02-post-reboot-bench.json"
+  ],
+  "allowed_loss_pct": 1.0,
+  "decode": {
+    "prose-c1": {
+      "runs": [
+        93.302,
+        92.368
+      ],
+      "mean": 92.83500000000001,
+      "official_reference": 89.1,
+      "allowed_floor": 88.20899999999999,
+      "delta_pct": 4.191919191919213,
+      "passed": true
+    },
+    "prose-c2": {
+      "runs": [
+        164.382,
+        162.121
+      ],
+      "mean": 163.25150000000002,
+      "official_reference": 150.394,
+      "allowed_floor": 148.89006,
+      "delta_pct": 8.549210739790158,
+      "passed": true
+    },
+    "prose-c4": {
+      "runs": [
+        294.258,
+        290.339
+      ],
+      "mean": 292.2985,
+      "official_reference": 266.942,
+      "allowed_floor": 264.27258,
+      "delta_pct": 9.498879906496537,
+      "passed": true
+    },
+    "code-c1": {
+      "runs": [
+        134.583,
+        136.296
+      ],
+      "mean": 135.4395,
+      "official_reference": 105.117,
+      "allowed_floor": 104.06583,
+      "delta_pct": 28.84642826564685,
+      "passed": true
+    },
+    "code-c2": {
+      "runs": [
+        195.181,
+        192.919
+      ],
+      "mean": 194.05,
+      "official_reference": 186.001,
+      "allowed_floor": 184.14099000000002,
+      "delta_pct": 4.327396089268332,
+      "passed": true
+    },
+    "code-c4": {
+      "runs": [
+        398.719,
+        405.271
+      ],
+      "mean": 401.995,
+      "official_reference": 329.017,
+      "allowed_floor": 325.72683,
+      "delta_pct": 22.18061680703429,
+      "passed": true
+    }
+  },
+  "prefill": {
+    "32768": {
+      "runs": [
+        8129.841,
+        7511.505
+      ],
+      "mean": 7820.673000000001,
+      "official_reference": 9615.0,
+      "allowed_floor": 9518.85,
+      "delta_pct": -18.661747269890792,
+      "passed": false
+    },
+    "131072": {
+      "runs": [
+        9057.437,
+        9042.149
+      ],
+      "mean": 9049.793,
+      "official_reference": 10108.0,
+      "allowed_floor": 10006.92,
+      "delta_pct": -10.469004748713894,
+      "passed": false
+    },
+    "262144": {
+      "runs": [
+        9136.141,
+        9226.626
+      ],
+      "mean": 9181.3835,
+      "official_reference": 10056.0,
+      "allowed_floor": 9955.44,
+      "delta_pct": -8.697459228321403,
+      "passed": false
+    },
+    "524288": {
+      "runs": [
+        9024.043,
+        9030.489
+      ],
+      "mean": 9027.266,
+      "official_reference": 9833.0,
+      "allowed_floor": 9734.67,
+      "delta_pct": -8.194182853656063,
+      "passed": false
+    },
+    "1000000": {
+      "runs": [
+        8710.569,
+        8778.575
+      ],
+      "mean": 8744.572,
+      "official_reference": 9397.0,
+      "allowed_floor": 9303.03,
+      "delta_pct": -6.94293923592636,
+      "passed": false
+    }
+  },
+  "failures": [
+    "prefill 32768: 7820.673 < 9518.850",
+    "prefill 131072: 9049.793 < 10006.920",
+    "prefill 262144: 9181.383 < 9955.440",
+    "prefill 524288: 9027.266 < 9734.670",
+    "prefill 1000000: 8744.572 < 9303.030"
+  ],
+  "ok": false
+}

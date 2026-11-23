@@ -8,6 +8,10 @@
 - vLLM：697 项补丁，patch head
   `9625f7f24876cdae68d35ebabb6914f65e39812e`，tree
   `259cf7edee8961f40e89b48002ae7394ebca49e5`。
+- 站点 overlay：`experiments/2026-11-19-x1119/vllm/series`，对应锁
+  `experiments/2026-11-19-x1119/upstreams.lock.json`；共享
+  `experiments/2026-11-16-c61-decode/vllm/series` 保持官方
+  `0001..0822`。
 - 这是 source/native 输入变化，必须重新构建镜像；不能复用
   `spark-ds41f:x1118`。
 - 保持 `spark/config.yaml.common.ring` 为四机 `/30` 双平面环网唯一源，
@@ -25,7 +29,7 @@
 
 1. 本地测试、`git diff --check`、release-test classification 通过。
 2. `spark/deepseek/bin/spark --cluster-config
-   experiments/2026-11-16-c61-decode/image-dgx4.json build prepare`
+   experiments/2026-11-19-x1119/tp4-ring.json build prepare`
    复用 tree `259cf7edee89`。
 3. 构建 `spark-ds41f:x1119`，记录 image ID、最低 `MemAvailable` 和
    `docker inspect` labels。

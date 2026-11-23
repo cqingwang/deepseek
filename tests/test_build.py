@@ -21,15 +21,18 @@ import spark_ds41f as spark
 
 class BuildDirectoryTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.inputs = spark.build_inputs(spark.read_json("upstreams.lock.json"))
+        self.inputs = spark.build_inputs(spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json"))
+        self.promoted_inputs = spark.build_inputs(spark.read_json("upstreams.lock.json"))
 
     def test_inputs_come_from_the_lock_and_source_manifest(self) -> None:
-        upstreams = spark.read_json("upstreams.lock.json")
-        manifest = spark.read_json(upstreams["source_manifest"])
-        for name in spark.BUILD_PROJECTS:
-            self.assertEqual(self.inputs[name]["revision"], upstreams["sources"][name]["revision"])
-            self.assertEqual(self.inputs[name]["expected_tree"], manifest[name]["expected_tree"])
-            self.assertEqual(self.inputs[name]["patch_head"], manifest[name]["patch_head"])
+        for lock_path in ("releases/spark-ds41f-1107/upstreams.lock.json", "upstreams.lock.json"):
+            upstreams = spark.read_json(lock_path)
+            manifest = spark.read_json(upstreams["source_manifest"])
+            inputs = spark.build_inputs(upstreams)
+            for name in spark.build_projects(inputs):
+                self.assertEqual(inputs[name]["revision"], upstreams["sources"][name]["revision"])
+                self.assertEqual(inputs[name]["expected_tree"], manifest[name]["expected_tree"])
+                self.assertEqual(inputs[name]["patch_head"], manifest[name]["patch_head"])
 
     def test_directory_is_stable_and_follows_every_input(self) -> None:
         directory = spark.build_directory(self.inputs)
@@ -38,6 +41,7 @@ class BuildDirectoryTest(unittest.TestCase):
         self.assertTrue(directory.name.startswith(
             f"vllm-{self.inputs['vllm']['revision'][:12]}-b12x-{self.inputs['b12x']['revision'][:12]}-"
         ))
+        self.assertNotIn("-b12x-", spark.build_directory(self.promoted_inputs).name)
         changed = copy.deepcopy(self.inputs)
         changed["cutlass"]["revision"] = "0" * 40
         self.assertNotEqual(directory, spark.build_directory(changed))
@@ -79,7 +83,7 @@ class LockWithoutB12xTest(unittest.TestCase):
     the promoted lock, which lists B12X, builds as before."""
 
     def setUp(self) -> None:
-        self.lock = spark.read_json("upstreams.lock.json")
+        self.lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         self.without = copy.deepcopy(self.lock)
         del self.without["sources"]["b12x"]
 
@@ -90,7 +94,7 @@ class LockWithoutB12xTest(unittest.TestCase):
         from unittest import mock
 
         output = io.StringIO()
-        cluster = spark.read_json("config/cluster.json")
+        cluster = spark.read_cluster("releases/spark-ds41f-1107/cluster.json", "tp4-ring")
         if "b12x" not in lock.get("sources", {}):
             # A profile of a lock without B12X expects no B12X tree label.
             cluster["container"]["expected_labels"].pop("local.spark-ds41f.b12x.tree", None)
@@ -285,15 +289,20 @@ class CudaToolkitTest(unittest.TestCase):
                 self.assertIn("TILELANG_BASE_STAGE=runtime", toolkit)
 
     def test_without_b12x_the_tilelang_runtime_builds_on_the_rewired_core(self) -> None:
-        lock = spark.read_json("upstreams.lock.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         del lock["sources"]["b12x"]
         self.assertEqual(spark.tilelang_base_stage(spark.build_inputs(lock)), "runtime-core")
         inputs = spark.build_inputs(self.with_toolkit(lock))
         self.assertEqual(spark.tilelang_base_stage(inputs), "runtime-core-cuda-13-5")
         self.assertEqual(spark.cuda_stages(inputs), ("cuda-13-5", "runtime-core-cuda-13-5"))
+        # Promoted 1120 already retires b12x and ships CUDA 13.5 directly.
+        promoted = spark.build_inputs(spark.read_json("upstreams.lock.json"))
+        self.assertNotIn("b12x", promoted)
+        self.assertEqual(spark.tilelang_base_stage(promoted), "runtime-core-cuda-13-5")
+        self.assertEqual(spark.cuda_stages(promoted), ("cuda-13-5", "runtime-core-cuda-13-5"))
 
     def test_inputs_record_the_locked_packages_only_when_listed(self) -> None:
-        lock = spark.read_json("upstreams.lock.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         plain, toolkit = spark.build_inputs(lock), spark.build_inputs(self.with_toolkit(lock))
         self.assertNotIn("cuda_toolkit", plain)
         self.assertIsNone(spark.cuda_stages(plain))
@@ -311,7 +320,7 @@ class CudaToolkitTest(unittest.TestCase):
         self.assertNotEqual(spark.build_directory(changed), spark.build_directory(toolkit))
 
     def test_malformed_toolkit_sources_and_lockfiles_are_refused(self) -> None:
-        lock = spark.read_json("upstreams.lock.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         self.assertEqual(spark.cuda_toolkit_problems(lock["sources"]), [])
         self.assertEqual(spark.cuda_toolkit_problems(self.with_toolkit(lock)["sources"]), [])
         for changes, message in (({"kind": "git"}, "kind must be deb"),
@@ -404,8 +413,8 @@ class CudaToolkitTest(unittest.TestCase):
     def test_prepare_only_accepts_the_toolkit_part_for_a_lock_that_lists_it(self) -> None:
         import argparse
 
-        lock = spark.read_json("upstreams.lock.json")
-        cluster = spark.read_json("config/cluster.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
+        cluster = spark.read_json("releases/spark-ds41f-1107/cluster.json")
         with mock.patch.object(spark, "configuration", return_value=(cluster, None, lock)), \
                 self.assertRaisesRegex(SystemExit, "cuda_toolkit: not listed in the upstreams lock"):
             spark.command_build_prepare(argparse.Namespace(cluster_config="c.json", only="cuda_toolkit", lock=False))
@@ -478,7 +487,7 @@ class TorchWheelsTest(unittest.TestCase):
         return lock
 
     def test_inputs_stages_and_context_follow_the_lock(self) -> None:
-        lock = spark.read_json("upstreams.lock.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         del lock["sources"]["b12x"]
         toolkit_only = self.with_torch(lock)
         del toolkit_only["sources"]["torch"]
@@ -514,7 +523,7 @@ class TorchWheelsTest(unittest.TestCase):
             self.assertNotIn("torch", spark.build_inputs(spark.read_json(released)))
 
     def test_malformed_torch_sources_and_lockfiles_are_refused(self) -> None:
-        lock = spark.read_json("upstreams.lock.json")
+        lock = spark.read_json("releases/spark-ds41f-1107/upstreams.lock.json")
         self.assertEqual(spark.torch_problems(lock["sources"]), [])
         self.assertEqual(spark.torch_problems(self.with_torch(lock)["sources"]), [])
         self.assertEqual(spark.torch_problems(self.with_torch(lock, toolkit=False)["sources"]),
@@ -607,6 +616,10 @@ class BuildResourcePolicyTest(unittest.TestCase):
         cluster = spark.read_json("config/cluster.json")
         labels = {f"local.spark-ds41f.{name}.tree": inputs[name]["expected_tree"]
                   for name in spark.build_projects(inputs)}
+        if "cuda_toolkit" in inputs:
+            labels["local.spark-ds41f.cuda.version"] = inputs["cuda_toolkit"]["version"]
+        if "torch" in inputs:
+            labels["local.spark-ds41f.torch.version"] = inputs["torch"]["version"]
         with tempfile.TemporaryDirectory() as temporary, contextlib.ExitStack() as stack:
             root = Path(temporary)
             directory = root / "build"
@@ -879,6 +892,136 @@ class PackageStructureTest(unittest.TestCase):
         self.assertLessEqual(len((ROOT / "bin" / "spark").read_text().splitlines()), 15)
         self.assertLessEqual(len((ROOT / "scripts" / "lab.py").read_text().splitlines()), 15)
         self.assertTrue((ROOT / "pyproject.toml").is_file())
+
+
+class SeriesIncludeCompositionTest(unittest.TestCase):
+    """Patch series may compose a release series with extra patches via ``include`` (#1049)."""
+
+    def test_single_file_series_keeps_exact_legacy_patchset_sha256(self) -> None:
+        upstreams = spark.read_json("upstreams.lock.json")
+        source = upstreams["sources"]["vllm"]
+        series_path = ROOT / source["patch_series"]
+        digest = hashlib.sha256()
+        digest.update(series_path.read_bytes())
+        for patch_name in spark.read_series(series_path):
+            if not patch_name.startswith("TODO-"):
+                digest.update(patch_name.encode())
+                digest.update(b"\0")
+                digest.update((series_path.parent / patch_name).read_bytes())
+        self.assertEqual(spark.patchset_sha256(source), digest.hexdigest())
+
+    def test_nested_include_prepare_lock_invalidation_missing_and_cycles(self) -> None:
+        import argparse
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            upstream = root / "upstream"
+            upstream.mkdir()
+            subprocess.run(["git", "init", "--quiet"], cwd=upstream, check=True)
+            subprocess.run(["git", "config", "user.name", "Test Author"], cwd=upstream, check=True)
+            subprocess.run(["git", "config", "user.email", "author@example.com"], cwd=upstream, check=True)
+            (upstream / "file.txt").write_text("base\n", encoding="utf-8")
+            subprocess.run(["git", "add", "file.txt"], cwd=upstream, check=True)
+            subprocess.run(["git", "commit", "--quiet", "-m", "base"], cwd=upstream, check=True)
+            base_revision = spark.git_output(upstream, "rev-parse", "HEAD")
+
+            (upstream / "file.txt").write_text("base\np1\n", encoding="utf-8")
+            subprocess.run(["git", "commit", "--quiet", "-am", "base patch"], cwd=upstream, check=True)
+            (upstream / "file.txt").write_text("base\np1\np2\n", encoding="utf-8")
+            subprocess.run(["git", "commit", "--quiet", "-am", "arm patch"], cwd=upstream, check=True)
+
+            all_patches = root / "tmp_patches"
+            all_patches.mkdir()
+            subprocess.run(
+                ["git", "format-patch", "--quiet", "-o", str(all_patches), base_revision],
+                cwd=upstream,
+                check=True,
+            )
+            p1, p2 = sorted(all_patches.glob("*.patch"))
+
+            base_dir = root / "releases" / "r1" / "vllm"
+            arm_dir = root / "experiments" / "arm" / "vllm"
+            base_dir.mkdir(parents=True)
+            arm_dir.mkdir(parents=True)
+            (base_dir / p1.name).write_bytes(p1.read_bytes())
+            (base_dir / "series").write_text(f"{p1.name}\n", encoding="utf-8")
+            (arm_dir / p2.name).write_bytes(p2.read_bytes())
+            (arm_dir / "series").write_text(
+                f"include ../../../releases/r1/vllm/series\n{p2.name}\n",
+                encoding="utf-8",
+            )
+
+            expected = [f"../../../releases/r1/vllm/{p1.name}", p2.name]
+            self.assertEqual(spark.read_series(arm_dir / "series"), expected)
+
+            (root / "experiments" / "arm" / "cluster.json").write_text(
+                json.dumps({"upstreams_config": "experiments/arm/upstreams.lock.json"}),
+                encoding="utf-8",
+            )
+            (root / "experiments" / "arm" / "source.json").write_text(
+                json.dumps({"vllm": {}}),
+                encoding="utf-8",
+            )
+            lock_doc = {
+                "source_manifest": "experiments/arm/source.json",
+                "sources": {
+                    "vllm": {
+                        "upstream": str(upstream),
+                        "revision": base_revision,
+                        "patch_series": "experiments/arm/vllm/series",
+                    },
+                    "nccl": {"upstream": str(upstream), "revision": base_revision},
+                },
+            }
+            (root / "experiments" / "arm" / "upstreams.lock.json").write_text(
+                json.dumps(lock_doc),
+                encoding="utf-8",
+            )
+
+            with mock.patch.object(spark, "ROOT", root), \
+                    mock.patch.object(spark, "BUILD_ROOT", root / ".work/build"), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                spark.lock_build_identifiers(
+                    argparse.Namespace(cluster_config="experiments/arm/cluster.json"),
+                    copy.deepcopy(lock_doc),
+                    parts=["vllm"],
+                )
+                locked = json.loads((root / "experiments" / "arm" / "source.json").read_text(encoding="utf-8"))
+                record = {
+                    "upstream": str(upstream),
+                    "revision": base_revision,
+                    **locked["vllm"],
+                }
+                build_dir = root / "build"
+                spark.prepare_project(build_dir, "vllm", record)
+                self.assertEqual(
+                    (build_dir / "src" / "vllm" / "file.txt").read_text(encoding="utf-8"),
+                    "base\np1\np2\n",
+                )
+                sha_before = spark.patchset_sha256(lock_doc["sources"]["vllm"])
+                # Editing an included base patch invalidates the child's patchset_sha256.
+                (base_dir / p1.name).write_text(
+                    (base_dir / p1.name).read_text(encoding="utf-8") + "\n# note\n",
+                    encoding="utf-8",
+                )
+                sha_after = spark.patchset_sha256(lock_doc["sources"]["vllm"])
+                self.assertNotEqual(sha_before, sha_after)
+
+                # Missing included series is reported cleanly by missing_patches.
+                (base_dir / "series").unlink()
+                self.assertEqual(
+                    spark.missing_patches(lock_doc["sources"]["vllm"]),
+                    ["releases/r1/vllm/series"],
+                )
+
+                # Include cycle raises SystemExit instead of recursing forever.
+                (base_dir / "series").write_text(
+                    "include ../../../experiments/arm/vllm/series\n",
+                    encoding="utf-8",
+                )
+                with self.assertRaisesRegex(SystemExit, "include cycle"):
+                    spark.read_series(arm_dir / "series")
 
 
 if __name__ == "__main__":

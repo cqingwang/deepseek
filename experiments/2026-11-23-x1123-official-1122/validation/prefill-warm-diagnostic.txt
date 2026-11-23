@@ -1,0 +1,43 @@
+WARN: spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002
+WARN: spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-a: serving container spark-ds41f is not running
+WARN: spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001
+WARN: spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-b: serving container spark-ds41f is not running
+WARN: spark-c: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-c: serving container spark-ds41f is not running
+WARN: spark-d: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-d: serving container spark-ds41f is not running
+benchmarking http://192.168.2.180:8888 (experiments/2026-11-23-x1123-official-1122/tp4-ring.json); writing /tmp/x1123-official1122-prefill-warm/bench.json
+prefill:
+  prefill 524288: 9349 tok/s
+  prefill 1000000: 8995 tok/s
+  prefill 32768: 7798 tok/s
+  prefill 131072: 9435 tok/s
+  prefill 262144: 9466 tok/s
+  prefill 1000000: 8987 tok/s
+  prefill 131072: 9464 tok/s
+  prefill 524288: 9348 tok/s
+  prefill 32768: 7818 tok/s
+  prefill 262144: 9446 tok/s
+prefill (tok/s):
+  32768 tokens          7807.9 ± 1.6% n=2  
+  131072 tokens         9449.1 ± 1.9% n=2  
+  262144 tokens         9456.0 ± 1.4% n=2  
+  524288 tokens         9348.8 ± 0.1% n=2  
+  1000000 tokens        8991.0 ± 0.5% n=2  
+spark-a: min MemAvailable 24.33 GiB, swap growth 0.0 GiB
+spark-b: min MemAvailable 27.48 GiB, swap growth 0.0 GiB
+spark-c: min MemAvailable 27.39 GiB, swap growth 0.0 GiB
+spark-d: min MemAvailable 27.38 GiB, swap growth 0.0 GiB
+spark-a: GPU max 60.0 C (29.0 C below its limit at the closest), board max 68.1 C, power max 47.02 W, thermal slowdown 0.0 ms
+spark-b: GPU max 59.0 C (31.0 C below its limit at the closest), board max 67.5 C, power max 46.37 W, thermal slowdown 0.0 ms
+spark-c: GPU max 62.0 C (30.0 C below its limit at the closest), board max 69.6 C, power max 47.93 W, thermal slowdown 0.0 ms
+spark-d: GPU max 63.0 C (25.0 C below its limit at the closest), board max 74.9 C, power max 49.86 W, thermal slowdown 0.0 ms
+report: /tmp/x1123-official1122-prefill-warm/bench.json

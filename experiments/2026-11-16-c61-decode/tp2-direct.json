@@ -33,7 +33,7 @@
         "--cpuset-cpus=5-9,15-19"
       ]
     },
-    "upstreams_config": "experiments/2026-11-16-c61-decode/upstreams.lock.json",
+    "upstreams_config": "experiments/2026-11-19-x1119/upstreams.lock.json",
     "environment": {
       "NCCL_IB_GID_INDEX": "3",
       "SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS": "1",

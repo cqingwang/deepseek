@@ -5,11 +5,12 @@
     "official_main": "d719bd61",
     "candidate": "candidate-61",
     "site_patch": "0823-fix-dsv41-replay-responses-custom-tool-calls.patch",
-    "upstreams_lock": "experiments/2026-11-16-c61-decode/upstreams.lock.json",
+    "upstreams_lock": "experiments/2026-11-18-x1118/upstreams.lock.json",
     "vllm_patch_head": "6fb28658e1fd1d6132af25cf4525482f23797ea9",
     "vllm_tree": "bb5439cabc793d79b50829c1fe10429389f0eed0",
     "patch_count": 696,
-    "site_profile": "experiments/2026-11-18-x1118/tp4-ring.json"
+    "site_profile": "experiments/2026-11-18-x1118/tp4-ring.json",
+    "source_manifest": "experiments/2026-11-18-x1118/source.json"
   },
   "image": {
     "tag": "spark-ds41f:x1118",

@@ -26,7 +26,7 @@
         "--cpuset-cpus=5-9,15-19"
       ]
     },
-    "upstreams_config": "experiments/2026-11-16-c61-decode/upstreams.lock.json"
+    "upstreams_config": "experiments/2026-11-19-x1119/upstreams.lock.json"
   },
   "serve_options": {
     "--speculative-config": "{\"method\":\"dspark\",\"num_speculative_tokens\":5,\"draft_tensor_parallel_size\":3,\"attention_backend\":\"TILELANG\",\"draft_sample_method\":\"greedy\",\"rejection_sample_method\":\"block\",\"enable_adaptive_verification\":true,\"adaptive_verification_row_cost\":0.049,\"adaptive_verification_single_req_row_cost_scale\":1.55,\"adaptive_verification_high_row_cost_scale\":0.75,\"adaptive_verification_wide_row_cost_knee\":24,\"adaptive_verification_wide_row_cost_scale\":0.78}"

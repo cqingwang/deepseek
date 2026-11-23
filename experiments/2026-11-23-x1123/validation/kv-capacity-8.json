@@ -1,0 +1,43 @@
+{
+  "business": {
+    "max_num_batched_tokens": 16384,
+    "max_request": 8,
+    "max_token": 1000000,
+    "num_speculative_tokens": 5
+  },
+  "capacity": {
+    "contexts": 8.0,
+    "every_sequence_tokens": 1000000,
+    "full_contexts": 8,
+    "max_model_len": 1000000,
+    "max_num_batched_tokens": 16384,
+    "max_num_seqs": 8,
+    "pool_blocks": 35450,
+    "prompt_blocks_in_flight": 3825,
+    "reported_contexts": 4.5577,
+    "reported_tokens": 4557726,
+    "resident_blocks": 3953,
+    "vllm_capacity_contexts": 7.9959,
+    "vllm_capacity_tokens": 7995936
+  },
+  "derived": {
+    "kv_cache_memory_bytes": 8076928000,
+    "long_prefill_token_threshold": 16336,
+    "max_cudagraph_capture_size": 48,
+    "max_model_len": 1000000,
+    "max_num_seqs": 8
+  },
+  "geometry": {
+    "block_size": 256,
+    "drafter_groups": 3,
+    "pool_block_bytes": 227840,
+    "ring_groups": 1,
+    "window": 128,
+    "window_groups": 15
+  },
+  "released_to_system_bytes": 9639812096,
+  "required_pool_bytes": 8076928000,
+  "schema_version": 1,
+  "source": "official-1120 DS4.1 KV geometry",
+  "upstream_pool_bytes": 17716740096
+}

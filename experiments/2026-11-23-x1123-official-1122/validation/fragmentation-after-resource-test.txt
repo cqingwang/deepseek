@@ -1,0 +1,20 @@
+=== 192.168.2.180 ===
+MemAvailable_GiB=27.063
+buddy_orders= [515, 318, 165, 653, 1181, 96, 62, 56, 8, 11, 0]
+largest_order= 9 largest_share=0.118
+2177 MHz, [N/A], P0, 8.81 W, 38
+=== 192.168.2.161 ===
+MemAvailable_GiB=29.108
+buddy_orders= [205, 125, 72, 348, 1269, 331, 73, 59, 18, 1, 1]
+largest_order= 10 largest_share=0.019
+2190 MHz, [N/A], P0, 7.30 W, 38
+=== 192.168.2.102 ===
+MemAvailable_GiB=29.166
+buddy_orders= [231, 117, 52, 197, 1111, 469, 89, 56, 16, 0, 1]
+largest_order= 10 largest_share=0.019
+2190 MHz, [N/A], P0, 9.07 W, 37
+=== 192.168.2.238 ===
+MemAvailable_GiB=29.157
+buddy_orders= [230, 110, 70, 321, 1351, 74, 88, 69, 32, 4, 1]
+largest_order= 10 largest_share=0.019
+2184 MHz, [N/A], P0, 8.85 W, 38

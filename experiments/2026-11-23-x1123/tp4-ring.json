@@ -1,0 +1,17 @@
+{
+  "notes": "Site x1123 deployment profile: current official main resolved at tp4-ring with the spark-ds41f-1120 source/image surface, four-node site ring, and 8-request runtime sizing owned by spark/config.yaml.",
+  "extends": {
+    "config": "config/cluster.json",
+    "shape": "tp4-ring"
+  },
+  "set": {
+    "container": {
+      "name_pattern": "deepseek-r{rank}",
+      "image": "spark-ds41f:x1123"
+    },
+    "nodes_config": "experiments/2026-11-18-x1118/nodes-ring4.json",
+    "host": {
+      "fan_control": false
+    }
+  }
+}

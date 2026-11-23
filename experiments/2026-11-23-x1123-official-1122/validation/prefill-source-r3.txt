@@ -1,0 +1,46 @@
+WARN: spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002
+WARN: spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-a: serving container spark-ds41f is not running
+WARN: spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001
+WARN: spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-b: serving container spark-ds41f is not running
+WARN: spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-c: serving container spark-ds41f is not running
+WARN: spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-d: serving container spark-ds41f is not running
+benchmarking http://192.168.2.180:8888 (experiments/2026-11-23-x1123-official-1122/tp4-ring.json); writing /tmp/x1123-final-prefill-r3/bench.json
+prefill:
+  prefill 524288: 9596 tok/s
+  prefill 1000000: 9306 tok/s
+  prefill 32768: 8549 tok/s
+  prefill 131072: 9720 tok/s
+  prefill 262144: 9745 tok/s
+  prefill 1000000: 9209 tok/s
+  prefill 131072: 9179 tok/s
+  prefill 524288: 9514 tok/s
+  prefill 32768: 9207 tok/s
+  prefill 262144: 9678 tok/s
+  prefill 262144: 9547 tok/s
+  prefill 524288: 9498 tok/s
+  prefill 1000000: 9292 tok/s
+  prefill 32768: 9141 tok/s
+  prefill 131072: 9548 tok/s
+prefill (tok/s):
+  32768 tokens          8965.9 ±10.0% n=3  
+  131072 tokens         9482.3 ± 7.2% n=3  
+  262144 tokens         9656.7 ± 2.6% n=3  
+  524288 tokens         9536.0 ± 1.4% n=3  
+  1000000 tokens        9269.0 ± 1.4% n=3  
+spark-a: min MemAvailable 25.31 GiB, swap growth 0.0 GiB
+spark-b: min MemAvailable 27.7 GiB, swap growth 0.0 GiB
+spark-c: min MemAvailable 27.64 GiB, swap growth 0.0 GiB
+spark-d: min MemAvailable 27.65 GiB, swap growth 0.0 GiB
+spark-a: GPU max 74.0 C (15.0 C below its limit at the closest), board max 82.6 C, power max 74.05 W, thermal slowdown 0.0 ms
+spark-b: GPU max 75.0 C (9.0 C below its limit at the closest), board max 80.1 C, power max 71.52 W, thermal slowdown 0.0 ms
+spark-c: GPU max 73.0 C (14.0 C below its limit at the closest), board max 80.2 C, power max 73.68 W, thermal slowdown 0.0 ms
+spark-d: GPU max 74.0 C (14.0 C below its limit at the closest), board max 81.3 C, power max 74.69 W, thermal slowdown 0.0 ms
+report: /tmp/x1123-final-prefill-r3/bench.json

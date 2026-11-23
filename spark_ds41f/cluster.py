@@ -135,9 +135,13 @@ def local_image(cluster: dict, tag: str, cluster_config: str) -> tuple[dict | No
         labels = image["Config"].get("Labels") or {}
         for key, wanted in cluster["container"].get("expected_labels", {}).items():
             if labels.get(key) != wanted:
-                return None, (f"this host's {tag} is another build (label {key}={labels.get(key)!r}, "
-                            f"the profile expects {wanted!r}): provide the profile's exact qualified "
-                            "image; do not replace an immutable tag")
+                return None, (
+                    f"this host's {tag} is another build (label {key}={labels.get(key)!r}, "
+                    f"the profile expects {wanted!r}): provide the profile's exact qualified "
+                    "image or give a patched build its own upstreams_config lock and "
+                    f"source_manifest (then run bin/spark --cluster-config {cluster_config} "
+                    "build prepare --lock); do not replace an immutable tag"
+                )
     return identity, None
 
 
@@ -681,7 +685,16 @@ def defragment_buddy_memory(nodes: dict, target_nodes: list[dict]) -> None:
             "-n",
             "sh",
             "-c",
-            "sync; echo 3 > /proc/sys/vm/drop_caches; echo 1 > /proc/sys/vm/compact_memory",
+            "sync; echo 3 > /proc/sys/vm/drop_caches; echo 1 > /proc/sys/vm/compact_memory; "
+            "if [ -w /sys/kernel/mm/hugepages/hugepages-524288kB/nr_hugepages ]; then "
+            "for _pass in 1 2; do "
+            "o13=$(awk '/Node 0, zone[[:space:]]+Normal/{print $NF}' /proc/buddyinfo 2>/dev/null); "
+            "if [ -n \"$o13\" ] && [ \"$o13\" -gt 0 ] 2>/dev/null; then "
+            "echo \"$o13\" > /sys/kernel/mm/hugepages/hugepages-524288kB/nr_hugepages 2>/dev/null || true; "
+            "echo 0 > /sys/kernel/mm/hugepages/hugepages-524288kB/nr_hugepages 2>/dev/null || true; "
+            "fi; "
+            "if [ \"$_pass\" -eq 1 ]; then echo 1 > /proc/sys/vm/compact_memory 2>/dev/null || true; fi; "
+            "done; fi",
         )
         if res.returncode:
             detail = (res.stderr or res.stdout).strip() or f"exit {res.returncode}"
@@ -897,6 +910,7 @@ PROFILE_LABEL = "spark.cluster-config"
 # What "the engine's shape" means: a start that changes any of these is a different
 # deployment, not a restart.
 SHAPE_FLAGS = (("nodes", "--nnodes"), ("tp", "--tensor-parallel-size"),
+               ("pp", "--pipeline-parallel-size"),
                ("context", "--max-model-len"), ("kv", "--kv-cache-memory-bytes"))
 
 
@@ -910,13 +924,14 @@ def require_named_profile(args: argparse.Namespace) -> None:
 
 
 def engine_shape(command: list[str]) -> dict[str, str | None]:
-    """Node count, tensor parallelism, context and KV bytes of a vLLM command."""
+    """Node count, tensor/pipeline parallelism, context and KV bytes of a vLLM command."""
     def value(flag: str) -> str | None:
         return command[command.index(flag) + 1] if flag in command[:-1] else None
 
     shape = {key: value(flag) for key, flag in SHAPE_FLAGS}
     shape["nodes"] = shape["nodes"] or "1"
     shape["tp"] = shape["tp"] or "1"
+    shape["pp"] = shape["pp"] or "1"
     return shape
 
 
@@ -924,7 +939,9 @@ def engine_text(shape: dict[str, str | None]) -> str:
     context, kv = shape.get("context"), shape.get("kv")
     context_text = f"{int(context):,}" if context and context.isdigit() else context or "default"
     kv_text = f"{int(kv) / 2**30:.1f} GiB" if kv and kv.isdigit() else kv or "default"
-    return f"{shape['nodes']} nodes, TP{shape['tp']}, context {context_text}, KV {kv_text}"
+    pp = shape.get("pp")
+    pp_text = f"PP{pp} " if pp and pp != "1" else ""
+    return f"{shape['nodes']} nodes, {pp_text}TP{shape['tp']}, context {context_text}, KV {kv_text}"
 
 
 def head_node(nodes: dict) -> dict:
@@ -1235,6 +1252,8 @@ def command_cluster_stop(args: argparse.Namespace) -> int:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
             failed = True
+    if not failed and defragment_before_start(cluster):
+        defragment_buddy_memory(nodes, nodes["nodes"])
     return int(failed)
 
 

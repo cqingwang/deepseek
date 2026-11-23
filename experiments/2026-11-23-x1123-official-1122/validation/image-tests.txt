@@ -1,0 +1,298 @@
+................F....................................................... [ 18%]
+........................................................................ [ 36%]
+........................................................................ [ 54%]
+..............s......................................................... [ 73%]
+...............................................................s........ [ 91%]
+........................FFFF.....                                        [100%]
+=================================== FAILURES ===================================
+____ test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import ____
+
+    def test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import():
+        code = """
+    import sys
+    import vllm.models.deepseek_v41 as ds41
+    cls = ds41.DeepseekV41ForCausalLM
+    assert "vllm.models.deepseek_v4_1.nvidia.dspark" not in sys.modules
+    assert "vllm.models.deepseek_v4_1.nvidia.model" not in sys.modules
+    assert "vllm.models.deepseek_v41.nvidia.model" not in sys.modules
+    """
+        res = subprocess.run(
+            [sys.executable, "-c", code],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+>       assert res.returncode == 0, res.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 7, in <module>
+E         AssertionError
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '-c', '\nimport sys\nimport vllm.models.deepseek_v41 as ds41\ncls = ds41.De...de=1, stdout='', stderr='Traceback (most recent call last):\n  File "<string>", line 7, in <module>\nAssertionError\n').returncode
+
+/opt/spark-ds41f/candidate/vllm/tests/kernels/test_deepseek_v41_postload_startup.py:193: AssertionError
+_________ test_grammar_bitmask_sizes_for_verification_tokens[5-16-272] _________
+
+num_speculative_tokens = 5, copy_max_drafts = 16, expected_rows = 272
+
+    @pytest.mark.parametrize(
+        ("num_speculative_tokens", "copy_max_drafts", "expected_rows"),
+        [
+            (5, 16, 16 * (1 + 16)),
+            (5, None, 16 * (1 + 5)),
+            (8, 4, 16 * (1 + 8)),
+            (None, None, 16),
+        ],
+    )
+    def test_grammar_bitmask_sizes_for_verification_tokens(
+        num_speculative_tokens: int | None,
+        copy_max_drafts: int | None,
+        expected_rows: int,
+    ) -> None:
+        """Copy-drafting can verify more tokens than num_speculative_tokens."""
+        spec_config = (
+            None
+            if num_speculative_tokens is None
+            else SpeculativeConfig(
+                model="[ngram]",
+                num_speculative_tokens=num_speculative_tokens,
+            )
+        )
+        vllm_config = VllmConfig(
+>           model_config=ModelConfig(tokenizer="gpt2"),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            device_config=DeviceConfig(device="cpu"),
+            scheduler_config=SchedulerConfig(
+                max_num_seqs=16,
+                max_model_len=1024,
+                is_encoder_decoder=False,
+            ),
+            structured_outputs_config=StructuredOutputsConfig(backend="xgrammar"),
+            speculative_config=spec_config,
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+E         Value error, Invalid repository ID or local directory specified: 'Qwen/Qwen3-0.6B'.
+E       Please verify the following requirements:
+E       1. Provide a valid Hugging Face repository ID.
+E       2. Specify a local directory that contains a recognized configuration file.
+E          - For Hugging Face models: ensure the presence of a 'config.json'.
+E          - For Mistral models: ensure the presence of a 'params.json'.
+E        [type=value_error, input_value=ArgsKwargs((), {'tokenizer': 'gpt2'}), input_type=ArgsKwargs]
+E           For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+/opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py:46: ValidationError
+----------------------------- Captured stdout call -----------------------------
+ERROR 11-23 11:08:00 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:02 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+ERROR 11-23 11:08:02 [repo_utils.py:182] Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR 11-23 11:08:02 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:04 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+------------------------------ Captured log call -------------------------------
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:182 Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+________ test_grammar_bitmask_sizes_for_verification_tokens[5-None-96] _________
+
+num_speculative_tokens = 5, copy_max_drafts = None, expected_rows = 96
+
+    @pytest.mark.parametrize(
+        ("num_speculative_tokens", "copy_max_drafts", "expected_rows"),
+        [
+            (5, 16, 16 * (1 + 16)),
+            (5, None, 16 * (1 + 5)),
+            (8, 4, 16 * (1 + 8)),
+            (None, None, 16),
+        ],
+    )
+    def test_grammar_bitmask_sizes_for_verification_tokens(
+        num_speculative_tokens: int | None,
+        copy_max_drafts: int | None,
+        expected_rows: int,
+    ) -> None:
+        """Copy-drafting can verify more tokens than num_speculative_tokens."""
+        spec_config = (
+            None
+            if num_speculative_tokens is None
+            else SpeculativeConfig(
+                model="[ngram]",
+                num_speculative_tokens=num_speculative_tokens,
+            )
+        )
+        vllm_config = VllmConfig(
+>           model_config=ModelConfig(tokenizer="gpt2"),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            device_config=DeviceConfig(device="cpu"),
+            scheduler_config=SchedulerConfig(
+                max_num_seqs=16,
+                max_model_len=1024,
+                is_encoder_decoder=False,
+            ),
+            structured_outputs_config=StructuredOutputsConfig(backend="xgrammar"),
+            speculative_config=spec_config,
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+E         Value error, Invalid repository ID or local directory specified: 'Qwen/Qwen3-0.6B'.
+E       Please verify the following requirements:
+E       1. Provide a valid Hugging Face repository ID.
+E       2. Specify a local directory that contains a recognized configuration file.
+E          - For Hugging Face models: ensure the presence of a 'config.json'.
+E          - For Mistral models: ensure the presence of a 'params.json'.
+E        [type=value_error, input_value=ArgsKwargs((), {'tokenizer': 'gpt2'}), input_type=ArgsKwargs]
+E           For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+/opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py:46: ValidationError
+----------------------------- Captured stdout call -----------------------------
+ERROR 11-23 11:08:04 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:06 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+ERROR 11-23 11:08:06 [repo_utils.py:182] Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR 11-23 11:08:06 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:08 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+------------------------------ Captured log call -------------------------------
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:182 Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+_________ test_grammar_bitmask_sizes_for_verification_tokens[8-4-144] __________
+
+num_speculative_tokens = 8, copy_max_drafts = 4, expected_rows = 144
+
+    @pytest.mark.parametrize(
+        ("num_speculative_tokens", "copy_max_drafts", "expected_rows"),
+        [
+            (5, 16, 16 * (1 + 16)),
+            (5, None, 16 * (1 + 5)),
+            (8, 4, 16 * (1 + 8)),
+            (None, None, 16),
+        ],
+    )
+    def test_grammar_bitmask_sizes_for_verification_tokens(
+        num_speculative_tokens: int | None,
+        copy_max_drafts: int | None,
+        expected_rows: int,
+    ) -> None:
+        """Copy-drafting can verify more tokens than num_speculative_tokens."""
+        spec_config = (
+            None
+            if num_speculative_tokens is None
+            else SpeculativeConfig(
+                model="[ngram]",
+                num_speculative_tokens=num_speculative_tokens,
+            )
+        )
+        vllm_config = VllmConfig(
+>           model_config=ModelConfig(tokenizer="gpt2"),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            device_config=DeviceConfig(device="cpu"),
+            scheduler_config=SchedulerConfig(
+                max_num_seqs=16,
+                max_model_len=1024,
+                is_encoder_decoder=False,
+            ),
+            structured_outputs_config=StructuredOutputsConfig(backend="xgrammar"),
+            speculative_config=spec_config,
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+E         Value error, Invalid repository ID or local directory specified: 'Qwen/Qwen3-0.6B'.
+E       Please verify the following requirements:
+E       1. Provide a valid Hugging Face repository ID.
+E       2. Specify a local directory that contains a recognized configuration file.
+E          - For Hugging Face models: ensure the presence of a 'config.json'.
+E          - For Mistral models: ensure the presence of a 'params.json'.
+E        [type=value_error, input_value=ArgsKwargs((), {'tokenizer': 'gpt2'}), input_type=ArgsKwargs]
+E           For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+/opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py:46: ValidationError
+----------------------------- Captured stdout call -----------------------------
+ERROR 11-23 11:08:09 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:11 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+ERROR 11-23 11:08:11 [repo_utils.py:182] Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR 11-23 11:08:11 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:13 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+------------------------------ Captured log call -------------------------------
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:182 Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+_______ test_grammar_bitmask_sizes_for_verification_tokens[None-None-16] _______
+
+num_speculative_tokens = None, copy_max_drafts = None, expected_rows = 16
+
+    @pytest.mark.parametrize(
+        ("num_speculative_tokens", "copy_max_drafts", "expected_rows"),
+        [
+            (5, 16, 16 * (1 + 16)),
+            (5, None, 16 * (1 + 5)),
+            (8, 4, 16 * (1 + 8)),
+            (None, None, 16),
+        ],
+    )
+    def test_grammar_bitmask_sizes_for_verification_tokens(
+        num_speculative_tokens: int | None,
+        copy_max_drafts: int | None,
+        expected_rows: int,
+    ) -> None:
+        """Copy-drafting can verify more tokens than num_speculative_tokens."""
+        spec_config = (
+            None
+            if num_speculative_tokens is None
+            else SpeculativeConfig(
+                model="[ngram]",
+                num_speculative_tokens=num_speculative_tokens,
+            )
+        )
+        vllm_config = VllmConfig(
+>           model_config=ModelConfig(tokenizer="gpt2"),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            device_config=DeviceConfig(device="cpu"),
+            scheduler_config=SchedulerConfig(
+                max_num_seqs=16,
+                max_model_len=1024,
+                is_encoder_decoder=False,
+            ),
+            structured_outputs_config=StructuredOutputsConfig(backend="xgrammar"),
+            speculative_config=spec_config,
+        )
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig
+E         Value error, Invalid repository ID or local directory specified: 'Qwen/Qwen3-0.6B'.
+E       Please verify the following requirements:
+E       1. Provide a valid Hugging Face repository ID.
+E       2. Specify a local directory that contains a recognized configuration file.
+E          - For Hugging Face models: ensure the presence of a 'config.json'.
+E          - For Mistral models: ensure the presence of a 'params.json'.
+E        [type=value_error, input_value=ArgsKwargs((), {'tokenizer': 'gpt2'}), input_type=ArgsKwargs]
+E           For further information visit https://errors.pydantic.dev/2.13/v/value_error
+
+/opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py:46: ValidationError
+----------------------------- Captured stdout call -----------------------------
+ERROR 11-23 11:08:13 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:15 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+ERROR 11-23 11:08:15 [repo_utils.py:182] Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR 11-23 11:08:15 [repo_utils.py:119] Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR 11-23 11:08:17 [repo_utils.py:117] Error retrieving file list: [Errno 101] Network is unreachable
+------------------------------ Captured log call -------------------------------
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:182 Error retrieving file list. Please ensure your `model_name_or_path``repo_type`, `token` and `revision` arguments are correctly set. Returning an empty list.
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:119 Error retrieving file list: [Errno 101] Network is unreachable, retrying 1 of 2
+ERROR    vllm.transformers_utils.repo_utils:repo_utils.py:117 Error retrieving file list: [Errno 101] Network is unreachable
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: 14 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/v1/spec_decode/test_adaptive_verification.py::test_sampler_hands_configured_seed_to_sampling_states
+  /usr/local/lib/python3.12/dist-packages/flashinfer/cute_dsl/availability.py:135: DeprecationWarning: Arch from arch.py is deprecated. Use Arch from enums.py instead.
+    from cutlass.base_dsl.arch import Arch
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/kernels/test_deepseek_v41_postload_startup.py::test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py::test_grammar_bitmask_sizes_for_verification_tokens[5-16-272]
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py::test_grammar_bitmask_sizes_for_verification_tokens[5-None-96]
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py::test_grammar_bitmask_sizes_for_verification_tokens[8-4-144]
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/v1/structured_output/test_copy_draft_bitmask_rows.py::test_grammar_bitmask_sizes_for_verification_tokens[None-None-16]
+5 failed, 386 passed, 2 skipped, 15 warnings in 532.24s (0:08:52)

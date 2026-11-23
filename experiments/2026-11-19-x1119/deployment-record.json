@@ -13,7 +13,9 @@
     "vllm_patch_head": "9625f7f24876cdae68d35ebabb6914f65e39812e",
     "vllm_tree": "259cf7edee8961f40e89b48002ae7394ebca49e5",
     "vllm_patch_count": 697,
-    "vllm_patchset_sha256": "3be9c8f7ce1e53a4531e665f3a9b09d8a8d832ff3f9a10f0eb75d401bed35a74"
+    "vllm_patchset_sha256": "0e7fe7a59a08f67e6dc4708bfa3be87d2ae49709cd2cf325f25f15f65ebfcd53",
+    "upstreams_lock": "experiments/2026-11-19-x1119/upstreams.lock.json",
+    "source_manifest": "experiments/2026-11-19-x1119/source.json"
   },
   "image": {
     "tag": "spark-ds41f:x1119",
@@ -119,59 +121,92 @@
     "ok": true,
     "decode_aggregate_tok_s": {
       "prose-nothink-c1": {
-        "runs": [89.995, 89.661],
+        "runs": [
+          89.995,
+          89.661
+        ],
         "mean": 89.828,
         "official_readme": 59.1
       },
       "prose-nothink-c2": {
-        "runs": [159.537, 157.229],
+        "runs": [
+          159.537,
+          157.229
+        ],
         "mean": 158.383,
         "official_readme": 84.8
       },
       "prose-nothink-c4": {
-        "runs": [281.499, 288.471],
+        "runs": [
+          281.499,
+          288.471
+        ],
         "mean": 284.985,
         "official_readme": 124.9
       },
       "code-nothink-c1": {
-        "runs": [134.596, 136.347],
+        "runs": [
+          134.596,
+          136.347
+        ],
         "mean": 135.4715,
         "official_readme": 80.6
       },
       "code-nothink-c2": {
-        "runs": [190.747, 188.567],
+        "runs": [
+          190.747,
+          188.567
+        ],
         "mean": 189.657,
         "official_readme": 118.2
       },
       "code-nothink-c4": {
-        "runs": [361.79, 382.677],
+        "runs": [
+          361.79,
+          382.677
+        ],
         "mean": 372.2335,
         "official_readme": 165.1
       }
     },
     "prefill_tok_s": {
       "32768": {
-        "runs": [9305.273, 9460.683],
+        "runs": [
+          9305.273,
+          9460.683
+        ],
         "mean": 9382.978,
         "official_readme": 8508.0
       },
       "131072": {
-        "runs": [9829.209, 9772.57],
+        "runs": [
+          9829.209,
+          9772.57
+        ],
         "mean": 9800.8895,
         "official_readme": 8657.0
       },
       "262144": {
-        "runs": [9819.413, 9770.339],
+        "runs": [
+          9819.413,
+          9770.339
+        ],
         "mean": 9794.876,
         "official_readme": 8261.0
       },
       "524288": {
-        "runs": [9591.727, 9567.113],
+        "runs": [
+          9591.727,
+          9567.113
+        ],
         "mean": 9579.42,
         "official_readme": 7460.0
       },
       "1000000": {
-        "runs": [9212.963, 9165.609],
+        "runs": [
+          9212.963,
+          9165.609
+        ],
         "mean": 9189.286,
         "official_readme": 6012.0
       }

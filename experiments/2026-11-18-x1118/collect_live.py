@@ -25,6 +25,28 @@ EXPECTED_IMAGE_LABELS = {
     "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
     "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07",
 }
+EXPECTED_ARGS = {
+    "--max-model-len": "1000000",
+    "--max-num-seqs": "5",
+    "--max-num-batched-tokens": "16384",
+    "--kv-cache-memory-bytes": "5374973440",
+    "--long-prefill-token-threshold": "16354",
+    "--max-cudagraph-capture-size": "30",
+    "--limit-mm-per-prompt": '{"image":67}',
+    "--master-port": "25000",
+    "--enable-per-request-metrics": 1,
+    "num_speculative_tokens": 5,
+    "max_new_tokens": 65536,
+}
+EXPECTED_STARTUP_HEAD = {
+    "max_num_seqs": "5",
+    "max_model_len": "1000000",
+    "max_num_batched_tokens": "16384",
+    "max_new_tokens": "65536",
+    "master_port": "25000",
+    "num_spec_tokens": "5",
+}
+EXPECTED_STARTUP_WORKER = {"kv_cache_gib": "5.01"}
 HOST_ONLY = {
     "TARGET_ENGINE_ID",
     "TARGET_CONTAINER_PREFIX",
@@ -217,34 +239,14 @@ def verify(evidence: dict) -> list[str]:
         for key, value in EXPECTED_IMAGE_LABELS.items():
             if node["labels"].get(key) != value:
                 problems.append(f"{prefix} label {key}={node['labels'].get(key)!r}")
-        expected_args = {
-            "--max-model-len": "1000000",
-            "--max-num-seqs": "5",
-            "--max-num-batched-tokens": "16384",
-            "--kv-cache-memory-bytes": "5374973440",
-            "--long-prefill-token-threshold": "16354",
-            "--max-cudagraph-capture-size": "30",
-            "--limit-mm-per-prompt": '{"image":67}',
-            "--master-port": "25000",
-            "--enable-per-request-metrics": 1,
-            "num_speculative_tokens": 5,
-            "max_new_tokens": 65536,
-        }
-        for key, value in expected_args.items():
+        for key, value in EXPECTED_ARGS.items():
             if node["args"].get(key) != value:
                 problems.append(f"{prefix} argv {key}={node['args'].get(key)!r}")
         if node["rank"] == 0:
-            expected_startup = {
-                "max_num_seqs": "5",
-                "max_model_len": "1000000",
-                "max_num_batched_tokens": "16384",
-                "max_new_tokens": "65536",
-                "master_port": "25000",
-                "num_spec_tokens": "5",
-            }
+            expected_startup = EXPECTED_STARTUP_HEAD
         else:
             expected_startup = {
-                "kv_cache_gib": "5.01",
+                **EXPECTED_STARTUP_WORKER,
                 "worker_rank": str(node["rank"]),
             }
         for key, value in expected_startup.items():

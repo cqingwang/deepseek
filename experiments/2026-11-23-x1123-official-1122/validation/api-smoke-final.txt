@@ -1,0 +1,1 @@
+API smoke OK: 7 cases

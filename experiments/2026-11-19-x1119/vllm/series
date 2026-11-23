@@ -1,0 +1,4 @@
+# x1119 site overlay: x1118 plus the structured-output copy-draft bitmask capacity fix.
+include ../../2026-11-16-c61-decode/vllm/series
+../../2026-11-18-x1118/vllm/0823-fix-dsv41-replay-responses-custom-tool-calls.patch
+0824-fix-structured-output-copy-draft-bitmask-capacity.patch

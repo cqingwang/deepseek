@@ -1,0 +1,17 @@
+{
+  "notes": "Site x1123 final image after aligning to official main 945d95d0 (spark-ds41f-1122). The promoted config owns the 730-patch vLLM surface; this profile only supplies the site ring node map, image tag, container names, and fan-control boundary.",
+  "extends": {
+    "config": "config/cluster.json",
+    "shape": "tp4-ring"
+  },
+  "set": {
+    "container": {
+      "name_pattern": "deepseek-r{rank}",
+      "image": "spark-ds41f:x1123"
+    },
+    "nodes_config": "experiments/2026-11-18-x1118/nodes-ring4.json",
+    "host": {
+      "fan_control": false
+    }
+  }
+}

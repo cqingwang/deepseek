@@ -14,7 +14,8 @@
 
 - vLLM：`19f2c20ed4d64ae22bd009ceacadd85e2a81e354` + candidate-61
   `0811..0822` 系列，tree `70cdcaeb7813998d6f5f8972a4219a5e1e48f7d5`。
-- candidate-61 锁：`experiments/2026-11-16-c61-decode/upstreams.lock.json`。
+- x1118 站点锁：`experiments/2026-11-18-x1118/upstreams.lock.json`
+  （官方 candidate-61 系列加 Responses custom-tool 回放补丁）。
 - site profile：`experiments/2026-11-18-x1118/tp4-ring.json`。
 
 ## 参数合同

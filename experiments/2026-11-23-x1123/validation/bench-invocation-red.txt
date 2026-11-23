@@ -1,0 +1,28 @@
+WARN: spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002
+WARN: spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-a: serving container spark-ds41f is not running
+WARN: spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001
+WARN: spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-b: serving container spark-ds41f is not running
+WARN: spark-c: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-c: serving container spark-ds41f is not running
+WARN: spark-d: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-d: serving container spark-ds41f is not running
+benchmarking http://192.168.2.180:8000 (experiments/2026-11-23-x1123/tp4-ring.json); writing /tmp/x1123-bench-run-01/bench.json
+quality:
+spark-a: min MemAvailable 29.23 GiB, swap growth 0.0 GiB
+spark-b: min MemAvailable 31.3 GiB, swap growth 0.0 GiB
+spark-c: min MemAvailable 31.35 GiB, swap growth 0.0 GiB
+spark-d: min MemAvailable 31.34 GiB, swap growth 0.0 GiB
+spark-a: GPU max 37.0 C (59.0 C below its limit at the closest), board max 39.8 C, power max 8.7 W, thermal slowdown 0.0 ms
+spark-b: GPU max 37.0 C (59.0 C below its limit at the closest), board max 38.9 C, power max 7.19 W, thermal slowdown 0.0 ms
+spark-c: GPU max 37.0 C (59.0 C below its limit at the closest), board max 38.8 C, power max 8.97 W, thermal slowdown 0.0 ms
+spark-d: GPU max 37.0 C (59.0 C below its limit at the closest), board max 40.0 C, power max 8.75 W, thermal slowdown 0.0 ms
+FAIL: aborted: API or telemetry error: <urlopen error [Errno 111] Connection refused>
+report: /tmp/x1123-bench-run-01/bench.json

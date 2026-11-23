@@ -61,6 +61,13 @@ Inference Lab integration branch is the serving source.
 | `torch` | PyTorch's wheel index (`download.pytorch.org/whl/nightly/cu135`) | not applicable | optional, listed only by a lock that also lists the CUDA toolkit it was compiled for: SHA-256-locked wheels of torch, the packages it requires, and torchvision, torchaudio, torchcodec and triton (`requirements/torch-2-16-cu135-aarch64.txt`) |
 | `model` | `deepseek-ai/DeepSeek-V4.1-Flash` | not applicable | unchanged native model weights and tokenizer |
 
+The benchmark client is not an image input and so not in this lock:
+[Sonar](https://github.com/christopherowen/Sonar) (`christopherowen/Sonar`, `main`) is pinned
+in `config/sonar.json` by URL and full revision, checked out on first use under
+`.work/sonar/<revision>`, and the same for every arm a run compares. To move the pin, merge
+the change into Sonar, set the new revision there, and record in the change which outputs
+(suite digests, request payloads, result formats) it leaves unchanged.
+
 The URL and full immutable revision in `upstreams.lock.json`, not a directory
 name or Docker tag, define identity. The `tracking_ref` says which canonical
 branch to inspect for future pulls; it does not float the build.
@@ -91,6 +98,34 @@ not be older than the version the vLLM base image installs. When a component
 pins an older version, patch the component's pin forward and qualify it rather
 than downgrading the others. The image build checks each consumer's declared
 requirement and fails on a mismatch.
+
+## Patched release arms
+
+Published release manifests (`manifests/sources/`, `releases/*/source.json`, and
+`upstreams.lock.json`) are immutable provenance records. Extending a release profile
+with only a rebuilt `container.image` and updated `expected_labels` makes
+`build distribute` and `doctor` disagree: `distribute` reads `expected_labels`
+from the profile while `doctor` checks the release's `source.json`.
+
+To ship a release plus one or more local patches so `build prepare`, `build image`,
+`build distribute`, `cluster sync`, and `doctor` all agree:
+
+1. Create an arm series in `experiments/<dir>/<project>/series` using `include`
+   to compose the base series with the extra patch(es):
+
+   ```text
+   include ../../../releases/<release>/vllm/series
+   0001-local-fix.patch
+   ```
+
+2. Copy the release's `upstreams.lock.json` and `source.json` into the arm
+   directory, point `source_manifest` and `patch_series` at the arm copies, and set
+   `upstreams_config` in the arm profile overlay.
+3. Run `bin/spark --cluster-config <profile> build prepare --lock` to compute and
+   align `patchset_sha256`, `patch_head`, `expected_tree`, and
+   `container.expected_labels` across the arm's lock, manifest, and profile.
+4. Build and distribute normally with `bin/spark --cluster-config <profile> build image --apply`
+   and `build distribute --apply`.
 
 ## Locks without B12X
 

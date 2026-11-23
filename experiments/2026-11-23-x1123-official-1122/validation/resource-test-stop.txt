@@ -1,0 +1,7 @@
+140:  max_request: 32
+Stopping deepseek ...
+[+] stop deepseek ranks 0..3
+[+] deepseek stopped: target containers=0, head :8888/v1/models=000
+Stopping inkling-mini ...
+[+] stop inkling-mini ranks 0..3
+[+] inkling-mini stopped: target containers=0; deepseek 保留: none

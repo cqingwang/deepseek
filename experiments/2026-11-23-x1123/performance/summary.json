@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "runs": [
+    "experiments/2026-11-23-x1123/performance/run-01/bench.json",
+    "experiments/2026-11-23-x1123/performance/run-02/bench.json"
+  ],
+  "allowed_loss_pct": 1.0,
+  "decode": {
+    "prose-c1": {
+      "runs": [
+        89.233,
+        90.321
+      ],
+      "mean": 89.777,
+      "official_readme": 59.1,
+      "allowed_floor": 58.509,
+      "delta_pct": 51.90693739424703,
+      "passed": true
+    },
+    "prose-c2": {
+      "runs": [
+        157.671,
+        158.969
+      ],
+      "mean": 158.32,
+      "official_readme": 84.8,
+      "allowed_floor": 83.952,
+      "delta_pct": 86.69811320754717,
+      "passed": true
+    },
+    "prose-c4": {
+      "runs": [
+        282.366,
+        283.997
+      ],
+      "mean": 283.1815,
+      "official_readme": 124.9,
+      "allowed_floor": 123.65100000000001,
+      "delta_pct": 126.72658126501202,
+      "passed": true
+    },
+    "code-c1": {
+      "runs": [
+        134.696,
+        133.903
+      ],
+      "mean": 134.2995,
+      "official_readme": 80.6,
+      "allowed_floor": 79.794,
+      "delta_pct": 66.62468982630274,
+      "passed": true
+    },
+    "code-c2": {
+      "runs": [
+        190.202,
+        192.387
+      ],
+      "mean": 191.2945,
+      "official_readme": 118.2,
+      "allowed_floor": 117.018,
+      "delta_pct": 61.8396785109983,
+      "passed": true
+    },
+    "code-c4": {
+      "runs": [
+        371.936,
+        358.227
+      ],
+      "mean": 365.0815,
+      "official_readme": 165.1,
+      "allowed_floor": 163.44899999999998,
+      "delta_pct": 121.12749848576621,
+      "passed": true
+    }
+  },
+  "prefill": {
+    "32768": {
+      "runs": [
+        8844.492,
+        8909.71
+      ],
+      "mean": 8877.100999999999,
+      "official_readme": 8508.0,
+      "allowed_floor": 8422.92,
+      "delta_pct": 4.338281617301343,
+      "passed": true
+    },
+    "131072": {
+      "runs": [
+        9234.571,
+        9259.175
+      ],
+      "mean": 9246.873,
+      "official_readme": 8657.0,
+      "allowed_floor": 8570.43,
+      "delta_pct": 6.813826960840941,
+      "passed": true
+    },
+    "262144": {
+      "runs": [
+        9227.545,
+        9201.658
+      ],
+      "mean": 9214.6015,
+      "official_readme": 8261.0,
+      "allowed_floor": 8178.39,
+      "delta_pct": 11.543414840818311,
+      "passed": true
+    },
+    "524288": {
+      "runs": [
+        9042.079,
+        9022.977
+      ],
+      "mean": 9032.528,
+      "official_readme": 7460.0,
+      "allowed_floor": 7385.4,
+      "delta_pct": 21.079463806970523,
+      "passed": true
+    },
+    "1000000": {
+      "runs": [
+        8677.627,
+        8660.59
+      ],
+      "mean": 8669.1085,
+      "official_readme": 6012.0,
+      "allowed_floor": 5951.88,
+      "delta_pct": 44.19674817032602,
+      "passed": true
+    }
+  },
+  "failures": [],
+  "ok": true
+}

@@ -1,0 +1,43 @@
+# x1123 final rsync summaries
+## closeout
+Transfer starting: 333 files
+README.md
+          33485 100%  179.54MB/s   00:00:00 (xfer#1, to-check=0/333)
+docs/engineering-memory.md
+         174867 100%   47.99MB/s   00:00:00 (xfer#2, to-check=20/333)
+
+sent 27835 bytes  received 1822 bytes  140487 bytes/sec
+total size is 186473922  speedup is 6287.69
+spark_ds41f/
+state/
+tests/
+tests/fixtures/
+tests/fixtures/candidate/
+tests/fixtures/candidate/determinism/
+tests/fixtures/candidate/determinism/candidate-54-tp3-switched/
+tests/fixtures/candidate/determinism/candidate-54-tp4/
+tests/fixtures/candidate/determinism/candidate-55-978r2/
+
+sent 6986625 bytes  received 45642 bytes  2637660 bytes/sec
+total size is 831363894  speedup is 118.22
+## evidence
+Transfer starting: 333 files
+
+sent 15075 bytes  received 38 bytes  76289 bytes/sec
+total size is 186473922  speedup is 12338.64
+Transfer starting: 40894 files
+./
+.github/
+.github/workflows/
+spark_ds41f/
+state/
+tests/
+tests/fixtures/
+tests/fixtures/candidate/
+tests/fixtures/candidate/determinism/
+tests/fixtures/candidate/determinism/candidate-54-tp3-switched/
+tests/fixtures/candidate/determinism/candidate-54-tp4/
+tests/fixtures/candidate/determinism/candidate-55-978r2/
+
+sent 5505132 bytes  received 44926 bytes  5045048 bytes/sec
+total size is 831368676  speedup is 149.79

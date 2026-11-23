@@ -1,0 +1,16 @@
+=== 192.168.2.180 ===
+target_containers=0
+gpu_compute=0
+mem_available_gib=119
+=== 192.168.2.161 ===
+target_containers=0
+gpu_compute=0
+mem_available_gib=119
+=== 192.168.2.102 ===
+target_containers=0
+gpu_compute=0
+mem_available_gib=119
+=== 192.168.2.238 ===
+target_containers=0
+gpu_compute=0
+mem_available_gib=119

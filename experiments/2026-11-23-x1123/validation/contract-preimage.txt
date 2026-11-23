@@ -1,0 +1,25 @@
+.F..                                                                     [100%]
+=================================== FAILURES ===================================
+____________ test_candidate_profile_is_the_deployed_runtime_surface ____________
+
+    def test_candidate_profile_is_the_deployed_runtime_surface() -> None:
+        """Lock the upstream candidate recipe and its site-only image override."""
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+        engine = config["engines"][TARGET]
+    
+        assert "runtime_profile" not in engine
+        assert engine["ds41f_config_file"] == DEPLOY_PROFILE
+        assert engine["image"] == "spark-ds41f:x1123"
+        assert engine["image_version_label"] == "x1123"
+        assert re.fullmatch(r"sha256:[0-9a-f]{64}", engine["image_id"])
+>       assert engine["image_id"] != (
+            "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b"
+        )
+E       AssertionError: assert 'sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b' != 'sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b'
+
+tests/test_deepseek_env_merge_contract.py:460: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_deepseek_env_merge_contract.py::test_candidate_profile_is_the_deployed_runtime_surface
+1 failed, 3 passed, 13 deselected in 0.41s

@@ -1,0 +1,34 @@
+Transfer starting summary
+Transfer starting: 333 files
+<fcst.... config.yaml
+<fcst.... docs/engineering-memory.md
+              0   0%   00:00:00 (xfer#1, to-check=20/333)
+.L...p... ring/nccl-ringonly-2.30.7/libnccl.so -> libnccl.so.2.30.7
+.L...p... ring/nccl-ringonly-2.30.7/libnccl.so.2 -> libnccl.so.2.30.7
+.L...p... ring/sparkring-switchless/libnccl.so.2 -> libnccl.so.2.30.7
+
+sent 15087 bytes  received 50 bytes  67245 bytes/sec
+total size is 186467994  speedup is 12318.69
+Transfer starting: 40841 files
+*deleting servebench/suites/single-stream.json
+...
+              0   0%   00:00:00 (xfer#6359, to-check=40811/40841)
+<fcst.... tests/test_source_locks.py
+              0   0%   00:00:00 (xfer#6360, to-check=40812/40841)
+<fcst.... tests/test_switched_topology.py
+              0   0%   00:00:00 (xfer#6361, to-check=40815/40841)
+<fcst.... tests/test_verdict_statistics.py
+              0   0%   00:00:00 (xfer#6362, to-check=40817/40841)
+.d..t.... tests/fixtures/
+<fcst.... tests/fixtures/cluster.json
+              0   0%   00:00:00 (xfer#6363, to-check=40821/40841)
+.d..t.... tests/fixtures/candidate/
+.d..t.... tests/fixtures/candidate/determinism/
+.d..t.... tests/fixtures/candidate/determinism/candidate-54-tp3-switched/
+.d..t.... tests/fixtures/candidate/determinism/candidate-54-tp4/
+.d..t.... tests/fixtures/candidate/determinism/candidate-55-978r2/
+.d..t.... tests/v1/
+.d..t.... tests/v1/structured_output/
+
+sent 5531854 bytes  received 82940 bytes  1804181 bytes/sec
+total size is 829865097  speedup is 147.80

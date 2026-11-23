@@ -1,0 +1,779 @@
+{
+  "schema_version": 1,
+  "base": "http://192.168.2.180:8888",
+  "waves": 8,
+  "concurrency": 3,
+  "elapsed_s": 97.023,
+  "rows": [
+    {
+      "wave": 0,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 11.637,
+      "response_id": "chatcmpl-ad47a9e7e311a67f",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 0,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 11.605,
+      "response_id": "chatcmpl-a203fbee6d4e1146",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 0,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 11.635,
+      "response_id": "chatcmpl-b8df9d366b53d814",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 1,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 12.477,
+      "response_id": "chatcmpl-b0e645ec8b9b3c2b",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 1,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 12.475,
+      "response_id": "chatcmpl-a527f46f54a7c46d",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 1,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 12.477,
+      "response_id": "chatcmpl-86ee97f27cbd0942",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 2,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 12.595,
+      "response_id": "chatcmpl-845c67e9e6067234",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 2,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 13.173,
+      "response_id": "chatcmpl-8a822cb1fb05c5a8",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1445,
+        "completion_tokens": 1286,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 2,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 12.592,
+      "response_id": "chatcmpl-bc86d4260e88015d",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 3,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 12.119,
+      "response_id": "chatcmpl-a7b6f49c53edcc2d",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 3,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 12.118,
+      "response_id": "chatcmpl-84e1e0b457b3dfa5",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 3,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 12.118,
+      "response_id": "chatcmpl-a4d42bc1c7dfae57",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 4,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 11.738,
+      "response_id": "chatcmpl-86dc8ac71cfa8364",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 4,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 11.767,
+      "response_id": "chatcmpl-862b689313d2b78b",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 4,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 11.701,
+      "response_id": "chatcmpl-acf1bbe583d32d41",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 5,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 12.397,
+      "response_id": "chatcmpl-b343bac805e50ad2",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 5,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 12.397,
+      "response_id": "chatcmpl-94ff4afd5227fd46",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 5,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 12.394,
+      "response_id": "chatcmpl-9ee7fa2127254c90",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 6,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 11.668,
+      "response_id": "chatcmpl-858b550208eda61e",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 6,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 11.666,
+      "response_id": "chatcmpl-bc82bd0ba0222453",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 6,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 11.668,
+      "response_id": "chatcmpl-8afa593acefeccd4",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 7,
+      "slot": 0,
+      "status": 200,
+      "elapsed_s": 11.777,
+      "response_id": "chatcmpl-b747c433f1ebc73f",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 7,
+      "slot": 1,
+      "status": 200,
+      "elapsed_s": 11.778,
+      "response_id": "chatcmpl-9aa52d78b4180faf",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    },
+    {
+      "wave": 7,
+      "slot": 2,
+      "status": 200,
+      "elapsed_s": 11.778,
+      "response_id": "chatcmpl-8628f88b5d3ebd86",
+      "finish_reason": "stop",
+      "record_count": 64,
+      "usage": {
+        "prompt_tokens": 159,
+        "total_tokens": 1253,
+        "completion_tokens": 1094,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "created_cache_tokens": 0,
+          "multimodal_tokens": null
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "sink_rejection": {
+          "flagged_rows": 0,
+          "flagged_draft_zero": 0,
+          "flagged_drafter": 0,
+          "flagged_prompt": 0,
+          "draft_zero_rejections": 0,
+          "draft_cuts": 0,
+          "fallthroughs": 0
+        }
+      },
+      "valid_schema": true
+    }
+  ],
+  "failures": [],
+  "ok": true
+}

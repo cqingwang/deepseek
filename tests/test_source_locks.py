@@ -22,11 +22,49 @@ HISTORICAL_PROFILES = {
     "experiments/2026-10-04-tilelang-1m/diagnostics/shapes8.json",
     "experiments/2026-10-23-next-release/rc2/cluster.json",
     "experiments/2026-10-23-next-release/rc3/cluster.json",
+    "experiments/2026-11-08-official-1107-alignment/frozen-best/official-1107.cluster.json",
     "experiments/2026-11-08-binary-prefill/frozen-best/target-cluster.json",
+    # Restored #877/#976 LSA overlays extending config/cluster.json from the C36/C37 era before 1107 updated tilelang.tree.
+    "experiments/2026-11-04-clustered-indexer/serving/candidate.json",
+    "experiments/2026-11-04-clustered-indexer/serving/control.json",
+    "experiments/2026-11-04-clustered-indexer/serving/restore.json",
+    "experiments/2026-11-04-token-lsa/paged/aggressive-fast.json",
+    "experiments/2026-11-04-token-lsa/paged/candidate.json",
+    "experiments/2026-11-04-token-lsa/paged/control.json",
+    "experiments/2026-11-04-token-lsa/paged/dense-1024-fast.json",
+    "experiments/2026-11-04-token-lsa/paged/dense-1024.json",
+    "experiments/2026-11-04-token-lsa/paged/dense-1536-fast.json",
+    "experiments/2026-11-04-token-lsa/paged/dense-256.json",
+    "experiments/2026-11-04-token-lsa/paged/restore.json",
+    "experiments/2026-11-05-answer-quality/native-source-fast.json",
+    "experiments/2026-11-05-answer-quality/source-1024-fast.json",
+    "experiments/2026-11-05-block-load/full.json",
+    "experiments/2026-11-05-block-load/native-source.json",
+    "experiments/2026-11-05-block-load/native.json",
+    "experiments/2026-11-05-block-summary/candidate.json",
+    "experiments/2026-11-05-block-summary/control.json",
+    "experiments/2026-11-05-block-summary/native.json",
+    "experiments/2026-11-05-compact-runtime/candidate.json",
+    "experiments/2026-11-05-dense-retention/candidate.json",
+    "experiments/2026-11-05-direct-coarse-merge/candidate.json",
+    "experiments/2026-11-05-fused-candidates/candidate.json",
+    "experiments/2026-11-05-native-source/candidate.json",
+    "experiments/2026-11-05-parallel-summary/candidate.json",
+    "experiments/2026-11-05-prefill-only/candidate.json",
+    "experiments/2026-11-05-query-reuse/full.json",
+    "experiments/2026-11-05-query-reuse/native-source.json",
+    "experiments/2026-11-05-query-reuse/native.json",
+    "experiments/2026-11-05-selector-fitting/capture.json",
+    "experiments/2026-11-06-optional-lsa/tp4-default-off.json",
+    "experiments/2026-11-06-optional-lsa/tp4.json",
+    # Ran on pre-r2 c61-decode (tree 42332c66ca46) before c61-r2 updated c61-decode/tp4-dev.json to db2b19659c29.
+    "experiments/2026-11-18-ffn-prefetch-pace/tp4-pace-ref-dev.json",
+    "experiments/2026-11-18-ffn-prefetch-pace/tp4-pace0-dev.json",
+    "experiments/2026-11-18-ffn-prefetch-pace/tp4-pace50-dev.json",
+    "experiments/2026-11-18-ffn-prefetch-pace/tp4-pace100-dev.json",
 }
 
-# Early TileLang experiments whose locks pointed at the mutable root series
-# (patches/vllm/series, patches/b12x/series) before per-experiment series existed.
+# Experiments whose locks pointed at a mutable series before per-experiment or later edits.
 HISTORICAL_ROLLING_SERIES_LOCKS = {
     "experiments/2026-10-03-packed-bf16-head/tilelang-tp4/upstreams.lock.json",
     "experiments/2026-10-04-tilelang-gate-router/upstreams.lock.json",
@@ -34,10 +72,28 @@ HISTORICAL_ROLLING_SERIES_LOCKS = {
     "experiments/2026-10-04-tilelang-router/upstreams.lock.json",
     "experiments/2026-10-04-tilelang-sparknet/upstreams.lock.json",
     "experiments/2026-10-04-tilelang-vocab-heads/upstreams.lock.json",
+    "experiments/2026-11-18-ffn-prefetch-pace/upstreams.lock.json",
 }
 
 
 class SourceLockTest(unittest.TestCase):
+    def test_site_overlays_do_not_duplicate_official_fixes(self) -> None:
+        c61 = spark.read_series(ROOT / "experiments/2026-11-16-c61-decode/vllm/series")
+        official = spark.read_series(
+            ROOT / "experiments/2026-10-26-spark-ds41f-candidate/candidate-62/vllm/series"
+        )
+        x1118 = spark.read_series(ROOT / "experiments/2026-11-18-x1118/vllm/series")
+        x1119 = spark.read_series(ROOT / "experiments/2026-11-19-x1119/vllm/series")
+
+        self.assertEqual(len(c61), 695)
+        self.assertEqual(len(official), 702)
+        self.assertNotIn("0823-fix-dsv41-replay-responses-custom-tool-calls.patch", c61)
+        self.assertNotIn("0824-fix-structured-output-copy-draft-bitmask-capacity.patch", c61)
+        self.assertTrue(any("0823-fix-dsv41-size-the-structured-output-bitmask" in patch for patch in official))
+        self.assertTrue(any("0826-feat-responses-support-CustomTool" in patch for patch in official))
+        self.assertEqual(x1118[-1], "0823-fix-dsv41-replay-responses-custom-tool-calls.patch")
+        self.assertEqual(x1119[-1], "0824-fix-structured-output-copy-draft-bitmask-capacity.patch")
+
     def test_locks_and_manifests_pin_the_same_revisions_and_identifiers(self) -> None:
         checked, problems = 0, []
         lock_paths = [ROOT / "upstreams.lock.json", *sorted((ROOT / "experiments").rglob("upstreams.lock.json"))]

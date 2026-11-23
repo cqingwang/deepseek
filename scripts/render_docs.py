@@ -43,12 +43,17 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import kv_capacity  # noqa: E402
 import recipe  # noqa: E402
-from servebench import prompts as sb_prompts  # noqa: E402
-from servebench import stats as sb_stats  # noqa: E402
+from spark_ds41f import build as spark_build  # noqa: E402
+from spark_ds41f import sonar  # noqa: E402
+
+sb_prompts = sonar.module("prompts")
+sb_stats = sonar.module("stats")
 
 SITE_TEMPLATE = ROOT / "site/index.html"
 SITE_DATA_MARKER = "__MANIFEST_DATA__"
 SITE_VERSION_MARKER = "__SITE_VERSION__"
+SITE_RANGE_MARKER = "__SPARK_RANGE__"
+_NUMBER_WORDS = ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight")
 
 MARKER_RE = re.compile(
     r"(<!-- BEGIN GENERATED: ([a-z0-9_-]+) -->)\n.*?(<!-- END GENERATED: \2 -->)",
@@ -82,14 +87,11 @@ def _count_series_patches(series_rel_path: str | None) -> int | None:
     path = ROOT / series_rel_path
     if not path.is_file():
         return None
-    return sum(
-        1
-        for line in path.read_text().splitlines()
-        if line.strip() and not line.lstrip().startswith("#")
-    )
+    _, entries = spark_build.series_files_and_entries(path)
+    return len(entries)
 
 
-# servebench's default prompt set crosses sixteen task styles with topics. Two styles ask for
+# Sonar's default prompt set crosses sixteen task styles with topics. Two styles ask for
 # code and one for a JSON object, which is neither prose nor code; the other thirteen ask for prose.
 _CODE_STYLES = ("Python function", "SQL schema")
 _STRUCTURED_STYLES = ("JSON object",)
@@ -293,7 +295,7 @@ def _parse_verdicts_text(path: Path) -> list[dict[str, str]]:
             if line.lstrip().startswith("metric"):
                 continue
             m = re.match(
-                r"^(.+?)\s+([+-]\d+\.\d+%)\s+(\d+\.\d+%)\s+([+-]\d+\.\d+%)\s+(?:(\S+)\s+(\d+\.\d+%)\s+)?(better|same|worse.*)$",
+                r"^(.+?)\s+([+-]\d+\.\d+%)\s+(\d+\.\d+%)\s+([+-]\d+\.\d+%)\s+(?:(\S+)\s+(\d+\.\d+%)\s+)?((?:better|same|worse).*)$",
                 line.strip(),
             )
             if m:
@@ -312,7 +314,7 @@ def _parse_verdicts_text(path: Path) -> list[dict[str, str]]:
 def load_suite_directory(suite_dir: Path) -> dict[str, Any]:
     suite_meta = json.loads((suite_dir / "suite.json").read_text())
     stem = suite_dir.name
-    m = re.match(r"^(\d{4}-\d{2}-\d{2})-(?:karmic-kraken-)?(.+)-(tp[34])$", stem)
+    m = re.match(r"^(\d{4}-\d{2}-\d{2})-(?:karmic-kraken-)?(.+)-(tp[348](?:-switched)?)$", stem)
     date_str = m.group(1) if m else ""
     release_name = m.group(2) if m else stem
     topology = m.group(3) if m else ("tp4" if "tp4" in stem else "tp3")
@@ -361,6 +363,158 @@ def load_suite_directory(suite_dir: Path) -> dict[str, Any]:
         "prefill": _parse_prefill_step(suite_dir / "prefill.json"),
         "stalls": stalls,
         "verdicts": verdicts,
+    }
+
+
+def _stat_mean(obj: Any) -> float | None:
+    if isinstance(obj, dict):
+        val = obj.get("mean")
+        return float(val) if val is not None else None
+    if isinstance(obj, (int, float)):
+        return float(obj)
+    return None
+
+
+def _benchmark_shape(stem: str, ident: dict[str, Any]) -> str | None:
+    nodes = len((ident.get("topology") or {}).get("nodes") or [])
+    transport = ident.get("transport") or ""
+    cfg = ident.get("cluster_config") or ""
+    if transport == "local" or nodes == 1 or stem.endswith("-tp1"):
+        return "tp1"
+    if nodes == 2 or stem.endswith(("-direct2", "-switched2")):
+        return "tp2-switched" if (transport == "oneshot-switched" or "switched" in stem) else "tp2-direct"
+    if nodes == 3 or stem.endswith(("-tp3", "-tp34k", "-switched3")):
+        if transport == "oneshot-switched" or "switched" in stem:
+            return "tp3-switched"
+        if "4k" in stem or "4k" in cfg:
+            return "tp3-triangle-4k"
+        return "tp3-triangle"
+    if nodes == 4 or stem.endswith(("-tp4", "-switched")):
+        return "tp4-switched" if (transport == "oneshot-switched" or "switched" in stem) else "tp4-ring"
+    if nodes in (5, 6, 7, 8):
+        return f"tp{nodes}-switched"
+    for n in (5, 6, 7, 8):
+        if stem.endswith(f"-switched{n}"):
+            return f"tp{n}-switched"
+    return None
+
+
+def load_benchmark_file(path: Path) -> dict[str, Any]:
+    data = json.loads(path.read_text())
+    stem = path.stem
+    m = re.match(
+        r"^(\d{4}-\d{2}-\d{2})-(?:karmic-kraken-)?(.+?)(?:-(tp1|direct2|switched[2-8]?|tp34k|tp3|tp4))?$",
+        stem,
+    )
+    date_str = m.group(1) if m else ""
+    release_name = m.group(2) if m else stem
+    ident = data.get("identity", {})
+    suites_data = data.get("suites", {})
+
+    decode_pts = (suites_data.get("decode") or {}).get("points") or {}
+    decode: dict[str, dict[str, Any]] = {}
+    for style in ("prose", "code"):
+        by_conc: dict[str, Any] = {}
+        for c in (1, 2, 4, 8, 16):
+            row = decode_pts.get(f"{style}-c{c}")
+            if not isinstance(row, dict):
+                continue
+            tps_obj = row.get("tps")
+            tps_mean = _stat_mean(tps_obj)
+            if tps_mean is None:
+                continue
+            entry: dict[str, Any] = {
+                "concurrency": c,
+                "tps": round(tps_mean, 2),
+                "ci95_pct": round(float(tps_obj["ci95_pct"]), 2)
+                if isinstance(tps_obj, dict) and tps_obj.get("ci95_pct") is not None
+                else None,
+                "n": int(tps_obj["n"]) if isinstance(tps_obj, dict) and tps_obj.get("n") is not None else None,
+                "ttft_s": round(_stat_mean(row.get("ttft_s")), 3) if _stat_mean(row.get("ttft_s")) is not None else None,
+                "step_ms": round(_stat_mean(row.get("step_ms")), 3) if _stat_mean(row.get("step_ms")) is not None else None,
+                "tokens_per_step": round(_stat_mean(row.get("tokens_per_step")), 3)
+                if _stat_mean(row.get("tokens_per_step")) is not None
+                else None,
+                "accepted_per_draft": round(_stat_mean(row.get("accepted_per_draft")), 3)
+                if _stat_mean(row.get("accepted_per_draft")) is not None
+                else None,
+            }
+            by_conc[f"c{c}"] = entry
+        if by_conc:
+            decode[style] = by_conc
+
+    prose_dec = decode.get("prose", {})
+    code_dec = decode.get("code", {})
+    runs: dict[str, Any] = {}
+    if "c1" in prose_dec:
+        p1 = prose_dec["c1"]
+        c1 = code_dec.get("c1")
+        tpot_ms = None
+        if p1.get("step_ms") and p1.get("tokens_per_step"):
+            tpot_ms = round(p1["step_ms"] / p1["tokens_per_step"], 2)
+        run1: dict[str, Any] = {
+            "concurrency": 1,
+            "output_tps": p1["tps"],
+            "code_tps": c1["tps"] if c1 else None,
+            "ttft_p50_s": p1.get("ttft_s"),
+            "step_ms": p1.get("step_ms"),
+            "tpot_p50_ms": tpot_ms,
+        }
+        if c1:
+            run1["tps_by_style"] = {
+                "prose": {"tps": round(p1["tps"], 1), "requests": p1.get("n")},
+                "code": {"tps": round(c1["tps"], 1), "requests": c1.get("n")},
+            }
+        runs["c1"] = run1
+    for c in (2, 4, 8, 16):
+        k = f"c{c}"
+        if k not in prose_dec:
+            continue
+        p = prose_dec[k]
+        code_entry = code_dec.get(k)
+        runs[k] = {
+            "concurrency": c,
+            "output_tps": p["tps"],
+            "prose_tps": p["tps"],
+            "code_tps": code_entry["tps"] if code_entry else None,
+            "ttft_p50_s": p.get("ttft_s"),
+            "step_ms": p.get("step_ms"),
+        }
+
+    prefill_pts = (suites_data.get("prefill") or {}).get("points") or {}
+    prefill: list[dict[str, Any]] = []
+    for size_key, row in sorted(prefill_pts.items(), key=lambda kv: int(kv[0])):
+        if not isinstance(row, dict):
+            continue
+        tps_obj = row.get("prefill_tps") or row.get("tps") or {}
+        mean_val = _stat_mean(tps_obj)
+        if mean_val is None or mean_val <= 0:
+            continue
+        prefill.append(
+            {
+                "size": int(size_key),
+                "prompt_tokens": row.get("prompt_tokens"),
+                "tps": round(mean_val, 1),
+                "ci95_pct": round(float(tps_obj["ci95_pct"]), 2)
+                if isinstance(tps_obj, dict) and tps_obj.get("ci95_pct") is not None
+                else None,
+            }
+        )
+
+    return {
+        "id": stem,
+        "path": f"manifests/benchmarks/{path.name}",
+        "kind": "bench",
+        "date": date_str,
+        "release": release_name,
+        "shape": _benchmark_shape(stem, ident),
+        "kernel_backend": ident.get("kernel_backend"),
+        "transport": ident.get("transport"),
+        "started_utc": data.get("started_utc"),
+        "image": ident.get("image"),
+        "decode": decode,
+        "runs": runs,
+        "prefill": prefill,
     }
 
 
@@ -433,6 +587,13 @@ def collect_manifest_data() -> dict[str, Any]:
         suites.append(parsed)
         suites_by_path[parsed["path"]] = parsed
 
+    benchmarks: list[dict[str, Any]] = []
+    benchmarks_by_path: dict[str, dict[str, Any]] = {}
+    for bench_path in sorted((ROOT / "manifests/benchmarks").glob("*.json")):
+        parsed_bench = load_benchmark_file(bench_path)
+        benchmarks.append(parsed_bench)
+        benchmarks_by_path[parsed_bench["path"]] = parsed_bench
+
     promoted_stem = cluster["promoted_baseline"]
     promoted_manifest = baselines_by_stem[promoted_stem]
     promoted_source = sources_by_stem.get(f"{promoted_stem}-source", {})
@@ -450,11 +611,15 @@ def collect_manifest_data() -> dict[str, Any]:
             if ref_suite
             else (_short_release_name(Path(bench_ref).stem.rsplit("-", 1)[0]) if bench_ref else None)
         )
+        pp = int(entry.get("pipeline_parallel_size", 1))
+        tp = int(entry["nodes"]) // pp
         shapes_info.append(
             {
                 "name": shape_name,
                 "default": shape_name == cluster.get("default_shape"),
                 "nodes": int(entry["nodes"]),
+                "pipeline_parallel_size": pp,
+                "tensor_parallel_size": tp,
                 "transport": entry["fabric"]["transport"],
                 "kernel_release": resolved["host"]["kernel"]["release"],
                 "page_size_bytes": int(resolved["host"]["kernel"]["page_size"]),
@@ -558,6 +723,7 @@ def collect_manifest_data() -> dict[str, Any]:
         "upstreams": upstreams_summary,
         "suites": suites,
         "suites_by_path": suites_by_path,
+        "benchmarks": benchmarks,
         "timeline": timeline,
     }
 
@@ -591,8 +757,11 @@ def render_readme_current_baseline(data: dict[str, Any]) -> str:
         else:
             ref_link = "unqualified (`--unqualified-shape`)"
         default_badge = " **(default)**" if s["default"] else ""
+        pp = int(s.get("pipeline_parallel_size", 1))
+        tp = int(s.get("tensor_parallel_size", s["nodes"]))
+        parallel_label = f"PP{pp} TP{tp}" if pp > 1 else f"TP{tp}"
         lines.append(
-            f"| `{s['name']}`{default_badge} | TP{s['nodes']} `{s['transport']}` ({s['page_size_label']}) | "
+            f"| `{s['name']}`{default_badge} | {parallel_label} `{s['transport']}` ({s['page_size_label']}) | "
             f"{ctx_label} | {seq_label} | {s['max_num_batched_tokens']:,} | {s['kv_cache_gib']} | "
             f"{free_label} | {held_label} | {ref_link} |"
         )
@@ -674,8 +843,39 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
     tk_u = up_map["tile_kernels"]
     sn_u = up_map["sparknet"]
     nccl_u = up_map["nccl"]
+    cuda_u = up_map.get("cuda_toolkit")
+    cuda_note = f", CUDA {cuda_u['version']}" if cuda_u else ""
     hosts = data["hosts"]
     ms = hosts.get("memory_saver", {})
+
+    def _group_by(val_fn):
+        grouped: dict[Any, list[str]] = {}
+        for s in data["shapes"]:
+            grouped.setdefault(val_fn(s), []).append(s["name"])
+        return grouped
+
+    ranks_transport_text = "; ".join(
+        f"`{s['name']}` ({s['nodes']} {'rank' if s['nodes'] == 1 else 'ranks'}, `{s['transport']}`)"
+        for s in data["shapes"]
+    )
+    max_len_text = "; ".join(
+        f"{', '.join(f'`{n}`' for n in names)}: {val:,} tokens"
+        for val, names in _group_by(lambda s: s["max_model_len"]).items()
+    )
+    max_seqs_text = "; ".join(
+        f"{', '.join(f'`{n}`' for n in names)}: {val}"
+        for val, names in _group_by(lambda s: s["max_num_seqs"]).items()
+    )
+    batched_text = "; ".join(
+        f"{', '.join(f'`{n}`' for n in names)}: {val:,} (`{shapes[names[0]]['qualified_release']}`)"
+        if len(names) == 1
+        else f"{', '.join(f'`{n}`' for n in names)}: {val:,}"
+        for val, names in _group_by(lambda s: s["max_num_batched_tokens"]).items()
+    )
+    kv_mem_text = "; ".join(
+        f"{', '.join(f'`{n}`' for n in names)}: {shapes[names[0]]['kv_cache_gib']} ({val:,} B)"
+        for val, names in _group_by(lambda s: s["kv_cache_memory_bytes"]).items()
+    )
 
     rows = [
         (
@@ -692,7 +892,7 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "Sources",
-            f"Local Inference Lab `integration/karmic-kraken-beta` vLLM `{vllm_u['revision'][:8]}` + `{vllm_u['patch_series']}` ({vllm_u['patch_count']} patches, patch head `{vllm_u['patch_head'][:8]}`, tree `{vllm_u['tree'][:8]}`), TileLang {tl_u['version']} ({tl_u['patch_count']} patches), TileKernels {tk_u['version']} ({tk_u['patch_count']} patch), sparknet {sn_u['version']}, NCCL 2.30.7 ({nccl_u['patch_count']} patches, tree `{nccl_u['tree'][:8]}`); direct checkpoint loader (`--load-format direct`, vLLM 0499, `VLLM_PLUGINS` empty)",
+            f"Local Inference Lab `integration/karmic-kraken-beta` vLLM `{vllm_u['revision'][:8]}` + `{vllm_u['patch_series']}` ({vllm_u['patch_count']} patches, patch head `{vllm_u['patch_head'][:8]}`, tree `{vllm_u['tree'][:8]}`), TileLang {tl_u['version']} ({tl_u['patch_count']} patches), TileKernels {tk_u['version']} ({tk_u['patch_count']} patch), sparknet {sn_u['version']} ({sn_u['patch_count']} {'patch' if sn_u['patch_count'] == 1 else 'patches'}), NCCL 2.30.7 ({nccl_u['patch_count']} {'patch' if nccl_u['patch_count'] == 1 else 'patches'}, tree `{nccl_u['tree'][:8]}`){cuda_note}; direct checkpoint loader (`--load-format direct`, vLLM 0499, `VLLM_PLUGINS` empty)",
         ),
         (
             "Image",
@@ -712,20 +912,20 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "Tensor parallel ranks & transport",
-            f"`tp4-ring`: 4 ranks (`{tp4['transport']}`); `tp3-triangle`: 3 ranks (`{tp3['transport']}`); `tp3-triangle-4k`: 3 ranks (`{tp3_4k['transport']}`)",
+            ranks_transport_text,
         ),
         (
             "Maximum model length",
-            f"`tp4-ring` and `tp3-triangle`: {tp4['max_model_len']:,} tokens; `tp3-triangle-4k`: {tp3_4k['max_model_len']:,} tokens",
+            max_len_text,
         ),
         (
             "Maximum sequences",
-            f"`tp4-ring`: {tp4['max_num_seqs']}; `tp3-triangle` and `tp3-triangle-4k`: {tp3['max_num_seqs']}",
+            max_seqs_text,
         ),
         ("Maximum parallel prefills", "1 (`--max-parallel-prefills 1`)"),
         (
             "Batched-token budget",
-            f"`tp4-ring`: {tp4['max_num_batched_tokens']:,}; `tp3-triangle`: {tp3['max_num_batched_tokens']:,} (qualified on `{tp3['qualified_release']}`); `tp3-triangle-4k`: {tp3_4k['max_num_batched_tokens']:,}",
+            batched_text,
         ),
         (
             "Prefill yield & late admission",
@@ -741,7 +941,7 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "Explicit KV memory",
-            f"`tp4-ring`: {tp4['kv_cache_gib']} ({tp4['kv_cache_memory_bytes']:,} B) per rank; `tp3-triangle`: {tp3['kv_cache_gib']} ({tp3['kv_cache_memory_bytes']:,} B) per rank; `tp3-triangle-4k`: {tp3_4k['kv_cache_gib']} ({tp3_4k['kv_cache_memory_bytes']:,} B) per rank; no per-allocation KV zeroing (vLLM 0502-0503)",
+            f"{kv_mem_text} per rank; no per-allocation KV zeroing (vLLM 0502-0503)",
         ),
         (
             "KV capacity",
@@ -749,7 +949,7 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "Expert scale codes",
-            "routed experts' UE8M0 weight scales as a per-row base exponent and 4-bit deltas (vLLM 0182-0183), with 2-bit deltas for narrow experts stored in the 4-bit codes' buffer (0563-0564, 0566; model loading 71.67 GiB a rank at TP4)",
+            "routed experts' UE8M0 weight scales as a per-row base exponent and 4-bit deltas (vLLM 0182-0183), with 2-bit deltas for narrow experts stored in the 4-bit codes' buffer (0563-0564, 0566)",
         ),
         (
             "Memory-saver",
@@ -757,11 +957,11 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "Page-size profiles",
-            f"64 KiB selected (`tp4-ring`, `tp3-triangle`); 4 KiB (`tp3-triangle-4k`) retains {tp3_4k['kv_cache_gib']} KV and a {tp3_4k['max_model_len']:,}-token limit",
+            f"64 KiB selected (11 shapes); 4 KiB (`tp3-triangle-4k`) retains {tp3_4k['kv_cache_gib']} KV and a {tp3_4k['max_model_len']:,}-token limit",
         ),
         (
             "Output head & display carve-out",
-            "exact 12-bit packed BF16 (`VLLM_DS41_PACKED_BF16_LM_HEAD=1`), bit-identical to the checkpoint, with FP32 logits (`VLLM_DS41_HEAD_DTYPE=float32`); kept in regular memory on `tp4-ring` (`SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS=0`) and in the GB10 display carve-out on `tp3-triangle` (`=1`)",
+            "exact 12-bit packed BF16 (`VLLM_DS41_PACKED_BF16_LM_HEAD=1`), bit-identical to the checkpoint, with FP32 logits (`VLLM_DS41_HEAD_DTYPE=float32`); kept in regular memory on `tp4-ring`, `tp4..8-switched`, and `tp1` (`SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS=0`) and in the GB10 RM scanout display carve-out via `nvidiactl` on `tp3-*` and `tp2-*` (`=1`)",
         ),
         (
             "Reference precision",
@@ -773,19 +973,19 @@ def render_current_state_active_settings(data: dict[str, Any]) -> str:
         ),
         (
             "DSpark speculative decoding",
-            f"{data['drafts']} draft tokens, draft TP = node count, fixed linear step cost budget (`adaptive_verification_row_cost: 0.035`, vLLM 0184, nothing timed at boot), dead verification rows below survival 0.2 (`0504`), block rejection with fresh draws per round (`0228`), sink draft-zero rejection on by default (`0221, 0223`), vocabulary-parallel greedy drafts and shard argmax verification (`0112-0114`)",
+            f"{data['drafts']} draft tokens, draft TP = node count, fixed linear step cost budget (`adaptive_verification_row_cost: 0.035` on TP4..8; TP3 calibrated piecewise curve on `tp3-*`; adaptive verification off on `tp2-*`/`tp1`; vLLM 0184, nothing timed at boot), dead verification rows below survival 0.2 (`0504`), block rejection with fresh draws per round (`0228`), sink draft-zero rejection on by default (`0221, 0223`), vocabulary-parallel greedy drafts and shard argmax verification (`0112-0114`)",
         ),
         (
             "Collectives",
-            f"sparknet {sn_u['version']} one-shot RoCE all-reduce (up to 2 MiB) and all-gather (`oneshot-ring4` on TP4, `oneshot-direct` on TP3), TP broadcast on one-shot all-gather (`0185`), GPU-clock timeout 10 s (`SPARKNET_ROCE_TIMEOUT_MS=10000`), no fallback (`0142`)",
+            f"sparknet {sn_u['version']} one-shot RoCE all-reduce (up to 2 MiB) and all-gather (`oneshot-ring4` on TP4 ring, `oneshot-direct` on TP3/TP2 direct, `oneshot-switched` on TP2..TP8 switched; `tp1` runs local `uni` without RDMA), TP broadcast on one-shot all-gather (`0185`), GPU-clock timeout 10 s (`SPARKNET_ROCE_TIMEOUT_MS=10000`), no fallback (`0142`)",
         ),
         (
             "CUDA graphs & warmup",
-            f"`FULL_AND_PIECEWISE`, capture sizes 1-{tp4['max_cudagraph_capture_size']} on `tp4-ring` (1-{tp3['max_cudagraph_capture_size']} on `tp3-triangle`); all declared TileLang calls prepared and cache frozen before memory profiling (`--jit-monitor-mode off`)",
+            f"`FULL_AND_PIECEWISE` capture sizes 1-{tp4['max_cudagraph_capture_size']} on `tp4-ring`/`tp4..8-switched` (1-{tp3['max_cudagraph_capture_size']} on `tp3-*`) and `PIECEWISE` 1-24 on `tp2-*`/`tp1`; all declared TileLang calls prepared and cache frozen before memory profiling (`--jit-monitor-mode off`)",
         ),
         (
             "Engram projection & rows",
-            "sharded across ranks (`projection_tp`); one native reader thread reads both tables in layer order from interleaved whole hash columns; host hashes prefill tokens a step early except drafted-prefill requests, which the GPU hashes (vLLM 0145-0154, 0180, 0567)",
+            "sharded across ranks (`projection_tp`); one native reader thread reads both tables in layer order from interleaved whole hash columns (`table_memory=disk` on TP1..TP5, `device` on `tp6..tp8-switched`); host hashes prefill tokens a step early except drafted-prefill requests, which the GPU hashes (vLLM 0145-0154, 0180, 0567)",
         ),
         (
             "Memory guards",
@@ -813,9 +1013,10 @@ def render_todo_next_release_status(data: dict[str, Any]) -> str:
     if tp3["qualified_release"] == data["promoted_short"]:
         return (
             f"Production is **{data['promoted_short']}** (`manifests/baselines/{data['promoted_baseline']}.json`, "
-            f"image `{data['image_tag']}`), promoted {data['promoted_date']} across `tp4-ring` "
-            f"([suite reference]({tp4['benchmark_reference']}/)), `tp3-triangle` "
-            f"([suite reference]({tp3['benchmark_reference']}/)), and `tp3-switched`..`tp8-switched` "
+            f"image `{data['image_tag']}`), promoted {data['promoted_date']} across all {len(data['shapes'])} shapes: "
+            f"`tp4-ring` ([suite reference]({tp4['benchmark_reference']}/)), "
+            f"`tp3-triangle` ([suite reference]({tp3['benchmark_reference']}/)), "
+            f"`tp3-triangle-4k`, `tp2-direct`, `tp1`, and `tp2-switched`..`tp8-switched` "
             f"([release record](experiments/2026-10-26-spark-ds41f-candidate/README.md))."
         )
     return (
@@ -842,10 +1043,10 @@ def render_todo_current_reference(data: dict[str, Any]) -> str:
 
     lines = [
         f"Active baseline manifest: [`manifests/baselines/{data['promoted_baseline']}.json`](manifests/baselines/{data['promoted_baseline']}.json) (`{data['promoted_short']}`). "
-        "Releases are judged by the servebench release, single-stream and sampled suites (`docs/release-benchmark.md`, `scripts/servebench_suite_table.py`). "
+        "Releases are judged by the release, single-stream and sampled suites, measured with Sonar (`docs/release-benchmark.md`, `scripts/sonar_table.py`). "
         f"Current benchmark references are [`{tp4_ref['path']}`]({tp4_ref['path']}/) for `tp4-ring` and [`{tp3_ref['path']}`]({tp3_ref['path']}/) for `tp3-triangle`:",
         "",
-        f"| Measure | `tp4-ring` (`{tp4_ref['release']}`, 1M, 16 seqs, 16K batch) | `tp3-triangle` (`{tp3_ref['release']}`, 1M, 8 seqs, 8K/6K batch) |",
+        f"| Measure | `tp4-ring` (`{tp4_ref['release']}`, 1M, {shapes['tp4-ring']['max_num_seqs']} seqs, 16K batch) | `tp3-triangle` (`{tp3_ref['release']}`, 1M, {shapes['tp3-triangle']['max_num_seqs']} seqs, 6K batch) |",
         "| --- | ---: | ---: |",
         f"| Decode grid geometric mean ({tp4_ref['grid']['shape_count']} TP4 / {tp3_ref['grid']['shape_count']} TP3 shapes) | {tp4_ref['grid']['geomean_ms']:.2f} ms | {tp3_ref['grid']['geomean_ms']:.2f} ms |",
         f"| Decode `c16`, 16 streams (output tok/s) | {tp4_ref['runs']['c16']['output_tps']:.1f} | — |",
@@ -905,6 +1106,7 @@ def render_site_html(data: dict[str, Any]) -> str:
         "shapes": data["shapes"],
         "upstreams": data["upstreams"],
         "suites": data["suites"],
+        "benchmarks": data["benchmarks"],
         "timeline": data["timeline"],
     }
     # "</" never appears inside the JSON, so no manifest string can end the <script> element early.
@@ -915,7 +1117,16 @@ def render_site_html(data: dict[str, Any]) -> str:
     # The link-preview image's URL carries a digest of the page, so a crawler that cached the
     # previous image fetches the new one whenever the page or its numbers change.
     version = hashlib.sha256((template + embedded_json).encode()).hexdigest()[:10]
-    return template.replace(SITE_VERSION_MARKER, version).replace(SITE_DATA_MARKER, embedded_json)
+    # The page description names the node counts the recipe's shapes cover; a crawler runs no script.
+    counts = [int(shape["nodes"]) for shape in data["shapes"]]
+    spark_range = " to ".join(
+        _NUMBER_WORDS[n] if n < len(_NUMBER_WORDS) else str(n) for n in sorted({min(counts), max(counts)})
+    )
+    return (
+        template.replace(SITE_VERSION_MARKER, version)
+        .replace(SITE_RANGE_MARKER, spark_range)
+        .replace(SITE_DATA_MARKER, embedded_json)
+    )
 
 
 def render_targets(data: dict[str, Any]) -> dict[Path, str]:

@@ -1,0 +1,61 @@
+.F...F...........                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_candidate_profile_is_the_deployed_runtime_surface ____________
+
+    def test_candidate_profile_is_the_deployed_runtime_surface() -> None:
+        """Lock the upstream candidate recipe and its site-only image override."""
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+        engine = config["engines"][TARGET]
+    
+        assert "runtime_profile" not in engine
+        assert engine["ds41f_config_file"] == DEPLOY_PROFILE
+        assert engine["image"] == "spark-ds41f:x1123"
+        assert engine["image_version_label"] == "x1123"
+        assert re.fullmatch(r"sha256:[0-9a-f]{64}", engine["image_id"])
+>       assert engine["image_id"] != (
+            "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b"
+        )
+E       AssertionError: assert 'sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b' != 'sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b'
+
+tests/test_deepseek_env_merge_contract.py:460: AssertionError
+_________ test_launcher_consumes_exactly_the_upstream_surface_per_rank _________
+
+tmp_path = PosixPath('/private/var/folders/bw/wyppmgk52_v2nnh0w_j_0gl80000gn/T/pytest-of-chan/pytest-1/test_launcher_consumes_exactly0')
+
+    def test_launcher_consumes_exactly_the_upstream_surface_per_rank(tmp_path: Path) -> None:
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        env_path, managed = _merged_env(tmp_path)
+        nodes = _site_nodes()
+        expected_env = _expected_container_env(resolved, nodes, managed)
+        expected_serve = _expected_serve_args(resolved, nodes, managed)
+        commands = _print_commands(env_path)
+        home = Path.home()
+        glp_name = "glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf"
+        glp_path = (
+            home
+            / ".cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75"
+            / "snapshots/2715ffd51f59899115853e1118db080536966c44"
+            / glp_name
+        )
+    
+        assert set(commands) == {0, 1, 2, 3}
+        for rank, tokens in commands.items():
+            env, serve_args, volumes = _parse_docker_argv(tokens, managed["IMAGE"])
+            assert env == expected_env[rank]
+            assert len(env) == len(template) + 4
+            assert not (HOST_ONLY_KEYS & set(env))
+            assert env["VLLM_PLUGINS"] == ""
+>           assert tokens[5:21] == resolved["container"]["docker_run_args"]
+E           AssertionError: assert ['--network=h...k=-1:-1', ...] == ['--network=h...k=-1:-1', ...]
+E             
+E             Left contains 2 more items, first extra item: '--env=CUDA_CACHE_MAXSIZE=4294967296'
+E             Use -v to get more diff
+
+tests/test_deepseek_env_merge_contract.py:575: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_deepseek_env_merge_contract.py::test_candidate_profile_is_the_deployed_runtime_surface
+FAILED tests/test_deepseek_env_merge_contract.py::test_launcher_consumes_exactly_the_upstream_surface_per_rank
+2 failed, 15 passed in 2.76s

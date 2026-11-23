@@ -8,8 +8,8 @@
 # 上游固定命令快照——DS41F_DOCKER_RUN_ARGS =
 # cluster.json `container.docker_run_args`，DS41F_SERVE_ARGS =
 # `serve_args` 经 scripts/recipe.py:resolve(..., "tp4-ring") 渲染后的定值
-# （rows=96：max_num_seqs 16 x (1+drafts 5)；capture ladder 1..96；
-# long_prefill 16288=16384-96；engram table_memory=disk）。
+# （rows=192：max_num_seqs 32 x (1+drafts 5)；capture ladder 1..192；
+# long_prefill 16192=16384-192；engram table_memory=disk）。
 # 来源：官方 latest-main config/cluster.json 的 tp4-ring 配方。
 # 站点渲染点：serve 模型路径、--host、--port、--api-key；逐 rank 注入
 # VLLM_HOST_IP、NCCL_IB_HCA、SPARKNET_ROCE_PEER_HCAS、
@@ -111,8 +111,6 @@ DS41F_DOCKER_RUN_ARGS=(
   --shm-size=16g
   --memory=112g
   --memory-swap=112g
-  --mount=type=bind,source=/dev/dri/by-path/pci-000f:01:00.0-card,target=/dev/dri/card0
-  '--device-cgroup-rule=c 226:* rw'
   --cpuset-cpus=5-9,15-19
 )
 
@@ -144,7 +142,7 @@ DS41F_SERVE_ARGS=(
   --max-model-len
   1048576
   --max-num-seqs
-  16
+  32
   --max-parallel-prefills
   1
   --gpu-memory-utilization
@@ -154,7 +152,7 @@ DS41F_SERVE_ARGS=(
   --kv-cache-memory-bytes
   17716740096
   --max-cudagraph-capture-size
-  96
+  192
   --generation-config
   vllm
   --override-generation-config
@@ -172,11 +170,11 @@ DS41F_SERVE_ARGS=(
   --jit-monitor-mode
   off
   --compilation-config
-  '{"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"],"cudagraph_capture_sizes":[1,2,3,4,6,8,12,16,20,24,28,32,40,48,56,64,72,80,88,96]}'
+  '{"cudagraph_mode":"FULL_AND_PIECEWISE","custom_ops":["all"],"cudagraph_capture_sizes":[1,2,3,4,6,8,12,16,20,24,28,32,40,48,56,64,72,80,88,96,104,112,120,128,136,144,152,160,168,176,184,192]}'
   --prefix-cache-retention-interval
   8192
   --long-prefill-token-threshold
-  16288
+  16192
   --async-scheduling
   --reasoning-parser
   deepseek_v41
@@ -197,6 +195,8 @@ DS41F_SERVE_ARGS=(
   short
   --prefill-yield-limit-s
   10
+  --renderer-num-workers
+  8
   --default-chat-template-kwargs
   '{}'
 )

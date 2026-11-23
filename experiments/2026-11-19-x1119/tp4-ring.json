@@ -12,6 +12,7 @@
     },
     "host": {
       "fan_control": false
-    }
+    },
+    "upstreams_config": "experiments/2026-11-19-x1119/upstreams.lock.json"
   }
 }

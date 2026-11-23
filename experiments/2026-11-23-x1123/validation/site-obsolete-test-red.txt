@@ -1,0 +1,73 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_copy_draft_bitmask_capacity_uses_full_decode_envelope __________
+
+    def test_copy_draft_bitmask_capacity_uses_full_decode_envelope() -> None:
+        manager = object.__new__(StructuredOutputManager)
+        manager.backend = _FakeBackend()
+        manager._grammar_bitmask = None
+        manager._full_mask = torch.tensor(-1, dtype=torch.int32)
+        manager.fill_bitmask_parallel_threshold = 128
+        manager.enable_in_reasoning = True
+        manager.vllm_config = SimpleNamespace(
+            num_speculative_tokens=5,
+            max_decode_rows=41,
+            scheduler_config=SimpleNamespace(max_num_seqs=5),
+            model_config=SimpleNamespace(is_diffusion=False),
+        )
+    
+        request_ids = ["copy-a", "copy-b", "uniform"]
+        requests = {request_id: _request() for request_id in request_ids}
+        scheduled_spec_decode_tokens = {
+            "copy-a": list(range(16)),
+            "copy-b": list(range(16)),
+            "uniform": list(range(5)),
+        }
+    
+>       bitmask = manager.grammar_bitmask(
+            requests,
+            request_ids,
+            scheduled_spec_decode_tokens,
+            draft_zero_req_ids=None,
+        )
+
+/tmp/site-tests/test_copy_draft_bitmask_capacity.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <vllm.v1.structured_output.StructuredOutputManager object at 0xe8fdab75cc50>
+requests = {'copy-a': namespace(structured_output_request=namespace(grammar=<test_copy_draft_bitmask_capacity._FakeGrammar object...py_draft_bitmask_capacity._FakeGrammar object at 0xe8fdab75d100>), use_structured_output=True, is_prefill_chunk=False)}
+structured_output_request_ids = ['copy-a', 'copy-b', 'uniform']
+scheduled_spec_decode_tokens = {'copy-a': [0, 1, 2, 3, 4, 5, ...], 'copy-b': [0, 1, 2, 3, 4, 5, ...], 'uniform': [0, 1, 2, 3, 4]}
+draft_zero_req_ids = None
+
+    def grammar_bitmask(
+        self,
+        requests: dict[str, "Request"],
+        structured_output_request_ids: list[str],
+        scheduled_spec_decode_tokens: dict[str, list[int]],
+        draft_zero_req_ids: set[str] | None = None,
+    ) -> "npt.NDArray[np.int32] | None":
+        """``draft_zero_req_ids``: the requests whose spec tokens start with
+        draft zero (sink rejection), the token their previous step sampled.
+        Its own mask was that step's; the masks of this step's rows start
+        after it."""
+        # Prepare the structured output bitmask for this batch.
+        if not structured_output_request_ids:
+            return None
+    
+        # Covers both speculative decoding and diffusion LLMs (canvas_length).
+        max_num_spec_tokens = self.vllm_config.num_speculative_tokens
+>       spec_config = self.vllm_config.speculative_config
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'types.SimpleNamespace' object has no attribute 'speculative_config'
+
+vllm/v1/structured_output/__init__.py:350: AttributeError
+=============================== warnings summary ===============================
+../../../../usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: 14 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../tmp/site-tests/test_copy_draft_bitmask_capacity.py::test_copy_draft_bitmask_capacity_uses_full_decode_envelope
+1 failed, 14 warnings in 3.43s

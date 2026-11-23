@@ -1,0 +1,37 @@
+Fssss                                                                    [100%]
+=================================== FAILURES ===================================
+____ test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import ____
+
+    def test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import():
+        code = """
+    import sys
+    import vllm.models.deepseek_v41 as ds41
+    cls = ds41.DeepseekV41ForCausalLM
+    assert "vllm.models.deepseek_v4_1.nvidia.dspark" not in sys.modules
+    assert "vllm.models.deepseek_v4_1.nvidia.model" not in sys.modules
+    assert "vllm.models.deepseek_v41.nvidia.model" not in sys.modules
+    """
+        res = subprocess.run(
+            [sys.executable, "-c", code],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+>       assert res.returncode == 0, res.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 7, in <module>
+E         AssertionError
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '-c', '\nimport sys\nimport vllm.models.deepseek_v41 as ds41\ncls = ds41.De...de=1, stdout='', stderr='Traceback (most recent call last):\n  File "<string>", line 7, in <module>\nAssertionError\n').returncode
+
+/opt/spark-ds41f/candidate/vllm/tests/kernels/test_deepseek_v41_postload_startup.py:193: AssertionError
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: 14 warnings
+  /usr/local/lib/python3.12/dist-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../opt/spark-ds41f/candidate/vllm/tests/kernels/test_deepseek_v41_postload_startup.py::test_lazy_deepseek_v41_resolution_avoids_eager_dspark_and_model_import
+1 failed, 4 skipped, 14 warnings in 8.47s

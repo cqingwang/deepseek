@@ -1,0 +1,77 @@
+WARN: spark-a: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0002,0004); run sudo efibootmgr --bootorder 0004,0002
+WARN: spark-a: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-a: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-a: serving container spark-ds41f is not running
+WARN: spark-b: UEFI boots 'UEFI: PXE IPv4 Realtek PCIe 10 GBE Family Controller' before the installed OS (BootOrder 0001,0003); run sudo efibootmgr --bootorder 0003,0001
+WARN: spark-b: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-b: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-b: serving container spark-ds41f is not running
+WARN: spark-c: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-c: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-c: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-c: serving container spark-ds41f is not running
+WARN: spark-d: dgx-dashboard-admin.service enabled or running, though unused on a headless inference node; run sudo systemctl disable --now dgx-dashboard-admin.service (scripts/host-recovery apply does the same)
+WARN: spark-d: Wi-Fi radio is enabled; run nmcli radio wifi off to keep the management port off wireless
+WARN: spark-d: control plane uses wireless interface wlP9s9; move master_addr / VLLM_HOST_IP (control_ip) and *_SOCKET_IFNAME onto wired or ConnectX-7 links and run nmcli radio wifi off (#712)
+WARN: spark-d: serving container spark-ds41f is not running
+benchmarking http://192.168.2.180:8888 (experiments/2026-11-23-x1123-official-1122/tp4-ring.json); writing /tmp/x1123-final-clock-02/bench.json
+quality:
+  quality 1/5: pass
+  quality 2/5: pass
+  quality 3/5: pass
+  quality 4/5: pass
+  quality 5/5: pass
+decode:
+  warmup: one discarded sample per point
+  round 1: code-c1 tps ±-%, code-c2 tps ±-%, code-c4 tps ±-%, prose-c1 tps ±-%, prose-c2 tps ±-%, prose-c4 tps ±-%
+  round 2: code-c1 tps ±0.89%, code-c2 tps ±14.03%, code-c4 tps ±37.59%, prose-c1 tps ±1.76%, prose-c2 tps ±4.8%, prose-c4 tps ±11.66%
+  round 3: code-c1 tps ±4.24%, code-c2 tps ±3.88%, code-c4 tps ±7.45%, prose-c1 tps ±3.81%, prose-c2 tps ±2.4%, prose-c4 tps ±2.91%
+  round 4: all points converged
+prefill:
+  prefill 262144: 9789 tok/s
+  prefill 524288: 9643 tok/s
+  prefill 131072: 9772 tok/s
+  prefill 32768: 8981 tok/s
+  prefill 1000000: 9239 tok/s
+  prefill 524288: 9575 tok/s
+  prefill 32768: 9171 tok/s
+  prefill 262144: 9577 tok/s
+  prefill 131072: 9724 tok/s
+  prefill 1000000: 9269 tok/s
+quality: LRU 5/5
+decode (aggregate tok/s, 95% CI):
+  prose-c1                91.6 ± 3.7% n=4  
+  prose-c2               161.9 ± 1.5% n=4  
+  prose-c4               291.0 ± 1.7% n=4  
+  code-c1                134.9 ± 2.3% n=4  
+  code-c2                192.5 ± 2.3% n=4  
+  code-c4                398.4 ± 4.6% n=4  
+decode primaries (mean ±95% CI): step ms | accepted/verified | tokens/step || tok/s measured aggregate / decode window | derived
+  prose-c1               27.64 ±2.7% |    0.567 ±3.2% |    2.721 ±1.4% ||     91.6 ±3.7% /     98.5 ±1.8% |     98.5 ±1.8%
+  prose-c2               27.57 ±4.6% |    0.567 ±1.6% |    2.477 ±2.3% ||    161.9 ±1.5% /    179.8 ±4.1% |    179.8 ±4.1%
+  prose-c4               30.26 ±2.4% |    0.557 ±4.6% |    2.420 ±0.8% ||    291.0 ±1.7% /    320.0 ±3.0% |    320.0 ±3.0%
+  code-c1                31.33 ±3.3% |    0.819 ±0.7% |    4.673 ±0.0% ||    134.9 ±2.3% /    149.2 ±3.4% |    149.2 ±3.4%
+  code-c2               38.75 ±23.0% |    0.853 ±0.8% |    4.519 ±0.7% ||    192.5 ±2.3% /   237.5 ±26.5% |   237.5 ±26.5%
+  code-c4                38.76 ±5.7% |    0.835 ±2.4% |    4.430 ±0.3% ||    398.4 ±4.6% /    457.6 ±5.2% |    457.6 ±5.2%
+step time (ms, lower is better; independent of acceptance; concurrent points are decode-window estimates):
+  prose-c1               27.64 ± 2.7% n=4  
+  prose-c2               27.57 ± 4.6% n=4  
+  prose-c4               30.26 ± 2.4% n=4  
+  code-c1                31.33 ± 3.3% n=4  
+  code-c2                38.75 ±23.0% n=4  
+  code-c4                38.76 ± 5.7% n=4  
+prefill (tok/s):
+  32768 tokens          9076.2 ±13.3% n=2  
+  131072 tokens         9748.3 ± 3.1% n=2  
+  262144 tokens         9683.1 ±13.9% n=2  
+  524288 tokens         9608.8 ± 4.5% n=2  
+  1000000 tokens        9254.3 ± 2.1% n=2  
+spark-a: min MemAvailable 25.17 GiB, swap growth 0.0 GiB
+spark-b: min MemAvailable 27.69 GiB, swap growth 0.0 GiB
+spark-c: min MemAvailable 27.73 GiB, swap growth 0.0 GiB
+spark-d: min MemAvailable 27.66 GiB, swap growth 0.0 GiB
+spark-a: GPU max 76.0 C (7.0 C below its limit at the closest), board max 82.5 C, power max 73.69 W, thermal slowdown 0.0 ms
+spark-b: GPU max 74.0 C (11.0 C below its limit at the closest), board max 79.9 C, power max 71.42 W, thermal slowdown 0.0 ms
+spark-c: GPU max 72.0 C (14.0 C below its limit at the closest), board max 80.9 C, power max 72.87 W, thermal slowdown 0.0 ms
+spark-d: GPU max 74.0 C (11.0 C below its limit at the closest), board max 81.3 C, power max 74.37 W, thermal slowdown 0.0 ms
+report: /tmp/x1123-final-clock-02/bench.json

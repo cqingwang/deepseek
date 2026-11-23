@@ -1,0 +1,84 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+______________ test_x1123_live_parameter_consumption_is_complete _______________
+
+    def test_x1123_live_parameter_consumption_is_complete() -> None:
+        evidence = json.loads(
+>           (EXPERIMENT / "validation/live-parameter-consumption.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+tests/test_deepseek_x1123_acceptance.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1256: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/live-parameter-consumption.json')
+name = '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/live-parameter-consumption.json'
+flags = 16777216, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/live-parameter-consumption.json'
+
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: FileNotFoundError
+____________ test_x1123_api_smoke_covers_stock_glp_and_custom_tools ____________
+
+    def test_x1123_api_smoke_covers_stock_glp_and_custom_tools() -> None:
+        evidence = json.loads(
+>           (EXPERIMENT / "validation/api-smoke.json").read_text(encoding="utf-8")
+        )
+
+tests/test_deepseek_x1123_acceptance.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1256: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/api-smoke.json')
+name = '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/api-smoke.json'
+flags = 16777216, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/validation/api-smoke.json'
+
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: FileNotFoundError
+_______ test_x1123_two_run_performance_passes_the_official_readme_gates ________
+
+    def test_x1123_two_run_performance_passes_the_official_readme_gates() -> None:
+        summary = json.loads(
+>           (EXPERIMENT / "performance/summary.json").read_text(encoding="utf-8")
+        )
+
+tests/test_deepseek_x1123_acceptance.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1256: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/performance/summary.json')
+name = '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/performance/summary.json'
+flags = 16777216, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/Users/chan/Documents/project/doc/spark/deepseek/experiments/2026-11-23-x1123/performance/summary.json'
+
+/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_deepseek_x1123_acceptance.py::test_x1123_live_parameter_consumption_is_complete
+FAILED tests/test_deepseek_x1123_acceptance.py::test_x1123_api_smoke_covers_stock_glp_and_custom_tools
+FAILED tests/test_deepseek_x1123_acceptance.py::test_x1123_two_run_performance_passes_the_official_readme_gates
+3 failed in 0.05s

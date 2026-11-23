@@ -1,8 +1,9 @@
 # Setting up DeepSeek V4.1 Flash on DGX Spark
 
-This guide takes three or four DGX Sparks from a fresh DGX OS install to the
+This guide takes one to four DGX Sparks from a fresh DGX OS install to the
 promoted deployment: DeepSeek V4.1 Flash on the TileLang kernel family, with
-tensor parallelism across the Sparks over direct-cabled ConnectX-7 links.
+tensor parallelism across the Sparks over direct-cabled ConnectX-7 links (a
+single Spark serves alone, with no fabric).
 
 Every stage says what it changes on your machines, which profiles need it,
 how to check it, and how to undo it. Read the [summary of host
@@ -15,17 +16,19 @@ shape on one image; a shape changes only its cabling and its memory sizing.
 
 | Sparks | Cabling | Shape | Context | Sequences | KV per rank | Kernel | Memory saver |
 | --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| 1 | none | `tp1` | 262,144 | 4 | 8 GiB | 64 KiB | required |
+| 2 | one cable | `tp2-direct` | 262,144 | 4 | 8 GiB | 64 KiB | required |
 | 3 | triangle | `tp3-triangle-4k` | 262,144 | 8 | 2.2 GiB | stock 4 KiB | not needed |
 | 3 | triangle | `tp3-triangle` | 1,048,576 | 8 | 4.91 GiB | 64 KiB | required |
-| 4 | ring | `tp4-ring` | 1,048,576 | 16 | 10.5 GiB | 64 KiB | required |
-| 2 | — | — | — | — | — | — | — |
+| 4 | ring | `tp4-ring` | 1,048,576 | 32 | 16.5 GiB | 64 KiB | required |
 
 A shape is qualified for the recipe's image when the recipe names its release
 benchmark (`benchmark_reference`); `cluster start` refuses an unqualified one
-unless given `--unqualified-shape`. Two Sparks are not supported.
+unless given `--unqualified-shape`. Two to eight Sparks cabled into a switch
+are in [switched-fabric.md](switched-fabric.md).
 
 **Externally reported, not qualified here.** Another site ran `tp4-ring` at
-the recipe's sizing (1,048,576 context, 16 sequences, KV 10.5 GiB) on the
+the recipe's sizing of the time (1,048,576 context, 16 sequences, KV 10.5 GiB) on the
 stock 4 KiB kernel of DGX OS 7.5.0 (`6.17.0-1032-nvidia`), with no memory saver
 and Secure Boot on. MemAvailable stayed at 18-21 GiB per node, including
 through a 993K-token prefill. That run used the r6u image plus r6v's vLLM 0180
@@ -34,9 +37,14 @@ and was started with `--unqualified-shape`
 qualified recipe is unchanged: `tp4-ring` requires the 64 KiB kernel and the
 memory saver.
 
-**Two Sparks** cannot hold this model with useful context. At three Sparks,
-the head node already runs within about 3 GiB of its memory guard during a
-1M prefill, and two would each hold half as much again of the weights.
+**One or two Sparks** (`tp1`, `tp2-direct`, `tp2-switched`) load routed experts
+from NVMe into GPU-accessible slots on demand, through an `io_uring` cache under
+the checkout's `cache/ds41_expert_slots`. That is what lets the model fit, and it
+is why these shapes are slow: one stream decodes at about 4 tok/s on one Spark
+and 18 tok/s on two, and four streams together reach about 11 and 53 tok/s
+(prose, each shape's release benchmark in
+[manifests/benchmarks](../manifests/benchmarks/)). They serve 262,144 tokens of
+context and four sequences.
 
 **The 4 KiB profile is the shortest path to a running service**: it needs no
 kernel change and no out-of-tree module. The 64 KiB profiles recover about
@@ -164,9 +172,10 @@ services as warnings; serving still starts, with less memory margin.
 ### Kernel mode setting
 
 DGX OS ships `nvidia-drm-options-modeset0`, which turns `nvidia-drm` mode
-setting off. The promoted profiles load the embedding and output head into
-the GB10 display carve-out (`SPARK_DS41F_DISPLAY_CARVEOUT_WEIGHTS=1`), which needs
-mode setting, and a display attached after boot stays dark without it:
+setting off. Without mode setting, a display attached after boot stays dark (and
+legacy pre-1120 rollback profiles that mount `/dev/dri/card0` for the display
+carve-out refuse to start; `spark-ds41f-1120` allocates the carve-out directly
+through NVIDIA RM on `/dev/nvidiactl`):
 
 ```sh
 sudo apt-get purge nvidia-drm-options-modeset0
@@ -174,8 +183,9 @@ sudo update-initramfs -u -k all
 sudo reboot   # with the service stopped
 ```
 
-Revert: `sudo apt-get install nvidia-drm-options-modeset0` and reboot; the
-carve-out profiles will then refuse to start.
+Revert: `sudo apt-get install nvidia-drm-options-modeset0` and reboot; an
+attached display after boot will stay dark, and legacy pre-1120 DRM carve-out
+profiles will refuse to start.
 
 ### Memory accounting
 
@@ -376,6 +386,8 @@ between two Sparks gives two RDMA paths.
 
 | Topology | Cables | Cabling | Transport |
 | --- | ---: | --- | --- |
+| 1 Spark | 0 | none | `local` |
+| 2 Sparks, direct | 1 | one cable between the two nodes | `oneshot-direct` |
 | 3 Sparks, triangle | 3 | every pair cabled directly: port 0 to the next node, port 1 to the previous | `oneshot-direct` |
 | 4 Sparks, ring | 4 | each node to the next and the previous, `1-2-3-4-1` | `oneshot-ring4` |
 
@@ -435,11 +447,15 @@ Two files describe your site and stay out of git:
 
 - **Node map.** `config/nodes.json` for the three-node profiles (start from
   [config/nodes.example.json](../config/nodes.example.json)),
+  `config/nodes-tp1.local.json` for one Spark (start from
+  [config/examples/nodes-tp1.json](../config/examples/nodes-tp1.json)),
+  `config/nodes-direct2.local.json` for two cabled directly (start from
+  [config/examples/nodes-direct2.json](../config/examples/nodes-direct2.json)),
   `config/nodes-ring4.local.json` for the TP4 ring profile (start from
   [config/examples/nodes-ring4.json](../config/examples/nodes-ring4.json)), or
   `config/nodes-switched.local.json` for a switched four-node deployment (start from
   [config/examples/nodes-switched.json](../config/examples/nodes-switched.json) and see
-  [switched-fabric.md](switched-fabric.md)).
+  [switched-fabric.md](switched-fabric.md)). For offline checks on a fresh clone before writing host maps, `./scripts/example_site.py` initializes git-ignored example maps for every shape.
   It names each node (`name`, which is used both as the SSH target and in status
   messages and must resolve via `~/.ssh/config` or DNS/hosts; if an earlier node
   map set `ssh_host`, either rename nodes to their SSH targets or add SSH
@@ -588,9 +604,10 @@ bin/spark build prepare
 bin/spark --cluster-config config/cluster.json build image --apply
 ```
 
-`build prepare` fetches the pinned vLLM, B12X, NCCL, TileLang, TileKernels
-and sparknet sources, applies the patch series and checks every result
-against the recorded trees. `build image --apply` refuses to run next to a
+`build prepare` fetches the pinned vLLM, NCCL, CUTLASS, TileLang, TileKernels
+and sparknet sources plus the hash-locked CUDA `13.5.37` and wheel inputs,
+applies the patch series, and checks every result against the recorded trees.
+`build image --apply` refuses to run next to a
 live service, sizes its compile jobs to available memory, never overwrites
 an existing tag, and runs a GPU import smoke test. The first build takes
 longer because it builds TileLang and TileKernels. More detail is in

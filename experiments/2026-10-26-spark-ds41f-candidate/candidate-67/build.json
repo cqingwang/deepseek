@@ -1,0 +1,39 @@
+{
+ "experiment": "experiments/2026-10-26-spark-ds41f-candidate/candidate-67",
+ "run": "candidate-67-image",
+ "jobs": [
+  {
+   "kind": "sync"
+  },
+  {
+   "kind": "image",
+   "config": "image-dgx4.json",
+   "node": "dgx4",
+   "copies": [
+    [
+     "dgx4",
+     "dgx3-internal"
+    ],
+    [
+     "dgx3",
+     "dgx2-internal"
+    ],
+    [
+     "dgx2",
+     "dgx1-internal"
+    ]
+   ],
+   "remove_stopped": true
+  },
+  {
+   "kind": "kernel",
+   "bundles": [
+    {
+     "bundle": "experiments/2026-10-26-spark-ds41f-candidate/candidate-67/bundles/release-tests",
+     "node": "dgx4"
+    }
+   ]
+  }
+ ],
+ "digest": "sha256:22725ab3a3242b16ea23eb59c5d0ee9031b5c7c6559b7837cf3d7228a8a583d4"
+}

@@ -1,0 +1,129 @@
+FFF..F...F.......                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_fixed_template_is_the_resolved_upstream_environment ___________
+
+    def test_fixed_template_is_the_resolved_upstream_environment() -> None:
+        resolved = _resolved_recipe()
+        template, order = _parse_env_assignments(TEMPLATE_PATH)
+        expected = {**resolved["environment"], **SITE_FIXED_OVERRIDES}
+    
+>       assert len(template) == len(expected)
+E       AssertionError: assert 86 == 87
+E        +  where 86 = len({'CUDA_CACHE_MAXSIZE': '4294967296', 'CUDA_CACHE_PATH': '/cache/spark-ds41f/jit/nv-compute', 'CUDA_DEVICE_MAX_CONNECTIONS': '32', 'DO_NOT_TRACK': '1', ...})
+E        +  and   87 = len({'CUDA_CACHE_MAXSIZE': '4294967296', 'CUDA_CACHE_PATH': '/cache/spark-ds41f/jit/nv-compute', 'CUDA_DEVICE_MAX_CONNECTIONS': '32', 'DO_NOT_TRACK': '1', ...})
+
+spark/tests/test_deepseek_env_merge_contract.py:443: AssertionError
+____________ test_candidate_profile_is_the_deployed_runtime_surface ____________
+
+    def test_candidate_profile_is_the_deployed_runtime_surface() -> None:
+        """Lock the upstream candidate recipe and its site-only image override."""
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+        engine = config["engines"][TARGET]
+    
+        assert "runtime_profile" not in engine
+>       assert engine["ds41f_config_file"] == DEPLOY_PROFILE
+E       AssertionError: assert 'experiments/...tp4-ring.json' == 'experiments/...tp4-ring.json'
+E         
+E         - experiments/2026-11-23-x1123-official-1122/tp4-ring.json
+E         ?                             --------------
+E         + experiments/2026-11-23-x1123/tp4-ring.json
+
+spark/tests/test_deepseek_env_merge_contract.py:456: AssertionError
+______ test_merge_keeps_every_fixed_key_and_only_overrides_declared_sites ______
+
+tmp_path = PosixPath('/private/var/folders/bw/wyppmgk52_v2nnh0w_j_0gl80000gn/T/pytest-of-chan/pytest-22/test_merge_keeps_every_fixed_k0')
+
+    def test_merge_keeps_every_fixed_key_and_only_overrides_declared_sites(tmp_path: Path) -> None:
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        env_path, managed = _merged_env(tmp_path)
+        merged, order = _parse_env_assignments(env_path)
+    
+        assert len(order) == len(set(order)), "合并文件存在重复环境键"
+        assert set(template) & set(managed) == SITE_TEMPLATE_OVERRIDES
+        assert "SPARKNET_ROCE_PEER_HCAS_BY_RANK" in managed
+        for key, value in template.items():
+            expected = managed[key] if key in SITE_TEMPLATE_OVERRIDES else value
+            assert merged[key] == expected
+        for key in (
+            "MAX_RUNNING_REQUESTS",
+            "MAX_REQUEST",
+            "MAX_TOKEN",
+            "MAX_TOKENS",
+            "MAX_NUM_BATCHED_TOKENS",
+            "NUM_SPECULATIVE_TOKENS",
+            "DEFAULT_THINKING",
+            "REASONING_EFFORT",
+            "MASTER_PORT",
+            "MAX_TOTAL_TOKENS",
+            "CONTEXT_LENGTH",
+            "DSV41_SPARSE_LOCAL_ADMISSION_MRR",
+        ):
+            assert key not in managed
+        assert "NCCL_IB_HCA" not in template
+        assert managed["NCCL_IB_HCA"].startswith("=")
+>       assert set(resolved["environment"]) <= set(merged)
+E       AssertionError: assert {'CUDA_CACHE_...HF_HOME', ...} <= {'API_HOST', ...ECTIONS', ...}
+E         
+E         Extra items in the left set:
+E         'WEIGHTLESS_STEER_GENERATION_DEFAULTS'
+
+spark/tests/test_deepseek_env_merge_contract.py:521: AssertionError
+_________ test_launcher_consumes_exactly_the_upstream_surface_per_rank _________
+
+tmp_path = PosixPath('/private/var/folders/bw/wyppmgk52_v2nnh0w_j_0gl80000gn/T/pytest-of-chan/pytest-22/test_launcher_consumes_exactly0')
+
+    def test_launcher_consumes_exactly_the_upstream_surface_per_rank(tmp_path: Path) -> None:
+        resolved = _resolved_recipe()
+        template, _ = _parse_env_assignments(TEMPLATE_PATH)
+        env_path, managed = _merged_env(tmp_path)
+        nodes = _site_nodes()
+        expected_env = _expected_container_env(resolved, nodes, managed)
+        expected_serve = _expected_serve_args(resolved, nodes, managed)
+        commands = _print_commands(env_path)
+        home = Path.home()
+        glp_name = "glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf"
+        glp_path = (
+            home
+            / ".cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75"
+            / "snapshots/2715ffd51f59899115853e1118db080536966c44"
+            / glp_name
+        )
+    
+        assert set(commands) == {0, 1, 2, 3}
+        for rank, tokens in commands.items():
+            env, serve_args, volumes = _parse_docker_argv(tokens, managed["IMAGE"])
+>           assert env == expected_env[rank]
+E           assert {'CUDA_CACHE_...CK': '1', ...} == {'CUDA_CACHE_...CK': '1', ...}
+E             
+E             Omitting 89 identical items, use -vv to show
+E             Differing items:
+E             {'PYTORCH_CUDA_ALLOC_CONF': 'expandable_segments:True,garbage_collection_threshold:0.6'} != {'PYTORCH_CUDA_ALLOC_CONF': 'garbage_collection_threshold:0.6'}
+E             Right contains 1 more item:
+E             {'WEIGHTLESS_STEER_GENERATION_DEFAULTS': '{"temperature":0.3,"top_p":0.95}'}
+E             Use -v to get more diff
+
+spark/tests/test_deepseek_env_merge_contract.py:573: AssertionError
+___________ test_common_business_keys_map_to_the_vllm_native_surface ___________
+
+tmp_path = PosixPath('/private/var/folders/bw/wyppmgk52_v2nnh0w_j_0gl80000gn/T/pytest-of-chan/pytest-22/test_common_business_keys_map_0')
+
+    def test_common_business_keys_map_to_the_vllm_native_surface(tmp_path: Path) -> None:
+        config = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
+        env_path, managed = _merged_env(tmp_path)
+        commands = _print_commands(env_path)
+        env, serve_args, _ = _parse_docker_argv(commands[0], managed["IMAGE"])
+    
+>       assert config["common"]["max_request"] == 8
+E       assert 6 == 8
+
+spark/tests/test_deepseek_env_merge_contract.py:647: AssertionError
+=========================== short test summary info ============================
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_fixed_template_is_the_resolved_upstream_environment
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_candidate_profile_is_the_deployed_runtime_surface
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_merge_keeps_every_fixed_key_and_only_overrides_declared_sites
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_launcher_consumes_exactly_the_upstream_surface_per_rank
+FAILED spark/tests/test_deepseek_env_merge_contract.py::test_common_business_keys_map_to_the_vllm_native_surface
+5 failed, 12 passed in 2.87s

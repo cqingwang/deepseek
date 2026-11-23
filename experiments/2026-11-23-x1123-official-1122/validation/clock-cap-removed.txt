@@ -1,0 +1,16 @@
+=== 192.168.2.180 ===
+Removed "/etc/systemd/system/multi-user.target.wants/spark-gpu-clock-limit.service".
+service=disabled/inactive
+2353 MHz, 9.19 W, 36
+=== 192.168.2.161 ===
+Removed "/etc/systemd/system/multi-user.target.wants/spark-gpu-clock-limit.service".
+service=disabled/inactive
+2216 MHz, 7.56 W, 36
+=== 192.168.2.102 ===
+Removed "/etc/systemd/system/multi-user.target.wants/spark-gpu-clock-limit.service".
+service=disabled/inactive
+2190 MHz, 9.53 W, 36
+=== 192.168.2.238 ===
+Removed "/etc/systemd/system/multi-user.target.wants/spark-gpu-clock-limit.service".
+service=disabled/inactive
+2301 MHz, 9.18 W, 36
