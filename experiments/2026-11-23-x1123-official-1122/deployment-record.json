@@ -87,12 +87,17 @@
     ]
   },
   "rollback": {
-    "old_x1123_tag": "spark-ds41f:x1123-1120",
-    "old_x1123_image_id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
-    "old_x1119_tag": "spark-ds41f:x1119",
-    "old_x1119_image_id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b",
-    "requires_rebuild": false,
-    "evidence": "validation/archive-old-image.txt"
+    "image_rollback_available": false,
+    "removed_tags": [
+      "spark-ds41f:x1123-1120",
+      "spark-ds41f:x1119"
+    ],
+    "removed_image_ids": [
+      "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f",
+      "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b"
+    ],
+    "requires_rebuild": true,
+    "evidence": "validation/cleanup-delete-images.txt"
   },
   "business_parameters": {
     "changed": {
@@ -251,6 +256,13 @@
     "live_contract_ok": true,
     "parameter_red": "validation/contract-red.txt",
     "parameter_green": "validation/contract-green.txt",
-    "static_tests": "29 passed"
+    "static_tests": "29 passed",
+    "cleanup": {
+      "receipt": "validation/cleanup-receipt.json",
+      "before": "validation/cleanup-before.txt",
+      "after": "validation/cleanup-after.txt",
+      "health": "validation/cleanup-health.json",
+      "api_smoke": "validation/cleanup-api-smoke.json"
+    }
   }
 }

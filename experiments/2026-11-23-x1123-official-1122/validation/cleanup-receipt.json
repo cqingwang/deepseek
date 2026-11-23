@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "scope": "four Spark nodes, deepseek target only",
+  "preserved": {
+    "serving_image": "spark-ds41f:x1123",
+    "serving_image_id": "sha256:5c50e8419ae6a6746ce7f78249ddd7c675c90a11a99f37003c1aba5f32228e33",
+    "other_target_image": "lmsysorg/sglang:nightly-dev-20261120-03fde9cc",
+    "build_base_image_on_spark_a": "vllm/vllm-openai:nightly-af1c01499b289be555c475669ba50a88e96d846e",
+    "model_weights": "/opt/models",
+    "runtime_cache": "/opt/runtime_assets/deepseek/cache",
+    "shared_ring": "/opt/spark/ring and spark-ring-mesh",
+    "running_containers": [
+      "deepseek-r0",
+      "deepseek-r1",
+      "deepseek-r2",
+      "deepseek-r3"
+    ]
+  },
+  "removed": {
+    "images": [
+      {
+        "tag": "spark-ds41f:x1123-1120",
+        "id": "sha256:63f2e77085f018df2099f8fbb118beaf87f0e36069f2c64e5687a302f6a0092f"
+      },
+      {
+        "tag": "spark-ds41f:x1119",
+        "id": "sha256:4f0efd618b15afcb07579c5118675726da73eb3e5fa967c38062a49ed909ea3b"
+      }
+    ],
+    "build_cache_spark_a": "12.31 GB -> 0",
+    "tmp": [
+      "/tmp/x1123-official1122-post-reboot-01",
+      "/tmp/x1123-official1122-post-reboot-02",
+      "/tmp/x1123-clock-cap-removed-prefill",
+      "/tmp/x1123-final-clock-01",
+      "/tmp/x1123-final-clock-02",
+      "/tmp/x1123-final-filler",
+      "/tmp/x1123-resource-post-clock-prefill",
+      "/tmp/x1123-final-prefill-r3",
+      "/tmp/spark-config-official-resource-test.yaml",
+      "/tmp/spark-ssh-1000"
+    ],
+    "runtime_results_spark_a": "26 MB -> empty directory",
+    "clock_cap_backup": "/var/tmp/spark-gpu-clock-limit.service.bak.20261123 on all four nodes"
+  },
+  "disk_before_after": {
+    "spark-a": {
+      "before": "967G used",
+      "after": "955G used",
+      "released": "about 12G"
+    },
+    "spark-b": {
+      "before": "944G used",
+      "after": "937G used",
+      "released": "about 7G"
+    },
+    "spark-c": {
+      "before": "935G used",
+      "after": "929G used",
+      "released": "about 6G"
+    },
+    "spark-d": {
+      "before": "925G used",
+      "after": "918G used",
+      "released": "about 7G"
+    }
+  },
+  "post_cleanup": {
+    "dangling_images": 0,
+    "anonymous_volumes": 0,
+    "stopped_target_containers": 0,
+    "build_cache": "0B on all nodes",
+    "health": "validation/cleanup-health.json",
+    "health_ok": true,
+    "api_smoke": "validation/cleanup-api-smoke.json",
+    "api_smoke_all_200": true
+  },
+  "rollback": {
+    "image_rollback_available": false,
+    "requires_rebuild": true
+  },
+  "evidence": [
+    "validation/cleanup-before.txt",
+    "validation/cleanup-delete-images.txt",
+    "validation/cleanup-delete-files-cache.txt",
+    "validation/cleanup-after.txt",
+    "validation/cleanup-health.json",
+    "validation/cleanup-api-smoke.json"
+  ]
+}

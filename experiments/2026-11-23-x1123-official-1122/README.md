@@ -16,7 +16,7 @@
   `7.99x`。其余业务参数未变。
 - 四机镜像 ID 同为
   `sha256:5c50e8419ae6a6746ce7f78249ddd7c675c90a11a99f37003c1aba5f32228e33`；
-  旧 x1123 镜像保留为 `spark-ds41f:x1123-1120`。
+  旧 x1123/x1119 回退镜像已在最终清理中删除。
 - 参数合同 RED 5 项后 GREEN 17 项；最终 live contract 91 个固定环境键、
   78 项 serve 参数、8 并发、1M、16,384 batch、67 图、5 drafts 均由
   `docker inspect` 和 vLLM 启动日志证明。
@@ -34,7 +34,7 @@
 | UVM packed leaf tables | `Y` |
 | CPU cpuset governor | `performance` |
 | NVMe APST / coalescing | `2000 ms` / `00000000` |
-| GPU clock cap service | 已 stop + disable，备份于 `/var/tmp` |
+| GPU clock cap service | 已 stop + disable；冗余备份已清理 |
 | 负载 GPU clock / power | 约 `2470–2554 MHz` / `64–75 W` |
 
 重启前四机最大空闲内存块占比仅 `1.9%–11.8%`；重启后恢复到 `99%+`。
@@ -94,6 +94,21 @@ manifest 约 `3%–6%`。因此本轮不能把 source-text 或 filler 任一口�
 - `performance/run-01-final-clock-bench.json`、`performance/run-02-final-clock-bench.json`
 - `performance/resource-test-post-clock-prefill-bench.json`
 - `performance/filler-clock-final-bench.json`
+- `validation/cleanup-before.txt`、`validation/cleanup-after.txt`
+- `validation/cleanup-delete-images.txt`、`validation/cleanup-delete-files-cache.txt`
+- `validation/cleanup-receipt.json`、`validation/cleanup-health.json`
+
+## 清理结果
+
+按用户要求删除四机历史回退镜像：
+
+- `spark-ds41f:x1123-1120`
+- `spark-ds41f:x1119`
+
+当前只保留 `spark-ds41f:x1123`；后续回退需要重新构建镜像。
+spark-a Build Cache `12.31 GB -> 0`，本轮 `/tmp/x1123-*` 验证目录、
+旧 runtime results 和冗余时钟帽备份已删除。四机无 dangling image、
+anonymous volume 或 stopped target container，服务与 API 保持正常。
 
 ## 未闭环
 
