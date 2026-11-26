@@ -1,0 +1,251 @@
+{
+  "schema": "spark-ds41f-acceptance/1",
+  "date": "2026-11-26",
+  "boots": 2,
+  "decode": {
+    "points": {
+      "prose-c1": {
+        "b1": 97.422,
+        "b2": 97.676,
+        "mean": 97.549,
+        "official": 89.643,
+        "floor_1pct": 88.747,
+        "delta_pct": 8.819,
+        "pass": true
+      },
+      "prose-c2": {
+        "b1": 175.569,
+        "b2": 175.52,
+        "mean": 175.544,
+        "official": 159.892,
+        "floor_1pct": 158.293,
+        "delta_pct": 9.789,
+        "pass": true
+      },
+      "prose-c4": {
+        "b1": 315.502,
+        "b2": 314.011,
+        "mean": 314.757,
+        "official": 306.615,
+        "floor_1pct": 303.549,
+        "delta_pct": 2.655,
+        "pass": true
+      },
+      "code-c1": {
+        "b1": 148.432,
+        "b2": 148.882,
+        "mean": 148.657,
+        "official": 113.322,
+        "floor_1pct": 112.189,
+        "delta_pct": 31.181,
+        "pass": true
+      },
+      "code-c2": {
+        "b1": 212.545,
+        "b2": 212.272,
+        "mean": 212.409,
+        "official": 186.125,
+        "floor_1pct": 184.264,
+        "delta_pct": 14.121,
+        "pass": true
+      },
+      "code-c4": {
+        "b1": 451.954,
+        "b2": 451.486,
+        "mean": 451.72,
+        "official": 356.911,
+        "floor_1pct": 353.342,
+        "delta_pct": 26.564,
+        "pass": true
+      }
+    },
+    "all_pass": true
+  },
+  "prefill": {
+    "points": {
+      "32768": {
+        "b1": 9370.7,
+        "b2": 9369.9,
+        "mean": 9370.3,
+        "official": 9729.189,
+        "floor_1pct": 9631.9,
+        "delta_pct": -3.689,
+        "pass": false
+      },
+      "131072": {
+        "b1": 9765.1,
+        "b2": 9793.2,
+        "mean": 9779.1,
+        "official": 10272.493,
+        "floor_1pct": 10169.8,
+        "delta_pct": -4.803,
+        "pass": false
+      },
+      "262144": {
+        "b1": 9811.0,
+        "b2": 9815.2,
+        "mean": 9813.1,
+        "official": 10252.712,
+        "floor_1pct": 10150.2,
+        "delta_pct": -4.288,
+        "pass": false
+      },
+      "524288": {
+        "b1": 9668.5,
+        "b2": 9676.5,
+        "mean": 9672.5,
+        "official": 10067.243,
+        "floor_1pct": 9966.6,
+        "delta_pct": -3.921,
+        "pass": false
+      },
+      "1000000": {
+        "b1": 9313.9,
+        "b2": 9335.0,
+        "mean": 9324.5,
+        "official": 9685.897,
+        "floor_1pct": 9589.0,
+        "delta_pct": -3.731,
+        "pass": false
+      }
+    },
+    "all_pass": false
+  },
+  "overall_ok": false,
+  "diagnostics": {
+    "source_text_prompt_tokens": {
+      "b1": {
+        "32768": {
+          "samples": [
+            36341,
+            28994,
+            30725
+          ],
+          "mean": 32020.0
+        },
+        "131072": {
+          "samples": [
+            120365,
+            115246,
+            118822
+          ],
+          "mean": 118144.3
+        },
+        "262144": {
+          "samples": [
+            236536,
+            249000,
+            238358
+          ],
+          "mean": 241298.0
+        },
+        "524288": {
+          "samples": [
+            478323,
+            476373,
+            474488
+          ],
+          "mean": 476394.7
+        },
+        "1000000": {
+          "samples": [
+            909701,
+            917995,
+            907876
+          ],
+          "mean": 911857.3
+        }
+      },
+      "b2": {
+        "32768": {
+          "samples": [
+            28183,
+            28725,
+            29834
+          ],
+          "mean": 28914.0
+        },
+        "131072": {
+          "samples": [
+            121605,
+            120793,
+            121185
+          ],
+          "mean": 121194.3
+        },
+        "262144": {
+          "samples": [
+            235335,
+            238021,
+            248564
+          ],
+          "mean": 240640.0
+        },
+        "524288": {
+          "samples": [
+            480578,
+            476863,
+            466370
+          ],
+          "mean": 474603.7
+        },
+        "1000000": {
+          "samples": [
+            912835,
+            911020,
+            914896
+          ],
+          "mean": 912917.0
+        }
+      },
+      "official_suite": {
+        "32768": {
+          "samples": [],
+          "mean": null
+        },
+        "131072": {
+          "samples": [],
+          "mean": null
+        },
+        "262144": {
+          "samples": [],
+          "mean": null
+        },
+        "524288": {
+          "samples": [],
+          "mean": null
+        },
+        "1000000": {
+          "samples": [],
+          "mean": null
+        }
+      }
+    },
+    "filler_prefill": {
+      "32768": {
+        "mean": 9933.0,
+        "official": 10237.419,
+        "delta_pct": -2.974
+      },
+      "131072": {
+        "mean": 10360.6,
+        "official": 10637.932,
+        "delta_pct": -2.607
+      }
+    },
+    "control_c32_source_prefill_from_log": {
+      "32768": 9446,
+      "131072": 9874,
+      "262144": 9847,
+      "524288": 9722,
+      "1000000": 9389
+    },
+    "notes": [
+      "Decode uses decode_window_tps; step_ms regressions come from higher speculative acceptance (tokens_per_step 2.7/4.5 vs reference 2.3/3.9), not from lower throughput.",
+      "Source-text prefill is ~3.7-4.8% below the README table; the host-side Sonar source_text corpus tokenizes to fewer prompt tokens than the official suite (1M: ~911k vs ~995k).",
+      "Filler prefill is host-independent: 32K 9933 vs official manifest 10237 (-3.0%), 131K 10361 vs 10638 (-2.6%).",
+      "A control boot with the official 32-concurrency / 16.5 GiB KV / capture-192 config only improved prefill by ~0.5-1%, so the 8-concurrency scheme is not the main cause.",
+      "The remaining gap is attributable to the site /30 switchless ring and source-corpus/tokenization differences; official environment keys/values match 88/88."
+    ]
+  }
+}

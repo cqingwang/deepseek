@@ -1,0 +1,15 @@
+NCCL_IB_SUBNET_AWARE_ROUTING=1
+NCCL_IB_SUBNET_PREFIX_LEN=30
+---ARGS---
+--port 8888
+--max-model-len 1000000
+--max-num-seqs 8
+--max-num-batched-tokens 16384
+--kv-cache-memory-bytes 8076928000
+--max-cudagraph-capture-size 48
+--override-generation-config {"max_new_tokens":65536,"temperature":1.0,"top_p":1.0}
+--speculative-config {"adaptive_verification_row_cost":0.035,"attention_backend":"TILELANG","draft_sample_method":"greedy","draft_tensor_parallel_size":4,"enable_adaptive_verification":true,"method":"dspark","num_speculative_tokens":5,"rejection_sample_method":"block"}
+--long-prefill-token-threshold 16336
+--limit-mm-per-prompt {"image":67}
+--default-chat-template-kwargs {"enable_thinking":false,"reasoning_effort":50}
+--master-port 25000

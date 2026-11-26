@@ -175,41 +175,53 @@ def _pp2_ring4_tp_hcas(node: dict) -> list[str]:
     return list(peers.get(str(rank ^ 1), ()))
 
 
+def _pp2_ring4_pp_hcas(node: dict) -> list[str]:
+    """Local RDMA HCAs reaching this node's PP=2 peer (rank ^ 2) in a PP=2 x TP=2 ring."""
+    rank = int(node["rank"])
+    peers = node.get("roce_peer_hcas") or {}
+    return list(peers.get(str(rank ^ 2), ()))
+
+
 def _pp2_ring4_node_environment(cluster: dict, node: dict, base: dict[str, str]) -> dict[str, str]:
     """Per-node fabric environment for PP=2 x TP=2 on a 4-node switchless ring.
 
     Each TP=2 stage ({0,1} and {2,3}) runs sparknet one-shot direct over its TP
-    cable only (keyed by TP-local peer rank 0/1), while NCCL sees all four local
-    HCAs (both TP and PP cables) with subnet-aware routing and runtime connect.
+    cable (keyed by TP-local peer rank 0/1), each PP=2 pair ({0,2} and {1,3})
+    runs sparknet one-shot P2P over its PP cable (keyed by PP-local peer rank
+    0/1), and NCCL sees all four local HCAs with subnet-aware routing.
     """
     sparknet = fabric(cluster)
     pinned = gid_pinned(cluster)
     env = dict(base)
-    for key in ("SPARKNET_ROCE_PEER_HCAS", "SPARKNET_ROCE_TOPOLOGY", "SPARKNET_ROCE_HCA",
+    for key in ("SPARKNET_ROCE_PEER_HCAS", "SPARKNET_ROCE_PP_PEER_HCAS",
+                "SPARKNET_ROCE_TOPOLOGY", "SPARKNET_ROCE_HCA", "SPARKNET_ROCE_PP_HCA",
                 "SPARKNET_ROCE_SUBNETS", "SPARKNET_ROCE_TRAFFIC_CLASS"):
         env.pop(key, None)
     if not pinned:
         for key in GID_PINS:
             env.pop(key, None)
     env.update(sparknet.render.RING_ENV)
-    env["NCCL_IB_HCA"] = "=" + ",".join(_pp2_ring4_hcas(node))
+    all_hcas = _pp2_ring4_hcas(node)
+    env["NCCL_IB_HCA"] = "=" + ",".join(all_hcas)
     rank = int(node["rank"])
     tp_peer_local = str((rank % 2) ^ 1)
     tp_hcas = _pp2_ring4_tp_hcas(node)
+    pp_peer_local = str((rank // 2) ^ 1)
+    pp_hcas = _pp2_ring4_pp_hcas(node)
     env["SPARKNET_ROCE_TOPOLOGY"] = "direct"
     env["SPARKNET_ROCE_PEER_HCAS"] = json.dumps({tp_peer_local: tp_hcas}, separators=(",", ":"))
+    if pp_hcas:
+        env["SPARKNET_ROCE_PP_PEER_HCAS"] = json.dumps({pp_peer_local: pp_hcas}, separators=(",", ":"))
     if pinned:
-        for key in GID_PINS:
-            if key in base:
-                env[key] = base[key]
+        if "NCCL_IB_GID_INDEX" in base:
+            env["NCCL_IB_GID_INDEX"] = base["NCCL_IB_GID_INDEX"]
         if "roce_gid_index" in node:
             env["NCCL_IB_GID_INDEX"] = str(node["roce_gid_index"])
-            env["SPARKNET_ROCE_GID_INDEX"] = str(node["roce_gid_index"])
-    else:
-        declared = node.get("roce_subnets", {})
-        subnets = {h: declared[h] for h in tp_hcas if h in declared}
-        if subnets:
-            env["SPARKNET_ROCE_SUBNETS"] = json.dumps(subnets, separators=(",", ":"))
+        env.pop("SPARKNET_ROCE_GID_INDEX", None)
+    declared = node.get("roce_subnets", {})
+    subnets = {h: declared[h] for h in all_hcas if h in declared}
+    if subnets:
+        env["SPARKNET_ROCE_SUBNETS"] = json.dumps(subnets, separators=(",", ":"))
     iface = node.get("management_interface")
     if iface:
         env.update(NCCL_SOCKET_IFNAME="=" + iface, GLOO_SOCKET_IFNAME=iface, TP_SOCKET_IFNAME=iface)
@@ -361,6 +373,39 @@ def hcas(cluster: dict, node: dict) -> list[str]:
     return fabric(cluster).nodes.nccl_hcas(fabric_node(node), mode)
 
 
+def _sparknet_node_problems(sparknet: ModuleType, nodes: dict, mode: str) -> list[str]:
+    """Validate the node map with sparknet, accepting this site's /30 ring subnets.
+
+    sparknet 0.6.0's node-map validator requires /24 cable networks, while the
+    site's four-node ring uses /30 point-to-point networks. The runtime only
+    needs each HCA's address to fall inside its declared network, so keep the
+    validator's endpoint, uniqueness and stripe checks and relax only the
+    prefix-length gate for /30 maps.
+    """
+    subnets = [
+        subnet
+        for node in nodes.get("nodes", [])
+        for subnet in (node.get("roce_subnets") or {}).values()
+    ]
+    if not any(str(subnet).endswith("/30") for subnet in subnets):
+        return sparknet.nodes.problems(nodes, mode)
+
+    original = sparknet.nodes._subnet
+
+    def subnet(raw: object) -> ipaddress.IPv4Network | None:
+        try:
+            network = ipaddress.IPv4Network(raw, strict=True)
+        except (ValueError, TypeError, ipaddress.AddressValueError):
+            return None
+        return network if network.prefixlen in (24, 30) else None
+
+    sparknet.nodes._subnet = subnet
+    try:
+        return sparknet.nodes.problems(nodes, mode)
+    finally:
+        sparknet.nodes._subnet = original
+
+
 def problems(cluster: dict, nodes: dict) -> list[str]:
     errors = []
     entries = nodes.get("nodes", [])
@@ -418,7 +463,7 @@ def problems(cluster: dict, nodes: dict) -> list[str]:
         errors.extend(_pp2_ring4_problems(cluster, nodes))
     else:
         sparknet = fabric(cluster)
-        errors.extend(sparknet.nodes.problems(fabric_map(nodes, strip_gid_index=True), mode))
+        errors.extend(_sparknet_node_problems(sparknet, fabric_map(nodes, strip_gid_index=True), mode))
         check_settings = {k: v for k, v in settings.items() if k not in GID_PINS} if pinned else settings
         errors.extend(sparknet.render.environment_problems(check_settings, mode, count))
         if hasattr(sparknet.render, "base_problems"):
@@ -574,9 +619,6 @@ def candidate(base: dict, nodes: dict, nodes_path: str) -> dict:
     result["nodes_config"] = nodes_path
     result["deployment"]["launch_enabled"] = False
     result["deployment"].pop("branch", None)
-    ssh_user = nodes.get("ssh_user")
-    if result.get("host", {}).get("home") == "/home/swank" and ssh_user not in (None, "", "swank", "u"):
-        result["host"]["home"] = f"/home/{ssh_user}"
     result["distributed"]["master_addr"] = next(control_ip(n) for n in nodes["nodes"] if n.get("head"))
     for flag in ("--tensor-parallel-size", "--nnodes"):
         set_argument(result, flag, str(count))

@@ -34,8 +34,8 @@ STARTUP_MEMGUARD_WAIT="${DS41F_STARTUP_MEMGUARD_WAIT_SECONDS:-120}"
 STEADY_MEMGUARD_GIB="${DS41F_MEMGUARD_GIB:-3}"
 STEADY_MEMGUARD_INTERVAL="${DS41F_MEMGUARD_INTERVAL_SECONDS:-2}"
 DS41F_GLP_HOME="${DS41F_GLP_HOME:-$HOME}"
-DS41F_GLP_FILE="$DS41F_GLP_HOME/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75/snapshots/2715ffd51f59899115853e1118db080536966c44/glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf"
-DS41F_GLP_SHA256=9c66d47701e0ceb42c33906f2d3789c0f1f16b21e7d97185f20f7f3f09fbf5cf
+DS41F_GLP_FILE="$DS41F_GLP_HOME/.cache/huggingface/hub/models--msuiche--DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5/snapshots/4d570926e9dd4fa7247d126072c34e249c89abd7/glp.deepseek-v41-flash-1017-GLP-27-L11-37-a3.5.gguf"
+DS41F_GLP_SHA256=24e97d41a9a4f77adad78ff4cb888cb4e339eb62151dbf37a7fcd3ea30eb442e
 
 die() { echo "ERROR: $*" >&2; exit 1; }
 info() { echo "[+] $*"; }

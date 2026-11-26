@@ -84,6 +84,21 @@ class CapacityTest(unittest.TestCase):
                 self.assertGreaterEqual(sized["contexts"], max_num_seqs)
                 self.assertEqual(sized["every_sequence_tokens"], 1_000_000)
 
+    def test_site_pool_for_eight_requests(self):
+        geo = kv_capacity.geometry(MODEL, block_size=256, drafts=5)
+        sizing = {
+            "max_model_len": 1_000_000,
+            "max_num_batched_tokens": 16_384,
+            "max_num_seqs": 8,
+            "kv_cache_memory_bytes": 17_716_740_096,
+        }
+        self.assertEqual(
+            kv_capacity.required_kv_cache_bytes(
+                geo, sizing, drafts=5, maximum_bytes=17_716_740_096
+            ),
+            8_076_928_000,
+        )
+
     def test_site_pool_never_exceeds_the_upstream_capacity(self):
         geo = kv_capacity.geometry(MODEL, block_size=256, drafts=5)
         sizing = {

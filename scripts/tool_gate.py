@@ -506,6 +506,7 @@ def post_chat(
     *,
     temperature: float,
     max_tokens: int,
+    api_key: str | None = None,
     tools: list[dict[str, Any]] | None = None,
     tool_choice: Any = None,
     timeout: float = 120.0,
@@ -523,7 +524,10 @@ def post_chat(
     req = urllib.request.Request(
         f"{base_url.rstrip('/')}/chat/completions",
         data=json.dumps(body).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
+        headers={
+            "Content-Type": "application/json",
+            **({"Authorization": f"Bearer {api_key}"} if api_key else {}),
+        },
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8"))
@@ -535,6 +539,7 @@ def run_model_gate(
     temperature: float,
     max_tokens: int,
     timeout: float,
+    api_key: str | None = None,
 ) -> dict[str, Any]:
     scenarios = build_scenarios()
     results: list[dict[str, Any]] = []
@@ -546,6 +551,7 @@ def run_model_gate(
             sc["messages"],
             temperature=temperature,
             max_tokens=max_tokens,
+            api_key=api_key,
             tools=sc.get("tools"),
             tool_choice=sc.get("tool_choice"),
             timeout=timeout,
@@ -572,6 +578,7 @@ def run_model_gate(
                 follow_msgs,
                 temperature=temperature,
                 max_tokens=max_tokens,
+                api_key=api_key,
                 tools=sc.get("tools"),
                 timeout=timeout,
             )
@@ -621,6 +628,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--max-tokens", type=int, default=1024)
     parser.add_argument("--timeout", type=float, default=120.0)
+    parser.add_argument(
+        "--api-key",
+        default=os.environ.get("OPENAI_API_KEY", ""),
+        help="Bearer token for the OpenAI-compatible endpoint (default: OPENAI_API_KEY)",
+    )
     parser.add_argument("--out", help="Optional JSON report path")
     args = parser.parse_args(argv)
 
@@ -637,7 +649,9 @@ def main(argv: list[str] | None = None) -> int:
     for temp in temps:
         for model in models:
             try:
-                run = run_model_gate(args.base, model, temp, args.max_tokens, args.timeout)
+                run = run_model_gate(
+                    args.base, model, temp, args.max_tokens, args.timeout, args.api_key
+                )
             except (urllib.error.URLError, TimeoutError, KeyError, json.JSONDecodeError) as exc:
                 print(f"ERROR: {model} @ temp={temp}: {exc}", file=sys.stderr)
                 return 2

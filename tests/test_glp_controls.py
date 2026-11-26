@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -33,14 +34,20 @@ class GlpAlphaRecipeAndReaderTest(unittest.TestCase):
 
     def test_glp_alpha_renders_env_and_reader_command(self):
         base = self._resolved()
-        self.assertNotIn("WEIGHTLESS_STEER_ALPHA", base["environment"])
-        self.assertNotIn("--env", spark_config.glp_reader_command(base, "/host/v.gguf"))
+        self.assertEqual(base["environment"]["WEIGHTLESS_STEER_ALPHA"], "2.0")
+        base_cmd = spark_config.glp_reader_command(base, "/host/v.gguf")
+        self.assertIn("--env", base_cmd)
+        self.assertIn("WEIGHTLESS_STEER_ALPHA=2.0", base_cmd)
 
-        dosed = self._resolved(lambda r: r["glp"].update(alpha=2.0))
-        self.assertEqual(dosed["environment"]["WEIGHTLESS_STEER_ALPHA"], "2.0")
+        unpinned = self._resolved(lambda r: r["glp"].pop("alpha", None))
+        self.assertNotIn("WEIGHTLESS_STEER_ALPHA", unpinned["environment"])
+        self.assertNotIn("--env", spark_config.glp_reader_command(unpinned, "/host/v.gguf"))
+
+        dosed = self._resolved(lambda r: r["glp"].update(alpha=1.5))
+        self.assertEqual(dosed["environment"]["WEIGHTLESS_STEER_ALPHA"], "1.5")
         cmd = spark_config.glp_reader_command(dosed, "/host/v.gguf")
         self.assertIn("--env", cmd)
-        self.assertIn("WEIGHTLESS_STEER_ALPHA=2.0", cmd)
+        self.assertIn("WEIGHTLESS_STEER_ALPHA=1.5", cmd)
 
     def test_glp_alpha_rejects_invalid_and_hand_written_values(self):
         for bad in ("2.0", 0, -1, True, float("inf"), float("nan")):
@@ -52,6 +59,35 @@ class GlpAlphaRecipeAndReaderTest(unittest.TestCase):
 
         with self.assertRaisesRegex(SystemExit, "does not set them itself"):
             self._resolved(hand_written)
+
+    def test_launcher_uses_the_recipe_glp_file(self):
+        launcher = (ROOT / "start-tp4.sh").read_text(encoding="utf-8")
+        glp = self.recipe["glp"]
+        self.assertIn(f"models--{glp['repo'].replace('/', '--')}", launcher)
+        self.assertIn(glp["revision"], launcher)
+        self.assertIn(glp["file"], launcher)
+        self.assertIn(glp["sha256"], launcher)
+
+    def test_site_env_template_matches_rendered_glp_environment(self):
+        """站点固定模板必须是 recipe.resolve 的 GLP 面的镜像，否则 alpha 会被白名单丢弃。"""
+        resolved = self._resolved()["environment"]
+        template = {}
+        for raw in (ROOT / ".env.deepseek.example").read_text(encoding="utf-8").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#") or line.startswith(("source ", ". ")):
+                continue
+            key, separator, value = line.partition("=")
+            if not separator:
+                continue
+            tokens = shlex.split(value) if value else []
+            template[key] = tokens[0] if tokens else ""
+        for key in (
+            "WEIGHTLESS_STEER_PATH",
+            "WEIGHTLESS_STEER_MODEL",
+            "WEIGHTLESS_STEER_ALPHA",
+            "WEIGHTLESS_STEER_GENERATION_DEFAULTS",
+        ):
+            self.assertEqual(template.get(key), resolved.get(key), key)
 
     def test_glp_alpha_overlay_set_and_unset(self):
         base = self._resolved()
@@ -141,6 +177,36 @@ class BenchIdentityGlpTest(unittest.TestCase):
 
 
 class ToolGateScoringTest(unittest.TestCase):
+    def test_tool_gate_sends_bearer_token(self):
+        captured = {}
+
+        class Response:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b'{"choices":[]}'
+
+        def fake_urlopen(request, timeout):
+            captured["request"] = request
+            captured["timeout"] = timeout
+            return Response()
+
+        with mock.patch.object(tool_gate.urllib.request, "urlopen", side_effect=fake_urlopen):
+            tool_gate.post_chat(
+                "http://127.0.0.1:8888/v1",
+                "deepseek-v4.1-flash",
+                [{"role": "user", "content": "hello"}],
+                temperature=0.0,
+                max_tokens=1,
+                api_key="secret",
+            )
+
+        self.assertEqual(captured["request"].get_header("Authorization"), "Bearer secret")
+
     def test_scenarios_are_well_formed(self):
         scenarios = tool_gate.build_scenarios()
         self.assertGreaterEqual(len(scenarios), 20)

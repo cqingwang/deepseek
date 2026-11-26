@@ -1,0 +1,386 @@
+{
+  "schema": "spark-ds41f-deployment-record/1",
+  "date": "2026-11-26",
+  "source": {
+    "root": "/Users/chan/Documents/project/doc/spark",
+    "target_commit": "bbbebe654ec4b7d71263a1613bb8197b3229c7e3",
+    "target_dirty": true,
+    "dirty_note": "471 staged/modified entries including official 1126 merge; user inkling WIP preserved locally and not synced",
+    "remote_source_mirror": "/opt/spark"
+  },
+  "image": {
+    "tag": "spark-ds41f:x1126",
+    "official_alias": "spark-ds41f:1126",
+    "id": "sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a",
+    "size": "27.2GB",
+    "build_elapsed_seconds": 717,
+    "min_available_gib": 78.7,
+    "labels": {
+      "local.spark-ds41f.vllm.tree": "f3783b0ec61851ba481f6a3a316d0a76d0e171d8",
+      "local.spark-ds41f.vllm.patch-head": "d8784b841c360f523ec20e44bf8fb0898f36d3e4",
+      "local.spark-ds41f.sparknet.tree": "1739407706277142da7a12c95fca3c503c8cb11c",
+      "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
+      "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
+      "local.spark-ds41f.cuda.version": "13.5.37",
+      "ai.vllm.build.commit": "af1c01499b289be555c475669ba50a88e96d846e"
+    },
+    "nodes": {
+      "spark-a": "sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a",
+      "spark-b": "sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a",
+      "spark-c": "sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a",
+      "spark-d": "sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a"
+    },
+    "distribution": "A -> B -> C -> D, docker save | ssh docker load over fabric links 10.251.20.2/.6/.10"
+  },
+  "glp": {
+    "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5",
+    "revision": "4d570926e9dd4fa7247d126072c34e249c89abd7",
+    "file": "glp.deepseek-v41-flash-1017-GLP-27-L11-37-a3.5.gguf",
+    "sha256": "24e97d41a9a4f77adad78ff4cb888cb4e339eb62151dbf37a7fcd3ea30eb442e",
+    "alpha": 2.0,
+    "spec_version": 3,
+    "layers": "27 [11..37]",
+    "observed": "alpha=2.0 (alpha_default=3.5, source=override)"
+  },
+  "config": {
+    "business": {
+      "max_request": 8,
+      "max_token": 1000000,
+      "max_tokens": 65536,
+      "max_num_batched_tokens": 16384,
+      "default_thinking": false,
+      "reasoning_effort": 50,
+      "master_port": 25000,
+      "max_images_per_request": 67,
+      "num_speculative_tokens": 5
+    },
+    "runtime": {
+      "max_num_seqs": 8,
+      "max_model_len": 1000000,
+      "max_num_batched_tokens": 16384,
+      "kv_cache_memory_bytes": 8076928000,
+      "long_prefill_token_threshold": 16336,
+      "max_cudagraph_capture_size": 48,
+      "port": 8888,
+      "limit_mm_per_prompt": {
+        "image": 67
+      },
+      "default_chat_template_kwargs": {
+        "enable_thinking": false,
+        "reasoning_effort": 50
+      }
+    },
+    "kv_pool": {
+      "tokens": 7991241,
+      "max_concurrency_1m": 7.99,
+      "rank0_gib": 7.52,
+      "rank0_free_gib": 26.83,
+      "relative_upstream_release_bytes": 9639812096
+    },
+    "shas": {
+      "local_config_wip": "013f6bdcb6de7648bf52f99da7c42c40c4c828e3f7ed89421fe360ad5926a2ab",
+      "remote_production_config": "a487bcdb7c33bee1e6b283d067979de35741cc31c0a7b4299a1922479e821212",
+      "cluster_json": "50bdd336e5775e376be5a8a13350b3156214b4a1c9e23c34a4833eb680f028ec",
+      "start_tp4": "4fbb1c2e4f642563eb3053f51c46a00a1ff1832a54b26a82f5662a618b52c92e",
+      "env_example": "c3f90e0cb58f55e78a6633d940ddbe8ce82674227b7908d6f69dca9348206bd1",
+      "site_overlay": "c5549ecdb199efcfedf171330de550e04045bc585b97b1f681aa29263251c169",
+      "site_nodes": "f1eee7c904d26f31e96b211ddfed790c78680c66131047145950ceae365b9d23"
+    }
+  },
+  "validation": {
+    "doctor_live": "configuration OK; live cluster matches with 8 warnings",
+    "tool_gate": "80/80 strict PASS, 0 derailments",
+    "determinism": "identical=true; 6 scenarios; 0 token diffs; 0 logprob diffs",
+    "api_models": [
+      "deepseek-v4.1-flash",
+      "deepseek-v4.1-flash-weightless"
+    ],
+    "containers": {
+      "spark-a": "deepseek-r0 running OOM=false Restart=0",
+      "spark-b": "deepseek-r1 running OOM=false Restart=0",
+      "spark-c": "deepseek-r2 running OOM=false Restart=0",
+      "spark-d": "deepseek-r3 running OOM=false Restart=0"
+    },
+    "memguard": "four steady memguard active (3 GiB / 2s)",
+    "swap_growth_gib": 0.0,
+    "minimum_mem_available_gib": {
+      "spark-a": 21.43,
+      "spark-b": 24.9,
+      "spark-c": 25.54,
+      "spark-d": 27.15
+    }
+  },
+  "performance": {
+    "summary": "performance/summary.json",
+    "decode_all_pass": true,
+    "prefill_all_pass": false,
+    "overall_ok": false,
+    "decode": {
+      "prose-c1": {
+        "b1": 97.422,
+        "b2": 97.676,
+        "mean": 97.549,
+        "official": 89.643,
+        "floor_1pct": 88.747,
+        "delta_pct": 8.819,
+        "pass": true
+      },
+      "prose-c2": {
+        "b1": 175.569,
+        "b2": 175.52,
+        "mean": 175.544,
+        "official": 159.892,
+        "floor_1pct": 158.293,
+        "delta_pct": 9.789,
+        "pass": true
+      },
+      "prose-c4": {
+        "b1": 315.502,
+        "b2": 314.011,
+        "mean": 314.757,
+        "official": 306.615,
+        "floor_1pct": 303.549,
+        "delta_pct": 2.655,
+        "pass": true
+      },
+      "code-c1": {
+        "b1": 148.432,
+        "b2": 148.882,
+        "mean": 148.657,
+        "official": 113.322,
+        "floor_1pct": 112.189,
+        "delta_pct": 31.181,
+        "pass": true
+      },
+      "code-c2": {
+        "b1": 212.545,
+        "b2": 212.272,
+        "mean": 212.409,
+        "official": 186.125,
+        "floor_1pct": 184.264,
+        "delta_pct": 14.121,
+        "pass": true
+      },
+      "code-c4": {
+        "b1": 451.954,
+        "b2": 451.486,
+        "mean": 451.72,
+        "official": 356.911,
+        "floor_1pct": 353.342,
+        "delta_pct": 26.564,
+        "pass": true
+      }
+    },
+    "prefill": {
+      "32768": {
+        "b1": 9370.7,
+        "b2": 9369.9,
+        "mean": 9370.3,
+        "official": 9729.189,
+        "floor_1pct": 9631.9,
+        "delta_pct": -3.689,
+        "pass": false
+      },
+      "131072": {
+        "b1": 9765.1,
+        "b2": 9793.2,
+        "mean": 9779.1,
+        "official": 10272.493,
+        "floor_1pct": 10169.8,
+        "delta_pct": -4.803,
+        "pass": false
+      },
+      "262144": {
+        "b1": 9811.0,
+        "b2": 9815.2,
+        "mean": 9813.1,
+        "official": 10252.712,
+        "floor_1pct": 10150.2,
+        "delta_pct": -4.288,
+        "pass": false
+      },
+      "524288": {
+        "b1": 9668.5,
+        "b2": 9676.5,
+        "mean": 9672.5,
+        "official": 10067.243,
+        "floor_1pct": 9966.6,
+        "delta_pct": -3.921,
+        "pass": false
+      },
+      "1000000": {
+        "b1": 9313.9,
+        "b2": 9335.0,
+        "mean": 9324.5,
+        "official": 9685.897,
+        "floor_1pct": 9589.0,
+        "delta_pct": -3.731,
+        "pass": false
+      }
+    },
+    "diagnostics": {
+      "source_text_prompt_tokens": {
+        "b1": {
+          "32768": {
+            "samples": [
+              36341,
+              28994,
+              30725
+            ],
+            "mean": 32020.0
+          },
+          "131072": {
+            "samples": [
+              120365,
+              115246,
+              118822
+            ],
+            "mean": 118144.3
+          },
+          "262144": {
+            "samples": [
+              236536,
+              249000,
+              238358
+            ],
+            "mean": 241298.0
+          },
+          "524288": {
+            "samples": [
+              478323,
+              476373,
+              474488
+            ],
+            "mean": 476394.7
+          },
+          "1000000": {
+            "samples": [
+              909701,
+              917995,
+              907876
+            ],
+            "mean": 911857.3
+          }
+        },
+        "b2": {
+          "32768": {
+            "samples": [
+              28183,
+              28725,
+              29834
+            ],
+            "mean": 28914.0
+          },
+          "131072": {
+            "samples": [
+              121605,
+              120793,
+              121185
+            ],
+            "mean": 121194.3
+          },
+          "262144": {
+            "samples": [
+              235335,
+              238021,
+              248564
+            ],
+            "mean": 240640.0
+          },
+          "524288": {
+            "samples": [
+              480578,
+              476863,
+              466370
+            ],
+            "mean": 474603.7
+          },
+          "1000000": {
+            "samples": [
+              912835,
+              911020,
+              914896
+            ],
+            "mean": 912917.0
+          }
+        },
+        "official_suite": {
+          "32768": {
+            "samples": [],
+            "mean": null
+          },
+          "131072": {
+            "samples": [],
+            "mean": null
+          },
+          "262144": {
+            "samples": [],
+            "mean": null
+          },
+          "524288": {
+            "samples": [],
+            "mean": null
+          },
+          "1000000": {
+            "samples": [],
+            "mean": null
+          }
+        }
+      },
+      "filler_prefill": {
+        "32768": {
+          "mean": 9933.0,
+          "official": 10237.419,
+          "delta_pct": -2.974
+        },
+        "131072": {
+          "mean": 10360.6,
+          "official": 10637.932,
+          "delta_pct": -2.607
+        }
+      },
+      "control_c32_source_prefill_from_log": {
+        "32768": 9446,
+        "131072": 9874,
+        "262144": 9847,
+        "524288": 9722,
+        "1000000": 9389
+      },
+      "notes": [
+        "Decode uses decode_window_tps; step_ms regressions come from higher speculative acceptance (tokens_per_step 2.7/4.5 vs reference 2.3/3.9), not from lower throughput.",
+        "Source-text prefill is ~3.7-4.8% below the README table; the host-side Sonar source_text corpus tokenizes to fewer prompt tokens than the official suite (1M: ~911k vs ~995k).",
+        "Filler prefill is host-independent: 32K 9933 vs official manifest 10237 (-3.0%), 131K 10361 vs 10638 (-2.6%).",
+        "A control boot with the official 32-concurrency / 16.5 GiB KV / capture-192 config only improved prefill by ~0.5-1%, so the 8-concurrency scheme is not the main cause.",
+        "The remaining gap is attributable to the site /30 switchless ring and source-corpus/tokenization differences; official environment keys/values match 88/88."
+      ]
+    },
+    "raw": {
+      "b1_decode": "performance/run-01/bench.json",
+      "b1_prefill": "performance/run-01/prefill-bench.json",
+      "b2": "performance/run-02/bench.json",
+      "filler_prefill": "performance/filler-prefill-bench.json",
+      "control_c32_prefill": "performance/control-c32-prefill-bench.json"
+    }
+  },
+  "fixes": {
+    "glp_alpha": "`WEIGHTLESS_STEER_ALPHA=2.0` added to .env.deepseek.example; before this the container stayed at file default 3.5",
+    "sync_node_map": "sync_to.sh target --delete now excludes config/nodes.json, config/site.json and *.local.json; regression tests in tests/test_sync_to_safety.py",
+    "site_node_map": "spark-d /30 network CIDRs and peer HCA mapping corrected to common.ring and actual RoCE GIDs; doctor live passes",
+    "bench_auth": "bench/determinism require SPARK_DS41F_API_KEY=deepseek",
+    "bench_suites": "prefill must be requested explicitly: --suites quality,decode,prefill (default is quality,decode)",
+    "bench_url": "site port is 8888; pass --url http://127.0.0.1:8888",
+    "doctor_git": "live doctor/bench need git ls-files; source mirror has no .git, so a temporary index/snapshot is required for those diagnostics and was removed after use"
+  },
+  "notes": [
+    "bge was not part of this acceptance; per user instruction it is not managed by this deployment.",
+    "The 8-concurrency fixed KV pool is 8,076,928,000 bytes; rank0 reports 7.52 GiB KV and 26.83 GiB free.",
+    "Prefill did not meet the plan 1% floor; root-cause evidence is recorded in performance/summary.json."
+  ],
+  "wrap_up": {
+    "recipient": "best validated recipe",
+    "retained": "official 1126 environment 88/88 + site overlay + max_request=8 fixed KV 8076928000 + batch 16384 + capture 48 + GLP-27 alpha 2.0",
+    "not_applied": "x1030-era 8 MiB all-gather (+0.2% alone), QPS=4 (negative), 8 MiB NCCL buffer (negative); 32-concurrency/capture-192 control was diagnostic only",
+    "final_state": "four deepseek ranks running OOM=false Restart=0; API 200"
+  }
+}

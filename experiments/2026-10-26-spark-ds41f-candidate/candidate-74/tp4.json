@@ -1,0 +1,17 @@
+{
+  "notes": "candidate-74 at tp4-ring: vLLM 0001..0869 (tree f3783b0ec618); identical runtime config to candidate-69-r2; PR #1319 GLP-27 alpha=2.0 / 0.3/0.95 defaults",
+  "extends": {
+    "config": "releases/spark-ds41f-1126/cluster.json",
+    "shape": "tp4-ring"
+  },
+  "set": {
+    "container": {
+      "image": "spark-ds41f:candidate-74",
+      "expected_labels": {
+        "local.spark-ds41f.vllm.tree": "f3783b0ec61851ba481f6a3a316d0a76d0e171d8",
+        "local.spark-ds41f.sparknet.tree": "1739407706277142da7a12c95fca3c503c8cb11c"
+      }
+    },
+    "upstreams_config": "experiments/2026-10-26-spark-ds41f-candidate/candidate-74/upstreams.lock.json"
+  }
+}

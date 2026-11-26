@@ -78,6 +78,12 @@ LOCAL_STRIP_FABRIC_KEYS = (
     "SPARKNET_ROCE_ALLREDUCE_DISPATCH_MAX_BYTES",
     "SPARKNET_ROCE_PROXY_CPU",
     "SPARKNET_ROCE_TIMEOUT_MS",
+    "SPARKNET_ROCE_PP_PEER_HCAS",
+    "SPARKNET_ROCE_PP_HCA",
+    "SPARKNET_ROCE_PP_SLOT_BYTES",
+    "SPARKNET_ROCE_PP_PACK_BYTES",
+    "SPARKNET_ROCE_PP_TIMEOUT_MS",
+    "SPARKNET_ROCE_PP_PROXY_CPU",
 )
 # sparknet's direct / oneshot-switched fabric settings (replacing tp4-ring's 4-channel ring values).
 SWITCHED_DIRECT_ENV = {
@@ -309,6 +315,16 @@ def _with_glp(cluster: dict, previous: dict | None = None) -> None:
     rendered, mount = _glp_rendering(glp)
     environment.update(rendered)
     mounts.append(mount)
+
+
+def without_glp(cluster: dict) -> dict:
+    """The profile serving its stock model only: a copy without the ``glp`` block and
+    without the served name, variables and mount the block renders."""
+    result = copy.deepcopy(cluster)
+    glp = result.pop("glp", None)
+    if glp:
+        _with_glp(result, previous=glp)
+    return result
 
 
 def _with_generation_defaults(cluster: dict) -> None:

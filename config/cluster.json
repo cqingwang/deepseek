@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "promoted_baseline": "2026-11-22-spark-ds41f-1122",
+  "promoted_baseline": "2026-11-26-spark-ds41f-1126",
   "model": "v41-flash-1017",
   "models": {
     "v41-flash": {
@@ -20,11 +20,12 @@
   },
   "glp": {
     "served_model_name": "deepseek-v4.1-flash-weightless",
-    "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-39-L1-39-a0.75",
-    "revision": "2715ffd51f59899115853e1118db080536966c44",
-    "file": "glp.deepseek-v41-flash-1017-GLP-39-L1-39-a0.75.gguf",
-    "sha256": "9c66d47701e0ceb42c33906f2d3789c0f1f16b21e7d97185f20f7f3f09fbf5cf",
-    "notes": "The published GLP vector for v41-flash-1017 (39 layers, alpha 0.75, MIT; a gated repository whose agreement the downloading account accepts). Requests to the served name are steered; the stock name beside it is unchanged.",
+    "alpha": 2.0,
+    "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5",
+    "revision": "4d570926e9dd4fa7247d126072c34e249c89abd7",
+    "file": "glp.deepseek-v41-flash-1017-GLP-27-L11-37-a3.5.gguf",
+    "sha256": "24e97d41a9a4f77adad78ff4cb888cb4e339eb62151dbf37a7fcd3ea30eb442e",
+    "notes": "The GLP spec-3 vector for v41-flash-1017 (27 layers L11-37, alpha_default 3.5; public repository). Served at alpha 2.0; stock name beside it is unchanged.",
     "generation_defaults": {
       "temperature": 0.3,
       "top_p": 0.95
@@ -32,13 +33,13 @@
   },
   "container": {
     "name": "spark-ds41f",
-    "image": "spark-ds41f:1122",
+    "image": "spark-ds41f:1126",
     "expected_labels": {
-      "local.spark-ds41f.vllm.tree": "8e0683a9276389957e49b7a26bd2bd062d788558",
+      "local.spark-ds41f.vllm.tree": "f3783b0ec61851ba481f6a3a316d0a76d0e171d8",
       "local.spark-ds41f.nccl.tree": "6af10aa730a64fcee8781d62340a9c9184e79469",
       "local.spark-ds41f.tilelang.tree": "741806c7357102130a149cdcae2a5f22678eab67",
       "local.spark-ds41f.tile_kernels.tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
-      "local.spark-ds41f.sparknet.tree": "e06f6a0675cb66638231d2c68948a2b315b69b07"
+      "local.spark-ds41f.sparknet.tree": "1739407706277142da7a12c95fca3c503c8cb11c"
     },
     "docker_run_args": [
       "--network=host",
@@ -65,7 +66,7 @@
     ]
   },
   "host": {
-    "home": "/home/swank",
+    "home": "$HOME",
     "memguard_gib": 3,
     "memguard_interval_seconds": 2,
     "startup_memguard_gib": 5,
@@ -277,7 +278,7 @@
         "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU": "0.2",
         "PYTORCH_CUDA_ALLOC_CONF": "garbage_collection_threshold:0.6"
       },
-      "benchmark_reference": "manifests/suites/2026-11-20-spark-ds41f-1120-tp4"
+      "benchmark_reference": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4"
     },
     "tp4-switched": {
       "notes": "Four nodes cabled through a switch (two ConnectX-7 paths per port); oneshot-switched profile over tp4-ring's 32-stream, 16.50 GiB KV sizing.",
@@ -445,7 +446,7 @@
       }
     },
     "tp2-direct": {
-      "notes": "Two directly cabled nodes over ConnectX-7 (oneshot-direct); 256K ctx, 4 streams, PIECEWISE graphs to 24 rows, 8.00 GiB KV, display carve-out, and 240/64 io_uring expert slot cache.",
+      "notes": "Two directly cabled nodes over ConnectX-7 (oneshot-direct); 256K ctx, 4 streams, PIECEWISE graphs to 24 rows, 6.00 GiB KV (6.44M tok, 24.58x 256K), 8K batched, adaptive verification (row_cost=0.25, DEAD_ROWS_TAU=0.45), expert-centric prefill streaming (0858/0865), 240/64 io_uring expert slot cache with bundled multidomain hotlist and BF16 fast lookahead (0863).",
       "nodes": 2,
       "engram_on_disk": true,
       "nodes_config": "config/nodes-direct2.local.json",
@@ -455,14 +456,14 @@
       "sizing": {
         "max_model_len": 262144,
         "max_num_seqs": 4,
-        "max_num_batched_tokens": 4096,
-        "kv_cache_memory_bytes": 8589934592,
+        "max_num_batched_tokens": 8192,
+        "kv_cache_memory_bytes": 6442450944,
         "prefix_cache_retention_interval": 8192
       },
       "cudagraph_mode": "PIECEWISE",
       "speculative": {
-        "enable_adaptive_verification": false,
-        "adaptive_verification_row_cost": null
+        "enable_adaptive_verification": true,
+        "adaptive_verification_row_cost": 0.25
       },
       "environment": {
         "NCCL_ALGO": "Ring",
@@ -500,13 +501,16 @@
         "VLLM_DS41_EXPERT_PREFILL_PROTECT_ROWS": "24",
         "VLLM_DS41_EXPERT_SLOTS": "240",
         "VLLM_DS41_L2_PREFETCH_WO_BANDS": "17-32=12",
-        "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU": "0.2",
-        "PYTORCH_CUDA_ALLOC_CONF": "garbage_collection_threshold:0.6"
+        "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU": "0.45",
+        "PYTORCH_CUDA_ALLOC_CONF": "garbage_collection_threshold:0.6",
+        "VLLM_DS41_EXPERT_FAST_LOOKAHEAD": "1",
+        "VLLM_DS41_EXPERT_HOTLIST": "multidomain",
+        "VLLM_DS41_EXPERT_HOTLIST_MODE": "pure"
       },
-      "benchmark_reference": "manifests/benchmarks/2026-11-20-spark-ds41f-1120-direct2.json"
+      "benchmark_reference": "manifests/benchmarks/2026-11-26-spark-ds41f-1126-direct2.json"
     },
     "tp2-switched": {
-      "notes": "Two nodes cabled through a switch; oneshot-switched profile over tp2-direct's 256K sizing, PIECEWISE graphs, carve-out, and 240/64 io_uring expert slot cache.",
+      "notes": "Two nodes on a switched fabric (oneshot-switched); 256K ctx, 4 streams, PIECEWISE graphs to 24 rows, 6.00 GiB KV, 8K batched, adaptive verification (row_cost=0.25, DEAD_ROWS_TAU=0.45), expert-centric prefill streaming (0858/0865), 240/64 io_uring expert slot cache with multidomain hotlist and BF16 fast lookahead (0863).",
       "extends": "tp2-direct",
       "engram_on_disk": true,
       "nodes_config": "config/nodes-switched2.local.json",
@@ -524,7 +528,7 @@
       "benchmark_reference": "manifests/benchmarks/2026-11-20-spark-ds41f-1120-switched2.json"
     },
     "tp1": {
-      "notes": "Single-node local deployment (distributed_executor_backend uni, RDMA stripped); 256K ctx, 4 streams, PIECEWISE graphs to 24 rows, 8.00 GiB KV, and 96/48 io_uring expert slot cache.",
+      "notes": "Single DGX Spark (local uni executor, no RoCE); 256K ctx, 4 streams, PIECEWISE graphs to 24 rows, 6.00 GiB KV (6.44M tok, 24.58x 256K), 8K batched, adaptive verification (row_cost=0.5, DEAD_ROWS_TAU=0.6), expert-centric prefill streaming (0858), 108/48 io_uring expert slot cache with bundled multidomain hotlist and BF16 fast lookahead (0863).",
       "nodes": 1,
       "engram_on_disk": true,
       "nodes_config": "config/nodes-tp1.local.json",
@@ -534,8 +538,8 @@
       "sizing": {
         "max_model_len": 262144,
         "max_num_seqs": 4,
-        "max_num_batched_tokens": 4096,
-        "kv_cache_memory_bytes": 8589934592,
+        "max_num_batched_tokens": 8192,
+        "kv_cache_memory_bytes": 6442450944,
         "prefix_cache_retention_interval": 8192
       },
       "cudagraph_mode": "PIECEWISE",
@@ -553,15 +557,18 @@
         "VLLM_DS41_EXPERT_CACHE_DIR": "/cache/ds41_expert_slots",
         "VLLM_DS41_EXPERT_DYNAMIC_SLOTS": "48",
         "VLLM_DS41_EXPERT_PREFILL_PROTECT_ROWS": "24",
-        "VLLM_DS41_EXPERT_SLOTS": "96",
+        "VLLM_DS41_EXPERT_SLOTS": "108",
         "VLLM_DS41_L2_PREFETCH_WO_BANDS": "17-32=12",
         "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU": "0.6",
-        "PYTORCH_CUDA_ALLOC_CONF": "garbage_collection_threshold:0.6"
+        "PYTORCH_CUDA_ALLOC_CONF": "garbage_collection_threshold:0.6",
+        "VLLM_DS41_EXPERT_FAST_LOOKAHEAD": "1",
+        "VLLM_DS41_EXPERT_HOTLIST": "multidomain",
+        "VLLM_DS41_EXPERT_HOTLIST_MODE": "pure"
       },
-      "benchmark_reference": "manifests/benchmarks/2026-11-20-spark-ds41f-1120-tp1.json"
+      "benchmark_reference": "manifests/benchmarks/2026-11-26-spark-ds41f-1126-tp1.json"
     },
     "pp2-tp2-ring": {
-      "notes": "Four nodes in a cable ring arranged as PP=2, TP=2 (oneshot-pp2-ring4: dual-stripe sparknet TP=2 pairs on adjacent links plus dual-stripe NCCL RoCE PP=2 across stages). 32 concurrent streams (CUDA graphs up to 192 rows), 16.50 GiB KV pool, 16K batched, 1M context, disk Engram, balanced V2+PP+async decode microbatches (0854).",
+      "notes": "Four nodes in a cable ring arranged as PP=2, TP=2 (oneshot-pp2-ring4: dual-stripe sparknet TP=2 pairs on adjacent links plus sparknet v0.6.0 one-shot P2P across stages). 32 concurrent streams (CUDA graphs up to 192 rows), 24.0 GiB KV pool (30.70M tokens), 16K batched, 1M context, disk Engram, async zero-sync PP adaptive verification (row_cost=0.25), VLLM_SINK_REJECTION=1, SPARK_DS41F_PP_USE_ENGINE_REQS=1, and intra-stage SP (0859).",
       "extends": "tp4-ring",
       "nodes": 4,
       "pipeline_parallel_size": 2,
@@ -571,13 +578,18 @@
         "transport": "oneshot-pp2-ring4"
       },
       "speculative": {
-        "enable_adaptive_verification": false,
-        "adaptive_verification_row_cost": null
+        "enable_adaptive_verification": true,
+        "adaptive_verification_row_cost": 0.25
       },
       "environment": {
-        "VLLM_SINK_REJECTION": "0"
+        "VLLM_PP_SPARKNET_P2P": "1",
+        "VLLM_SINK_REJECTION": "1",
+        "SPARK_DS41F_PP_USE_ENGINE_REQS": "1"
       },
-      "benchmark_reference": "manifests/benchmarks/2026-11-22-spark-ds41f-1122-pp2tp2ring.json"
+      "benchmark_reference": "manifests/benchmarks/2026-11-26-spark-ds41f-1126-pp2tp2ring.json",
+      "sizing": {
+        "kv_cache_memory_bytes": 25769803776
+      }
     },
     "pp2-tp2-switched": {
       "notes": "Four nodes on a switched fabric arranged as PP=2, TP=2 (oneshot-switched). 32 concurrent streams (CUDA graphs up to 192 rows), 16.50 GiB KV pool, 16K batched, 1M context, disk Engram.",
@@ -587,11 +599,16 @@
       "engram_on_disk": true,
       "nodes_config": "config/nodes-switched.local.json",
       "speculative": {
-        "enable_adaptive_verification": false,
-        "adaptive_verification_row_cost": null
+        "enable_adaptive_verification": true,
+        "adaptive_verification_row_cost": 0.25
       },
       "environment": {
-        "VLLM_SINK_REJECTION": "0"
+        "VLLM_PP_SPARKNET_P2P": "1",
+        "VLLM_SINK_REJECTION": "1",
+        "SPARK_DS41F_PP_USE_ENGINE_REQS": "1"
+      },
+      "sizing": {
+        "kv_cache_memory_bytes": 25769803776
       }
     },
     "pp2-tp3-switched": {
@@ -603,14 +620,16 @@
       "nodes_config": "config/nodes-switched6.local.json",
       "sizing": {
         "max_num_batched_tokens": 24576,
-        "kv_cache_memory_bytes": 17716740096
+        "kv_cache_memory_bytes": 25769803776
       },
       "speculative": {
-        "enable_adaptive_verification": false,
-        "adaptive_verification_row_cost": null
+        "enable_adaptive_verification": true,
+        "adaptive_verification_row_cost": 0.25
       },
       "environment": {
-        "VLLM_SINK_REJECTION": "0"
+        "VLLM_PP_SPARKNET_P2P": "1",
+        "VLLM_SINK_REJECTION": "1",
+        "SPARK_DS41F_PP_USE_ENGINE_REQS": "1"
       }
     },
     "pp2-tp4-switched": {
@@ -621,11 +640,16 @@
       "engram_on_disk": true,
       "nodes_config": "config/nodes-switched8.local.json",
       "speculative": {
-        "enable_adaptive_verification": false,
-        "adaptive_verification_row_cost": null
+        "enable_adaptive_verification": true,
+        "adaptive_verification_row_cost": 0.25
       },
       "environment": {
-        "VLLM_SINK_REJECTION": "0"
+        "VLLM_PP_SPARKNET_P2P": "1",
+        "VLLM_SINK_REJECTION": "1",
+        "SPARK_DS41F_PP_USE_ENGINE_REQS": "1"
+      },
+      "sizing": {
+        "kv_cache_memory_bytes": 38654705664
       }
     }
   }

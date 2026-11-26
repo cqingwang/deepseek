@@ -493,9 +493,9 @@ class RecipeTest(unittest.TestCase):
             "tp3-triangle": ("16", "96", triangle_16, "6048", "FULL_AND_PIECEWISE"),
             "tp3-switched": ("16", "96", triangle_16, "6048", "FULL_AND_PIECEWISE"),
             "tp3-triangle-4k": ("8", "48", triangle, "4048", "FULL_AND_PIECEWISE"),
-            "tp2-direct": ("4", "24", piecewise_24, "4072", "PIECEWISE"),
-            "tp2-switched": ("4", "24", piecewise_24, "4072", "PIECEWISE"),
-            "tp1": ("4", "24", piecewise_24, "4072", "PIECEWISE"),
+            "tp2-direct": ("4", "24", piecewise_24, "8168", "PIECEWISE"),
+            "tp2-switched": ("4", "24", piecewise_24, "8168", "PIECEWISE"),
+            "tp1": ("4", "24", piecewise_24, "8168", "PIECEWISE"),
             "pp2-tp2-ring": ("32", "192", tp4_ladder, "16192", "FULL_AND_PIECEWISE"),
             "pp2-tp2-switched": ("32", "192", tp4_ladder, "16192", "FULL_AND_PIECEWISE"),
             "pp2-tp3-switched": ("32", "192", tp4_ladder, "24384", "FULL_AND_PIECEWISE"),
@@ -596,8 +596,8 @@ class RecipeTest(unittest.TestCase):
                     "tp7-switched": ("32768", "32576"), "tp8-switched": ("32768", "32576"),
                     "tp3-triangle": ("6144", "6048"), "tp3-switched": ("6144", "6048"),
                     "tp3-triangle-4k": ("4096", "4048"),
-                    "tp2-direct": ("4096", "4072"), "tp2-switched": ("4096", "4072"),
-                    "tp1": ("4096", "4072"),
+                    "tp2-direct": ("8192", "8168"), "tp2-switched": ("8192", "8168"),
+                    "tp1": ("8192", "8168"),
                     "pp2-tp2-ring": ("16384", "16192"), "pp2-tp2-switched": ("16384", "16192"),
                     "pp2-tp3-switched": ("24576", "24384"), "pp2-tp4-switched": ("32768", "32576")}
         self.assertEqual(set(self.recipe["shapes"]), set(expected))
@@ -700,7 +700,8 @@ class RecipeTest(unittest.TestCase):
                 else:
                     self.assertNotIn(key, env, (name, key))
         # TP4..8 switched shapes render identical environments; TP3 differs only on carve-out,
-        # WO band, and the 4 MiB collective cap; TP2 further adds the io_uring expert-slot cache.
+        # WO band, and the 4 MiB collective cap; TP2 further adds the io_uring expert-slot cache
+        # and its calibrated TP2 dead-row threshold (SPARK_DS41F_DSPARK_DEAD_ROWS_TAU=0.45).
         tp4_env = resolved_envs["tp4-switched"]
         for name in ("tp5-switched", "tp6-switched", "tp7-switched", "tp8-switched"):
             self.assertEqual(resolved_envs[name], tp4_env, name)
@@ -710,9 +711,12 @@ class RecipeTest(unittest.TestCase):
             {k: v for k, v in resolved_envs["tp3-switched"].items() if k not in tp3_diff},
             {k: v for k, v in tp4_env.items() if k not in tp3_diff},
         )
+        self.assertEqual(resolved_envs["tp2-switched"]["SPARK_DS41F_DSPARK_DEAD_ROWS_TAU"], "0.45")
         self.assertEqual(
-            {k: v for k, v in resolved_envs["tp2-switched"].items() if not k.startswith("VLLM_DS41_EXPERT_")},
-            resolved_envs["tp3-switched"],
+            {k: v for k, v in resolved_envs["tp2-switched"].items()
+             if not k.startswith("VLLM_DS41_EXPERT_") and k != "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU"},
+            {k: v for k, v in resolved_envs["tp3-switched"].items()
+             if k != "SPARK_DS41F_DSPARK_DEAD_ROWS_TAU"},
         )
         # Mutating tp3-triangle's environment does not move tp3-switched's direct profile.
         mutated = json.loads(json.dumps(self.recipe))

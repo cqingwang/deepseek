@@ -1,0 +1,30 @@
+{
+  "experiment": "experiments/2026-10-26-spark-ds41f-candidate/candidate-74",
+  "run": "candidate-74-image",
+  "jobs": [
+    {
+      "kind": "sync"
+    },
+    {
+      "kind": "image",
+      "config": "image-dgx4.json",
+      "node": "dgx4",
+      "copies": [
+        [
+          "dgx4",
+          "dgx3-internal"
+        ],
+        [
+          "dgx3",
+          "dgx2-internal"
+        ],
+        [
+          "dgx2",
+          "dgx1-internal"
+        ]
+      ],
+      "remove_stopped": true
+    }
+  ],
+  "digest": "sha256:94fff0b0b6ffa8ecd7bca576abf1d6c6be17f10c75bfc243b04d0479d356a4e7"
+}

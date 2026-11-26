@@ -1,0 +1,17 @@
+{
+  "notes": "Site x1126 deployment profile. The official 1126 config owns the vLLM surface, GLP-27 and serve args; this overlay only supplies the site container names, x1126 image tag, the /30 ring node map and the fan-control boundary.",
+  "extends": {
+    "config": "config/cluster.json",
+    "shape": "tp4-ring"
+  },
+  "set": {
+    "container": {
+      "name_pattern": "deepseek-r{rank}",
+      "image": "spark-ds41f:x1126"
+    },
+    "nodes_config": "config/nodes-ring4.local.json",
+    "host": {
+      "fan_control": false
+    }
+  }
+}
