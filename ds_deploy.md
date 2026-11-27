@@ -659,6 +659,155 @@ candidate-77 官方 README 仍把以下门禁列为 pending，x1128 必须补跑
 - `tool_gate`：`80/80 strict PASS`
 - determinism：`0` token / `0` logprob diffs
 
+### 11.5 思考/输出死循环检测补丁（强制）
+
+这是 x1128 的硬门禁，不能只看“请求最终返回了”。
+
+candidate-77 继承的 vLLM series 必须包含：
+
+- `0656`：loop detector
+- `0674`：loop detection 默认开启并加固 windowed reasoning loop
+- `0679`：reasoning parser markers / answer horizons
+
+release-tests manifest 必须包含：
+
+```text
+tests/v1/core/test_repetition_detection.py
+```
+
+检查 manifest：
+
+```bash
+cd /Users/chan/Documents/project/doc/spark/deepseek
+jq -e '.["tests/v1/core/test_repetition_detection.py"]' \
+  experiments/2026-10-26-spark-ds41f-candidate/candidate-77/release-tests-gate-manifest.json
+```
+
+检查镜像内实际代码符号：
+
+```bash
+ssh chan@192.168.2.180 '
+  docker exec deepseek-r0 python3 -c "
+from vllm.v1.core.sched.utils import check_sequence_repetition
+from vllm.v1.request import RequestStatus
+assert RequestStatus.FINISHED_REPETITION
+print(\"loop detector symbols OK\")
+"
+'
+```
+
+检查运行态 metric label：
+
+```bash
+curl -fsS \
+  -H 'Authorization: Bearer deepseek' \
+  http://127.0.0.1:8888/metrics |
+  grep 'finished_reason="repetition"'
+```
+
+当前 x1126 实测已存在：
+
+```text
+vllm:request_success_total{...,finished_reason="repetition",...} 4.0
+```
+
+x1128 必须保持同一 metric label 和检测路径。
+
+可选 live 诊断：发送一个容易重复的短请求，确认不会无限挂起：
+
+```bash
+curl -sS \
+  -H 'Authorization: Bearer deepseek' \
+  -H 'Content-Type: application/json' \
+  http://127.0.0.1:8888/v1/chat/completions \
+  -d '{
+    "model": "deepseek-v4.1-flash",
+    "messages": [{"role": "user", "content": "Repeat the token ha forever without stopping."}],
+    "max_tokens": 512,
+    "temperature": 0,
+    "chat_template_kwargs": {"thinking": true, "reasoning_effort": 50}
+  }'
+```
+
+判定：
+
+- `finish_reason="repetition"`：PASS，检测器已介入。
+- `finish_reason="stop"`：PASS，模型自然停止。
+- `finish_reason="length"`：WARN，需检查是否只是短请求被 cap 截断。
+- 请求超时、容器退出、EngineCore 崩溃：FAIL。
+
+### 11.6 输出中断 `max_output_tokens`（强制）
+
+客户端提示：
+
+```text
+Incomplete response returned, reason: max_output_tokens
+```
+
+不是网络错误，而是 Responses API 返回：
+
+```text
+status = incomplete
+incomplete_details.reason = max_output_tokens
+```
+
+先检查运行参数：
+
+```bash
+ssh chan@192.168.2.180 '
+  docker inspect deepseek-r0 --format "{{json .Args}}" |
+  python3 -c "
+import json, sys
+args = json.load(sys.stdin)
+for flag in (\"--override-generation-config\", \"--default-chat-template-kwargs\", \"--max-model-len\"):
+    i = args.index(flag)
+    print(flag, args[i + 1])
+"
+'
+```
+
+必须看到：
+
+```text
+--override-generation-config {"max_new_tokens":65536,...}
+--default-chat-template-kwargs {"enable_thinking":false,"reasoning_effort":50}
+--max-model-len 1000000
+```
+
+发送一个带 thinking 的 Responses API 请求，显式给足输出预算：
+
+```bash
+curl -sS \
+  -H 'Authorization: Bearer deepseek' \
+  -H 'Content-Type: application/json' \
+  http://127.0.0.1:8888/v1/responses \
+  -d '{
+    "model": "deepseek-v4.1-flash",
+    "input": "Write a bounded 200-word explanation of why retries need limits.",
+    "max_output_tokens": 65536,
+    "chat_template_kwargs": {"thinking": true, "reasoning_effort": 50}
+  }'
+```
+
+判定：
+
+- `status="completed"`：PASS。
+- `incomplete_details=null`：PASS。
+- `max_output_tokens=65536`：PASS。
+- `usage.output_tokens < 65536`：PASS。
+- 出现 `status="incomplete"` 且 `incomplete_details.reason="max_output_tokens"`：FAIL。
+
+如果 FAIL，按顺序排查：
+
+1. `reasoning_effort` 是否仍为 50，而不是 75/100。
+2. `max_new_tokens` 是否为 65536。
+3. `max_model_len` 是否为 1000000。
+4. `usage.output_tokens_details.reasoning_tokens` 是否接近 65536。
+5. 客户端是否把 `max_output_tokens` 映射成了更小的 `max_tokens`。
+
+如果 reasoning tokens 已接近 65536，说明是思考预算耗尽，不是传输中断；应降低
+reasoning effort、拆分任务或提高输出预算，不能只靠重试。
+
 ## 12. 两轮性能验收
 
 ### 12.1 口径
@@ -826,6 +975,12 @@ vllm/vllm-openai:nightly-af1c0149... cf41fa0cc731
 - [ ] x1128 API `/v1/models` 200
 - [ ] x1128 `tool_gate` 80/80
 - [ ] x1128 determinism 0 token / 0 logprob diffs
+- [ ] x1128 loop detector symbols 存在
+- [ ] x1128 release-tests 包含 `test_repetition_detection.py`
+- [ ] x1128 `/metrics` 存在 `finished_reason="repetition"`
+- [ ] x1128 循环诊断请求不挂起、不崩溃
+- [ ] x1128 Responses API `max_output_tokens=65536` 返回 `completed`
+- [ ] x1128 无 `incomplete_details.reason=max_output_tokens`
 - [ ] x1128 release tests 通过
 - [ ] x1128 clean-reboot `tp3-triangle` screen 通过
 - [ ] x1128 decode 两轮均值 >= 1% 下限
