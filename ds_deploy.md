@@ -1,28 +1,26 @@
-# spark/deepseek 1126 部署与验收指导
+# spark/deepseek x1128 部署与验收指导
 
 > 日期：2026-11-28
-> 状态：`spark-ds41f:x1126` 已部署并在四机运行；官方 `main@5386c71b` 已合入本地；
-> 官方生产 tag `spark-ds41f-1126@890f8654` 的镜像锁与当前生产一致。
-> 本文是当前站点部署方案，不是历史计划。`stop`、`start`、`build image --apply`、
+> 状态：当前生产仍是 `spark-ds41f:x1126`；`x1128` 目标镜像尚未构建、尚未分发、
+> 尚未部署。`x1128` 来源为官方 `main@5386c71b` / candidate-77；官方生产 tag
+> 仍是 `spark-ds41f-1126@890f8654`。
+> 本文是 x1128 部署方案。`stop`、`start`、`build image --apply`、
 > `build distribute --apply`、`sync_to.sh` 等动作仍需逐项确认后执行。
 
 ## 1. 当前结论
 
-- 源码唯一源：
-  - `/Users/chan/Documents/project/doc/spark`
-  - `/Users/chan/Documents/project/doc/spark/deepseek`
-- 父仓当前提交：`239f6fb8 Update DeepSeek deployment baseline and merge official main`
-- 子模块当前提交：`a01ac121 Merge official main into site deployment`
-- 子模块第二父提交：`5386c71b`（官方 `main`）
-- 官方生产 tag：`spark-ds41f-1126@890f8654`
+### 1.1 当前生产
+
+- 父仓当前提交：`8709b73c Update DeepSeek 1126 deployment guide pointer`
+- 子模块当前提交：`8bdbe54a Update 1126 deployment guide to current state`
 - 当前生产镜像：`spark-ds41f:x1126`
-- 官方别名：`spark-ds41f:1126`，与 `x1126` 指向同一 image ID
+- 官方别名：`spark-ds41f:1126`
 - 当前 image ID：
   `sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a`
-- 四机 `deepseek-r0..3` 均运行 `spark-ds41f:x1126`，当前 `OOMKilled=false`、
-  `RestartCount=0`
+- 四机 `deepseek-r0..3` 均运行 `spark-ds41f:x1126`
+- 当前 `OOMKilled=false`、`RestartCount=0`
 
-当前镜像锁：
+当前 x1126 镜像锁：
 
 ```text
 vLLM:        candidate-74 / 742 patches
@@ -34,40 +32,36 @@ TileKernels: 2.0.0 / cb2fa41c8af290204c81c547ed678ebf957cca53
 NCCL:        2.30.7 / 6af10aa730a64fcee8781d62340a9c9184e79469
 ```
 
-当前业务与运行参数：
+### 1.2 x1128 目标
+
+- 目标 tag：`spark-ds41f:x1128`
+- 本地别名：`spark-ds41f:1128` 可选，仅作本地别名，不是官方 release tag
+- 来源：官方 `main@5386c71b` / candidate-77
+- 站点 profile：
+  `experiments/2026-11-28-x1128/tp4-ring.json`
+- 当前四机没有 `x1128` 镜像
+- 当前父级 `spark/config.yaml` 仍指向 x1126
+
+x1128 目标锁：
 
 ```text
-max_request: 8
-max_token: 1000000
-max_tokens: 65536
-max_num_batched_tokens: 16384
-default_thinking: false
-reasoning_effort: 50
-master_port: 25000
-api_url: http://0.0.0.0:8888/v1/models
-api_key: deepseek
+vLLM:        candidate-77 / 744 patches
+patch head:  e0b964f8e6463e4a64ca91a2eaba5f0649739f12
+vLLM tree:   58f9b11080cf8ebeccd80c0ce1d9bb7a6ff4ae58
+sparknet:    v0.6.0 / 1739407706277142da7a12c95fca3c503c8cb11c
+TileLang:    0.1.16 / 16c9ce75cead3b893572b9432f2c39b662391de8
+TileLang patch head: 2ed9f9cf5f90be8513aa9350310d103a51f74a8a
+TileKernels: 2.0.0 / cb2fa41c8af290204c81c547ed678ebf957cca53
+NCCL:        2.30.7 / 6af10aa730a64fcee8781d62340a9c9184e79469
 ```
 
-当前派生 runtime：
+### 1.3 当前验收状态
 
-```text
---max-num-seqs 8
---max-model-len 1000000
---max-num-batched-tokens 16384
---kv-cache-memory-bytes 8076928000
---long-prefill-token-threshold 16336
---max-cudagraph-capture-size 48
---limit-mm-per-prompt {"image":67}
---default-chat-template-kwargs {"enable_thinking":false,"reasoning_effort":50}
---master-port 25000
-```
-
-当前验收状态：
-
-- Decode：两轮均值全部超过官方 1126 的 1% 下限，PASS。
-- Prefill：source-text 两轮均值比官方 1126 低 `3.7%–4.8%`，未达 1% 门限，HOLD。
-- 功能门禁：API、tool_gate、determinism、memguard、swap 均通过。
-- 当前生产仍是 `spark-ds41f:1126`，没有切到 candidate-75/76/77。
+- x1126 decode：两轮均值全部超过官方 1126 的 1% 下限，PASS。
+- x1126 prefill：source-text 两轮均值比官方 1126 低 `3.7%–4.8%`，HOLD。
+- x1128：尚未构建、尚未运行、尚未验收。
+- candidate-77 官方 README 仍把完整 `174` 文件 release tests 和 clean-reboot
+  `tp3-triangle` screen 列为 pending；x1128 必须补跑。
 
 ## 2. 官方最新代码与生产边界
 
@@ -75,14 +69,14 @@ api_key: deepseek
 
 - `candidate-75`：DFly2 standalone drafter，未 promotion；GB10 上明显慢于 DSpark。
 - `candidate-76`：DSpark truncated-depth CUDA graph replay + 2 MiB hugepage defrag。
-- `candidate-77`：TileLang `0.1.16` rebase。
+- `candidate-77`：TileLang `0.1.16` rebase，x1128 的来源。
 
-这些 candidate 已进入本地源码，但 `config/cluster.json` 仍是官方 1126 生产配置。
-不要因为合并了官方 `main` 就自动切换生产镜像。
+这些 candidate 已进入本地源码，但官方 `config/cluster.json` 仍是 1126 生产配置。
+x1128 是站点 candidate 部署，不是官方 production promotion。
 
 当前站点 launcher 已对齐官方新能力：
 
-- 当前 1126 没有 `drafter`，继续使用固定 1126 argv。
+- 当前 x1126 没有 `drafter`，继续使用固定 1126 argv。
 - profile 选择官方 `drafter` / `drafters` 时，launcher 使用 `recipe.resolve`
   生成的 `serve_args`，并补挂 `/hub` 或 `/drafter-*`。
 - 启动前默认调用官方 `spark_ds41f.cluster.defragment_buddy_memory`。
@@ -92,21 +86,37 @@ api_key: deepseek
 export DS41F_DEFRAGMENT_BEFORE_START=0
 ```
 
-## 3. 当前配置
+## 3. 配置口径
 
-### 3.1 父级 `spark/config.yaml`
+### 3.1 当前生产配置
 
-当前 `engines.deepseek` 已对齐：
+当前 `spark/config.yaml` 仍是：
 
 ```yaml
 image: spark-ds41f:x1126
 image_version_label: x1126
 image_id: sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a
-allow_unverified_image: true
 ds41f_config_file: experiments/2026-11-26-x1126/tp4-ring.json
 expected_image:
   source: upstreams.lock.json
   vllm_tree: f3783b0ec61851ba481f6a3a316d0a76d0e171d8
+```
+
+在 x1128 构建完成并拿到实际 image ID 前，不要改成 x1128。
+
+### 3.2 x1128 构建完成后的父级配置
+
+构建完成后改为：
+
+```yaml
+image: spark-ds41f:x1128
+image_version_label: x1128
+image_id: sha256:<X1128_IMAGE_ID>
+allow_unverified_image: true
+ds41f_config_file: experiments/2026-11-28-x1128/tp4-ring.json
+expected_image:
+  source: experiments/2026-10-26-spark-ds41f-candidate/candidate-77/upstreams.lock.json
+  vllm_tree: 58f9b11080cf8ebeccd80c0ce1d9bb7a6ff4ae58
 skip_build: true
 nnodes: 4
 tensor_parallel_size: 4
@@ -114,7 +124,30 @@ num_speculative_tokens: 5
 max_images_per_request: 67
 ```
 
-`common` 保持：
+`image_id` 必须来自本地实际构建结果，不能直接抄官方 candidate-77 的 digest。
+
+### 3.3 站点 x1128 profile
+
+`experiments/2026-11-28-x1128/tp4-ring.json` 只覆盖：
+
+```json
+{
+  "container": {
+    "name_pattern": "deepseek-r{rank}",
+    "image": "spark-ds41f:x1128"
+  },
+  "nodes_config": "config/nodes-ring4.local.json",
+  "host": {
+    "fan_control": false
+  }
+}
+```
+
+它继承官方 candidate-77 的 vLLM、TileLang、sparknet、GLP 和 serve 参数。
+
+### 3.4 业务参数
+
+保持：
 
 ```yaml
 max_request: 8
@@ -131,26 +164,7 @@ api_key: deepseek
 不要新增 `engines.deepseek.max_num_seqs`。DeepSeek 并发唯一来自
 `common.max_request`。
 
-### 3.2 站点 profile
-
-`experiments/2026-11-26-x1126/tp4-ring.json` 只覆盖：
-
-```json
-{
-  "container": {
-    "name_pattern": "deepseek-r{rank}",
-    "image": "spark-ds41f:x1126"
-  },
-  "nodes_config": "config/nodes-ring4.local.json",
-  "host": {
-    "fan_control": false
-  }
-}
-```
-
-官方 `config/cluster.json` 继续拥有 vLLM、sparknet、TileLang、GLP 和 serve 参数。
-
-### 3.3 GLP
+### 3.5 GLP
 
 ```text
 repo:     msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5
@@ -168,7 +182,7 @@ alpha:    2.0
 
 ## 4. 8 并发固定 KV
 
-当前 DS4.1 1126 几何：
+当前 DS4.1 几何：
 
 - `--block-size=256`
 - pool block：`227,840` bytes
@@ -209,10 +223,7 @@ null_block                       = 1
 | GLP 向量 | GLP-27 文件、alpha、generation defaults | 否 |
 | launcher/环境模板 | `start-tp4.sh`、`.env.deepseek.example`、`program.py` 映射 | 否 |
 | 父级 image tag/ID | `spark/config.yaml` 的 `image`/`image_id` | 否 |
-| 官方 main 合并 | 文档、profile、host-side doctor/defrag、candidate 证据 | 否 |
-
-当前官方 `main` 合并只改变宿主侧源码、profile 和文档；生产镜像仍是
-`spark-ds41f:x1126`。只有切换 candidate-75/76/77 或修改镜像内输入时才需要新镜像。
+| x1128 切换 | candidate-77 vLLM/TileLang 输入 | 是 |
 
 ## 6. 部署前检查
 
@@ -264,9 +275,27 @@ bin/spark doctor：configuration OK
 - 历史 kernel profile source lock
 - lab 历史 `master_addr`
 
-这些不是当前 1126 合并引入的回归。
+这些不是 x1128 合并引入的回归。
 
-### 6.2 集群窗口
+### 6.2 x1128 profile 解析
+
+```bash
+cd /Users/chan/Documents/project/doc/spark/deepseek
+python3.14 bin/spark \
+  --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
+  doctor
+```
+
+必须解析出：
+
+```text
+image: spark-ds41f:x1128
+vLLM tree: 58f9b11080cf8ebeccd80c0ce1d9bb7a6ff4ae58
+TileLang tree: 16c9ce75cead3b893572b9432f2c39b662391de8
+sparknet tree: 1739407706277142da7a12c95fca3c503c8cb11c
+```
+
+### 6.3 集群窗口
 
 ```bash
 ssh chan@192.168.2.180 'cat ~/spark-hold.json 2>/dev/null || true'
@@ -275,7 +304,7 @@ ssh chan@192.168.2.180 'cat ~/spark-hold.json 2>/dev/null || true'
 如果 hold 存在且不是当前任务持有，不要 stop/start；先按
 `docs/switchless-topology.md` 的窗口规则申请。
 
-### 6.3 GLP-27 文件
+### 6.4 GLP-27 文件
 
 ```bash
 for host in 192.168.2.180 192.168.2.161 192.168.2.102 192.168.2.238; do
@@ -294,14 +323,11 @@ done
 
 当前远端状态：
 
-- `/opt/spark/deepseek` 的关键源码与本地一致：
-  `start-tp4.sh`、`.env.deepseek.example`、`scripts/topology.py`、
-  `spark_ds41f/bench.py`、`build.py`、`sonar.py`、`tool_gate.py`、
-  `kv_capacity.py`、`config/cluster.json`、`upstreams.lock.json`。
+- 四机运行 x1126，没有 x1128 镜像。
+- `/opt/spark/deepseek` 的 x1126 关键源码与本地一致。
 - 远端父级 `config.yaml` 缺少本地 `inkling` WIP block。
 - 远端父级 `README.md` 和 `tests/test_deepseek_env_merge_contract.py` 仍是旧版本。
-- 远端 `experiments/2026-11-26-x1126/` 只有 `tp4-ring.json` 和部分 validation，
-  缺少本地 README、deployment-record、performance 和最终 validation 文件。
+- 远端 `experiments/2026-11-26-x1126/` 只有部分 validation。
 
 因此不要直接执行 `SYNC_SCOPE=all`。当前 `SYNC_SCOPE=engines` 也会同步所有
 enabled engines（deepseek、bge、inkling）；如果 Inkling 仍是 WIP，先用临时
@@ -315,7 +341,16 @@ SYNC_SCOPE=engines ./sync_to.sh --list
 SYNC_SCOPE=engines ./sync_to.sh --dry-run
 ```
 
-确认清单不包含不想要的 Inkling 文件后，再执行：
+确认清单包含：
+
+```text
+deepseek/experiments/2026-11-28-x1128/tp4-ring.json
+deepseek/experiments/2026-10-26-spark-ds41f-candidate/candidate-77/
+deepseek/start-tp4.sh
+deepseek/.env.deepseek.example
+```
+
+确认不包含不想要的 Inkling 文件后，再执行：
 
 ```bash
 SYNC_SCOPE=engines ./sync_to.sh
@@ -326,22 +361,13 @@ SYNC_SCOPE=engines ./sync_to.sh
 ```bash
 ssh chan@192.168.2.180 '
   sha256sum \
-    /opt/spark/config.yaml \
-    /opt/spark/deepseek/config/cluster.json \
+    /opt/spark/deepseek/experiments/2026-11-28-x1128/tp4-ring.json \
     /opt/spark/deepseek/start-tp4.sh \
     /opt/spark/deepseek/.env.deepseek.example
 '
 ```
 
-## 8. 构建与分发
-
-当前生产镜像已经构建并分发，不需要因为官方 `main` 合并而重建。
-
-只有以下情况才重建：
-
-- 切换 candidate-75/76/77
-- 修改 vLLM/TileLang/sparknet/NCCL/CUDA/Dockerfile/requirements
-- 修改 `spark_ds41f/build.py` 等镜像内输入
+## 8. 构建 x1128
 
 ### 8.1 构建前停服务
 
@@ -367,33 +393,41 @@ done
 ssh chan@192.168.2.180 '
   cd /opt/spark/deepseek
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
     build prepare
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
     build check
 '
 ```
 
-### 8.3 构建新 tag
-
-不要覆盖正在使用的 `spark-ds41f:x1126`。新构建使用新 tag，例如：
+### 8.3 构建
 
 ```bash
 ssh chan@192.168.2.180 '
   cd /opt/spark/deepseek
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
-    build image --apply --tag spark-ds41f:x1126-r2
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
+    build image --apply --tag spark-ds41f:x1128
 '
 ```
 
-记录 image ID 和 labels：
+记录 image ID：
 
 ```bash
 ssh chan@192.168.2.180 \
-  "docker image inspect spark-ds41f:x1126-r2 --format '{{.Id}}'"
+  "docker image inspect spark-ds41f:x1128 --format '{{.Id}}'"
 ```
+
+可选本地别名：
+
+```bash
+ssh chan@192.168.2.180 \
+  'docker tag spark-ds41f:x1128 spark-ds41f:1128'
+```
+
+不要覆盖已存在的 `spark-ds41f:x1128`。如果 tag 已存在，先确认引用；需要新构建时
+使用 `x1128-r2` 并在部署记录中说明。
 
 ### 8.4 分发
 
@@ -401,8 +435,8 @@ ssh chan@192.168.2.180 \
 ssh chan@192.168.2.180 '
   cd /opt/spark/deepseek
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
-    build distribute --apply --tag spark-ds41f:x1126-r2
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
+    build distribute --apply --tag spark-ds41f:x1128
 '
 ```
 
@@ -412,15 +446,35 @@ ssh chan@192.168.2.180 '
 for host in 192.168.2.180 192.168.2.161 192.168.2.102 192.168.2.238; do
   echo "===== $host ====="
   ssh chan@"$host" \
-    "docker image inspect spark-ds41f:x1126-r2 --format '{{.Id}}'"
+    "docker image inspect spark-ds41f:x1128 --format '{{.Id}}'"
 done
 ```
 
-## 9. 启动
+## 9. 更新父级配置并启动
 
-当前父级配置已经指向 x1126，不需要再手工改 image/image_id。
+### 9.1 更新 `spark/config.yaml`
 
-### 9.1 生成并检查受管环境
+拿到实际 image ID 后改为：
+
+```yaml
+image: spark-ds41f:x1128
+image_version_label: x1128
+image_id: sha256:<X1128_IMAGE_ID>
+allow_unverified_image: true
+ds41f_config_file: experiments/2026-11-28-x1128/tp4-ring.json
+expected_image:
+  source: experiments/2026-10-26-spark-ds41f-candidate/candidate-77/upstreams.lock.json
+  vllm_tree: 58f9b11080cf8ebeccd80c0ce1d9bb7a6ff4ae58
+```
+
+同步父级配置：
+
+```bash
+cd /Users/chan/Documents/project/doc/spark
+SYNC_SCOPE=engines ./sync_to.sh
+```
+
+### 9.2 生成并检查受管环境
 
 ```bash
 ssh chan@192.168.2.180 '
@@ -435,8 +489,8 @@ ssh chan@192.168.2.180 '
 必须看到：
 
 ```text
-IMAGE=spark-ds41f:x1126
-IMAGE_ID=sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a
+IMAGE=spark-ds41f:x1128
+IMAGE_ID=sha256:<X1128_IMAGE_ID>
 DS41F_MAX_NUM_SEQS=8
 DS41F_MAX_MODEL_LEN=1000000
 DS41F_MAX_NEW_TOKENS=65536
@@ -446,7 +500,7 @@ DS41F_REASONING_EFFORT=50
 DS41F_MASTER_PORT=25000
 ```
 
-### 9.2 stop → 零残留 → start
+### 9.3 stop → 零残留 → start
 
 ```bash
 ssh chan@192.168.2.180 'cd /opt/spark && ./deploy.sh stop'
@@ -484,7 +538,7 @@ ssh chan@192.168.2.180 '
 期望：
 
 ```text
-sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a running OOMKilled=false RestartCount=0
+sha256:<X1128_IMAGE_ID> running OOMKilled=false RestartCount=0
 ```
 
 ### 10.2 容器环境与 argv
@@ -520,12 +574,15 @@ ssh chan@192.168.2.180 '
 '
 ```
 
-当前 1126 实测：
+必须看到：
 
-- `GPU KV cache size: 7,991,241 tokens`
-- `Maximum concurrency ... 7.99x`
-- `kv_cache=7.52 GiB`
-- rank0 `free_memory=26.83 GiB`
+- `max_num_seqs=8`
+- `max_model_len=1000000`
+- `max_num_batched_tokens=16384`
+- `kv_cache_memory_bytes=8076928000`
+- `long_prefill_token_threshold=16336`
+- `max_cudagraph_capture_size=48`
+- `GPU KV cache size: 7,991,241 tokens` 左右，`Maximum concurrency ... 7.99x`
 - `Copy drafts widen max_num_batched_tokens from 16384 to 16395`
 - `Copy drafts widen the CUDA-graph capture range from 48 to 59 rows`
 - `GLP file ... sha256=24e97d41... spec_version=3 directions=27 layers=[11..37]`
@@ -554,7 +611,7 @@ deepseek-v4.1-flash-weightless
 ssh chan@192.168.2.180 '
   cd /opt/spark/deepseek
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
     doctor --live
 '
 ```
@@ -568,11 +625,11 @@ ssh chan@192.168.2.180 '
     --base http://127.0.0.1:8888/v1 \
     --api-key deepseek \
     --temperatures 0.0,0.3 \
-    --out /opt/spark/deepseek/results/private/x1126/tool-gate.json
+    --out /opt/spark/deepseek/results/private/x1128/tool-gate.json
 '
 ```
 
-当前结果：`80/80 strict PASS`，`0 derailments`。
+期望：`80/80 strict PASS`，`0 derailments`。
 
 ### 11.3 determinism
 
@@ -585,13 +642,19 @@ ssh chan@192.168.2.180 '
 '
 ```
 
-当前结果：`token_diffs=0`、`logprob_diffs=0`、`identical=true`。
+期望：`token_diffs=0`、`logprob_diffs=0`、`identical=true`。
 
 ### 11.4 release tests
 
+candidate-77 官方 README 仍把以下门禁列为 pending，x1128 必须补跑：
+
+- 完整 `174` 文件 in-image release tests
+- clean-reboot `tp3-triangle` screen
+- 目标 shape 的 determinism / tool_gate
+
 官方 1126 参考门禁：
 
-- in-image release tests：`12,082 passed / 356 skipped / 0 failed`，`174` 个文件
+- in-image release tests：`12,082 passed / 356 skipped / 0 failed`
 - Linux repo unit suite：`950/950 passed`
 - `tool_gate`：`80/80 strict PASS`
 - determinism：`0` token / `0` logprob diffs
@@ -621,7 +684,7 @@ ssh chan@192.168.2.180 '
   cd /opt/spark/deepseek
   SPARK_DS41F_API_KEY=deepseek \
   python3.14 bin/spark \
-    --cluster-config experiments/2026-11-26-x1126/tp4-ring.json \
+    --cluster-config experiments/2026-11-28-x1128/tp4-ring.json \
     bench \
     --url http://127.0.0.1:8888 \
     --concurrency 1,2,4 \
@@ -631,15 +694,17 @@ ssh chan@192.168.2.180 '
     --prefill-repeats 3 \
     --compare manifests/benchmarks/2026-11-26-spark-ds41f-1126-tp4.json \
     --tolerance 1 \
-    --output results/private/bench/x1126-b1
+    --output results/private/bench/x1128-b1
 '
 ```
 
-Boot 2 重复 stop/start，把输出改为 `x1126-b2`。
+Boot 2 重复 stop/start，把输出改为 `x1128-b2`。
 
-### 12.3 当前 decode 结果
+### 12.3 x1126 参考结果
 
-| Case | 官方 1126 | 1% 下限 | 当前两轮均值 | 结果 |
+x1128 尚未测量。以下 x1126 结果只作为回归参考：
+
+| Case | 官方 1126 | 1% 下限 | x1126 两轮均值 | 结果 |
 |---|---:|---:|---:|---|
 | prose-c1 | 89.643 | 88.747 | 97.549 | PASS |
 | prose-c2 | 159.892 | 158.293 | 175.544 | PASS |
@@ -648,9 +713,7 @@ Boot 2 重复 stop/start，把输出改为 `x1126-b2`。
 | code-c2 | 186.125 | 184.264 | 212.409 | PASS |
 | code-c4 | 356.911 | 353.342 | 451.720 | PASS |
 
-### 12.4 当前 prefill 结果
-
-| Size | 官方 1126 | 1% 下限 | 当前两轮均值 | 偏差 | 结果 |
+| Size | 官方 1126 | 1% 下限 | x1126 两轮均值 | 偏差 | 结果 |
 |---|---:|---:|---:|---:|---|
 | 32K | 9,729.189 | 9,631.897 | 9,370.3 | -3.689% | FAIL |
 | 131K | 10,272.493 | 10,169.768 | 9,779.1 | -4.803% | FAIL |
@@ -658,59 +721,59 @@ Boot 2 重复 stop/start，把输出改为 `x1126-b2`。
 | 524K | 10,067.243 | 9,966.571 | 9,672.5 | -3.921% | FAIL |
 | 1M | 9,685.897 | 9,589.039 | 9,324.5 | -3.731% | FAIL |
 
-当前结论：decode PASS，prefill HOLD。不要写成“1126 全量性能通过”。
-
-已排除：
-
-- 官方 environment 88/88 键与站点模板一致
-- 官方 32 并发 / 16.5 GiB KV / capture 192 控制实验只提升约 `0.5%–1%`
-- GLP alpha 不影响 stock prefill
-- host-independent filler 对照仍低约 `2.6%–3.0%`
-
-主要剩余差异：
-
-- 站点 `source_text` 语料 tokenization 偏短
-- 站点 `/30` 无交换环网与官方测试环境差异
+x1128 验收必须重新测两轮，不能把 x1126 结果写成 x1128 结果。
 
 ## 13. 证据落盘
 
-当前本地证据：
+x1128 证据目录：
 
 ```text
-experiments/2026-11-26-x1126/
+experiments/2026-11-28-x1128/
   README.md
   deployment-record.json
   tp4-ring.json
   validation/
-    api-models.json
-    b1-startup-keylines.txt
-    determinism-wide.jsonl
     doctor-live.txt
-    final-runtime-consumption.txt
-    final-startup-keylines.txt
-    live-parameter-consumption.txt
-    startup-keylines.txt
     tool-gate.json
     tool-gate.txt
+    determinism-wide.jsonl
+    determinism-wide-nologprobs.jsonl
+    api-smoke.json
+    live-parameter-consumption.json
   performance/
-    control-c32-prefill-bench.json
-    filler-prefill-bench.json
     run-01/bench.json
-    run-01/prefill-bench.json
     run-02/bench.json
     summary.json
 ```
 
-注意：`deployment-record.json` 记录的是构建时源码
-`bbbebe654ec4b7d71263a1613bb8197b3229c7e3` 加未提交 1126 合并；当前子模块
-HEAD 已是 `a01ac121`。这是历史构建记录，不要改写。
+`deployment-record.json` 至少记录：
 
-远端当前只同步了部分 validation；README、deployment-record、performance 和最终
-validation 仍缺失。需要时用 scoped sync 补齐。
+- 官方来源 `main@5386c71b` / candidate-77
+- 本地父仓/子模块 commit
+- image tag、image ID、四机 image ID
+- image labels：vLLM/sparknet/TileLang/TileKernels/NCCL tree
+- GLP-27 repo/revision/file/SHA
+- `max_request=8`、`max_token=1000000`、`max_tokens=65536`
+- `max_num_batched_tokens=16384`
+- `kv_cache_memory_bytes=8076928000`
+- `long_prefill_token_threshold=16336`
+- `max_cudagraph_capture_size=48`
+- 实际启动日志中的 KV tokens、concurrency、GLP alpha/layers
+- API smoke、tool_gate、determinism、release tests
+- 两轮 bench 原始路径与汇总
+- 最低 `MemAvailable`、swap、OOM/restart
+- 回滚 image ID 与配置
 
 ## 14. 回滚
 
-当前 spark-a 只保留：
+x1128 部署前，当前回滚基线是：
+
+```text
+spark-ds41f:x1126
+sha256:b3fe75f0a14aa8523149b0675dd3ec309efd339cc5e786a7dc71c6154c1bd20a
+```
+
+四机当前保留：
 
 ```text
 spark-ds41f:1126  b3fe75f0a14a
@@ -718,31 +781,22 @@ spark-ds41f:x1126 b3fe75f0a14a
 vllm/vllm-openai:nightly-af1c0149... cf41fa0cc731
 ```
 
-没有保留 `spark-ds41f:x1123`。因此当前回滚基线是同一 1126 image 的官方别名，
-不是 x1123。
+回滚步骤：
 
-回滚到当前 1126：
+1. 恢复 `spark/config.yaml` 的 x1126 image/image_id/ds41f_config_file。
+2. scoped sync 到四机。
+3. `./deploy.sh stop`，确认零容器/零 GPU compute。
+4. `./deploy.sh start --target=deepseek`。
+5. 验证 API、GLP-27、KV 和 x1126 基线。
 
-```bash
-ssh chan@192.168.2.180 'cd /opt/spark && ./deploy.sh stop'
-ssh chan@192.168.2.180 'cd /opt/spark && ./deploy.sh start --target=deepseek'
-```
-
-如果需要回退到更早 release：
-
-1. 从官方 tag `spark-ds41f-1126@890f8654` 或更早 release 重新构建。
-2. 更新 `spark/config.yaml` 的 image/image_id/ds41f_config_file。
-3. scoped sync 到四机。
-4. stop → 零残留 → start。
-5. 验证 API、GLP、KV、decode/prefill。
+在 x1128 验收通过前，不要删除 x1126 镜像。
 
 ## 15. 验收清单
 
-- [x] 本地父仓与子模块工作树干净
-- [x] 官方 `main@5386c71b` 已合入子模块
-- [x] 当前生产镜像 `spark-ds41f:x1126`
+### 当前 x1126 生产
+
+- [x] 四机运行 `spark-ds41f:x1126`
 - [x] 四机 image ID 一致
-- [x] image labels 与 1126 source tree 一致
 - [x] GLP-27 四机 SHA-256 一致
 - [x] `common.max_request=8`
 - [x] `max_token=1000000`
@@ -755,15 +809,26 @@ ssh chan@192.168.2.180 'cd /opt/spark && ./deploy.sh start --target=deepseek'
 - [x] `--kv-cache-memory-bytes=8076928000`
 - [x] `--long-prefill-token-threshold=16336`
 - [x] `--max-cudagraph-capture-size=48`
-- [x] 启动日志 GLP `alpha=2.0`、`spec_version=3`、`layers=27`
 - [x] API `/v1/models` 200
 - [x] `tool_gate` 80/80
 - [x] determinism 0 token / 0 logprob diffs
 - [x] decode prose/code c1/c2/c4 两轮均值 >= 1% 下限
 - [ ] prefill 32K/131K/262K/524K/1M 两轮均值 >= 1% 下限
 - [x] 四机 `OOMKilled=false`、`RestartCount=0`
-- [x] 最低 `MemAvailable`、swap、memguard 已记录
-- [x] 本地原始 JSON、summary、deployment-record 已落盘
-- [ ] 远端 x1126 完整证据已同步
-- [x] 工程记忆已更新
-- [x] 当前回滚 image/alias 已记录
+
+### x1128 目标
+
+- [ ] 站点 profile `experiments/2026-11-28-x1128/tp4-ring.json` 已同步
+- [ ] x1128 镜像已构建
+- [ ] x1128 四机 image ID 一致
+- [ ] x1128 image labels 与 candidate-77 source tree 一致
+- [ ] x1128 容器运行 `OOMKilled=false`、`RestartCount=0`
+- [ ] x1128 API `/v1/models` 200
+- [ ] x1128 `tool_gate` 80/80
+- [ ] x1128 determinism 0 token / 0 logprob diffs
+- [ ] x1128 release tests 通过
+- [ ] x1128 clean-reboot `tp3-triangle` screen 通过
+- [ ] x1128 decode 两轮均值 >= 1% 下限
+- [ ] x1128 prefill 两轮均值 >= 1% 下限
+- [ ] x1128 原始 JSON、summary、deployment-record 已落盘
+- [ ] x1128 回滚到 x1126 已验证

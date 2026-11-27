@@ -311,7 +311,9 @@ def qualified_recipe_problems(cluster: dict, nodes: dict, upstreams: dict) -> li
     return warnings
 
 
-CONTAINER_KEYS = frozenset(("name", "image", "expected_labels", "docker_run_args", "mounts"))
+CONTAINER_KEYS = frozenset(
+    ("name", "name_pattern", "image", "expected_labels", "docker_run_args", "mounts")
+)
 
 
 def local_doctor(cluster: dict, nodes: dict, upstreams: dict) -> list[str]:

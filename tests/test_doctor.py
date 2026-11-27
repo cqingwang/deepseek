@@ -1635,5 +1635,17 @@ class QualifiedRecipeProblemsTest(unittest.TestCase):
         self.assertIn("serve_args differ from qualified profile", warnings[0])
 
 
+class SiteProfileDoctorTest(unittest.TestCase):
+    def test_x1128_site_profile_accepts_name_pattern(self) -> None:
+        cluster = spark.read_cluster("experiments/2026-11-28-x1128/tp4-ring.json")
+        nodes = spark.read_json(cluster["nodes_config"])
+        upstreams = spark.read_json(cluster["upstreams_config"])
+        head = next(node for node in nodes["nodes"] if node.get("head"))
+        cluster["distributed"]["master_addr"] = head.get("control_ip") or head["management_ip"]
+        findings = spark.local_doctor(cluster, nodes, upstreams)
+        errors = [finding for finding in findings if not isinstance(finding, spark.Warn)]
+        self.assertEqual(errors, [])
+
+
 if __name__ == "__main__":
     unittest.main()
