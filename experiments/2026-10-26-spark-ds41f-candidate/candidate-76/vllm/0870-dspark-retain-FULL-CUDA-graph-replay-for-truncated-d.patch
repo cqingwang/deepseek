@@ -1,0 +1,126 @@
+From 58903930300576f1c1bff574760f1b9f1b1d23f8 Mon Sep 17 00:00:00 2001
+From: Christopher Owen <christopherowen@users.noreply.github.com>
+Date: Fri, 27 Nov 2026 09:32:26 +0100
+Subject: [PATCH] dspark: retain FULL CUDA graph replay for truncated dynamic
+ draft depth
+
+DFlashSpeculator.propose forced eager execution whenever
+0 < active_spec < num_speculative_steps, dropping out of FULL CUDA graph
+capture on any per-batch-size or acceptance-driven draft-depth schedule.
+
+For greedy DSpark without a logit-reading acceptance estimator, replay the
+captured FULL graph directly: mask sample_idx_mapping[:, active_spec:] to
+-1 before replay so the in-graph confidence calibrator neither records tail
+features nor predicts tail slots, and zero draft_token_confidence_probs
+beyond active_spec after replay. Plain DFlash and probabilistic DSpark
+retain the existing eager path.
+
+Upstream base: 19f2c20ed4d64ae22bd009ceacadd85e2a81e354 + candidate-74 (0001..0869)
+Quality impact: none (identical outputs at fixed K=5; preserves exact calibration masking when K < 5)
+Tests: tests/v1/spec_decode/test_dspark_truncated_cudagraph.py
+Upstream status: local candidate-76-r3 patch
+---
+ .../test_dspark_truncated_cudagraph.py        | 30 +++++++++++++++++++
+ .../gpu/spec_decode/dflash/speculator.py      | 19 +++++++++++-
+ .../gpu/spec_decode/dspark/speculator.py      |  3 ++
+ 3 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 tests/v1/spec_decode/test_dspark_truncated_cudagraph.py
+
+diff --git a/tests/v1/spec_decode/test_dspark_truncated_cudagraph.py b/tests/v1/spec_decode/test_dspark_truncated_cudagraph.py
+new file mode 100644
+index 0000000000..2a8f2ecf08
+--- /dev/null
++++ b/tests/v1/spec_decode/test_dspark_truncated_cudagraph.py
+@@ -0,0 +1,30 @@
++# SPDX-License-Identifier: Apache-2.0
++# SPDX-FileCopyrightText: Copyright contributors to the vLLM project
++
++import pytest
++import torch
++
++from vllm.v1.worker.gpu.spec_decode.dflash.speculator import DFlashSpeculator
++from vllm.v1.worker.gpu.spec_decode.dspark.speculator import DSparkSpeculator
++
++pytestmark = pytest.mark.cpu_test
++
++
++def test_dspark_can_replay_truncated_graph_policy():
++    dflash = DFlashSpeculator.__new__(DFlashSpeculator)
++    assert dflash._can_replay_truncated_graph() is False
++
++    # Greedy DSpark without logit-based estimator can replay captured FULL graph.
++    dspark = DSparkSpeculator.__new__(DSparkSpeculator)
++    dspark.draft_logits = None
++    dspark.acceptance_estimator = object()
++    dspark.use_confidence_head = True
++    assert dspark._can_replay_truncated_graph() is True
++
++    # Probabilistic DSpark or logit-reading acceptance estimator stays eager.
++    dspark.draft_logits = torch.empty((1, 5, 16))
++    assert dspark._can_replay_truncated_graph() is False
++
++    dspark.draft_logits = None
++    dspark.use_confidence_head = False
++    assert dspark._can_replay_truncated_graph() is False
+diff --git a/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py b/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
+index ecdd54851b..b4f22a6aad 100644
+--- a/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
+@@ -507,6 +507,12 @@ class DFlashSpeculator(DraftModelSpeculator):
+         super().reset_attn()
+ 
++    def _can_replay_truncated_graph(self) -> bool:
++        """Whether a captured full-depth CUDA graph can safely replay when
++        ``0 < active_spec < self.num_speculative_steps`` by masking tail
++        calibration slots before replay and zeroing tail confidence outputs."""
++        return False
++
+     @torch.inference_mode()
+     def _run_model(
+         self,
+         num_tokens: int,
+@@ -864,7 +870,9 @@ class DFlashSpeculator(DraftModelSpeculator):
+             if num_speculative_tokens is None
+             else int(num_speculative_tokens)
+         )
+-        need_eager = is_profile or (0 < active_spec < self.num_speculative_steps)
++        is_truncated = 0 < active_spec < self.num_speculative_steps
++        truncated_graph = is_truncated and self._can_replay_truncated_graph()
++        need_eager = is_profile or (is_truncated and not truncated_graph)
+         # Every DFlash step has exactly num_query_per_req tokens, so we can use FULL CGs
+         batch_desc, batch_sync = dispatch_cg_and_sync_dp(
+             self.query_cudagraph_manager,
+@@ -910,7 +918,16 @@ class DFlashSpeculator(DraftModelSpeculator):
+                     causal=self._group_causal,
+                 )
+             assert self.query_cudagraph_manager is not None
++            if truncated_graph:
++                n_spec = self.num_speculative_steps
++                self.sample_idx_mapping[: num_reqs * n_spec].view(
++                    num_reqs, n_spec
++                )[:, active_spec:].fill_(-1)
+             self.query_cudagraph_manager.run_fullgraph(batch_desc)
++            if truncated_graph:
++                conf = getattr(self, "draft_token_confidence_probs", None)
++                if conf is not None:
++                    conf[:num_reqs, active_spec:].zero_()
+         else:
+             max_seq_len = int(input_batch.seq_lens_cpu_upper_bound[:num_reqs].max())
+             self.draft_max_seq_len = min(
+diff --git a/vllm/v1/worker/gpu/spec_decode/dspark/speculator.py b/vllm/v1/worker/gpu/spec_decode/dspark/speculator.py
+index 48d9cd6d4b..ecbdd7dff5 100644
+--- a/vllm/v1/worker/gpu/spec_decode/dspark/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/dspark/speculator.py
+@@ -207,6 +207,9 @@ def _compute_confidence_probs(
+ class DSparkSpeculator(DFlashSpeculator):
+     _speculator_name = "DSpark"
+ 
++    def _can_replay_truncated_graph(self) -> bool:
++        return self.draft_logits is None and not _needs_logits_for_acceptance(self)
++
+     def __init__(self, vllm_config: VllmConfig, device: torch.device):
+         super().__init__(vllm_config, device)
+ 
+-- 
+2.43.0
+

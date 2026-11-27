@@ -200,6 +200,7 @@ DS41F_SERVE_ARGS=(
   --default-chat-template-kwargs
   '{}'
 )
+ACTIVE_SERVE_ARGS=()
 
 # 受管 env 文件 → 容器 -e 集。只有上游模板键与声明的站点覆盖键可进入容器；
 # 宿主键、重复键和多 token 的未引用值均 fail-closed。
@@ -345,15 +346,75 @@ for flag, value in options.items():
 PY
 }
 
+# 官方 recipe 的 drafter/drafters 面。当前 1126 没有 drafter，保持下面的
+# 固定 argv；candidate-75+ 选择 standalone drafter 时，改用 recipe.resolve
+# 生成的 serve_args，并补上站点未自行挂载的 /hub 或 /drafter-* 卷。
+resolved_profile_rows() {
+  python3 - "$ROOT" "$CONFIG_FILE" <<'PY'
+import json
+import pathlib
+import sys
+
+root = pathlib.Path(sys.argv[1]).resolve()
+config_path = pathlib.Path(sys.argv[2]).resolve()
+try:
+    relative = config_path.relative_to(root).as_posix()
+except ValueError:
+    raise SystemExit(f"运行 profile 越出目标根目录: {config_path}")
+
+sys.path.insert(0, str(root / "scripts"))
+import recipe
+
+
+def load_profile(path: pathlib.Path, shape: str | None = None) -> dict:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if recipe.is_recipe(data):
+        return recipe.resolve(data, shape or "tp4-ring")
+    if recipe.is_overlay(data):
+        extends = data.get("extends", {})
+        base = load_profile(root / extends["config"], extends.get("shape", shape))
+        return recipe.overlay(data, base)
+    return data
+
+
+profile = load_profile(root / relative)
+if not profile.get("drafter") and not profile.get("drafters"):
+    raise SystemExit(0)
+
+serve_args = list(profile["serve_args"])
+if "--default-chat-template-kwargs" not in serve_args:
+    serve_args.extend(["--default-chat-template-kwargs", "{}"])
+for argument in serve_args:
+    print(f"serve\t{argument}")
+
+for mount in profile.get("container", {}).get("mounts", []):
+    if not isinstance(mount, (list, tuple)) or len(mount) < 3:
+        continue
+    host, target, mode = mount[:3]
+    if target in {"/cache", "/glp/vector.gguf"}:
+        continue
+    host = str(host).replace("{home}", str(pathlib.Path.home())).replace(
+        "{checkout}", str(root)
+    )
+    print(f"mount\t{host}\t{target}\t{mode}")
+PY
+}
+
 serve_arg_value() {
   local flag="$1" index found=0
-  for index in "${!DS41F_SERVE_ARGS[@]}"; do
-    if [ "${DS41F_SERVE_ARGS[$index]}" = "$flag" ]; then
+  local -a args
+  if [ "${#ACTIVE_SERVE_ARGS[@]}" -gt 0 ]; then
+    args=("${ACTIVE_SERVE_ARGS[@]}")
+  else
+    args=("${DS41F_SERVE_ARGS[@]}")
+  fi
+  for index in "${!args[@]}"; do
+    if [ "${args[$index]}" = "$flag" ]; then
       found=$((found + 1))
       [ "$found" -eq 1 ] || die "基线 serve flag 重复: $flag"
-      [ $((index + 1)) -lt "${#DS41F_SERVE_ARGS[@]}" ] \
+      [ $((index + 1)) -lt "${#args[@]}" ] \
         || die "基线 serve flag 缺少值: $flag"
-      printf '%s' "${DS41F_SERVE_ARGS[$((index + 1))]}"
+      printf '%s' "${args[$((index + 1))]}"
       return 0
     fi
   done
@@ -533,10 +594,28 @@ docker_command_for_rank() {
   command+=(-v "$MODEL_DIR:$MODEL_CONTAINER_PATH:ro")
   command+=(-v "$CACHE_DIR:/cache:rw")
   command+=(-v "$DS41F_GLP_FILE:/glp/vector.gguf:ro")
+  local -a extra_mounts=()
+  local -a resolved_serve_args=()
+  local kind first second third
+  while IFS=$'\t' read -r kind first second third; do
+    case "$kind" in
+      serve) resolved_serve_args+=("$first") ;;
+      mount) extra_mounts+=(-v "$first:$second:$third") ;;
+    esac
+  done < <(resolved_profile_rows)
+  if [ "${#extra_mounts[@]}" -gt 0 ]; then
+    command+=("${extra_mounts[@]}")
+  fi
   command+=("$IMAGE")
 
   # 站点渲染点：模型路径、--host、--port、--api-key 和 common 原生映射。
-  local -a serve_args=("${DS41F_SERVE_ARGS[@]}")
+  local -a serve_args
+  if [ "${#resolved_serve_args[@]}" -gt 0 ]; then
+    serve_args=("${resolved_serve_args[@]}")
+  else
+    serve_args=("${DS41F_SERVE_ARGS[@]}")
+  fi
+  ACTIVE_SERVE_ARGS=("${serve_args[@]}")
   serve_args[0]="$MODEL_CONTAINER_PATH"
   local index flag value found
   for index in "${!serve_args[@]}"; do
@@ -826,10 +905,37 @@ remote_docker_inspect_id() {
   fi
 }
 
+defragment_before_launch() {
+  [ "${DS41F_DEFRAGMENT_BEFORE_START:-1}" = "1" ] || return 0
+  python3 - "$ROOT" "$CONFIG_FILE" <<'PY'
+import pathlib
+import sys
+
+root = pathlib.Path(sys.argv[1]).resolve()
+config_path = pathlib.Path(sys.argv[2]).resolve()
+try:
+    relative = config_path.relative_to(root).as_posix()
+except ValueError:
+    raise SystemExit(f"运行 profile 越出目标根目录: {config_path}")
+
+sys.path.insert(0, str(root))
+import spark_ds41f as spark
+from spark_ds41f import cluster as cluster_module
+
+cluster = spark.read_cluster(relative)
+if cluster.get("host", {}).get("defragment_before_start", True) is False:
+    raise SystemExit(0)
+nodes = spark.read_json(cluster["nodes_config"])
+cluster_module.defragment_buddy_memory(nodes, nodes["nodes"])
+PY
+}
+
 launch_stack() {
   preflight
   local rank target
   trap cleanup_failed_launch EXIT
+  info "启动前执行官方 buddy memory defrag（DS41F_DEFRAGMENT_BEFORE_START=${DS41F_DEFRAGMENT_BEFORE_START:-1}）"
+  defragment_before_launch
   for rank in 1 2 3; do
     stop_memguard_for_rank "$rank"
     info "预置 rank $rank startup memguard（${STARTUP_MEMGUARD_GIB} GiB / ${STARTUP_MEMGUARD_INTERVAL}s）"
