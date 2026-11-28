@@ -1,0 +1,16 @@
+===== 192.168.2.180 =====
+spark-a
+deepseek-r0 spark-ds41f:x1128 Up 15 minutes
+sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e OOMKilled=false RestartCount=0 Status=running
+===== 192.168.2.161 =====
+spark-b
+deepseek-r1 spark-ds41f:x1128 Up 15 minutes
+sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e OOMKilled=false RestartCount=0 Status=running
+===== 192.168.2.102 =====
+spark-c
+deepseek-r2 spark-ds41f:x1128 Up 15 minutes
+sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e OOMKilled=false RestartCount=0 Status=running
+===== 192.168.2.238 =====
+spark-d
+deepseek-r3 spark-ds41f:x1128 Up 15 minutes
+sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e OOMKilled=false RestartCount=0 Status=running

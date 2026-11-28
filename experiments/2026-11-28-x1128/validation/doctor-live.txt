@@ -1,0 +1,8 @@
+WARN: recommend: management port off wireless (spark-a, spark-b, spark-c, spark-d) -> run: sudo nmcli radio wifi off
+WARN: recommend: put installed OS first in UEFI boot order (spark-a, spark-b) -> run: efibootmgr && sudo efibootmgr --bootorder <ubuntu-entry>,<remaining-entries>
+WARN: recommend: start serving container (spark-a, spark-b, spark-c, spark-d) -> run: bin/spark --cluster-config experiments/2026-11-28-x1128/tp4-ring.json cluster start --apply
+WARN: spark-a: cannot check weight fragmentation: [Errno 2] No such file or directory: '/home/chan/.cache/huggingface/hub/models--deepseek-ai--DeepSeek-V4.1-Flash-1017/snapshots/1bae0e1088993b9b82de08f59de5be5a34e42170/model.safetensors.index.json'
+WARN: spark-b: cannot check weight fragmentation: [Errno 2] No such file or directory: '/home/chan/.cache/huggingface/hub/models--deepseek-ai--DeepSeek-V4.1-Flash-1017/snapshots/1bae0e1088993b9b82de08f59de5be5a34e42170/model.safetensors.index.json'
+WARN: spark-c: cannot check weight fragmentation: [Errno 2] No such file or directory: '/home/chan/.cache/huggingface/hub/models--deepseek-ai--DeepSeek-V4.1-Flash-1017/snapshots/1bae0e1088993b9b82de08f59de5be5a34e42170/model.safetensors.index.json'
+WARN: spark-d: cannot check weight fragmentation: [Errno 2] No such file or directory: '/home/chan/.cache/huggingface/hub/models--deepseek-ai--DeepSeek-V4.1-Flash-1017/snapshots/1bae0e1088993b9b82de08f59de5be5a34e42170/model.safetensors.index.json'
+configuration OK; live cluster matches with 7 warnings

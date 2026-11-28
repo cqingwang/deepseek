@@ -1,0 +1,95 @@
+{
+ "cooling": [
+  {
+   "node": "spark-a",
+   "start_c": 49.4,
+   "cooled": true,
+   "seconds": 5.0,
+   "final_c": 48.8,
+   "fan_floor": null,
+   "restored": null
+  },
+  {
+   "node": "spark-b",
+   "start_c": 47.9,
+   "cooled": true,
+   "seconds": 5.0,
+   "final_c": 47.1,
+   "fan_floor": null,
+   "restored": null
+  },
+  {
+   "node": "spark-c",
+   "start_c": 48.1,
+   "cooled": true,
+   "seconds": 5.0,
+   "final_c": 47.6,
+   "fan_floor": null,
+   "restored": null
+  },
+  {
+   "node": "spark-d",
+   "start_c": 49.9,
+   "cooled": true,
+   "seconds": 5.0,
+   "final_c": 47.8,
+   "fan_floor": null,
+   "restored": null
+  }
+ ],
+ "fan_curve": [],
+ "fan_stop_failures": [],
+ "thermal": {
+  "spark-a": {
+   "max_gpu_c": 59.0,
+   "min_headroom_c": 35.0,
+   "max_system_c": 72.9,
+   "max_power_w": 38.91,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-b": {
+   "max_gpu_c": 58.0,
+   "min_headroom_c": 36.0,
+   "max_system_c": 70.8,
+   "max_power_w": 35.81,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-c": {
+   "max_gpu_c": 59.0,
+   "min_headroom_c": 35.0,
+   "max_system_c": 70.7,
+   "max_power_w": 38.28,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  },
+  "spark-d": {
+   "max_gpu_c": 60.0,
+   "min_headroom_c": 34.0,
+   "max_system_c": 73.2,
+   "max_power_w": 38.47,
+   "thermal_slowdown_ms": 0.0,
+   "power_cap_ms": 0.0
+  }
+ },
+ "memory": {
+  "spark-a": {
+   "min_available_gib": 14.88,
+   "swap_growth_gib": 0.0
+  },
+  "spark-b": {
+   "min_available_gib": 17.57,
+   "swap_growth_gib": 0.0
+  },
+  "spark-c": {
+   "min_available_gib": 17.57,
+   "swap_growth_gib": 0.0
+  },
+  "spark-d": {
+   "min_available_gib": 17.33,
+   "swap_growth_gib": 0.0
+  }
+ },
+ "halted": null
+}

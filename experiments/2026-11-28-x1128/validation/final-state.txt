@@ -1,0 +1,34 @@
+UTC 2026-11-28T08:16:54Z
+config: spark/config.yaml
+image: spark-ds41f:x1128
+profile: experiments/2026-11-28-x1128/tp4-ring.json
+===== 192.168.2.180 =====
+deepseek-r0 spark-ds41f:x1128 Up 4 minutes
+image=sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e oom=false restarts=0
+2398 MHz, 3003 MHz, 2398 MHz, 35
+===== 192.168.2.161 =====
+deepseek-r1 spark-ds41f:x1128 Up 4 minutes
+image=sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e oom=false restarts=0
+2398 MHz, 3003 MHz, 2398 MHz, 36
+===== 192.168.2.102 =====
+deepseek-r2 spark-ds41f:x1128 Up 4 minutes
+image=sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e oom=false restarts=0
+2411 MHz, 3003 MHz, 2411 MHz, 36
+===== 192.168.2.238 =====
+deepseek-r3 spark-ds41f:x1128 Up 4 minutes
+image=sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e oom=false restarts=0
+2405 MHz, 3003 MHz, 2405 MHz, 36
+===== r0 argv =====
+--max-num-seqs 32
+--max-model-len 1048576
+--max-num-batched-tokens 16384
+--kv-cache-memory-bytes 17716740096
+--max-cudagraph-capture-size 192
+--long-prefill-token-threshold 16192
+--override-generation-config {"max_new_tokens":65536,"temperature":1.0,"top_p":1.0}
+--default-chat-template-kwargs {"enable_thinking":false,"reasoning_effort":50}
+===== env =====
+VLLM_SERVER_DEV_MODE=0
+===== api =====
+deepseek-v4.1-flash
+deepseek-v4.1-flash-weightless

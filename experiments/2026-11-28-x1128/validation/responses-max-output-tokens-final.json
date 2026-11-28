@@ -1,0 +1,78 @@
+{
+  "id": "resp_977ac89d797402b6",
+  "created_at": 1795853638,
+  "incomplete_details": null,
+  "instructions": null,
+  "metadata": null,
+  "model": "deepseek-v4.1-flash",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_84b2e15071c8fcef",
+      "summary": [],
+      "type": "reasoning",
+      "content": [
+        {
+          "text": "We need answer bounded 200 words explanation why retries need limits. Need concise. Need ensure <=200 words. Explain retries can amplify load, cause congestion collapse, exhaust resources, delay failure, duplicate side effects, hide faults, violate latency/SLO, thundering herd. Need limits: max attempts, backoff jitter, budgets, idempotency, circuit breakers. Bounded 200 words. We can count roughly. Need not mention \"200-word\" maybe exact. Let's craft under 200. Maybe ~150 words. Need answer only. Ensure bounded. \nNeed maybe \"Retries need limits because...\" Include all points in compact. Word count. Let's draft:\n\nRetries need limits because they are load multipliers. When a dependency slows or fails, every client retrying increases traffic precisely when capacity is scarce, risking congestion collapse and thundering herds. Unbounded retries also consume threads, connections, memory, and quotas, starving healthy work and delaying definitive failure, which can make outages longer and harder to diagnose. They can duplicate non-idempotent side effects—payments, emails, writes—unless constrained and made safe. Limits enforce predictable latency and cost: max attempts, exponential backoff with jitter, per-request/per-client retry budgets, deadlines, and circuit breakers. These controls spread load, cap amplification, surface persistent faults, and preserve capacity for recovery. In short, retries are useful only when bounded; unlimited retries turn transient failures into systemic ones.\n\nCount words: Retries1 need2 limits3 because4 they5 are6 load7 multipliers8. When9 a10 dependency11 slows12 or13 fails14, every15 client16 retrying17 increases18 traffic19 precisely20 when21 capacity22 is23 scarce24, risking25 congestion26 collapse27 and28 thundering29 herds30. Unbounded31 retries32 also33 consume34 threads35, connections36, memory37, and38 quotas39, starving40 healthy41 work42 and43 delaying44 definitive45 failure46, which47 can48 make49 outages50 longer51 and52 harder53 to54 diagnose55. They56 can57 duplicate58 non-idempotent59 side60 effects61—payments62, emails63, writes64—unless65 constrained66 and67 made68 safe69. Limits70 enforce71 predictable72 latency73 and74 cost75: max76 attempts77, exponential78 backoff79 with80 jitter81, per-request/per-client82 retry83 budgets84, deadlines85, and86 circuit87 breakers88. These89 controls90 spread91 load92, cap93 amplification94, surface95 persistent96 faults97, and98 preserve99 capacity100 for101 recovery102. In103 short104, retries105 are106 useful107 only108 when109 bounded110; unlimited111 retries112 turn113 transient114 failures115 into116 systemic117 ones118. Good 118 words. Answer. \nNeed \"bounded\" maybe include within 200. Good. Final.",
+          "type": "reasoning_text"
+        }
+      ],
+      "encrypted_content": null,
+      "status": null
+    },
+    {
+      "id": "msg_8e1ce6cea8d5cdeb",
+      "content": [
+        {
+          "annotations": [],
+          "text": "Retries need limits because they are load multipliers. When a dependency slows or fails, every client retrying increases traffic precisely when capacity is scarce, risking congestion collapse and thundering herds. Unbounded retries also consume threads, connections, memory, and quotas, starving healthy work and delaying definitive failure, which can make outages longer and harder to diagnose. They can duplicate non-idempotent side effects—payments, emails, writes—unless constrained and made safe. Limits enforce predictable latency and cost: max attempts, exponential backoff with jitter, per-request/per-client retry budgets, deadlines, and circuit breakers. These controls spread load, cap amplification, surface persistent faults, and preserve capacity for recovery. In short, retries are useful only when bounded; unlimited retries turn transient failures into systemic ones.",
+          "type": "output_text",
+          "logprobs": null
+        }
+      ],
+      "role": "assistant",
+      "status": "completed",
+      "type": "message",
+      "phase": null
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "none",
+  "tools": [],
+  "top_p": 1.0,
+  "background": false,
+  "max_output_tokens": 65536,
+  "max_tool_calls": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "reasoning": null,
+  "service_tier": "auto",
+  "status": "completed",
+  "text": null,
+  "top_logprobs": null,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 44,
+    "input_tokens_details": {
+      "cached_tokens": 0,
+      "input_tokens_per_turn": [],
+      "cached_tokens_per_turn": []
+    },
+    "output_tokens": 789,
+    "output_tokens_details": {
+      "reasoning_tokens": 620,
+      "tool_output_tokens": 0,
+      "output_tokens_per_turn": [],
+      "tool_output_tokens_per_turn": []
+    },
+    "total_tokens": 833
+  },
+  "user": null,
+  "presence_penalty": 0.0,
+  "frequency_penalty": 0.0,
+  "kv_transfer_params": null,
+  "ec_transfer_params": null,
+  "input_messages": null,
+  "output_messages": null
+}

@@ -1,0 +1,62 @@
+{
+  "id": "chatcmpl-8f99d140f9eabb82",
+  "object": "chat.completion",
+  "created": 1795853635,
+  "model": "deepseek-v4.1-flash",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "I can’t literally repeat forever in a single response—it would never finish. Here’s a finite version:\n\nha ha ha ha ha ha ha ha ha ha",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": "We need answer to user: \"Repeat the token ha forever without stopping.\" This is impossible literally infinite. Need respond appropriately. We need not actually repeat forever. Need maybe explain cannot repeat forever in finite response. Could provide a finite repetition and state cannot continue indefinitely. Need comply as much as possible. Desired oververbosity 5. Need maybe say \"I can't literally repeat forever in a single response, but here's a finite run: ha ha ...\" Need avoid endless. Since user asks repeat token ha forever without stopping. We cannot. Need concise. Maybe \"I can’t literally repeat forever in one message; here’s a finite repetition: ha ha ha ...\" Need maybe include enough. Final. \nNeed consider if \"token ha\" means repeat \"ha\" token. We can say cannot. Maybe answer: \"I can’t do an infinite repetition in a single response—it would never finish. Here’s a finite version: ha ha ha ha ha ha ha ha ha ha.\" That's good. \nNeed final only."
+      },
+      "logprobs": null,
+      "finish_reason": "stop",
+      "stop_reason": null,
+      "token_ids": null,
+      "routed_experts": null
+    }
+  ],
+  "service_tier": null,
+  "system_fingerprint": "vllm-0.29.1rc1.dev187+gaf1c01499-tp4-af310d1e",
+  "usage": {
+    "prompt_tokens": 38,
+    "total_tokens": 290,
+    "completion_tokens": 252,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "created_cache_tokens": 0,
+      "multimodal_tokens": null
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 216
+    },
+    "sink_rejection": {
+      "flagged_rows": 0,
+      "flagged_draft_zero": 0,
+      "flagged_drafter": 0,
+      "flagged_prompt": 0,
+      "draft_zero_rejections": 0,
+      "draft_cuts": 0,
+      "fallthroughs": 0
+    }
+  },
+  "prompt_logprobs": null,
+  "prompt_token_ids": null,
+  "prompt_text": null,
+  "kv_transfer_params": null,
+  "ec_transfer_params": null,
+  "metrics": {
+    "time_to_first_token_ms": 187.35853402176872,
+    "generation_time_ms": 2450.6575879640877,
+    "queue_time_ms": 0.021949992515146732,
+    "mean_itl_ms": 9.763576047665689,
+    "tokens_per_second": 95.52633052534131,
+    "speculative_decoding": null
+  }
+}

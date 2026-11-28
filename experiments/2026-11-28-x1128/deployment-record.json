@@ -1,0 +1,141 @@
+{
+  "status": "x1128_best_recipe_deployed_functional_pass_performance_hold",
+  "date": "2026-11-28",
+  "source": {
+    "official_main": "5386c71b",
+    "candidate": "candidate-77",
+    "official_production_tag": "spark-ds41f-1126@890f8654",
+    "parent_commit": "b88a54e050c5546d6192e62a0b7663376502c8b7",
+    "submodule_commit": "0f7055034744d8de2dd3e39388a56dd4600a7eaa",
+    "deployment_commit_label": "rsync-600b67b51396e29610d5617c7d6c63a5"
+  },
+  "image": {
+    "tag": "spark-ds41f:x1128",
+    "id": "sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e",
+    "size_bytes": 27249010886,
+    "nodes": {
+      "spark-a": "sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e",
+      "spark-b": "sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e",
+      "spark-c": "sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e",
+      "spark-d": "sha256:001305bdec0a5133b9112827ae0b730fc407cbdb13e6abc1b8cfc8c7c7c26e0e"
+    },
+    "labels": {
+      "vllm_patch_head": "e0b964f8e6463e4a64ca91a2eaba5f0649739f12",
+      "vllm_tree": "58f9b11080cf8ebeccd80c0ce1d9bb7a6ff4ae58",
+      "tilelang_tree": "16c9ce75cead3b893572b9432f2c39b662391de8",
+      "sparknet_tree": "1739407706277142da7a12c95fca3c503c8cb11c",
+      "tile_kernels_tree": "cb2fa41c8af290204c81c547ed678ebf957cca53",
+      "nccl_tree": "6af10aa730a64fcee8781d62340a9c9184e79469"
+    }
+  },
+  "glp": {
+    "repo": "msuiche/DeepSeek-V4.1-Flash-1017-abliterated-cyber-GLP-27-L11-37-a3.5",
+    "revision": "4d570926e9dd4fa7247d126072c34e249c89abd7",
+    "file": "glp.deepseek-v41-flash-1017-GLP-27-L11-37-a3.5.gguf",
+    "sha256": "24e97d41a9a4f77adad78ff4cb888cb4e339eb62151dbf37a7fcd3ea30eb442e",
+    "alpha": 2.0
+  },
+  "functional_validation": {
+    "api_models": [
+      "deepseek-v4.1-flash",
+      "deepseek-v4.1-flash-weightless"
+    ],
+    "tool_gate": "80/80 strict PASS; 0 derailments",
+    "determinism": "identical=true; 0 token diffs; 0 logprob diffs",
+    "loop_detector_symbols": "PASS",
+    "loop_detector_release_test": "40/40 passed",
+    "loop_metric_label": "finished_reason=\"repetition\" present",
+    "loop_live_probe": "finish_reason=stop",
+    "responses_max_output_tokens": {
+      "status": "completed",
+      "incomplete_details": null,
+      "max_output_tokens": 65536,
+      "output_tokens": 789,
+      "reasoning_tokens": 620
+    },
+    "container_state": "OOMKilled=false; RestartCount=0 on all four ranks"
+  },
+  "release_tests": {
+    "manifest_files": 174,
+    "full_suite_complete": true,
+    "passed": 11796,
+    "skipped": 641,
+    "failed": 1,
+    "failed_tests": [
+      "tests/v1/worker/test_display_carveout.py::test_cross_process_isolation_and_sigkill_reclamation"
+    ],
+    "failure_reason": "NV_ESC_RM_ALLOC status=0x51; the same test fails with x1126 on all four nodes, so this is a site-wide display-carveout baseline condition rather than an x1128 regression",
+    "evidence": "experiments/2026-11-28-x1128/validation/release-tests-full"
+  },
+  "performance": {
+    "status": "hold_official_suite_below_99pct_floor",
+    "selected_boot": "boot-a",
+    "selection_reason": "best complete official-suite run; boot-b stopped during prefill after reproducing the same decode regression",
+    "acceptance_profile": "experiments/2026-11-28-x1128/tp4-ring-dev.json",
+    "launch_parameters": {
+      "max_request": 32,
+      "max_token": 1048576,
+      "max_tokens": 65536,
+      "max_num_batched_tokens": 16384,
+      "reasoning_effort": 50,
+      "kv_cache_memory_bytes": 17716740096,
+      "max_cudagraph_capture_size": 192,
+      "gpu_clocks": "unlocked"
+    },
+    "selected_results": {
+      "single_stream_c1": 86.13666666666667,
+      "release_c16": 273.29,
+      "release_c8": 207.38333333333335,
+      "release_poisson": 180.27333333333334,
+      "sampled_c16": 267.6333333333333,
+      "sampled_c8": 203.94666666666666,
+      "sampled_c1": 84.69,
+      "prefill": {
+        "32768": 9451.656952405341,
+        "131072": 9971.343284055218,
+        "262144": 9947.720435055764,
+        "524288": 9774.14923721546,
+        "1000000": 9403.394209255135
+      }
+    },
+    "summary": "experiments/2026-11-28-x1128/performance/summary-final.json",
+    "site_baseline": {
+      "x1126_decode_prose_c1": 82.175,
+      "x1128_single_stream_c1": 86.13666666666667,
+      "x1126_prefill_tps": [
+        9341.125345294466,
+        9934.350728624695,
+        9937.32636905106,
+        9760.289090941349,
+        9406.992157440889
+      ],
+      "conclusion": "x1128 is faster than x1126 on single-stream decode and level on source-text prefill; the remaining official-reference gap is a site baseline rather than an x1128 regression"
+    },
+    "official_references": {
+      "single_stream": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4-single-stream",
+      "release": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4",
+      "sampled": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4-sampled",
+      "pinned_values": "experiments/2026-11-28-x1128/performance/official-suite-reference.json"
+    },
+    "result": "Poisson is level; single-stream c1, release c8/c16, sampled c1/c8/c16 and prefill remain 2.9%-4.3% below the official references"
+  },
+  "final_runtime": {
+    "image": "spark-ds41f:x1128",
+    "profile": "experiments/2026-11-28-x1128/tp4-ring.json",
+    "dev_mode": false,
+    "nodes_running": 4,
+    "api": "deepseek-v4.1-flash and deepseek-v4.1-flash-weightless",
+    "oomkilled": false,
+    "restart_count": 0,
+    "gpu_clock_lock": "2400,3003",
+    "loop_symbols": "experiments/2026-11-28-x1128/validation/loop-symbols-final.txt",
+    "loop_metrics": "experiments/2026-11-28-x1128/validation/loop-metrics-final.txt",
+    "loop_probe": "experiments/2026-11-28-x1128/validation/loop-probe-final.json",
+    "responses_max_output_tokens": "experiments/2026-11-28-x1128/validation/responses-max-output-tokens-final.json",
+    "final_state": "experiments/2026-11-28-x1128/validation/final-state.txt"
+  },
+  "clean_reboot_tp3_screen": {
+    "status": "not_applicable",
+    "reason": "site cabling is the four-node spark-a -> spark-b -> spark-c -> spark-d -> spark-a TP4 ring and has no direct three-node triangle links"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "description": "Official spark-ds41f-1126 TP4 Performance references, extracted from the recorded suite runs. Compare candidate results only with a run of the same suite digest and same launch parameters.",
+  "metric_paths": {
+    "output_tps": "summary.output_tps.mean",
+    "prefill_tps": "prefill[].tps.mean"
+  },
+  "release": {
+    "path": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4",
+    "suite_sha256": "2c1698722fafa68c534a2197673c418fa9b465c0dbaa70f53d9105a4271c4d87",
+    "minimum_ratio": 0.99,
+    "output_tps": {
+      "c8": 215.32666666666668,
+      "c16": 283.32666666666654
+    },
+    "prefill_method": {
+      "step_id": "prefill",
+      "prefill_text": "source",
+      "sizes": [
+        32768,
+        131072,
+        262144,
+        524288,
+        1000000
+      ],
+      "repeats": 3,
+      "max_tokens": 1,
+      "temperature": 0,
+      "metric": "prompt_tokens / ttft_s",
+      "summary": "arithmetic mean of the three successful per-repeat tok/s samples",
+      "prompt_tokens_note": "prompt_tokens is the first successful sample; prompt_tokens_samples preserves all three actual inputs so a changed tokenization or prompt shape is visible"
+    },
+    "prefill": {
+      "32768": {
+        "prompt_tokens": 32761,
+        "prompt_tokens_samples": [
+          32761,
+          33374,
+          33705
+        ],
+        "tps": 9729.18856072901
+      },
+      "131072": {
+        "prompt_tokens": 131900,
+        "prompt_tokens_samples": [
+          131900,
+          130839,
+          134836
+        ],
+        "tps": 10272.493254963929
+      },
+      "262144": {
+        "prompt_tokens": 262554,
+        "prompt_tokens_samples": [
+          262554,
+          262080,
+          262198
+        ],
+        "tps": 10252.712163036354
+      },
+      "524288": {
+        "prompt_tokens": 522774,
+        "prompt_tokens_samples": [
+          522774,
+          522103,
+          523855
+        ],
+        "tps": 10067.243273791164
+      },
+      "1000000": {
+        "prompt_tokens": 994697,
+        "prompt_tokens_samples": [
+          994697,
+          998835,
+          1004733
+        ],
+        "tps": 9685.897478846977
+      }
+    }
+  },
+  "single_stream": {
+    "path": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4-single-stream",
+    "suite_sha256": "7c59b27e8503a6bec126b02a58756995b0d16fec42c28989519d567b67eaaefb",
+    "output_tps": {
+      "c1": 89.54333333333334
+    }
+  },
+  "sampled": {
+    "path": "manifests/suites/2026-11-26-spark-ds41f-1126-tp4-sampled",
+    "suite_sha256": "ab647d3850241f3f49fb40fe9ba0408871dc705aea75e46cc1e99be82162a1cc",
+    "output_tps": {
+      "c16": 277.1433333333333,
+      "c8": 211.25,
+      "c1": 87.66666666666666
+    }
+  },
+  "not_in_official_tp4_performance": {
+    "c2": "No official TP4 c2 row; do not use the internal benchmark matrix as a publication reference.",
+    "c4": "No official TP4 c4 row; c4 appears in the official TP3 triangle table only."
+  }
+}

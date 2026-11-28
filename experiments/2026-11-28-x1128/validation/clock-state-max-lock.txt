@@ -1,0 +1,16 @@
+===== 192.168.2.180 =====
+GPU clocks set to "(gpuClkMin 3003, gpuClkMax 3003)" for GPU 0000000F:01:00.0
+All done.
+2398 MHz, 3003 MHz, 11.30 W, 43
+===== 192.168.2.161 =====
+GPU clocks set to "(gpuClkMin 3003, gpuClkMax 3003)" for GPU 0000000F:01:00.0
+All done.
+2398 MHz, 3003 MHz, 9.86 W, 43
+===== 192.168.2.102 =====
+GPU clocks set to "(gpuClkMin 3003, gpuClkMax 3003)" for GPU 0000000F:01:00.0
+All done.
+2411 MHz, 3003 MHz, 11.93 W, 43
+===== 192.168.2.238 =====
+GPU clocks set to "(gpuClkMin 3003, gpuClkMax 3003)" for GPU 0000000F:01:00.0
+All done.
+2405 MHz, 3003 MHz, 11.95 W, 43

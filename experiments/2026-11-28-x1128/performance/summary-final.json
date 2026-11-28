@@ -1,0 +1,177 @@
+{
+  "selected": "boot-a",
+  "selection_reason": "best full official-suite run; boot-b stopped during prefill after confirming the same decode regression",
+  "metrics": {
+    "single_stream_c1": {
+      "boot-a": {
+        "actual": 86.13666666666667,
+        "reference": 89.54333333333334,
+        "ratio": 0.9619551055354949,
+        "delta_pct": -3.8044894464505097,
+        "floor": 88.6479,
+        "passed": false
+      },
+      "boot-b": {
+        "actual": 86.03333333333333,
+        "reference": 89.54333333333334,
+        "ratio": 0.9608011018873543,
+        "delta_pct": -3.9198898112645653,
+        "floor": 88.6479,
+        "passed": false
+      }
+    },
+    "release_c16": {
+      "boot-a": {
+        "actual": 273.29,
+        "reference": 283.32666666666654,
+        "ratio": 0.964575637073814,
+        "delta_pct": -3.5424362926186004,
+        "floor": 280.4933999999999,
+        "passed": false
+      },
+      "boot-b": {
+        "actual": 272.33333333333337,
+        "reference": 283.32666666666654,
+        "ratio": 0.9611990870373426,
+        "delta_pct": -3.880091296265742,
+        "floor": 280.4933999999999,
+        "passed": false
+      }
+    },
+    "release_c8": {
+      "boot-a": {
+        "actual": 207.38333333333335,
+        "reference": 215.32666666666668,
+        "ratio": 0.9631103130127868,
+        "delta_pct": -3.6889686987213177,
+        "floor": 213.17340000000002,
+        "passed": false
+      },
+      "boot-b": {
+        "actual": 205.96999999999997,
+        "reference": 215.32666666666668,
+        "ratio": 0.9565466423109072,
+        "delta_pct": -4.345335768909275,
+        "floor": 213.17340000000002,
+        "passed": false
+      }
+    },
+    "release_poisson": {
+      "boot-a": {
+        "actual": 180.27333333333334,
+        "reference": 180.13,
+        "ratio": 1.000795721608468,
+        "delta_pct": 0.07957216084679697,
+        "floor": 178.3287,
+        "passed": true
+      },
+      "boot-b": {
+        "actual": 180.25,
+        "reference": 180.13,
+        "ratio": 1.0006661855326708,
+        "delta_pct": 0.06661855326708377,
+        "floor": 178.3287,
+        "passed": true
+      }
+    },
+    "sampled_c16": {
+      "boot-a": {
+        "actual": 267.6333333333333,
+        "reference": 277.1433333333333,
+        "ratio": 0.9656856259697149,
+        "delta_pct": -3.4314374030285144,
+        "floor": 274.3719,
+        "passed": false
+      }
+    },
+    "sampled_c8": {
+      "boot-a": {
+        "actual": 203.94666666666666,
+        "reference": 211.25,
+        "ratio": 0.9654280078895463,
+        "delta_pct": -3.4571992110453698,
+        "floor": 209.1375,
+        "passed": false
+      }
+    },
+    "sampled_c1": {
+      "boot-a": {
+        "actual": 84.69,
+        "reference": 87.66666666666666,
+        "ratio": 0.966045627376426,
+        "delta_pct": -3.3954372623574036,
+        "floor": 86.78999999999999,
+        "passed": false
+      }
+    }
+  },
+  "prefill": {
+    "32768": {
+      "boot-a": {
+        "actual": 9451.656952405341,
+        "reference": 9729.18856072901,
+        "ratio": 0.9714743314315132,
+        "delta_pct": -2.8525668568486817,
+        "floor": 9631.89667512172,
+        "passed": false
+      }
+    },
+    "131072": {
+      "boot-a": {
+        "actual": 9971.343284055218,
+        "reference": 10272.493254963929,
+        "ratio": 0.9706838482699234,
+        "delta_pct": -2.9316151730076623,
+        "floor": 10169.76832241429,
+        "passed": false
+      }
+    },
+    "262144": {
+      "boot-a": {
+        "actual": 9947.720435055764,
+        "reference": 10252.712163036354,
+        "ratio": 0.9702525806702968,
+        "delta_pct": -2.974741932970315,
+        "floor": 10150.18504140599,
+        "passed": false
+      }
+    },
+    "524288": {
+      "boot-a": {
+        "actual": 9774.14923721546,
+        "reference": 10067.243273791164,
+        "ratio": 0.9708863659489845,
+        "delta_pct": -2.9113634051015524,
+        "floor": 9966.570841053252,
+        "passed": false
+      }
+    },
+    "1000000": {
+      "boot-a": {
+        "actual": 9403.394209255135,
+        "reference": 9685.897478846977,
+        "ratio": 0.9708335474117086,
+        "delta_pct": -2.9166452588291425,
+        "floor": 9589.038504058506,
+        "passed": false
+      }
+    }
+  },
+  "references": {
+    "single_stream_c1": 89.54333333333334,
+    "release_c16": 283.32666666666654,
+    "release_c8": 215.32666666666668,
+    "release_poisson": 180.13,
+    "sampled_c16": 277.1433333333333,
+    "sampled_c8": 211.25,
+    "sampled_c1": 87.66666666666666,
+    "prefill": {
+      "32768": 9729.18856072901,
+      "131072": 10272.493254963929,
+      "262144": 10252.712163036354,
+      "524288": 10067.243273791164,
+      "1000000": 9685.897478846977
+    }
+  },
+  "all_boot_a_gates_passed": false
+}

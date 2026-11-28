@@ -1,0 +1,6 @@
+{
+  "environment": {
+    "VLLM_SERVER_DEV_MODE": "1"
+  },
+  "serve_options": {}
+}

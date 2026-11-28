@@ -1,0 +1,159 @@
+{
+  "tolerance_pct": 1.0,
+  "reference": {
+    "decode": "manifests/benchmarks/2026-11-26-spark-ds41f-1126-tp4.json",
+    "prefill": "README.md#performance (spark-ds41f-1126, tp4-ring)",
+    "decode_metric": "suites.decode.points.<case>.decode_window_tps.mean",
+    "prefill_metric": "suites.prefill.points.<size>.prefill_tps.mean"
+  },
+  "decode": {
+    "prose-c1": {
+      "reference": 89.643,
+      "runs": [
+        99.569,
+        98.86
+      ],
+      "mean": 99.215,
+      "floor": 88.747,
+      "delta_pct": 10.677,
+      "passed": true
+    },
+    "prose-c2": {
+      "reference": 159.892,
+      "runs": [
+        178.801,
+        177.552
+      ],
+      "mean": 178.176,
+      "floor": 158.293,
+      "delta_pct": 11.436,
+      "passed": true
+    },
+    "prose-c4": {
+      "reference": 306.615,
+      "runs": [
+        315.82,
+        318.694
+      ],
+      "mean": 317.257,
+      "floor": 303.549,
+      "delta_pct": 3.471,
+      "passed": true
+    },
+    "code-c1": {
+      "reference": 113.322,
+      "runs": [
+        151.443,
+        149.364
+      ],
+      "mean": 150.404,
+      "floor": 112.189,
+      "delta_pct": 32.722,
+      "passed": true
+    },
+    "code-c2": {
+      "reference": 186.125,
+      "runs": [
+        217.483,
+        216.676
+      ],
+      "mean": 217.079,
+      "floor": 184.264,
+      "delta_pct": 16.631,
+      "passed": true
+    },
+    "code-c4": {
+      "reference": 356.911,
+      "runs": [
+        459.698,
+        455.481
+      ],
+      "mean": 457.589,
+      "floor": 353.342,
+      "delta_pct": 28.208,
+      "passed": true
+    }
+  },
+  "prefill": {
+    "32768": {
+      "reference": 9729,
+      "runs": [
+        9369.622,
+        9350.241
+      ],
+      "mean": 9359.931,
+      "floor": 9631.71,
+      "delta_pct": -3.793,
+      "passed": false
+    },
+    "131072": {
+      "reference": 10272,
+      "runs": [
+        9833.369,
+        9755.436
+      ],
+      "mean": 9794.403,
+      "floor": 10169.28,
+      "delta_pct": -4.65,
+      "passed": false
+    },
+    "262144": {
+      "reference": 10253,
+      "runs": [
+        9874.004,
+        9772.919
+      ],
+      "mean": 9823.462,
+      "floor": 10150.47,
+      "delta_pct": -4.189,
+      "passed": false
+    },
+    "524288": {
+      "reference": 10067,
+      "runs": [
+        9732.317,
+        9644.342
+      ],
+      "mean": 9688.329,
+      "floor": 9966.33,
+      "delta_pct": -3.762,
+      "passed": false
+    },
+    "1000000": {
+      "reference": 9686,
+      "runs": [
+        9381.536,
+        9291.44
+      ],
+      "mean": 9336.488,
+      "floor": 9589.14,
+      "delta_pct": -3.608,
+      "passed": false
+    }
+  },
+  "run_failures": [],
+  "passed": false,
+  "failures": [
+    "run 1: decode prose-c1: reasoning_share=0.0, reference 1.0",
+    "run 2: decode prose-c1: reasoning_share=0.0, reference 1.0",
+    "run 1: decode prose-c2: reasoning_share=0.0, reference 1.0",
+    "run 2: decode prose-c2: reasoning_share=0.0, reference 1.0",
+    "run 1: decode prose-c4: reasoning_share=0.0, reference 1.0",
+    "run 2: decode prose-c4: reasoning_share=0.0, reference 1.0",
+    "run 1: decode code-c1: reasoning_share=0.0, reference 1.0",
+    "run 2: decode code-c1: reasoning_share=0.0, reference 1.0",
+    "run 1: decode code-c2: reasoning_share=0.0, reference 1.0",
+    "run 2: decode code-c2: reasoning_share=0.0, reference 1.0",
+    "run 1: decode code-c4: reasoning_share=0.0, reference 1.0",
+    "run 2: decode code-c4: reasoning_share=0.0, reference 1.0",
+    "prefill 32768: 9359.931 < 9631.710 tok/s",
+    "prefill 131072: 9794.403 < 10169.280 tok/s",
+    "prefill 262144: 9823.462 < 10150.470 tok/s",
+    "prefill 524288: 9688.329 < 9966.330 tok/s",
+    "prefill 1000000: 9336.488 < 9589.140 tok/s"
+  ],
+  "reports": [
+    "experiments/2026-11-28-x1128/performance/run-02/bench/bench.json",
+    "experiments/2026-11-28-x1128/performance/run-03/bench/bench.json"
+  ]
+}

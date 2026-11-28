@@ -1,0 +1,2 @@
+vllm:request_success_total{engine="0",finished_reason="repetition",model_name="deepseek-v4.1-flash"} 0.0
+vllm:request_success_created{engine="0",finished_reason="repetition",model_name="deepseek-v4.1-flash"} 1.7958536110745888e+09

@@ -1,0 +1,17 @@
+{
+  "notes": "Site x1128 acceptance profile: official candidate-77 dev mode plus site container names, image tag, /30 ring node map and fan-control boundary.",
+  "extends": {
+    "config": "experiments/2026-10-26-spark-ds41f-candidate/candidate-77/tp4-dev.json",
+    "shape": "tp4-ring"
+  },
+  "set": {
+    "container": {
+      "name_pattern": "deepseek-r{rank}",
+      "image": "spark-ds41f:x1128"
+    },
+    "nodes_config": "config/nodes-ring4.local.json",
+    "host": {
+      "fan_control": false
+    }
+  }
+}
